@@ -1,0 +1,2876 @@
+{
+  "components": [
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Admin\\Mutations\\useAdminDeleteOrganization.tsx",
+      "component": "AdminDeleteOrgaProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Admin\\Mutations\\useAdminDeleteUser.tsx",
+      "component": "AdminDeleteUserProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Authentification\\Querys\\useLogin.tsx",
+      "component": "LoginMutationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Authentification\\Querys\\useLogin.tsx",
+      "component": "LoginUserType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\ContactForm\\Muations\\useSendContactForm.tsx",
+      "component": "ContactFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Coypu\\Querys\\useGetCoypuData.tsx",
+      "component": "CoypuProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "FilterCategoryType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "FilterType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "FilterItemProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "FilterQuestionProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "FilterSelectionValue"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "FilterAnswerProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Filter\\Querys\\useGetFilters.tsx",
+      "component": "RangeMinMaxProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Graph\\Querys\\useGetPrivateGraph.tsx",
+      "component": "Node"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Graph\\Querys\\useGetPrivateGraph.tsx",
+      "component": "Edge"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Graph\\Querys\\useGetPrivateGraph.tsx",
+      "component": "Graph"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useAssignRole.tsx",
+      "component": "AssignRoleProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useCreateOrganization.tsx",
+      "component": "CreateOrganizationFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useCreateRole.tsx",
+      "component": "RoleProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useCreateRole.tsx",
+      "component": "CreateRoleProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useInviteUser.tsx",
+      "component": "InvitationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useRemoveRole.tsx",
+      "component": "RemoveRoleProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useUpdateOrganization.tsx",
+      "component": "UpdateOrgaProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useUpdateOrganization.tsx",
+      "component": "UpdateOrgaChanges"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useUpdateOrganization.tsx",
+      "component": "UpdatePriorities"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useUpdateOrganization.tsx",
+      "component": "UpdateOrgaDeletions"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useUpdateRole.tsx",
+      "component": "UpdateRoleProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Mutations\\useUpdateRolePermissions.tsx",
+      "component": "SetPermissionProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganization.tsx",
+      "component": "Organization"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganization.tsx",
+      "component": "OrganizationBranding"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganization.tsx",
+      "component": "OrganizationDetails"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganization.tsx",
+      "component": "OrganizationPriority"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganization.tsx",
+      "component": "OrganizationPriorityType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganizationInvites.tsx",
+      "component": "OrganizationInvite"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganizationPermissions.tsx",
+      "component": "PermissionProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganizationPermissions.tsx",
+      "component": "PermissionNameTranslationType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganizationPermissions.tsx",
+      "component": "PermissionContextTranslationType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganizationPermissions.tsx",
+      "component": "PermissionTypeTranslationType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Organization\\Querys\\useGetOrganizationUsers.tsx",
+      "component": "OrganizationsUser"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Permissions\\Querys\\useGetPermissionGates.tsx",
+      "component": "PermissionGateType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Permissions\\Querys\\useGetPermissions.tsx",
+      "component": "Permission"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Mutations\\useUploadFiles.tsx",
+      "component": "UploadFilesProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessStatusType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "HistoryProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryCREATION"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistorySTATUS"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryMESSAGE"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryFILE"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryDELETION"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryDETAILS"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Files\\Querys\\useGetProcessHistory.tsx",
+      "component": "ProcessHistoryOTHER"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Mutations\\useDeleteProcess.tsx",
+      "component": "DeleteProcessMutationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Mutations\\useStatusButtonRequest.tsx",
+      "component": "StatusButtonRequestProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Mutations\\useUpdateProcess.tsx",
+      "component": "UpdateProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Mutations\\useUpdateProcess.tsx",
+      "component": "UpdateProcessMutationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetCheckModel.tsx",
+      "component": "CheckModel"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetContractors.tsx",
+      "component": "ContractorProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessDetailsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "Process"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "DefinedProcess"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "DefaultProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "NoServiceProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ManufactoringProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ModelingProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "FileProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessFile"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "GenericProcessFile"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessFileType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessOrigin"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "DefaultProcessFile"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ModelProcessFile"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ChatMessageProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessChangesProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "UpdateProcessDetailsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessDeletionsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "UplaodFilesProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "DownloadFileProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "DeleteFileProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\Querys\\useGetProcess.tsx",
+      "component": "ProcessStatus"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\types.tsx",
+      "component": "MultipleProcessMutationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Process\\types.tsx",
+      "component": "SingleProcessMutationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Mutations\\useUpdateProject.tsx",
+      "component": "UpdateProjectProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Mutations\\useUpdateProject.tsx",
+      "component": "ProjectChangesProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Mutations\\useUpdateProject.tsx",
+      "component": "ProjectDeletionsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Mutations\\useVerifyProject.tsx",
+      "component": "VerifyProjectMutationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Querys\\useGetFlatProjects.tsx",
+      "component": "FlatProject"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Querys\\useGetProject.tsx",
+      "component": "ProjectDetailsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Querys\\useGetProject.tsx",
+      "component": "Project"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Querys\\useGetProject.tsx",
+      "component": "FlatProcessStatus"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Project\\Querys\\useGetProject.tsx",
+      "component": "FlatProcess"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\query.tsx",
+      "component": "getQueryProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodeType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodeNew"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNode"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodeProperty"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyName"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyGeneral"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyText"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyNumber"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyDate"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Ontology\\Querys\\useGetOntoNodes.tsx",
+      "component": "OntoNodePropertyBoolean"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Organization\\Mutations\\useUpdateOrgaNode.tsx",
+      "component": "UpdateOrgaNode"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Organization\\Querys\\useGetOrgaNodeData.tsx",
+      "component": "OrgaNode"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\AdditiveManufacturing\\Material\\Querys\\useGetMaterials.tsx",
+      "component": "MaterialProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\AdditiveManufacturing\\Model\\Mutations\\useUploadModels.tsx",
+      "component": "UploadModel"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\AdditiveManufacturing\\Model\\Querys\\useGetModels.tsx",
+      "component": "RepositoryModel"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\AdditiveManufacturing\\PostProcessing\\Querys\\useGetPostProcessigns.tsx",
+      "component": "PostProcessingProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\AdditiveManufacturing\\PostProcessing\\Querys\\useGetPostProcessigns.tsx",
+      "component": "EPostProcessingOptionType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "ServiceItemProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "DisplayService"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "ServiceType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "ServiceProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "DefinedServiceProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "UpdateServiceProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "GerneralUpdateServiceProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "UpdateServiceUndefinedProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "ManufacturingServiceProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "UpdateServiceManufacturingProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "ServiceManufacturingState"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Service\\Querys\\useGetServices.tsx",
+      "component": "ServiceManufacturingContextReturnProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Test\\Querys\\useGetDynamicTestButtons.tsx",
+      "component": "TestDynamicProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\User\\Mutations\\useUpdateUser.tsx",
+      "component": "UpdateUser"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\User\\Mutations\\useUpdateUser.tsx",
+      "component": "UpdateUserChanges"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\User\\Mutations\\useUpdateUser.tsx",
+      "component": "NewUserAddressProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\User\\Mutations\\useUpdateUser.tsx",
+      "component": "UpdateUserDeletions"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "component": "DataNaviagtionTranlationType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "component": "isDataNaviagtionTranlationType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\ContactForm.tsx",
+      "component": "ContactFormDataProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\ExampleForm.tsx",
+      "component": "ExampleDataProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\index.tsx",
+      "component": "HeaderItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\index.tsx",
+      "component": "HeaderItemLoggedInType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\index.tsx",
+      "component": "NavigationItemPreferredType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\components\\LanguageMenu.tsx",
+      "component": "Language"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "component": "ProcessFileTableProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\BodyScrollContextProvider.tsx",
+      "component": "BodyScrollContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\EventContextProvider.tsx",
+      "component": "EventContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ModalContextProvider.tsx",
+      "component": "ModalItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ModalContextProvider.tsx",
+      "component": "ModalContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\OrganisationContext.tsx",
+      "component": "OrganizationContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\PermissionContextProvider.tsx",
+      "component": "PermissionContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ProcessContext.tsx",
+      "component": "ProcessContextProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ProjectContext.tsx",
+      "component": "ProjectContextProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\UserContextProvider.tsx",
+      "component": "UserContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\data\\navigation.tsx",
+      "component": "INavigationItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\dev\\palette.tsx",
+      "component": "ExampleLoaderComponent"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonTitleType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonPropsGeneric"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonShowInType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonPropsExtern"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonAction"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonActionNavigationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonActionRequestProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonActionFunctionProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "SBAFDeleteProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "component": "StatusButtonProcessProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useRessourcesTableItem.tsx",
+      "component": "ResourcesTableItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UserProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "AnonymUser"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "AuthorizedUserProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UserDetailsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "GeneralNotificationSettings"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UserNotificationSetting"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "OrgaNotificationSetting"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UserNotificationSettingsType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "OrgaNotificationSettingsType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "AppLanguage"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UpdateUserProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UserAddressProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "UserType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useUser.tsx",
+      "component": "Address"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\AdminOutlet.tsx",
+      "component": "AdminContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\AuthorizedUserOutlet.tsx",
+      "component": "AuthorizedUserContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Admin\\hooks\\useAdmin.tsx",
+      "component": "DeleteUserProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Admin\\hooks\\useAdmin.tsx",
+      "component": "AdminProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Admin\\hooks\\useAdmin.tsx",
+      "component": "OrganizationProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Admin\\hooks\\useAdmin.tsx",
+      "component": "AdminFlatProjectProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\App.tsx",
+      "component": "AppState"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\App.tsx",
+      "component": "AppContext"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "Event"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "ProjectEvents"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "ProjectEventItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "ProcessEventItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "OrgaEvents"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "PermissionEvent"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "DeleteEvent"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "ProjectEventType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "DeleteProjectEvent"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\App\\types.ts",
+      "component": "DeleteOrgaEvent"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\Roles.tsx",
+      "component": "PermissionGroupProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Portfolio\\Portfolio.tsx",
+      "component": "PortfolioItemType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\components\\ContractorList.tsx",
+      "component": "ContractorSelectionFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\ContractorSelection.tsx",
+      "component": "ProcessAddressType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\ContractorSelection.tsx",
+      "component": "ProcessAddressFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\Filter.tsx",
+      "component": "CategoryProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\types\\index.tsx",
+      "component": "ModelProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\types\\index.tsx",
+      "component": "ModelDetailsProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\types\\index.tsx",
+      "component": "ManufacturingModelType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "component": "ProcessModelUploadFormProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "component": "ManufacturingModelUploadData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Modelling\\Modelling.tsx",
+      "component": "ModelingServiceProps"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusWizard\\StatusWizard.tsx",
+      "component": "StatusWizardItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Verify\\components\\VerifyCard.tsx",
+      "component": "VerifyType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Verify\\components\\VerifyCard.tsx",
+      "component": "VerifyStatus"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\Checkout\\Checkout.tsx",
+      "component": "CheckoutFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\ContractorSelection\\ContractorSelection.tsx",
+      "component": "ContractorSelectionFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\StatusBar\\StatusBar.tsx",
+      "component": "StatusData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\Verification\\Verification.tsx",
+      "component": "VerifyFormData"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\Menu.tsx",
+      "component": "ResourcesMenuItem"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\NodeForm.tsx",
+      "component": "ResourcesNodeFormEdges"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\NodeForm.tsx",
+      "component": "ResourcesNodeFormEdge"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\RequestInformation\\RequestInformationForm.tsx",
+      "component": "NodeRequestInformation"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\types\\general.tsx",
+      "component": "UseQueryStatusType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\types\\general.tsx",
+      "component": "UseMutationStatusType"
+    },
+    {
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\types\\general.tsx",
+      "component": "ErrorType"
+    }
+  ],
+  "interactions": [
+    {
+      "component": "AddressCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Address\\AddressCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickEdit"
+    },
+    {
+      "component": "AddressCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Address\\AddressCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickDelete"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "Collapsible",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Collapsible\\Collapsible.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "CkBanner",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\CookieBanner\\CkBanner.tsx",
+      "event": "onClick",
+      "handler": "acceptCookies"
+    },
+    {
+      "component": "CkBanner",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\CookieBanner\\CkBanner.tsx",
+      "event": "onClick",
+      "handler": "rejectCookies"
+    },
+    {
+      "component": "CkBanner",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\CookieBanner\\CkBanner.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickSettingsButton"
+    },
+    {
+      "component": "Footer",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Footer\\index.tsx",
+      "event": "onClick",
+      "handler": "contactOnClick"
+    },
+    {
+      "component": "AddressForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\AddressForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ContactForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\ContactForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ExampleForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\ExampleForm.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonReset"
+    },
+    {
+      "component": "ExampleForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\ExampleForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "OrganizationForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\OrganizationForm.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonCancel"
+    },
+    {
+      "component": "OrganizationForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\OrganizationForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "HeaderItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickLi"
+    },
+    {
+      "component": "HeaderItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "Header",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\index.tsx",
+      "event": "onClick",
+      "handler": "onClickButtonMenu"
+    },
+    {
+      "component": "MenuLanguageMenu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\components\\LanguageMenu.tsx",
+      "event": "onClick",
+      "handler": "openLanguageMenu"
+    },
+    {
+      "component": "MenuLanguageMenu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\components\\LanguageMenu.tsx",
+      "event": "onClick",
+      "handler": "changeLanguage"
+    },
+    {
+      "component": "Menu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\index.tsx",
+      "event": "onClick",
+      "handler": "handleOnClick"
+    },
+    {
+      "component": "Menu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\index.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickChildren"
+    },
+    {
+      "component": "Menu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\index.tsx",
+      "event": "onClick",
+      "handler": "closeMenu"
+    },
+    {
+      "component": "Menu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\index.tsx",
+      "event": "onClick",
+      "handler": "closeMenu"
+    },
+    {
+      "component": "ProcessFileTable",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickUpload"
+    },
+    {
+      "component": "ProcessFileTable",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickDownload"
+    },
+    {
+      "component": "ProcessFileRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\ProcessFileRow.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickDownload"
+    },
+    {
+      "component": "ProcessFileRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\ProcessFileRow.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickDelete"
+    },
+    {
+      "component": "RawProcessFileRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\RawFileRow.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDelete"
+    },
+    {
+      "component": "ProcessUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\UploadCard.tsx",
+      "event": "onClick",
+      "handler": "handleClickUploadCard"
+    },
+    {
+      "component": "ProcessMenu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Menu.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "ProcessMenu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Menu.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickCollapsible"
+    },
+    {
+      "component": "ProcessMenu",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Menu.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "ProcessTextInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Messages\\components\\TextInput.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSend"
+    },
+    {
+      "component": "TitleForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\TitleForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "Switch",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Switch\\index.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickSwitch"
+    },
+    {
+      "component": "Upload",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "event": "onClick",
+      "handler": "handleClickUploadCard"
+    },
+    {
+      "component": "toast",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useToast.tsx",
+      "event": "onClick",
+      "handler": "onClick"
+    },
+    {
+      "component": "AdvantagesUser",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Advantages\\components\\User.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "HomeClientInfo",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Home\\components\\ClientInfo.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "HomeProjects",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Home\\components\\Projects.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDemo"
+    },
+    {
+      "component": "HomeProjects",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Home\\components\\Projects.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDemo"
+    },
+    {
+      "component": "HomeProjects",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Home\\components\\Projects.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonNew"
+    },
+    {
+      "component": "Login",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Login\\Login.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonLoginClient"
+    },
+    {
+      "component": "Login",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Login\\Login.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonRegisterClient"
+    },
+    {
+      "component": "Login",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Login\\Login.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonLoginOrga"
+    },
+    {
+      "component": "Login",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Login\\Login.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonRegisterOrga"
+    },
+    {
+      "component": "Login",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Login\\Login.tsx",
+      "navigateTo": "/registerorganization"
+    },
+    {
+      "component": "OrganizationAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\Address.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonAddAddress"
+    },
+    {
+      "component": "OrganizationAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\Address.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonAddAddress"
+    },
+    {
+      "component": "Invitation",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\Invitation.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "Invitation",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\Invitation.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "Invitation",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\Invitation.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickInput"
+    },
+    {
+      "component": "OrganizationtableRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\UserTable.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickEdit"
+    },
+    {
+      "component": "OrganizationtableRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\UserTable.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickDelete"
+    },
+    {
+      "component": "OrganizationInfoPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Info\\View.tsx",
+      "event": "onClick",
+      "handler": "openEdit"
+    },
+    {
+      "component": "OrganizationRolesForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\Form.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "OrganizationRolesItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEdit"
+    },
+    {
+      "component": "OrganizationRolesItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDelete"
+    },
+    {
+      "component": "OrganizationRolesTableRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\TableRow.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEdit"
+    },
+    {
+      "component": "OrganizationRolesTableRow",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\TableRow.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDelete"
+    },
+    {
+      "component": "OrganizationRoles",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\Roles.tsx",
+      "event": "onClick",
+      "handler": "createNewRole"
+    },
+    {
+      "component": "PortfolioItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Portfolio\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "Portfolio",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Portfolio\\Portfolio.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "ContractorSelectionAddressCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\components\\AddressCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickEdit"
+    },
+    {
+      "component": "ContractorSelectionAddressCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\components\\AddressCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickReset"
+    },
+    {
+      "component": "AddressSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\components\\AddressSelection.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonNew"
+    },
+    {
+      "component": "ProcessContractorList",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\components\\ContractorList.tsx",
+      "event": "onClick",
+      "handler": "saveContractor"
+    },
+    {
+      "component": "ProcessContractorSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\ContractorSelection.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSelectContractor"
+    },
+    {
+      "component": "ProcessContractorSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\ContractorSelection\\ContractorSelection.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEditContractor"
+    },
+    {
+      "component": "ProcessInfo",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Info.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEditTitle"
+    },
+    {
+      "component": "ProcessRequest",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Request\\Request.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickFile"
+    },
+    {
+      "component": "ProcessFilterMultiSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\components\\MultiSelection.tsx",
+      "event": "onClick",
+      "handler": "toggleAllValues"
+    },
+    {
+      "component": "ProcessFilter",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\Filter.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickResetButton"
+    },
+    {
+      "component": "ProcessFilter",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\Filter.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickCancelButton"
+    },
+    {
+      "component": "ProcessFilter",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\Filter.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickApplyButton"
+    },
+    {
+      "component": "Service",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Service.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEditType"
+    },
+    {
+      "component": "ProcessServiceMaterialCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\MaterialCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickMaterial"
+    },
+    {
+      "component": "ProcessServiceMaterialCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\MaterialCard.tsx",
+      "navigateTo": "service/manufacturing/material"
+    },
+    {
+      "component": "ProcessServiceModelCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\ModellCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickModel"
+    },
+    {
+      "component": "ProcessServiceModelCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\ModellCard.tsx",
+      "navigateTo": "service/manufacturing/model"
+    },
+    {
+      "component": "ProcessSericePostProcessingCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\PostProcessingCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickPostProcessing"
+    },
+    {
+      "component": "ProcessSericePostProcessingCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\PostProcessingCard.tsx",
+      "navigateTo": "service/manufacturing/postprocessing"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickModel"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "navigateTo": "service/manufacturing/model"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickModel"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "navigateTo": "service/manufacturing/model"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickMaterial"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "navigateTo": "service/manufacturing/material"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickMaterial"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "navigateTo": "service/manufacturing/material"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickPostProcessing"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "navigateTo": "service/manufacturing/postprocessing"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickPostProcessing"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "navigateTo": "service/manufacturing/postprocessing"
+    },
+    {
+      "component": "ProcessMaterialItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDeselect"
+    },
+    {
+      "component": "ProcessMaterialPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\components\\PreView.tsx",
+      "event": "onClick",
+      "handler": "closeMaterialView"
+    },
+    {
+      "component": "ProcessMaterialPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\components\\PreView.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSelect"
+    },
+    {
+      "component": "ProcessMaterialPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\components\\PreView.tsx",
+      "navigateTo": "../postprocessing"
+    },
+    {
+      "component": "ManufacturingMaterials",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\Material.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSave"
+    },
+    {
+      "component": "ProcessModelPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\components\\PreView.tsx",
+      "event": "onClick",
+      "handler": "closeModelView"
+    },
+    {
+      "component": "ProcessModelPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\components\\PreView.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSelect"
+    },
+    {
+      "component": "ProcessModelPreView",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\components\\PreView.tsx",
+      "navigateTo": "../material"
+    },
+    {
+      "component": "UploadModelCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\components\\ModelCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDelete"
+    },
+    {
+      "component": "UploadModelCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\components\\ModelCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSaveAll"
+    },
+    {
+      "component": "ProcessModelUpload",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProcessModelUpload",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "event": "onClick",
+      "handler": "handleClickUploadCard"
+    },
+    {
+      "component": "ProcessPostProcessingItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\PostProcessing\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "closeItemView"
+    },
+    {
+      "component": "ProcessPostProcessingItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\PostProcessing\\components\\Item.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "ManufacturingPostProcessings",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\PostProcessing\\PostProcessing.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSave"
+    },
+    {
+      "component": "ServiceSearch",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Search\\Search.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickSearchButton"
+    },
+    {
+      "component": "ServiceCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceSelection\\components\\ServiceCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnClick"
+    },
+    {
+      "component": "ServiceSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceSelection\\ServiceSelection.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickCard"
+    },
+    {
+      "component": "StatusWizardCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusWizard\\components\\Card.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickCard"
+    },
+    {
+      "component": "StatusWizardCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusWizard\\components\\Card.tsx"
+    },
+    {
+      "component": "ProcessTitleForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\TitleForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProjectCheckout",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\Checkout\\Checkout.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProjectContractorSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\ContractorSelection\\ContractorSelection.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProcessServiceManufacturing",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\ServicePreview\\components\\Manufacturing.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonOpen"
+    },
+    {
+      "component": "ProcessVerification",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\Verification\\Verification.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProcessVerification",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\Verification\\Verification.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProfileAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\Address.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonAddAddress"
+    },
+    {
+      "component": "ProfileAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\Address.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonAddAddress"
+    },
+    {
+      "component": "ProfileGeneral",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\General.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonCancel"
+    },
+    {
+      "component": "ProfileGeneral",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\General.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ProfileGeneral",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\General.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEdit"
+    },
+    {
+      "component": "ProfileLocals",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\Locals.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "Profile",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\Proflle.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDelete"
+    },
+    {
+      "component": "FlatProcessCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\FlatProcessCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonContinue"
+    },
+    {
+      "component": "FlatProcessCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\FlatProcessCard.tsx"
+    },
+    {
+      "component": "FlatProcessCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\FlatProcessCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonContinue"
+    },
+    {
+      "component": "FlatProcessCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\FlatProcessCard.tsx"
+    },
+    {
+      "component": "FlatProcessCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\FlatProcessCard.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonDelete"
+    },
+    {
+      "component": "ProjectInfo",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\Info.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonEditTitle"
+    },
+    {
+      "component": "ProjectProcesses",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\Processes.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "ProjectProcesses",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\Processes.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButton"
+    },
+    {
+      "component": "ProjectTitleForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\TitleForm.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickEditCheckButton"
+    },
+    {
+      "component": "CreateProjectTitleForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\TitleForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "Projects",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\Projects.tsx",
+      "event": "onClick",
+      "handler": "onButtonClickCreateProject"
+    },
+    {
+      "component": "RegisterOrganization",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\RegisterOrganization\\RegisterOrganization.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ResKriVer",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\ResKriVer\\ResKriVer.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ResourcesNodeForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\NodeForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "ResourcesPropertyForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\PropertyForm.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonAddProperty"
+    },
+    {
+      "component": "RequestInformationForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\RequestInformation\\RequestInformationForm.tsx",
+      "event": "onClick",
+      "handler": "handleSubmit"
+    },
+    {
+      "component": "Test",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\Test.tsx",
+      "event": "onClick",
+      "handler": "closeSocket"
+    },
+    {
+      "component": "Test",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\Test.tsx",
+      "event": "onClick",
+      "handler": "handleOnClickButtonSave"
+    },
+    {
+      "component": "Test",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\Test.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickScrollLeft"
+    },
+    {
+      "component": "Test",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\Test.tsx",
+      "event": "onClick",
+      "handler": "handleOnButtonClickScrollRight"
+    }
+  ],
+  "conditions": [
+    {
+      "component": "serializeNavigator",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Authentification\\Mutations\\useSendUserInfos.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "serializeNavigator",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Authentification\\Mutations\\useSendUserInfos.tsx",
+      "condition": "=== undefined function"
+    },
+    {
+      "component": "useLogout",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Authentification\\Querys\\useLogout.tsx",
+      "condition": "!== data undefined"
+    },
+    {
+      "component": "sendContactForm",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\ContactForm\\Muations\\useSendContactForm.tsx",
+      "condition": "=== undefined false"
+    },
+    {
+      "component": "getCoypuData",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Coypu\\Querys\\useGetCoypuData.tsx",
+      "condition": "> undefined undefined"
+    },
+    {
+      "component": "getCoypuData",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Coypu\\Querys\\useGetCoypuData.tsx",
+      "condition": "< undefined undefined"
+    },
+    {
+      "component": "CSRFToken",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\customAxios.tsx",
+      "condition": "!== token undefined"
+    },
+    {
+      "component": "useEventsWebsocket",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Events\\Websocket\\useEventsWebsocket.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "sendMessage",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Events\\Websocket\\useEventsWebsocket.tsx",
+      "condition": "=== state connected"
+    },
+    {
+      "component": "getQuery",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\query.tsx",
+      "condition": "=== convertFn undefined"
+    },
+    {
+      "component": "useCreateOrgaEntitieEdge",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Organization\\Mutations\\useCreateOrgaEntitieEdge.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "useDeleteOrgaEntitieEdge",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\api\\Resources\\Organization\\Mutations\\useDeleteOrgaEntitieEdge.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "deleteAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Address\\AddressCard.tsx",
+      "condition": "=== type user"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "=== index 0"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "generateBreadcrumbItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Breadcrumb\\Breadcrumb.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "extractAndParseJSON",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& jsonMatch undefined"
+    },
+    {
+      "component": "sendDetailedHelp",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "sendDetailedHelp",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "sendDetailedHelp",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& isChatbotEnabled undefined"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "=== closeChatbot true"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "=== undefined responseFromChatbot"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Chatbot",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "=== undefined startSession"
+    },
+    {
+      "component": "handleOnClickButton",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleOnClickButton",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Chatbot\\Chatbot.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "toggleExpand",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Collapsible\\Collapsible.tsx",
+      "condition": "!== setOutsideExpand undefined"
+    },
+    {
+      "component": "Collapsible",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Collapsible\\Collapsible.tsx",
+      "condition": "!== outsideExpand undefined"
+    },
+    {
+      "component": "Collapsible",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Collapsible\\Collapsible.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleOnClickSettingsButton",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\CookieBanner\\CkBanner.tsx",
+      "condition": "=== showSettings true"
+    },
+    {
+      "component": "updateAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\AddressForm.tsx",
+      "condition": "=== type user"
+    },
+    {
+      "component": "createAddress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\AddressForm.tsx",
+      "condition": "=== type user"
+    },
+    {
+      "component": "onSubmit",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\AddressForm.tsx",
+      "condition": "!== existingAddressID undefined"
+    },
+    {
+      "component": "handleOnClickButtonSubmit",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\ExampleForm.tsx",
+      "condition": "!== customSubmit undefined"
+    },
+    {
+      "component": "handleOnChange",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\Notifications\\NotificationFormItem.tsx",
+      "condition": "=== type user"
+    },
+    {
+      "component": "handleChange",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Form\\Priorities\\PrioritiesFormItem.tsx",
+      "condition": "=== type orga"
+    },
+    {
+      "component": "onClick",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Header\\components\\Item.tsx",
+      "condition": "=== undefined false"
+    },
+    {
+      "component": "changeLanguage",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\components\\LanguageMenu.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "onKeyDown",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Menu\\index.tsx",
+      "condition": "=== undefined Escape"
+    },
+    {
+      "component": "NetworkGraph",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\NetworkGraph\\GraphViewer.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "OwnerGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\OwnerGate\\OwnerGate.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "OwnerGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\OwnerGate\\OwnerGate.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "OwnerGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\OwnerGate\\OwnerGate.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "OwnerGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\OwnerGate\\OwnerGate.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "hasPermission",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\PermissionGate\\hooks\\usePermissionGate.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "PermissionGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\PermissionGate\\PermissionGate.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleOnButtonClickUpload",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "condition": "=== type upload"
+    },
+    {
+      "component": "handleOnButtonClickDownload",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "condition": "!== type upload"
+    },
+    {
+      "component": "ProcessFileTable",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ProcessFileTable",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\FileTable.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleChangeHiddenInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\UploadCard.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleDragOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\UploadCard.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleDragOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\File\\components\\UploadCard.tsx",
+      "condition": "=== undefined dragleave"
+    },
+    {
+      "component": "handleOnClickButtonSend",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Messages\\components\\TextInput.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "onEnterPress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Messages\\components\\TextInput.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "onEnterPress",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\Messages\\components\\TextInput.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleKeyDown",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Process\\TitleForm.tsx",
+      "condition": "=== undefined Enter"
+    },
+    {
+      "component": "handleChangeHiddenInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleClickUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "handleDragOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleDragOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "condition": "=== undefined dragleave"
+    },
+    {
+      "component": "handleDropOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Upload",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\components\\Upload\\index.tsx",
+      "condition": "=== error true"
+    },
+    {
+      "component": "objectsEqual",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ChatbotContextProvider.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "objectsEqual",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ChatbotContextProvider.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "setUserChoice",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ChatbotContextProvider.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "useTopics",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\ChatbotContextProvider.tsx",
+      "condition": "=== context undefined"
+    },
+    {
+      "component": "EventContextProvider",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\EventContextProvider.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "UserContextProvider",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\contexts\\UserContextProvider.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "useProjectsState",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useProjectsState.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "useScrollToProcess",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useScrollToProcess.tsx",
+      "condition": "!== processID undefined"
+    },
+    {
+      "component": "getStatusButtons",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "filterButtonByUser",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "filterLocalButtons",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "getProjectStatusButtons",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== index undefined"
+    },
+    {
+      "component": "handleButtonAction",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "handleButtonAction",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== undefined VERIFYING_AND_REQUESTED"
+    },
+    {
+      "component": "handleButtonAction",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== undefined VERIFYING"
+    },
+    {
+      "component": "handleButtonAction",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\Project\\useStatusButtons.tsx",
+      "condition": "=== undefined REQUESTED"
+    },
+    {
+      "component": "getOrgaEventAmount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useOrgaEvent.tsx",
+      "condition": "=== events undefined"
+    },
+    {
+      "component": "getProjectEventAmount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useProjectEvent.tsx",
+      "condition": "=== events undefined"
+    },
+    {
+      "component": "getProjectEventAmount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useProjectEvent.tsx",
+      "condition": "=== type undefined"
+    },
+    {
+      "component": "getProjectEventAmount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useProjectEvent.tsx",
+      "condition": "=== type message"
+    },
+    {
+      "component": "getProjectEventAmount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useProjectEvent.tsx",
+      "condition": "=== type status"
+    },
+    {
+      "component": "handleNewProjectEvent",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useProjectEvent.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleNewProjectEvent",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\hooks\\useProjectEvent.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "useEvents",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "!== socket undefined"
+    },
+    {
+      "component": "onWebsocktEvent",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "onWebsocktEvent",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "!== newEvent undefined"
+    },
+    {
+      "component": "getProjectEventItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "=== projectEvent undefined"
+    },
+    {
+      "component": "getProjectEventItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "=== projectEventItem undefined"
+    },
+    {
+      "component": "getProjectEventCount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "=== projectEvent undefined"
+    },
+    {
+      "component": "getProcessEventItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "=== projectEvent undefined"
+    },
+    {
+      "component": "getProcessEventItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "=== processEventItem undefined"
+    },
+    {
+      "component": "getProcessEventItemCount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useEvents\\useEvents.tsx",
+      "condition": "=== processEventItem undefined"
+    },
+    {
+      "component": "hydrateInternFilter",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useFilter.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "useFilter",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useFilter.tsx",
+      "condition": "=== compareItem undefined"
+    },
+    {
+      "component": "logger",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useLogger.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "logger",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useLogger.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "useModal",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useModal.tsx",
+      "condition": "> undefined 0"
+    },
+    {
+      "component": "createRersourcesTableItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useRessourcesTableItem.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "valueIncludesSearchInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSearch.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "valueIncludesSearchInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSearch.tsx",
+      "condition": "=== undefined boolean"
+    },
+    {
+      "component": "valueIncludesSearchInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSearch.tsx",
+      "condition": "=== undefined number"
+    },
+    {
+      "component": "valueIncludesSearchInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSearch.tsx",
+      "condition": "=== undefined string"
+    },
+    {
+      "component": "valueIncludesSearchInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSearch.tsx",
+      "condition": "=== undefined object"
+    },
+    {
+      "component": "filterDataWithSearchInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSearch.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleSort",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSort.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleSort",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSort.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "sortItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSort.tsx",
+      "condition": "< valueA undefined"
+    },
+    {
+      "component": "sortItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\hooks\\useSort.tsx",
+      "condition": "> valueA undefined"
+    },
+    {
+      "component": "AdminOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\AdminOutlet.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "AdminOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\AdminOutlet.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "AdminOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\AdminOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "CSRFOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\CSRFOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "DefinedProcessOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\DefinedProcessOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ManufacturingProcessOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\ManufacturingProcessOutlet.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "OrganizationOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\OrganizationOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ProcessOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\ProcessOutlet.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "ProcessOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\ProcessOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ProjectOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\ProjectOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "UserLocalsOutlet",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\outlets\\UserLocalsOutlet.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Home",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Home\\Home.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "handleOnClickEdit",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\UserTable.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleOnClickDelete",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\UserTable.tsx",
+      "condition": "=== undefined true"
+    },
+    {
+      "component": "handleOnChangeSelect",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\UserTable.tsx",
+      "condition": "!== allRoles undefined"
+    },
+    {
+      "component": "handleOnChangeSelect",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\components\\UserTable.tsx",
+      "condition": "!== _newRole undefined"
+    },
+    {
+      "component": "onSubmit",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\Form.tsx",
+      "condition": "=== role undefined"
+    },
+    {
+      "component": "groupPermissions",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\components\\Form.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "sortPermissions",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\Roles.tsx",
+      "condition": "< undefined undefined"
+    },
+    {
+      "component": "sortPermissions",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\Roles.tsx",
+      "condition": "> undefined undefined"
+    },
+    {
+      "component": "getGroupedPermissions",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Organization\\Roles\\Roles.tsx",
+      "condition": "=== index undefined"
+    },
+    {
+      "component": "PortfolioItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Portfolio\\components\\Item.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "parseFilterSelectionValue",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\components\\Selection.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleChangeInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\components\\Slider.tsx",
+      "condition": "< input undefined"
+    },
+    {
+      "component": "handleChangeInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\components\\Slider.tsx",
+      "condition": "> input undefined"
+    },
+    {
+      "component": "handleChangeInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\components\\SliderSelection.tsx",
+      "condition": "< input undefined"
+    },
+    {
+      "component": "handleChangeInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\components\\SliderSelection.tsx",
+      "condition": "> input undefined"
+    },
+    {
+      "component": "getCountOfChecktItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\Filter\\Filter.tsx",
+      "condition": "=== title SELECTED"
+    },
+    {
+      "component": "ProcessServiceModelCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\components\\ModellCard.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "condition": "|| process undefined"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "condition": "=== undefined 0"
+    },
+    {
+      "component": "ServiceManufacturingDetails",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceDetails\\Manufacturing\\Manufacturing.tsx",
+      "condition": "!== material undefined"
+    },
+    {
+      "component": "useServiceEdit",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\hooks\\useServiceEdit.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "filterBySearch",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\Material.tsx",
+      "condition": "=== searchText "
+    },
+    {
+      "component": "filterBySearch",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Material\\Material.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleChangeHiddenInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleDragOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleDragOnUploadCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "condition": "=== undefined dragleave"
+    },
+    {
+      "component": "saveForAll",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Model\\Upload\\Upload.tsx",
+      "condition": "!== i undefined"
+    },
+    {
+      "component": "filterBySearch",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\PostProcessing\\PostProcessing.tsx",
+      "condition": "=== searchText "
+    },
+    {
+      "component": "filterBySearch",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\PostProcessing\\PostProcessing.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleOnChangeInput",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceEdit\\Manufacturing\\Search\\Search.tsx",
+      "condition": "=== touched false"
+    },
+    {
+      "component": "ServiceSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceSelection\\ServiceSelection.tsx",
+      "condition": "== userChoice 2"
+    },
+    {
+      "component": "ServiceSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceSelection\\ServiceSelection.tsx",
+      "condition": "== userChoice 1"
+    },
+    {
+      "component": "ServiceSelection",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Service\\ServiceSelection\\ServiceSelection.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "ProcessStatusGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusGate.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ProcessStatusGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusGate.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ProcessStatusGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusGate.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "ProcessStatusGate",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusGate.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleOnClickCard",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\StatusWizard\\components\\Card.tsx",
+      "condition": "&& element undefined"
+    },
+    {
+      "component": "handleKeyDown",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\TitleForm.tsx",
+      "condition": "=== undefined Enter"
+    },
+    {
+      "component": "getVerifyStatus",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Verify\\Verify.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "getVerifyStatus",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\components\\Verify\\Verify.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "handleOnChangeInputAmount",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\ServicePreview\\components\\Manufacturing.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "ProcessServiceSelect",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\ServicePreview\\components\\Select.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "getClassName",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\StatusBar\\components\\Item.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "getClassName",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\StatusBar\\components\\Item.tsx",
+      "condition": "< state undefined"
+    },
+    {
+      "component": "getClassName",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\StatusBar\\components\\Item.tsx",
+      "condition": "> state undefined"
+    },
+    {
+      "component": "StatusItemConnector",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\StatusBar\\components\\ItemConnector.tsx",
+      "condition": "=== onGoing true"
+    },
+    {
+      "component": "getItems",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Process\\legacy\\StatusBar\\StatusBar.tsx",
+      "condition": "< status undefined"
+    },
+    {
+      "component": "handleOnClickButton",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Profile\\components\\Locals.tsx",
+      "condition": "&& edit undefined"
+    },
+    {
+      "component": "sortFlatProcess",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\Processes.tsx",
+      "condition": "< valueA undefined"
+    },
+    {
+      "component": "sortFlatProcess",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\Processes.tsx",
+      "condition": "> valueA undefined"
+    },
+    {
+      "component": "updatedTitle",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\TitleForm.tsx",
+      "condition": "!== onSubmit undefined"
+    },
+    {
+      "component": "handelOnKeyDown",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\components\\TitleForm.tsx",
+      "condition": "=== undefined Enter"
+    },
+    {
+      "component": "ProjectPage",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\ProjectPage.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "ProjectPage",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\ProjectPage.tsx",
+      "condition": "&& userChoice undefined"
+    },
+    {
+      "component": "ProjectPage",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Project\\ProjectPage.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "handleSort",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\Table.tsx",
+      "condition": "=== sortColumn undefined"
+    },
+    {
+      "component": "getSortIcon",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\Table.tsx",
+      "condition": "=== sortColumn undefined"
+    },
+    {
+      "component": "sortProjects",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\Table.tsx",
+      "condition": "< valueA undefined"
+    },
+    {
+      "component": "sortProjects",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\Table.tsx",
+      "condition": "> valueA undefined"
+    },
+    {
+      "component": "ProjectsTable",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\Table.tsx",
+      "condition": "=== undefined 0"
+    },
+    {
+      "component": "handleKeyDown",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Projects\\components\\TitleForm.tsx",
+      "condition": "=== undefined Enter"
+    },
+    {
+      "component": "openLink",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Redirect\\Redirect.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "Redirect",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Redirect\\Redirect.tsx",
+      "condition": "=== time undefined"
+    },
+    {
+      "component": "isActive",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\Menu.tsx",
+      "condition": "=== to /resources"
+    },
+    {
+      "component": "ResourcesNode",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\Node.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "ResourcesNode",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\Node.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "handleOnClickModalButtonDraft",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\NodeDraft.tsx",
+      "condition": "!== node undefined"
+    },
+    {
+      "component": "ResourcesNodeDraft",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\NodeDraft.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "oncloseModal",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\NodeView.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "handleOnChangePropertyType",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\PropertyForm.tsx",
+      "condition": "=== property undefined"
+    },
+    {
+      "component": "handleOnClickButtonDeleteNode",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\Table.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "handleOnChangeInputActive",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\components\\Table.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "parseOntoNodeType",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Resources\\RequestInformation\\RequestInformationForm.tsx",
+      "condition": "=== type undefined"
+    },
+    {
+      "component": "ModelPreview",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\STLViewer.tsx",
+      "condition": "=== file undefined"
+    },
+    {
+      "component": "scroll",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\Test.tsx",
+      "condition": "!== undefined undefined"
+    },
+    {
+      "component": "scroll",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\pages\\Test\\Test.tsx",
+      "condition": "=== dir left"
+    },
+    {
+      "component": "getFileSizeAsString",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": ">= undefined 1"
+    },
+    {
+      "component": "getFileSizeAsString",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": ">= undefined 1"
+    },
+    {
+      "component": "getTimeAsText",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": ">= day 1"
+    },
+    {
+      "component": "getTimeAsText",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": ">= hour 1"
+    },
+    {
+      "component": "getTimeAsText",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": ">= sec 1"
+    },
+    {
+      "component": "removeItem",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "> index undefined"
+    },
+    {
+      "component": "removeItemByIndex",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "&& undefined undefined"
+    },
+    {
+      "component": "getAuthorizedUserType",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "=== name undefined"
+    },
+    {
+      "component": "getModelURI",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "=== undefined undefined"
+    },
+    {
+      "component": "splitFindArray",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "splitArray",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "JSONIsParseable",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "!== undefined string"
+    },
+    {
+      "component": "JSONSafeParse",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "!== undefined string"
+    },
+    {
+      "component": "sortByKey",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "|| undefined undefined"
+    },
+    {
+      "component": "sortByKey",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "> undefined undefined"
+    },
+    {
+      "component": "sortByKey",
+      "file": "F:\\Projekte\\semper-ki\\Frontend\\src\\services\\utils.tsx",
+      "condition": "< undefined undefined"
+    }
+  ]
+}

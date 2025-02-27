@@ -21,6 +21,7 @@
     "d3-force": "^3.0.0",
     "dompurify": "^3.0.5",
     "flag-icons": "^6.6.6",
+    "flowise-embed-react": "^1.0.7",
     "formik": "^2.2.9",
     "i18next": "^23.7.15",
     "i18next-browser-languagedetector": "^6.1.8",

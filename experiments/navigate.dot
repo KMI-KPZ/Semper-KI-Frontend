@@ -1,0 +1,13 @@
+digraph Navigation {
+  // Styling
+
+  "Login" -> "/registerorganization" [label="onClick"];
+  "ProcessServiceMaterialCard" -> "service/manufacturing/material" [label="onClick"];
+  "ProcessServiceModelCard" -> "service/manufacturing/model" [label="onClick"];
+  "ProcessSericePostProcessingCard" -> "service/manufacturing/postprocessing" [label="onClick"];
+  "ServiceManufacturingDetails" -> "service/manufacturing/model" [label="onClick"];
+  "ServiceManufacturingDetails" -> "service/manufacturing/material" [label="onClick"];
+  "ServiceManufacturingDetails" -> "service/manufacturing/postprocessing" [label="onClick"];
+  "ProcessMaterialPreView" -> "../postprocessing" [label="onClick"];
+  "ProcessModelPreView" -> "../material" [label="onClick"];
+}

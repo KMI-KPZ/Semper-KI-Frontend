@@ -9,7 +9,13 @@ interface ProcessVerifyCardProps {
   errorMsg?: string;
 }
 
-export type VerifyType = "PRINTABILITY" | "DRAFT" | "CAPACITY" | "STABILITY";
+export type VerifyType =
+  | "PRINTABILITY"
+  | "DRAFT"
+  | "CAPACITY"
+  | "STABILITY"
+  | "FEM"
+  | "PROCESS";
 export enum VerifyStatus {
   "READY",
   "STARTED",

@@ -13,7 +13,7 @@ interface ProcessContainerProps {
   pageTitle: string;
   start: ProcessStatus;
   end?: ProcessStatus;
-  showActionContainer?: boolean;
+  showDelete?: boolean;
 }
 
 const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
@@ -28,6 +28,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
     pageTitle,
     start,
     menuChildren,
+    showDelete = false,
   } = props;
 
   return (
@@ -48,7 +49,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
       >
         {children}
       </GrayContainer>
-      <ActionContainer start={start} end={end} />
+      <ActionContainer start={start} end={end} showDelete={showDelete} />
     </>
   );
 };

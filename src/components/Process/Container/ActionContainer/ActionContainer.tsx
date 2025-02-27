@@ -16,10 +16,11 @@ import ActionContainerTodos from "./components/Todos";
 interface ActionContainerProps {
   start: ProcessStatus;
   end?: ProcessStatus;
+  showDelete?: boolean;
 }
 
 const ActionContainer: React.FC<ActionContainerProps> = (props) => {
-  const { end, start } = props;
+  const { end, start, showDelete = false } = props;
   const { process } = useProcess();
   const { getStatusButtons, handleOnClickButton } = useStatusButtons();
   const [error, setError] = useState(false);
@@ -43,6 +44,19 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
   ) => {
     if (
       button.action.type === "request" &&
+      button.action.data.type === "backstepStatus"
+    ) {
+      window.confirm(
+        t("components.Process.Container.ActionContainer.backConfirm") +
+          "\n" +
+          t("components.Process.Container.ActionContainer.backConfirm2") +
+          "\n" +
+          t("components.Process.Container.ActionContainer.backConfirm3")
+      ) === true
+        ? handleOnClickButton(button, processID)
+        : logger("delete canceled");
+    } else if (
+      button.action.type === "request" &&
       button.action.data.type === "deleteProcess"
     ) {
       window.confirm(
@@ -61,7 +75,7 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
 
   const statusButtons = getStatusButtons(
     process,
-    process.actionStatus !== "ACTION_REQUIRED"
+    process.actionStatus !== "ACTION_REQUIRED" || showDelete
   );
 
   if (showDependingOnProcessStatus)

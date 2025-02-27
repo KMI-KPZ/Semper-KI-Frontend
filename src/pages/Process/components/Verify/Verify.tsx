@@ -29,9 +29,10 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
     <ProcessContainer
       id="Verification"
       start={ProcessStatus.CONTRACTOR_COMPLETED}
-      end={ProcessStatus.VERIFYING_IN_PROGRESS}
+      end={ProcessStatus.VERIFICATION_FAILED}
       menuButtonTitle={t("Process.components.Verify.button.menu")}
       pageTitle={t("Process.components.Verify.heading")}
+      showDelete={process.processStatus === ProcessStatus.VERIFICATION_FAILED}
     >
       <Container
         width="full"
@@ -39,7 +40,29 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
         className="flex-wrap md:flex-nowrap"
         items="start"
       >
-        <ProcessVerifyCard status={getVerifyStatus()} type="PRINTABILITY" />
+        <ProcessVerifyCard
+          status={getVerifyStatus()}
+          type="PROCESS"
+          errorMsg={
+            process.processDetails.verificationResults !== undefined &&
+            process.processDetails.verificationResults.process !== undefined &&
+            process.processDetails.verificationResults.process.msg !== undefined
+              ? process.processDetails.verificationResults.process.msg
+              : undefined
+          }
+        />
+        <ProcessVerifyCard
+          status={getVerifyStatus()}
+          type="FEM"
+          errorMsg={
+            process.processDetails.verificationResults !== undefined &&
+            process.processDetails.verificationResults.fem !== undefined &&
+            process.processDetails.verificationResults.fem.msg !== undefined
+              ? process.processDetails.verificationResults.fem.msg
+              : undefined
+          }
+        />
+        {/* <ProcessVerifyCard status={getVerifyStatus()} type="PRINTABILITY" />
         <ProcessVerifyCard status={getVerifyStatus()} type="DRAFT" />
         <ProcessVerifyCard status={getVerifyStatus()} type="CAPACITY" />
         <ProcessVerifyCard
@@ -54,7 +77,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
               ? "Stützkonstruktion nicht ausreichend"
               : undefined
           }
-        />
+        /> */}
       </Container>
     </ProcessContainer>
   );

@@ -38,7 +38,10 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
                 <ProcessStatusGate start={ProcessStatus.CONTRACTOR_COMPLETED}>
                   <ProcessVerify />
                 </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.VERIFYING_COMPLETED}>
+                <ProcessStatusGate
+                  start={ProcessStatus.VERIFICATION_FAILED}
+                  startExclude
+                >
                   <ProcessRequest />
                 </ProcessStatusGate>
                 <ProcessStatusGate start={ProcessStatus.REQUEST_COMPLETED}>

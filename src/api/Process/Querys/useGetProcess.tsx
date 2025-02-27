@@ -28,6 +28,12 @@ export interface ProcessDetailsProps {
   amount: number;
   priorities: OrganizationPriority[];
   prices?: ProcessPrices;
+  verificationResults?: VerificationResults;
+}
+
+export interface VerificationResults {
+  process?: { msg: string };
+  fem?: { msg: string };
 }
 
 export interface ProcessPrices {

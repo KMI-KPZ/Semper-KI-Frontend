@@ -651,6 +651,9 @@
           "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
           "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
           "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+          "backConfirm": "Möchten Sie wirklich einen Schritt zurück gehen?",
+          "backConfirm2": "Dabei gehen alle Information aus dem aktuellen Schritt verloren.",
+          "backConfirm3": "(jedoch nicht die Informationen aus den vorherigen Schritten)",
           "components": {
             "ActionContainerWarpper": {
               "heading": "Ihr Prozess ist fehlgeschlagen",
@@ -1949,7 +1952,7 @@
                     "license": "Lizenz der Datei",
                     "licensePH": "Lizenz1, Lizenz2 ...",
                     "fem": "FEM Analyse",
-                    "femHint": "Mit der FEM Analyse wird grob simuliert, ob das Bauteil bei gegenebem Druck bricht.",
+                    "femHint": "Mit der FEM Analyse wird grob simuliert, ob das Bauteil bei gegebenem Druck bricht.",
                     "femLabel": "Durchführen",
                     "fem_testType": "Testtyp",
                     "elongation": "Dehnung",
@@ -1961,7 +1964,7 @@
                     }
                   },
                   "LoadingScreen": {
-                    "heading": "Modell(e) werden hochgeladen"
+                    "heading": "Modell(e) werden hochgeladen und analysiert"
                   }
                 }
               }
@@ -2052,13 +2055,17 @@
               "PRINTABILITY": "Druckbarkeit",
               "DRAFT": "Entwurfsprüfung",
               "CAPACITY": "Kapazitätsprüfung",
-              "STABILITY": "Stabilitätsprüfung"
+              "STABILITY": "Stabilitätsprüfung",
+              "FEM": "FEM Analyse",
+              "PROCESS": "Prozessprüfung"
             },
             "description": {
               "PRINTABILITY": "Überprüfung der Druckbarkeit ihres 3D-Modells mit Hilfe von KI",
               "DRAFT": "Überprüfung der Machbarkeit ihres Entwurfes ",
               "CAPACITY": "Überprüfung der Kapazität des Herstellers",
-              "STABILITY": "Überprüfung der Stabilität des 3D-Modellentwurfs"
+              "STABILITY": "Überprüfung der Stabilität des 3D-Modellentwurfs",
+              "FEM": "Überprüfung ob das Bauteil bei gegebenem Druck bricht.",
+              "PROCESS": "Überprüfung des Prozesses auf validität."
             }
           },
           "VerifyStatus": {

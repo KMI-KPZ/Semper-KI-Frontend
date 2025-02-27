@@ -171,6 +171,14 @@ export const Button = forwardRef<
     return "";
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      handleOnClickButton(
+        e as unknown as React.MouseEvent<HTMLAnchorElement, MouseEvent>
+      );
+    }
+  };
+
   return (
     <a
       ref={ref} // Attach ref here
@@ -191,6 +199,7 @@ export const Button = forwardRef<
         className
       )}
       onClick={handleOnClickButton}
+      onKeyDown={handleKeyDown}
       href={to !== undefined ? to : undefined}
       data-testid={testid}
       target={target}

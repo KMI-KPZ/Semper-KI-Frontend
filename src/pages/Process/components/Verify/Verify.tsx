@@ -1,5 +1,5 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { Container, Text } from "@component-library/index";
+import { Container } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessContainer from "@/components/Process/Container/Container";
@@ -14,7 +14,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   const { t } = useTranslation();
   const { process: _process } = useProcess();
 
-  const getVerifyStatus = (): VerifyStatus => {
+  const getVerifyStatus = (type: "serviceReady" | "FEM"): VerifyStatus => {
     if (_process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
       return VerifyStatus.READY;
     }
@@ -22,7 +22,22 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
       return VerifyStatus.STARTED;
     }
     {
-      return VerifyStatus.COMPLETED;
+      switch (type) {
+        case "serviceReady":
+          return _process.processDetails.verificationResults !== undefined &&
+            _process.processDetails.verificationResults.serviceReady
+              .isSuccessful
+            ? VerifyStatus.COMPLETED
+            : VerifyStatus.FAILED;
+        case "FEM":
+          return _process.processDetails.verificationResults !== undefined &&
+            _process.processDetails.verificationResults.serviceSpecificTasks
+              .FEM !== undefined &&
+            _process.processDetails.verificationResults.serviceSpecificTasks.FEM
+              .isSuccessful
+            ? VerifyStatus.COMPLETED
+            : VerifyStatus.FAILED;
+      }
     }
   };
 
@@ -42,19 +57,19 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
         items="start"
       >
         <ProcessVerifyCard
-          status={getVerifyStatus()}
+          status={getVerifyStatus("serviceReady")}
           type="PROCESS"
           errorMsg={
             _process.processDetails.verificationResults !== undefined &&
             _process.processDetails.verificationResults.serviceReady
               .isSuccessful === false
-              ? _process.processDetails.verificationResults.serviceReady.reason
+              ? t("Process.components.Verify.serviceReady")
               : undefined
           }
         />
         {_process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
           <ProcessVerifyCard
-            status={getVerifyStatus()}
+            status={getVerifyStatus("FEM")}
             type="FEM"
             errorMsg={
               _process.processDetails.verificationResults !== undefined &&
@@ -62,30 +77,50 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
                 .FEM !== undefined &&
               _process.processDetails.verificationResults.serviceSpecificTasks
                 .FEM.isSuccessful === false ? (
-                <Container direction="col" width="full">
-                  {_process.processDetails.verificationResults.serviceSpecificTasks.FEM.groups.map(
-                    (group, index) => (
-                      <Container direction="col" width="full" key={index}>
-                        <Text>
-                          {t("general.group") + " " + group.groupID + 1}
-                        </Text>
-                        {group.models.map((model, index) => (
-                          <Container direction="col" width="full" key={index}>
-                            <Text>{model.name}</Text>
-                            <Text>
-                              {t(
-                                `types.ProcessVerificationResultFEMError.${model.type}`
+                <Container
+                  direction="col"
+                  width="full"
+                  className=" rounded-md border-2 "
+                >
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th className=" border-r p-2 text-center align-text-top">
+                          {t("general.group")}
+                        </th>
+                        <th className=" border-r p-2 text-center align-text-top">
+                          {t("general.model")}
+                        </th>
+                        <th className=" p-2 text-center align-text-top">
+                          {t("general.error")}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {_process.processDetails.verificationResults.serviceSpecificTasks.FEM.groups.map(
+                        (group, _index) =>
+                          group.models.map((model, index) => (
+                            <tr key={index}>
+                              {index === 0 ? (
+                                <td className="border-r border-t p-2 text-center align-text-top">
+                                  {group.groupID + 1}
+                                </td>
+                              ) : (
+                                <td />
                               )}
-                            </Text>
-                            {model.ssi &&
-                            process.env.NODE_ENV === "development" ? (
-                              <Text>{model.type}</Text>
-                            ) : null}
-                          </Container>
-                        ))}
-                      </Container>
-                    )
-                  )}
+                              <td className="border-r border-t p-2 text-center  align-text-top">
+                                {model.name}
+                              </td>
+                              <td className="border-t p-2 text-center  align-text-top ">
+                                {t(
+                                  `types.ProcessVerificationResultFEMError.${model.type}`
+                                )}
+                              </td>
+                            </tr>
+                          ))
+                      )}
+                    </tbody>
+                  </table>
                 </Container>
               ) : undefined
             }

@@ -95,10 +95,13 @@ const ContractorSelectionAddressCard: React.FC<
       justify="start"
       id={
         type === "billing"
-          ? "types.ProcessError.Process-Address-Billing"
-          : "types.ProcessError.Process-Address-Deliver"
+          ? "Process-Address-Billing"
+          : "Process-Address-Deliver"
       }
     >
+      {showDeliveryAddress === false ? (
+        <div id="Process-Address-Deliver" />
+      ) : null}
       <Container width="fit" className={`gap-2 p-0 `}>
         <ProcessConditionIcon
           error={

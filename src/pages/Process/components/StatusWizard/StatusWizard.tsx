@@ -57,7 +57,7 @@ const statusWizardItems: StatusWizardItem[] = [
     endStatus: ProcessStatus.SERVICE_COMPLETED,
     icon: <FactoryIcon />,
     text: "contractorSelected",
-    targetID: "Process-Contractor",
+    targetID: "Contractor",
   },
   {
     startStatus: ProcessStatus.CONTRACTOR_COMPLETED,

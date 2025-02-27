@@ -318,8 +318,8 @@
       "Process-Dependency": "Prozess wartet auf andere Prozess(e)",
       "Process-ContractFiles": "Bitte einen Vertrag hochladen",
       "Process-Payment": "Bitte eine Rechnung hochladen",
-      "Process-VerificationFailed": "Prozessüberprüfung fehlgeschlagen",
-      "Service-VerificationFailed": "Serviceüberprüfung fehlgeschlagen"
+      "Process-VerificationFailed": "Bitte Eingabedaten aktualisieren",
+      "Service-VerificationFailed": "Die FEM-Überprüfung ist fehlgeschlagen, es steht ihnen dennoch frei die Anfrage zu senden"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -396,6 +396,8 @@
     "updatedWhen": "Aktualisiert am",
     "createdBy": "Erstellt von",
     "updatedBy": "Aktualisiert von",
+    "model": "Modell",
+    "error": "Fehler",
     "button": {
       "clone": "Duplizieren",
       "select": "Auswählen",
@@ -1495,7 +1497,7 @@
     "headerPath": "Für die gewünschte Seite müssen sie sich anmelden",
     "button": {
       "login": "Anmelden",
-      "register": "Registieren",
+      "register": "Registrieren",
       "testuser": "Einzelnutzer",
       "testorga": "Organisation",
       "testadmin": "Admin"
@@ -2053,6 +2055,7 @@
       },
       "Verify": {
         "heading": "Prozess Überprüfen",
+        "serviceReady": "Serviceüberprüfung fehlgeschlagen! Eingaben nicht mehr Aktuell",
         "button": {
           "menu": "Überprüfungsmenu"
         },

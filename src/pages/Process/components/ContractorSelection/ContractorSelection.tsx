@@ -81,7 +81,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
 
   return (
     <ProcessContainer
-      id="Process-Contractor"
+      id="Contractor"
       pageTitle={pageTitle}
       menuButtonTitle={menuButtonTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
@@ -95,7 +95,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           className={`card bg-white ${
             !showDeliveryAddress ? "self-stretch" : ""
           }`}
-          id="Contractor"
+          id="Process-Contractor"
         >
           <Container width="fit" className={`gap-2  p-0`}>
             <ProcessConditionIcon

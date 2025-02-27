@@ -10,6 +10,7 @@ import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
 import logger from "@/hooks/useLogger";
 import ActionStatusCard from "@/components/Process/ActionStatusCard";
 import DependenciesForm from "@/components/Form/DependenciesForm";
+import { tanslateProcessErrorTypeKey } from "@/components/Process/Container/ActionContainer/components/ConditionItem";
 
 interface HomeProcessProps {
   project: DashboardProject;
@@ -325,9 +326,11 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                               `}
                             size="sm"
                             width="fit"
-                            className="p-0 text-orange-500"
+                            className="p-0 text-orange-500 md:whitespace-normal"
                             variant="text"
-                            to={`/projects/${project.projectID}/${process.processID}#${error.key}`}
+                            to={`/projects/${project.projectID}/${
+                              process.processID
+                            }#${tanslateProcessErrorTypeKey(error.key)}`}
                           />
                         </Container>
                       ))}

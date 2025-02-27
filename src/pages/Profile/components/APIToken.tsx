@@ -55,15 +55,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
           {t("Profile.APIToken.subTitle2")}
         </Text>
       </Container>
-      <Button
-        title={t("Profile.APIToken.button.link")}
-        variant="primary"
-        size="sm"
-        extern
-        target="_blank"
-        endIcon={<LaunchIcon />}
-        to={process.env.VITE_HTTP_API_URL + "/public/api/schema/swagger-ui/"}
-      />
+
       {shortApiToken.isLoading ? (
         <LoadingAnimation />
       ) : shortApiToken.data === undefined || shortApiToken.data === "" ? (
@@ -90,6 +82,17 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
               variant="secondary"
               onClick={handleOnClickButtonDelete}
               title={t("general.button.delete")}
+            />
+            <Button
+              title={t("Profile.APIToken.button.link")}
+              variant="primary"
+              size="sm"
+              extern
+              target="_blank"
+              endIcon={<LaunchIcon />}
+              to={
+                process.env.VITE_HTTP_API_URL + "/public/api/schema/swagger-ui/"
+              }
             />
           </Container>
         </Container>

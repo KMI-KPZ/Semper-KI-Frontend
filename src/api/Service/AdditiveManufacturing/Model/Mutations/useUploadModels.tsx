@@ -23,7 +23,7 @@ export interface UploadModel {
   file: File;
 }
 
-interface ModelsUpload {
+export interface ModelsUpload {
   projectID: string;
   processID: string;
   groupID: number;

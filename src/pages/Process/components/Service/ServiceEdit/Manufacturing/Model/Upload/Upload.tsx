@@ -13,6 +13,7 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 // import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ModelLevelOfDetail } from "@/api/Process/Querys/useGetProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import ModelLoadingScreen from "../components/ModelLoadingScreen";
 
 interface Props {}
 
@@ -397,6 +398,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           />
         </Container>
       </Container>
+      <ModelLoadingScreen
+        loading={uploadModels.isLoading}
+        uploadModels={uploadModels}
+      />
     </form>
   );
 };

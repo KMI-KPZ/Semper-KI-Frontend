@@ -512,7 +512,8 @@
       "contact": "Kontakt",
       "data-protection": "Datenschutzerklärung",
       "instagram": "Instagram",
-      "mastodon": "Mastodon"
+      "mastodon": "Mastodon",
+      "magazin": "Magazin"
     },
     "Form": {
       "NotificationForm": {
@@ -1958,6 +1959,9 @@
                     "button": {
                       "saveAll": "Auf alle Modelle anwenden"
                     }
+                  },
+                  "LoadingScreen": {
+                    "heading": "Modell(e) werden hochgeladen"
                   }
                 }
               }

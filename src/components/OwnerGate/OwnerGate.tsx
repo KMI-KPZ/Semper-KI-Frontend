@@ -36,7 +36,7 @@ const OwnerGate: React.FC<PropsWithChildren<OwnerGateProps>> = (props) => {
     project.client !== user.organization;
   const ownProcess =
     user.usertype === UserType.ORGANIZATION &&
-    process.contractor?.hashedID === user.hashedID;
+    process.contractor?.hashedID === user.organization;
 
   if (user.usertype === UserType.ADMIN) return children;
   if (user.usertype === UserType.ANONYM) return children;

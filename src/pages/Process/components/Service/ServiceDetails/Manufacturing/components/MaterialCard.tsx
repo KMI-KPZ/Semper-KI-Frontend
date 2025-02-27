@@ -54,7 +54,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.img"
           )}
-          className="max-h-40 w-full object-contain md:w-fit"
+          className="aspect-square max-h-40 w-full rounded-md border-2 object-cover md:w-fit"
         />
       </Container>
       <Container direction="col" width="full" className="gap-1">

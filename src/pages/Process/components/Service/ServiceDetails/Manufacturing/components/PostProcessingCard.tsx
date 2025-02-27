@@ -52,7 +52,7 @@ const ProcessSericePostProcessingCard: React.FC<
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
           )}
-          className="max-h-40 w-full object-contain md:w-fit"
+          className="aspect-square max-h-40 w-full rounded-md border-2 object-cover md:w-fit"
         />
       </Container>
 

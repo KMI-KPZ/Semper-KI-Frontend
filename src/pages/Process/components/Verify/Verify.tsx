@@ -1,23 +1,24 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { Container } from "@component-library/index";
+import { Container, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessContainer from "@/components/Process/Container/Container";
 import ProcessVerifyCard, { VerifyStatus } from "./components/VerifyCard";
 import useProcess from "@/hooks/Process/useProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface ProcessVerifyProps {}
 
 const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { process } = useProcess();
+  const { process: _process } = useProcess();
 
   const getVerifyStatus = (): VerifyStatus => {
-    if (process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
+    if (_process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
       return VerifyStatus.READY;
     }
-    if (process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS) {
+    if (_process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS) {
       return VerifyStatus.STARTED;
     }
     {
@@ -32,7 +33,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
       end={ProcessStatus.VERIFICATION_FAILED}
       menuButtonTitle={t("Process.components.Verify.button.menu")}
       pageTitle={t("Process.components.Verify.heading")}
-      showDelete={process.processStatus === ProcessStatus.VERIFICATION_FAILED}
+      showDelete={_process.processStatus === ProcessStatus.VERIFICATION_FAILED}
     >
       <Container
         width="full"
@@ -44,40 +45,52 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
           status={getVerifyStatus()}
           type="PROCESS"
           errorMsg={
-            process.processDetails.verificationResults !== undefined &&
-            process.processDetails.verificationResults.process !== undefined &&
-            process.processDetails.verificationResults.process.msg !== undefined
-              ? process.processDetails.verificationResults.process.msg
+            _process.processDetails.verificationResults !== undefined &&
+            _process.processDetails.verificationResults.process.isSuccessful ===
+              false
+              ? _process.processDetails.verificationResults.process.reason
               : undefined
           }
         />
-        <ProcessVerifyCard
-          status={getVerifyStatus()}
-          type="FEM"
-          errorMsg={
-            process.processDetails.verificationResults !== undefined &&
-            process.processDetails.verificationResults.fem !== undefined &&
-            process.processDetails.verificationResults.fem.msg !== undefined
-              ? process.processDetails.verificationResults.fem.msg
-              : undefined
-          }
-        />
-        {/* <ProcessVerifyCard status={getVerifyStatus()} type="PRINTABILITY" />
-        <ProcessVerifyCard status={getVerifyStatus()} type="DRAFT" />
-        <ProcessVerifyCard status={getVerifyStatus()} type="CAPACITY" />
-        <ProcessVerifyCard
-          status={
-            getVerifyStatus() === VerifyStatus.COMPLETED
-              ? VerifyStatus.FAILED
-              : getVerifyStatus()
-          }
-          type="STABILITY"
-          errorMsg={
-            getVerifyStatus() === VerifyStatus.COMPLETED
-              ? "Stützkonstruktion nicht ausreichend"
-              : undefined
-          }
-        /> */}
+        {_process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
+          <ProcessVerifyCard
+            status={getVerifyStatus()}
+            type="FEM"
+            errorMsg={
+              _process.processDetails.verificationResults !== undefined &&
+              _process.processDetails.verificationResults.serviceSpecificTasks
+                .FEM !== undefined &&
+              _process.processDetails.verificationResults.serviceSpecificTasks
+                .FEM.isSuccessful === false ? (
+                <Container direction="col" width="full">
+                  {_process.processDetails.verificationResults.serviceSpecificTasks.FEM.groups.map(
+                    (group, index) => (
+                      <Container direction="col" width="full" key={index}>
+                        <Text>
+                          {t("general.group") + " " + group.groupID + 1}
+                        </Text>
+                        {group.models.map((model, index) => (
+                          <Container direction="col" width="full" key={index}>
+                            <Text>{model.name}</Text>
+                            <Text>
+                              {t(
+                                `types.ProcessVerificationResultFEMError.${model.type}`
+                              )}
+                            </Text>
+                            {model.ssi &&
+                            process.env.NODE_ENV === "development" ? (
+                              <Text>{model.type}</Text>
+                            ) : null}
+                          </Container>
+                        ))}
+                      </Container>
+                    )
+                  )}
+                </Container>
+              ) : undefined
+            }
+          />
+        ) : null}
       </Container>
     </ProcessContainer>
   );

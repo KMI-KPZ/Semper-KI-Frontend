@@ -20,48 +20,7 @@ import { objectToArray } from "@/services/utils";
 import { ContractorProps } from "./useGetContractors";
 import { ProcessActionStatus } from "@/api/Project/Querys/useGetProject";
 
-export interface ProcessDetailsProps {
-  provisionalContractor?: ContractorProps;
-  title?: string;
-  clientBillingAddress?: UserAddressProps;
-  clientDeliverAddress?: UserAddressProps;
-  amount: number;
-  priorities: OrganizationPriority[];
-  prices?: ProcessPrices;
-  verificationResults?: VerificationResults;
-}
-
-export interface VerificationResults {
-  process?: { msg: string };
-  fem?: { msg: string };
-}
-
-export interface ProcessPrices {
-  details?: any;
-  groupCosts: [number, number][];
-}
-
-export type ProcessError = {
-  key: ProcessErrorType;
-  groupID?: number;
-  processID?: string;
-};
-
-export type ProcessErrorType =
-  | "Service-ADDITIVE_MANUFACTURING-models"
-  | "Service-ADDITIVE_MANUFACTURING-material"
-  | "ServiceManufacturingPostProcessing"
-  | "Process-Contractor"
-  | "Process-Address-Billing"
-  | "Process-Address-Deliver"
-  | "Process-ServiceType"
-  | "Process-Dependency"
-  | "Process-ContractFiles"
-  | "Process-Payment";
-
 export type Process = NoServiceProcessProps | DefinedProcess;
-
-export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
 
 export type DefaultProcessProps = {
   client: string;
@@ -100,6 +59,8 @@ export type NoServiceProcessProps = {
   serviceDetails: undefined;
 } & DefaultProcessProps;
 
+export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
+
 export type ManufactoringProcessProps = {
   serviceType: ServiceType.ADDITIVE_MANUFACTURING;
   serviceDetails: { groups: ManufacturingServiceProps[] };
@@ -109,6 +70,93 @@ export type ModelingProcessProps = {
   serviceType: ServiceType.CREATE_MODEL;
   serviceDetails: ModelingServiceProps;
 } & DefaultProcessProps;
+
+export enum ProcessStatus {
+  "DRAFT" = 0, //kein Service Ausgewählt
+  "WAITING_FOR_OTHER_PROCESS" = 100, //warten auf anderen Prozess
+  "SERVICE_READY" = 200, //Service bereit
+  "SERVICE_IN_PROGRESS" = 201, //Service in Bearbeitung
+  "SERVICE_COMPLICATION" = 202, //Service Komplikation
+  "SERVICE_COMPLETED" = 203, //Service abgeschlossen
+  "CONTRACTOR_COMPLETED" = 300, //auftragnehmer ausgewählt
+  "VERIFYING_IN_PROGRESS" = 400, //verifizierung in bearbeitung
+  "VERIFYING_COMPLETED" = 401, //verifizierung abgeschlossen
+  "VERIFICATION_FAILED" = 402, //verifizierung fehlgeschlagen
+  "REQUEST_COMPLETED" = 500, //auftrag raus
+  "OFFER_COMPLETED" = 600, //angebot raus
+  "OFFER_REJECTED" = 601, //angebot abgelehnt
+  "CONFIRMATION_COMPLETED" = 700, //bestätigung raus
+  "CONFIRMATION_REJECTED" = 701, //bestätigung abgelehnt
+  "PRODUCTION_IN_PROGRESS" = 800, //produktion in bearbeitung
+  "PRODUCTION_COMPLETED" = 801, //produktion abgeschlossen
+  "DELIVERY_IN_PROGRESS" = 900, //lieferung in bearbeitung
+  "DELIVERY_COMPLETED" = 901, //lieferung abgeschlossen
+  "DISPUTE" = 1000, //streitfall
+  "COMPLETED" = 1100, //abgeschlossen
+  "FAILED" = 1200, //fehlgeschlagen
+  "CANCELED" = 1300, //abgebrochen
+}
+
+export interface ProcessDetailsProps {
+  provisionalContractor?: ContractorProps;
+  title?: string;
+  clientBillingAddress?: UserAddressProps;
+  clientDeliverAddress?: UserAddressProps;
+  amount: number;
+  priorities: OrganizationPriority[];
+  prices?: ProcessPrices;
+  verificationResults?: ProcessVerificationResults;
+}
+
+export interface ProcessVerificationResults {
+  process: ProcessVerificationResult;
+  serviceSpecificTasks: { FEM?: ProcessVerificationResultFEM };
+}
+
+export type ProcessVerificationResult =
+  | { isSuccessful: true }
+  | { isSuccessful: false; reason: string };
+
+export type ProcessVerificationResultFEMError =
+  | "MATERIAL"
+  | "MODEL"
+  | "BREAKS"
+  | "ERROR";
+export type ProcessVerificationResultFEM = {
+  isSuccessful: boolean;
+  groups: {
+    groupID: number;
+    models: {
+      name: string;
+      type: ProcessVerificationResultFEMError;
+      ssi?: string;
+    }[];
+  }[];
+};
+
+export interface ProcessPrices {
+  details?: any;
+  groupCosts: [number, number][];
+}
+
+export type ProcessError = {
+  key: ProcessErrorType;
+  groupID?: number;
+  processID?: string;
+};
+
+export type ProcessErrorType =
+  | "Service-ADDITIVE_MANUFACTURING-models"
+  | "Service-ADDITIVE_MANUFACTURING-material"
+  | "ServiceManufacturingPostProcessing"
+  | "Process-Contractor"
+  | "Process-Address-Billing"
+  | "Process-Address-Deliver"
+  | "Process-ServiceType"
+  | "Process-Dependency"
+  | "Process-ContractFiles"
+  | "Process-Payment"
+  | "Process-VerificationFailed";
 
 export type FileProps = {
   createdBy: string;
@@ -244,32 +292,6 @@ export interface DeleteFileProps {
   fileID: string;
 }
 
-export enum ProcessStatus {
-  "DRAFT" = 0, //kein Service Ausgewählt
-  "WAITING_FOR_OTHER_PROCESS" = 100, //warten auf anderen Prozess
-  "SERVICE_READY" = 200, //Service bereit
-  "SERVICE_IN_PROGRESS" = 201, //Service in Bearbeitung
-  "SERVICE_COMPLICATION" = 202, //Service Komplikation
-  "SERVICE_COMPLETED" = 203, //Service abgeschlossen
-  "CONTRACTOR_COMPLETED" = 300, //auftragnehmer ausgewählt
-  "VERIFYING_IN_PROGRESS" = 400, //verifizierung in bearbeitung
-  "VERIFYING_COMPLETED" = 401, //verifizierung abgeschlossen
-  "VERIFICATION_FAILED" = 402, //verifizierung fehlgeschlagen
-  "REQUEST_COMPLETED" = 500, //auftrag raus
-  "OFFER_COMPLETED" = 600, //angebot raus
-  "OFFER_REJECTED" = 601, //angebot abgelehnt
-  "CONFIRMATION_COMPLETED" = 700, //bestätigung raus
-  "CONFIRMATION_REJECTED" = 701, //bestätigung abgelehnt
-  "PRODUCTION_IN_PROGRESS" = 800, //produktion in bearbeitung
-  "PRODUCTION_COMPLETED" = 801, //produktion abgeschlossen
-  "DELIVERY_IN_PROGRESS" = 900, //lieferung in bearbeitung
-  "DELIVERY_COMPLETED" = 901, //lieferung abgeschlossen
-  "DISPUTE" = 1000, //streitfall
-  "COMPLETED" = 1100, //abgeschlossen
-  "FAILED" = 1200, //fehlgeschlagen
-  "CANCELED" = 1300, //abgebrochen
-}
-
 export const isProcessAtServiceStatus = (process: Process): boolean => {
   return (
     process.processStatus >= ProcessStatus.SERVICE_READY &&
@@ -359,6 +381,7 @@ export const parseProcess = (process: any): Process => {
       prices: process.processDetails.prices
         ? process.processDetails.prices
         : undefined,
+      verificationResults: process.processDetails.verificationResults,
     },
     dependenciesIn: process.dependenciesIn,
     dependenciesOut: process.dependenciesOut,

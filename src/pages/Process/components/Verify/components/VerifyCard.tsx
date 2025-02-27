@@ -1,12 +1,12 @@
 import { Container, Heading, Text } from "@component-library/index";
-import React from "react";
+import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import ProcessVerifyStatus from "./VerifyStatus";
 
 interface ProcessVerifyCardProps {
   type: VerifyType;
   status: VerifyStatus;
-  errorMsg?: string;
+  errorMsg?: string | ReactNode;
 }
 
 export type VerifyType =
@@ -49,7 +49,7 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
           <Heading variant="h4" className="text-red-500">
             {t("Process.components.Verify.components.VerifyCard.error")}
           </Heading>
-          <Text>{errorMsg}</Text>
+          {typeof errorMsg === "string" ? <Text>{errorMsg}</Text> : errorMsg}
         </Container>
       ) : null}
     </Container>

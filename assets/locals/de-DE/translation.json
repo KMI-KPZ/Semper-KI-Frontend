@@ -317,7 +317,8 @@
       "Process-ServiceType": "Bitte einen Service auswählen",
       "Process-Dependency": "Prozess wartet auf andere Prozess(e)",
       "Process-ContractFiles": "Bitte einen Vertrag hochladen",
-      "Process-Payment": "Bitte eine Rechnung hochladen"
+      "Process-Payment": "Bitte eine Rechnung hochladen",
+      "Process-VerificationFailed": "Überprüfung fehlgeschlagen"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -352,6 +353,12 @@
     "FemTestType": {
       "elongation": "Dehnung",
       "compression": "Kompression"
+    },
+    "ProcessVerificationResultFEMError": {
+      "MATERIAL": "Das Ausgewählte Material besitzt keine FEM Daten",
+      "MODEL": "Das Ausgewählte Modell hat einen Fehler in Berechnung geworfen",
+      "BREAKS": "Das Modell bricht bei der Belastung",
+      "ERROR": "Fehler in der Berechnung"
     }
   },
   "general": {

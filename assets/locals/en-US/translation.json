@@ -1346,7 +1346,7 @@
     "admin": "Mocked registrations",
     "headerPath": "You must register for the desired page",
     "button": {
-      "login": "Register",
+      "login": "Login",
       "register": "Register",
       "testuser": "Single user",
       "testorga": "Organization",

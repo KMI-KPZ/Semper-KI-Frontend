@@ -2,10 +2,12 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MaterialProps } from "../Querys/useGetMaterials";
+import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface SetMaterialProps {
   material: MaterialProps;
   groupID: number;
+  color: OntoNode | undefined;
   processID: string;
   projectID: string;
 }

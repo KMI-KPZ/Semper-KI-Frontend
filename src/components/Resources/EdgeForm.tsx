@@ -102,7 +102,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
           .sort(sortItemsAll);
 
   return (
-    <Container width="full" direction="col" className="card gap-0">
+    <Container width="full" direction="col" className="card gap-0 bg-white">
       <Heading variant="h3">
         {t("components.Resources.EdgeForm.heading")}
         {t(`types.OntoNodeType.${nodeType}`)}
@@ -115,7 +115,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
             direction="col"
             className="overflow-auto"
             justify="start"
-            align="start"
+            items="start"
           >
             <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
               <caption className=" pb-2 pl-5 text-left">
@@ -174,52 +174,57 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                   </tr>
                 ) : allEdges.length > 0 ? (
                   <>
-                    {allEdges.slice(0, paginationAll).map((node, index) => (
-                      <tr key={index}>
-                        <td
-                          className={`border-t-2 p-3 text-left ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          {node.name}
-                        </td>
-                        <td
-                          className={`border-t-2 p-3 text-left ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          {node.createdBy === organization.hashedID
-                            ? organization.name
-                            : "Semper-KI"}
-                        </td>
-                        <td
-                          className={`border-t-2 p-3 text-left ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          <Container
-                            width="full"
-                            direction="row"
-                            justify="start"
+                    {allEdges
+                      .filter(
+                        (node) => node.createdBy === organization.hashedID
+                      )
+                      .slice(0, paginationAll)
+                      .map((node, index) => (
+                        <tr key={index}>
+                          <td
+                            className={`border-t-2 p-3 text-left ${
+                              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                            }`}
                           >
-                            <Button
-                              title={t("general.button.add")}
-                              onClick={() => {
-                                append({
-                                  nodeID: node.nodeID,
-                                  nodeType: nodeType,
-                                  nodeName: node.name,
-                                  createdBy: node.createdBy,
-                                });
-                              }}
-                              className="w-full"
-                              size="sm"
-                              variant="text"
-                            />
-                          </Container>
-                        </td>
-                      </tr>
-                    ))}
+                            {node.name}
+                          </td>
+                          <td
+                            className={`border-t-2 p-3 text-left ${
+                              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                            }`}
+                          >
+                            {node.createdBy === organization.hashedID
+                              ? organization.name
+                              : "Semper-KI"}
+                          </td>
+                          <td
+                            className={`border-t-2 p-3 text-left ${
+                              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                            }`}
+                          >
+                            <Container
+                              width="full"
+                              direction="row"
+                              justify="start"
+                            >
+                              <Button
+                                title={t("general.button.add")}
+                                onClick={() => {
+                                  append({
+                                    nodeID: node.nodeID,
+                                    nodeType: nodeType,
+                                    nodeName: node.name,
+                                    createdBy: node.createdBy,
+                                  });
+                                }}
+                                className="w-full"
+                                size="sm"
+                                variant="text"
+                              />
+                            </Container>
+                          </td>
+                        </tr>
+                      ))}
                     {allEdges.length > paginationAll || allEdges.length > 0 ? (
                       <tr key="more">
                         <td colSpan={3} className="border-t-2 p-3">
@@ -267,7 +272,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
             direction="col"
             className="overflow-auto"
             justify="start"
-            align="start"
+            items="start"
           >
             <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
               <caption className=" pb-2 pl-5 text-left">

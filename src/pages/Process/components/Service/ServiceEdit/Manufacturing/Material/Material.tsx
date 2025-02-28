@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetMaterials, {
   MaterialProps,
@@ -21,6 +21,8 @@ import useModal from "@/hooks/useModal";
 import useSearch from "@/hooks/useSearch";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
+import ProcessMaterialFilter from "./components/Filter";
+import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface Props {}
 
@@ -28,6 +30,11 @@ interface Props {}
 //   modalOpen: boolean;
 //   material: MaterialProps | undefined;
 // }
+
+export interface MaterialColorState {
+  color: OntoNode | undefined;
+  materialID: string;
+}
 
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { t } = useTranslation();
@@ -49,6 +56,23 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const [selectedMaterial, setSelectedMaterial] = useState<
     MaterialProps | undefined
   >(group.material);
+
+  const [seletedColors, setSelectedColors] = useState<MaterialColorState[]>([]);
+
+  useEffect(() => {
+    if (materialsQuery.data !== undefined)
+      setSelectedColors(
+        materialsQuery.data.map((material) => ({
+          materialID: material.id,
+          color:
+            material.colors !== undefined && material.colors.length !== 0
+              ? group.color !== undefined && material.id === group.material?.id
+                ? group.color
+                : material.colors[0]
+              : undefined,
+        })) || []
+      );
+  }, [materialsQuery.data]);
 
   const closeModal = () => {
     navigate(`/projects/${projectID}/${processID}`);
@@ -75,6 +99,9 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           projectID: project.projectID,
           processID: process.processID,
           material: selectedMaterial,
+          color: seletedColors.find(
+            (item) => item.materialID === selectedMaterial.id
+          )?.color,
         },
         {
           onSuccess() {
@@ -134,6 +161,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         className="h-full w-screen max-w-6xl gap-5 p-5 pt-14"
       >
         <Search handleSearchInputChange={handleSearchInputChange} />
+        <ProcessMaterialFilter />
         <Container direction="col" width="full">
           <Container width="full" direction="col">
             <Container direction="row" width="full" justify="between">
@@ -150,7 +178,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                   width="full"
                   wrap="wrap"
                   direction="row"
-                  align="start"
+                  items="start"
                 >
                   {materialsQuery.data
                     .filter((material) => filterDataBySearchInput(material))
@@ -161,6 +189,8 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                         key={index}
                         openMaterialView={openMaterialView}
                         selected={isMaterialSelected(material)}
+                        seletedColors={seletedColors}
+                        setSelectedColors={setSelectedColors}
                       >
                         <Container direction="row">
                           {isMaterialSelected(material) ? (

@@ -63,7 +63,7 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
       className="card absolute left-0 top-20 z-40 max-h-[80vh] gap-3 overflow-y-auto bg-white  p-0"
       direction="col"
       justify="start"
-      align="center"
+      items="center"
       width="fit"
     >
       <Container
@@ -100,7 +100,7 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
                 key={index}
                 className=" relative gap-2 rounded-md border-2 p-3 duration-300 hover:cursor-pointer hover:border-gray-300 hover:bg-gray-50"
                 width="full"
-                align="start"
+                items="start"
                 tabIndex
                 direction="col"
                 onClick={() => handleOnClickButtonEvent(event)}

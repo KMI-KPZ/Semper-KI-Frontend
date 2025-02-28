@@ -20,20 +20,20 @@ describe("Utils", () => {
   describe("Test getFileSizeAsString", () => {
     it("should return 1B as string", () => {
       const value = getFileSizeAsString(1);
-      expect(value).toBe("1B");
+      expect(value).toBe("1 B");
       expect(typeof value).toBe("string");
     });
     it("should return 1KB", () => {
       const value = getFileSizeAsString(1000);
-      expect(value).toBe("1KB");
+      expect(value).toBe("1 KB");
     });
     it("should return 1MB", () => {
       const value = getFileSizeAsString(1000000);
-      expect(value).toBe("1MB");
+      expect(value).toBe("1 MB");
     });
     it("should return 0MB", () => {
       const value = getFileSizeAsString(-1);
-      expect(value).toBe("0B");
+      expect(value).toBe("0 B");
     });
   });
   describe("Test isNumber", () => {

@@ -26,19 +26,19 @@
       "upload": "Modell hochladen",
       "material": "Material",
       "postprocessing": "Nachbearbeitung",
-      "cart": "Warenkorb",
+      "cart": "Warenkorb @needed?",
       "manufacturer": "Hersteller",
       "checkout": "Kasse",
-      "guide": "Wegweiser",
+      "guide": "Wegweiser @needed?",
       "order": "Auftragsdetails",
       "orders": "Meine Aufträge",
       "account": "Profil",
       "test": "Test",
       "service": "Service",
-      "use": "In Anspruch nehmen",
+      "use": "In Anspruch nehmen @needed?",
       "provide": "Service anbieten",
       "portfolio": "Portfolio",
-      "use-service": "Service in Anspruch nehmen",
+      "use-service": "Service in Anspruch nehmen @needed?",
       "provide-service": "Service bereitstellen",
       "continue": "Auftrag fortsetzen",
       "new-contract": "Neuer Auftrag",
@@ -47,7 +47,7 @@
       "user": "Benutzer",
       "procedure": "Verfahren",
       "printer": "Drucker",
-      "about-us": "Magazin",
+      "about-us": "Magazin @needed?",
       "login": "Anmelden",
       "register": "Registrieren",
       "logout": "Abmelden",
@@ -67,7 +67,12 @@
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
       "project": "Projekt",
-      "dashboard": "Dashboard"
+      "dashboard": "Dashboard",
+      "additionalRequirement": "Nachbearbeitung(en)",
+      "costing": "Kosten",
+      "characterisation": "Verifizierung",
+      "maturity": "Reifegrad",
+      "resilience": "Resilienz"
     }
   },
   "enum": {
@@ -87,6 +92,7 @@
       "CONTRACTOR_SELECTED": "Auftragnehmer ausgewählt",
       "VERIFYING": "Überprüfen lassen",
       "VERIFIED": "Überprüft",
+      "VERIFICATION_FAILED": "Überprüfung fehlgeschlagen",
       "REQUESTED": "Angefragt",
       "CLARIFICATION": "Rückfragen vom Auftragnehmer",
       "CONFIRMED_BY_CONTRACTOR": "Bestätigt durch Auftragnehmer",
@@ -114,8 +120,8 @@
     },
     "ServiceType": {
       "NONE": "Service auswahl",
-      "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-      "CREATE_MODEL": "Modell entwerfen lassen",
+      "ADDITIVE_MANUFACTURING": "Modell 3D-drucken",
+      "CREATE_MODEL": "Modell entwerfen",
       "DELIVERY": "Lieferung",
       "POST_PROCESSING": "Nachbearbeitung",
       "PACKAGING": "Verpackung",
@@ -170,6 +176,12 @@
       "MEDIUM": "Mittel",
       "MEDIUM_HIGH": "Mittel-Hoch",
       "HIGH": "Hoch"
+    },
+    "CharacterisationStatus": {
+      "UNVERIFIED": "Unverifiziert",
+      "REQUESTED": "Angefragt",
+      "SEND": "Gesendet",
+      "VERIFIED": "Überprüft"
     }
   },
   "types": {
@@ -230,7 +242,7 @@
       "organization": "Organisation",
       "printer": "3D-Drucker",
       "material": "Materialien",
-      "additionalRequirement": "Zusätzliche Anforderungen",
+      "additionalRequirement": "Nachbearbeitung(en)",
       "color": "Farben",
       "materialCategory": "Materialkategorie",
       "technology": "3D-Drucker Technologie",
@@ -278,7 +290,7 @@
       "amount": "Menge",
       "categorys": "Kategorien",
       "boxSize": "Kastengröße",
-      "materialcategory": "Materialkategorie",
+      "materialType": "Materialtyp",
       "volume": "Volumen",
       "materialCategory": "Materialkategorie",
       "proceeding": "Verfahren",
@@ -289,7 +301,11 @@
       "textarea": "Textfeld",
       "color": "Farbe",
       "number": "Zahl",
-      "multiselection": "Mehrfachauswahl"
+      "multiselection": "Mehrfachauswahl",
+      "tensileStrength": "Zugfestigkeit",
+      "density": "Dichte",
+      "elongationAtBreak": "Bruchdehnung",
+      "certificates": "Zertifikate"
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
@@ -298,7 +314,12 @@
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
       "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen",
-      "Process-ServiceType": "Bitte einen Service auswählen"
+      "Process-ServiceType": "Bitte einen Service auswählen",
+      "Process-Dependency": "Prozess wartet auf andere Prozess(e)",
+      "Process-ContractFiles": "Bitte einen Vertrag hochladen",
+      "Process-Payment": "Bitte eine Rechnung hochladen",
+      "Process-VerificationFailed": "Bitte Eingabedaten aktualisieren",
+      "Service-VerificationFailed": "Die FEM-Überprüfung ist fehlgeschlagen, es steht ihnen dennoch frei die Anfrage zu senden"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -315,11 +336,36 @@
       "test": "Test",
       "roleChanged": "Rolle Geändert",
       "userDeleted": "Benutzer Gelöscht"
+    },
+    "ProcessOrigin": {
+      "Service": "Service",
+      "Contractor": "Auftragnehmer",
+      "Verification": "Überprüfung",
+      "Request": "Anfrage",
+      "Clarification": "Rückfragen",
+      "Contract": "Vertrag",
+      "ContractFiles": "Vertragsdateien",
+      "Confirmation": "Bestätigung",
+      "Production": "Produktion",
+      "Delivery": "Lieferung",
+      "PaymentFiles": "Rechnung",
+      "Completed": "Abgeschlossen"
+    },
+    "FemTestType": {
+      "elongation": "Dehnung",
+      "compression": "Kompression"
+    },
+    "ProcessVerificationResultFEMError": {
+      "MATERIAL": "Das Ausgewählte Material besitzt keine FEM Daten",
+      "MODEL": "Das Ausgewählte Modell hat einen Fehler in Berechnung geworfen",
+      "BREAKS": "Das Modell bricht bei der Belastung",
+      "ERROR": "Fehler in der Berechnung"
     }
   },
   "general": {
     "email": "E-Mail",
     "name": "Name",
+    "fileName": "Dateiname",
     "company": "Firma",
     "street": "Straße",
     "houseNumber": "Hausnummer",
@@ -342,6 +388,18 @@
     "total": "Gesamt",
     "min": "Min",
     "max": "Max",
+    "contractor": "Auftragnehmer",
+    "client": "Auftraggeber",
+    "manufacturer": "Hersteller",
+    "you": "Sie",
+    "createdWhen": "Erstellt am",
+    "updatedWhen": "Aktualisiert am",
+    "createdBy": "Erstellt von",
+    "updatedBy": "Aktualisiert von",
+    "model": "Modell",
+    "error": "Fehler",
+    "next": "Weiter",
+    "previous": "Zurück",
     "button": {
       "clone": "Duplizieren",
       "select": "Auswählen",
@@ -351,6 +409,8 @@
       "delete": "Löschen",
       "create": "Erstellen",
       "save": "Speichern",
+      "waiting": "Warten",
+      "saving": "Wird Gespeichert",
       "cancel": "Abbrechen",
       "apply": "Anwenden",
       "open": "Öffnen",
@@ -464,7 +524,8 @@
       "contact": "Kontakt",
       "data-protection": "Datenschutzerklärung",
       "instagram": "Instagram",
-      "mastodon": "Mastodon"
+      "mastodon": "Mastodon",
+      "magazin": "Magazin"
     },
     "Form": {
       "NotificationForm": {
@@ -602,6 +663,9 @@
           "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
           "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
           "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+          "backConfirm": "Möchten Sie wirklich einen Schritt zurück gehen?",
+          "backConfirm2": "Dabei gehen alle Information aus dem aktuellen Schritt verloren.",
+          "backConfirm3": "(jedoch nicht die Informationen aus den vorherigen Schritten)",
           "components": {
             "ActionContainerWarpper": {
               "heading": "Ihr Prozess ist fehlgeschlagen",
@@ -623,6 +687,7 @@
             "userFilesTitle": "Dateien zum Angebot",
             "uploadFilesTitle": "Dateien hochladen",
             "currentFilesTitle": "Aktuelle Dateien",
+            "origin": "Ursprung",
             "button": {
               "upload": "Dateien Hochladen",
               "downloadAll": "Alle Dateien Herunterladen"
@@ -647,7 +712,10 @@
         }
       },
       "ContractorCard": {
-        "priceRange": "Preisspanne"
+        "priceRange": "Preisspanne",
+        "distance": "Entfernung: {{distance}} km",
+        "noDistance": "nicht vorhanden",
+        "verified": "Verifiziert"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -702,6 +770,18 @@
         "technology": "Technologie",
         "noTechnologies": "Keine Technologie gefunden",
         "noTechnology": "Keine Technologie ausgewählt",
+        "noMaterialCategory": "Keine Materialkategorie ausgewählt",
+        "materialCategory": "Materialkategorie",
+        "noMaterialCategories": "Keine Materialkategorie gefunden",
+        "noMaterialType": "Keine Materialtyp ausgewählt",
+        "materialType": "Materialtyp",
+        "noMaterialTypes": "Keine Materialtypen gefunden",
+        "ralColors": "RAL Farbcodes",
+        "or": "Oder",
+        "noRalColor": "Keine RAL Farbe ausgewählt",
+        "errorLoadingRalColors": "Fehler beim Laden der RAL Farben",
+        "hexColors": "Farben",
+        "noHexColors": "keine Farbe ausgewählt",
         "general": "Allgemeine Informationen",
         "nodeName": "Name",
         "context": "Beschreibung",
@@ -709,7 +789,7 @@
       },
       "NodeTable": {
         "subHeading": "Eigene {{name}}",
-        "button": { "createOwn": "Drucker Anlegen" }
+        "button": { "createOwn": "{{name}} Anlegen" }
       },
       "NodeView": {
         "context": "Beschreibung:",
@@ -1185,8 +1265,20 @@
         "processErrors": "Todos",
         "noErrors": "Keine Interaktionen erforderlich",
         "status": "Status",
+        "addDependencie": "Abhängigkeit hinzufügen",
+        "dependenciesIn": "Eingehene Abhängigkeiten",
+        "dependenciesOut": "Ausgehende Abhängigkeiten",
+        "dependenciesInHeading": "Vorherige Prozesse:",
+        "dependenciesOutHeading": "Nachfolgende Prozesse:",
+        "dependenciesTable": {
+          "name": "Prozessname",
+          "serviceType": "Servicetyp",
+          "processStatus": "Prozessstatus",
+          "selected": "Ausgewählt"
+        },
         "button": {
-          "clone": "Prozess in neues Projekt duplizieren"
+          "clone": "Prozess in neues Projekt duplizieren",
+          "addDependencie": "Abhängigkeit hinzufügen"
         }
       }
     }
@@ -1240,6 +1332,29 @@
       "special-terms": "Soweit besondere Bedingungen für einzelne Nutzungen dieser Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen.",
       "src": "Quelle",
       "gender-fit": "[angepasst an gendergerechte Sprache]"
+    },
+    "Nda": {
+      "heading": "NDA-Richtlinie (Geheimhaltungsvereinbarung)",
+      "1": {
+        "heading": "Vertraulichkeit der hochgeladenen Modelle",
+        "text": "Wir verpflichten uns, alle hochgeladenen 3D-Modelle und zugehörigen Informationen streng vertraulich zu behandeln."
+      },
+      "2": {
+        "heading": "Keine Weitergabe an Dritte",
+        "text": "Ihre Dateien werden nicht an Dritte weitergegeben, verkauft oder für andere Zwecke als die angegebenen genutzt."
+      },
+      "3": {
+        "heading": "Zugriffsbeschränkung",
+        "text": "Der Zugriff auf Ihre Daten ist nur autorisierten Mitarbeitern gestattet, die diese für die Erfüllung Ihrer Anfrage benötigen."
+      },
+      "4": {
+        "heading": "Speicherung und Löschung",
+        "text": "Hochgeladene Dateien werden nur so lange gespeichert, wie es für die Bearbeitung notwendig ist. Auf Wunsch können sie sofort nach Abschluss gelöscht werden."
+      },
+      "5": {
+        "heading": "Ausnahmen",
+        "text": "Diese Geheimhaltungsvereinbarung gilt nicht für Informationen, die bereits öffentlich bekannt sind oder uns auf legalem Wege von Dritten bereitgestellt wurden."
+      }
     },
     "Privacy": {
       "privacy-policy": "Datenschutzerklärung",
@@ -1314,12 +1429,65 @@
       "google-web-fonts": "Google Web Fonts",
       "google-web-fonts-info": "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Web Fonts in ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen. Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse unsere Website aufgerufen wurde. Die Nutzung von Google Web Fonts erfolgt im Interesse einer einheitlichen und ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Wenn Ihr Browser Web Fonts nicht unterstützt, wird eine Standardschrift von Ihrem Computer genutzt. Weitere Informationen zu Google Web Fonts finden Sie unter https://developers.google.com/fonts/faq und in der Datenschutzerklärung von Google: https://www.google.com/policies/privacy/."
     },
+    "PrivacyPolicy": {
+      "heading": "Datenschutzrichtlinie",
+      "1": {
+        "heading": "Allgemeine Hinweise",
+        "text": "Diese Datenschutzrichtlinie erläutert, welche Daten wir erheben, wie wir sie verarbeiten und welche Rechte Sie haben."
+      },
+      "2": {
+        "heading": "Erhobene Daten",
+        "text1": "Hochgeladene 3D-Modelle",
+        "text2": "Nutzername, E-Mail-Adresse (falls erforderlich)",
+        "text3": "Nutzungsdaten unserer Website"
+      },
+      "3": {
+        "heading": "Verwendungszweck der Daten",
+        "text1": "Verarbeitung und Speicherung hochgeladener Modelle",
+        "text2": "Verbesserung unseres Services",
+        "text3": "Kommunikation mit Ihnen (falls notwendig)"
+      },
+      "4": {
+        "heading": "Datensicherheit",
+        "text": "Wir setzen technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff zu schützen."
+      },
+      "5": {
+        "heading": "Rechte der Nutzer",
+        "text": "Sie haben das Recht, Auskunft über Ihre gespeicherten Daten zu erhalten, diese korrigieren oder löschen zu lassen. Kontaktieren Sie uns hierzu unter info@semper-ki.org."
+      }
+    },
+    "TermsOfService": {
+      "heading": "Nutzungsbedingungen",
+      "1": {
+        "heading": "Allgemeine Bestimmungen",
+        "text": "Durch die Nutzung unserer Plattform erklären Sie sich mit diesen Nutzungsbedingungen einverstanden."
+      },
+      "2": {
+        "heading": "Nutzung der Plattform",
+        "text": "Sie dürfen nur 3D-Modelle hochladen, an denen Sie die erforderlichen Rechte besitzen. Sie tragen die alleinige Verantwortung für den Inhalt der hochgeladenen Dateien."
+      },
+      "3": {
+        "heading": "Urheberrecht und Haftungsausschluss",
+        "text": "Wir übernehmen keine Haftung für urheberrechtliche Verstöße durch Nutzer. Falls eine Urheberrechtsverletzung gemeldet wird, behalten wir uns das Recht vor, das betroffene Modell zu entfernen."
+      },
+      "4": {
+        "heading": "Speicherung und Löschung von Inhalten",
+        "text": "Wir behalten uns vor, hochgeladene Dateien nach einer gewissen Zeit automatisch zu löschen oder auf Anfrage zu entfernen."
+      },
+      "5": {
+        "heading": "Änderungen der Nutzungsbedingungen",
+        "text": "Diese Bedingungen können jederzeit geändert werden. Die aktuelle Version ist stets auf unserer Website verfügbar."
+      }
+    },
     "Legal": {
       "heading": "Gesetzliches",
       "button": {
         "imprint": "Impressum",
         "privacy": "Datenschutzerklärung",
-        "contact": "Kontakt"
+        "contact": "Kontakt",
+        "nda": "NDA-Richtlinie",
+        "privacyPolice": "Datenschutzrichtlinie",
+        "termsOfService": "Nutzungsbedingungen"
       }
     }
   },
@@ -1331,7 +1499,7 @@
     "headerPath": "Für die gewünschte Seite müssen sie sich anmelden",
     "button": {
       "login": "Anmelden",
-      "register": "Registieren",
+      "register": "Registrieren",
       "testuser": "Einzelnutzer",
       "testorga": "Organisation",
       "testadmin": "Admin"
@@ -1508,6 +1676,14 @@
         "heading": "Angebot",
         "button": {
           "menu": "Angebotsmenu"
+        },
+        "ContractUpload": {
+          "heading": "Vertrag hochladen",
+          "uploadedContracts": "Hochladene Verträge",
+          "noUploadedContracts": "Keine Verträge hochgeladen",
+          "button": {
+            "upload": "Vertrag hochladen"
+          }
         }
       },
       "ContractorSelection": {
@@ -1521,7 +1697,8 @@
           "menu": "Hersteller Menu",
           "selectAddress": "Adresse auswählen",
           "select": "Auftragnehmer auswählen",
-          "edit": "Auftragnehmer bearbeiten"
+          "edit": "Auftragnehmer bearbeiten",
+          "costOverview": "Ihre Kostenaufstellung"
         },
         "components": {
           "AddressCard": {
@@ -1546,7 +1723,11 @@
           "ContractorList": {
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
-            "noContractorFound": "Kein Auftragnehmer gefunden"
+            "noContractorFound": "Kein Auftragnehmer gefunden",
+            "onlyVerified": "Nur verifizierte Auftragnehmer anzeigen"
+          },
+          "Costs": {
+            "heading": "Kostenaufstellung"
           }
         }
       },
@@ -1554,9 +1735,16 @@
         "heading": "Lieferung",
         "button": {
           "menu": "Lieferungsmenu"
+        },
+        "DeliveryUpload": {
+          "heading": "Rechnung hochladen",
+          "uploadedRecipes": "Hochladene Rechnung",
+          "noUploadedRecipes": "Keine Rechnung hochgeladen",
+          "button": {
+            "upload": "Rechnung hochladen"
+          }
         }
       },
-
       "Production": {
         "heading": "Produktion",
         "button": {
@@ -1630,7 +1818,8 @@
                 "name": "Name:",
                 "type": "Typ:",
                 "cost": "Mittlere Anschaffungskosten:",
-                "properties": "Eigenschaften:"
+                "properties": "Eigenschaften:",
+                "color": "Farbe:"
               },
               "GroupOverview": {
                 "heading": "Gruppenübersicht",
@@ -1650,16 +1839,23 @@
                 "quantity": "Anzahl",
                 "levelOfDetail": "Detailgrad",
                 "name": "Name:",
+                "size": "Größe:",
                 "dimensions": "Maße",
                 "surface": "Oberfläche",
                 "volume": "Volumen",
-                "complexity": "Komplexität"
+                "complexity": "Komplexität",
+                "fem": "FEM Analyse",
+                "femValue": "{{testType}} mit {{pressure}} MPa"
               },
               "PostProcessingCard": {
                 "name": "name",
                 "img": "Nachbearbeitungsbild",
                 "type": "Typ:",
                 "properties": "Eigenschaften:"
+              },
+              "FreeText": {
+                "heading": "Kommentar/Freitext für zusätzliche Informationen",
+                "placeholder": "Hier können Sie zusätzliche Informationen für den Hersteller hinterlassen..."
               },
               "button": {
                 "noModel": "Kein Modell? geben sie hier ihre Anforderungen ein",
@@ -1686,7 +1882,13 @@
               },
               "components": {
                 "Card": {
-                  "props": "Eigenschaften"
+                  "props": "Eigenschaften",
+                  "colors": "Farben",
+                  "noColors": "keine Farben vorhanden",
+                  "noColorProps": "keine Eigenschaften vorhanden"
+                },
+                "Filter": {
+                  "heading": "Filter / Vorgaben"
                 }
               }
             },
@@ -1698,7 +1900,12 @@
               },
               "components": {
                 "Card": {
-                  "license": "Lizenz"
+                  "certificates": "Zertifikate",
+                  "complexity": "Komplexität",
+                  "levelOfDetail": "Detailgrad",
+                  "license": "Lizenz",
+                  "size": "Größe",
+                  "tags": "Tags"
                 },
                 "Item": {
                   "created": "Erstellt am",
@@ -1724,6 +1931,12 @@
                 "loading": "Model wird hochgeladen",
                 "heading": "Eigene Modelle Hochladen",
                 "text": "per Drag & Drop oder Klick",
+                "disclaimer": "Mit dem Hochladen bestätigen Sie, dass Sie die Rechte zur Nutzung dieses Modells haben und erklären Sie sich mit unseren Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.",
+                "disclaimer2": "Indem Sie fortfahren, bestätigen Sie, dass Sie Eigentümer dieses 3D-Modells sind oder die Erlaubnis haben, es zu verwenden. Wir sind nicht haftbar für Urheberrechtsverletzungen. Außerdem behandeln wir Ihre Daten sicher und geben Ihre Dateien nicht weiter. Weitere Informationen finden Sie in unserer NDA-Richtlinie.",
+                "disclaimerCheckBox": "Ich bin mit den oben genannten Bedingungen einverstanden.",
+                "termsOfService": "Nutzungsbedingungen",
+                "privacyPolicy": "Datenschutzrichtlinie",
+                "nda": "NDA-Richtlinie",
                 "error": {
                   "tags": "Error Tags",
                   "licenses": "keine Lizenz(en) angegeben",
@@ -1748,12 +1961,22 @@
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
                     "scalingFactor": "Skalierung",
-                    "license": "Lizenz der Datei *",
+                    "license": "Lizenz der Datei",
                     "licensePH": "Lizenz1, Lizenz2 ...",
+                    "fem": "FEM Analyse",
+                    "femHint": "Mit der FEM Analyse wird grob simuliert, ob das Bauteil bei gegebenem Druck bricht.",
+                    "femLabel": "Durchführen",
+                    "fem_testType": "Testtyp",
+                    "elongation": "Dehnung",
+                    "compression": "Kompression",
+                    "fem_pressure": "Druck",
                     "mandatory": "* Pflichtfeld",
                     "button": {
                       "saveAll": "Auf alle Modelle anwenden"
                     }
+                  },
+                  "LoadingScreen": {
+                    "heading": "Modell(e) werden hochgeladen und analysiert"
                   }
                 }
               }
@@ -1788,8 +2011,8 @@
             "ServiceCard": {
               "heading": {
                 "NONE": "error",
-                "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-                "CREATE_MODEL": "Modell entwerfen lassen (Test)",
+                "ADDITIVE_MANUFACTURING": "Modell 3D-drucken",
+                "CREATE_MODEL": "Modell entwerfen (Test)",
                 "DELIVERY": "Lieferung (Test)",
                 "POST_PROCESSING": "Nachbearbeitung (Test)",
                 "PACKAGING": "Verpackung (Test)",
@@ -1834,6 +2057,7 @@
       },
       "Verify": {
         "heading": "Prozess Überprüfen",
+        "serviceReady": "Serviceüberprüfung fehlgeschlagen! Eingaben nicht mehr Aktuell",
         "button": {
           "menu": "Überprüfungsmenu"
         },
@@ -1844,13 +2068,17 @@
               "PRINTABILITY": "Druckbarkeit",
               "DRAFT": "Entwurfsprüfung",
               "CAPACITY": "Kapazitätsprüfung",
-              "STABILITY": "Stabilitätsprüfung"
+              "STABILITY": "Stabilitätsprüfung",
+              "FEM": "FEM Analyse",
+              "PROCESS": "Prozessprüfung"
             },
             "description": {
               "PRINTABILITY": "Überprüfung der Druckbarkeit ihres 3D-Modells mit Hilfe von KI",
               "DRAFT": "Überprüfung der Machbarkeit ihres Entwurfes ",
               "CAPACITY": "Überprüfung der Kapazität des Herstellers",
-              "STABILITY": "Überprüfung der Stabilität des 3D-Modellentwurfs"
+              "STABILITY": "Überprüfung der Stabilität des 3D-Modellentwurfs",
+              "FEM": "Überprüfung ob das Bauteil bei gegebenem Druck bricht.",
+              "PROCESS": "Überprüfung des Prozesses auf validität."
             }
           },
           "VerifyStatus": {
@@ -1901,6 +2129,7 @@
       "subTitle": "Erstellen Sie einen neuen API Token für den Zugriff auf die Semper-KI API",
       "subTitle2": "Der Token wird nur einmal angezeigt und kann nicht wiederhergestellt werden.\n Sie können jedoch jederzeit einen neuen Token erstellen.",
       "button": {
+        "link": "Swagger Öffnen",
         "reCreate": "Neu erstellen"
       }
     },
@@ -2047,8 +2276,12 @@
         "overview": "Übersicht",
         "materials": "Materialien",
         "printers": "3D-Drucker",
+        "colors": "Farben",
         "postProcessings": "Nachbearbeitung",
         "costing": "Kosten",
+        "characterisation": "Verifizierung",
+        "maturity": "Reifegrad",
+        "resilience": "Resilienz",
         "request": "Datenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
@@ -2062,6 +2295,24 @@
         "button": {
           "variant": "Variante erstellen"
         }
+      }
+    },
+    "Characterisation": {
+      "header": "Verifizierung",
+      "describtion": "Hier können sie ihre Fähigkeiten verifizieren, indem sie ein Charakterisierungsbauteil drucken und zu unserem Partner (Fraunhofer IWU) schicken. Sie erhalten dann eine Rückmeldung über die Qualität ihres Druckes und es wird in der Auswahl des Kunden angezeigt das sie Verfiziert sind. Die Verifizierung bezieht sich auf ein Paar von Drucker und Material.",
+      "printer": "3D-Drucker",
+      "material": "Material",
+      "verified": "Überprüfung",
+      "actions": "Aktionen",
+      "noItems": "keine Verifizierungen/Drucker-Materialien Paare vorhanden",
+      "noItemsWithFilter": "keine  Verifizierungen/Drucker-Materialien Paare vorhanden mit den gewählten Filtern",
+      "button": {
+        "verify": "Verifizieren",
+        "send": "Model abschicken",
+        "reverified": "Re-Verifizieren",
+        "downloadModel": "Modell herunterladen",
+        "downloadInstructions": "Anleitung herunterladen",
+        "downloadDetails": "Details herunterladen"
       }
     },
     "Costing": {
@@ -2080,6 +2331,23 @@
       "own": "Eigene Materialien",
       "button": {
         "createOwn": "Material Anlegen"
+      }
+    },
+    "Maturity": {
+      "header": "Reifegrad",
+      "describtion": "Das Reifegrad-Modell dient dazu, den Reifegrad ihres Unternehmen einzuschätzen um sie bei der Digitalisierung zu unterstützen und mit Patneren zu verbinden die ein änhliches Level haben wie sie. Voreteile auf der Plattform: genauere Kundenzuordnung und höhere Sichtbarkeit des Unternehmens",
+      "level": "Reifegrad:",
+      "noLevel": "noch nicht ermittelt",
+      "assessmentBlockId": "Name",
+      "value": "Wert",
+      "blocks": "Zusatzinformationen",
+      "blocksValue": "Wert",
+      "recommendations": "Empfehlungen",
+      "noRecommendations": "keine Empfehlungen vorhanden",
+      "header2": "Auswertung",
+      "button": {
+        "calculate": "Reifegrad ermitteln",
+        "recalculate": "Reifegrad erneut ermitteln"
       }
     },
     "Overview": {
@@ -2105,6 +2373,24 @@
       "header": "Anfragen zu Datenerweiterung",
       "noItems": "keine Anfragen vorhanden",
       "button": { "new": "neue Anfrage" }
+    },
+    "Resilience": {
+      "header": "Resilienz",
+      "describtion": "Der Resilienz-Wert gibt an wie gut ihr Unternehmen auf Krisen vorbereitet ist und wie schnell sie sich von Krisen erholen können.",
+      "level": "Resilienzwert:",
+      "noLevel": "noch nicht ermittelt",
+      "assessmentBlockId": "Name",
+      "value": "Wert",
+      "blocks": "Zusatzinformationen",
+      "blocksValue": "Wert",
+      "recommendations": "Empfehlungen",
+      "noRecommendations": "keine Empfehlungen vorhanden",
+      "header2": "Auswertung",
+
+      "button": {
+        "calculate": "Resilienz ermitteln",
+        "recalculate": "Resilienz erneut ermitteln"
+      }
     }
   },
   "Test": {

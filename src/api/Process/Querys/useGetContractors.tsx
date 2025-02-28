@@ -7,8 +7,12 @@ import { OrganizationBranding } from "@/api/Organization/Querys/useGetOrganizati
 export interface ContractorProps {
   hashedID: string;
   name: string;
+  distance: number;
   branding: OrganizationBranding;
   prices: { groupCosts: [number, number][] };
+  contractorCoordinates: [number, number];
+  groups: number[];
+  verified: boolean;
 }
 
 const useGetContractors = () => {

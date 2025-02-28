@@ -45,7 +45,9 @@ const ResourcesNodeTable: React.FC<ResourcesNodeTableProps> = (props) => {
           })}
         </Heading>
         <Button
-          title={t("components.Resources.NodeTable.button.createOwn")}
+          title={t("components.Resources.NodeTable.button.createOwn", {
+            name: t(`types.OntoNodeType.${nodeType}`),
+          })}
           variant="secondary"
           size="sm"
           width="fit"

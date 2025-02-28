@@ -5,6 +5,7 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessFileView from "@/components/Process/File/FileView";
 import ProcessMessages from "@/components/Process/Messages/Messages";
 import useProcess from "@/hooks/Process/useProcess";
+import ContractUpload from "./ContractUpload";
 
 interface ProcessContractProps {}
 
@@ -26,6 +27,7 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
         origin="Contract"
         endStatus={ProcessStatus.OFFER_COMPLETED}
       />
+      <ContractUpload />
     </ProcessContainer>
   );
 };

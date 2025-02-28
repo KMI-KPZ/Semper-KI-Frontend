@@ -3,7 +3,9 @@ import { Navigate, Outlet, useParams } from "react-router-dom";
 import useGetProcess from "@/api/Process/Querys/useGetProcess";
 import useGetFilters from "@/api/Filter/Querys/useGetFilters";
 import { Container, LoadingAnimation } from "@component-library/index";
-import ProcessContextProvider from "@/contexts/ProcessContext";
+import ProcessContextProvider, {
+  ProcessLoadGroup,
+} from "@/contexts/ProcessContext";
 
 interface ProcessOutletProps {}
 
@@ -14,6 +16,11 @@ const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
   const process = useGetProcess();
   const filter = useGetFilters();
   const { projectID } = useParams();
+  const [loadGroup, setLoadGroup] = React.useState<ProcessLoadGroup>({
+    groupID: undefined,
+    navLink: undefined,
+    loadNav: false,
+  });
 
   if (process.isLoading || filter.isLoading)
     return (
@@ -29,7 +36,12 @@ const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
     filter.data !== undefined
   )
     return (
-      <ProcessContextProvider process={process.data} filters={filter.data}>
+      <ProcessContextProvider
+        process={process.data}
+        filters={filter.data}
+        loadGroup={loadGroup}
+        setLoadGroup={setLoadGroup}
+      >
         {children}
         <Outlet />
       </ProcessContextProvider>

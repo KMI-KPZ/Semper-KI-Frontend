@@ -129,7 +129,7 @@ export const Test: React.FC<Props> = (props) => {
               <Container
                 direction="col"
                 justify="start"
-                align="start"
+                items="start"
                 className="card"
                 width="full"
                 key={index}
@@ -164,7 +164,7 @@ export const Test: React.FC<Props> = (props) => {
                   <Container
                     direction="col"
                     justify="start"
-                    align="start"
+                    items="start"
                     className="card"
                     width="full"
                   >
@@ -182,7 +182,7 @@ export const Test: React.FC<Props> = (props) => {
                   <Container
                     direction="col"
                     justify="start"
-                    align="start"
+                    items="start"
                     width="full"
                     className="card"
                   >

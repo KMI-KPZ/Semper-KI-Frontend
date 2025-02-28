@@ -53,7 +53,7 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
   };
 
   return (
-    <Container width="full" className="gap-10" align="start" direction="col">
+    <Container width="full" className="gap-10" items="start" direction="col">
       <HomeHeader variant="h2" title={t("Home.Anonym.Tutorial.heading")} />
       <Text>{t("Home.Anonym.Tutorial.subTitle")}</Text>
       <Container width="full">

@@ -1,13 +1,12 @@
-import {
-  ManufactoringProcessProps,
-  ProcessStatus,
-} from "@/api/Process/Querys/useGetProcess";
+import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 import React from "react";
-import ProcessFilter from "../../Filter/Filter";
+// import ProcessFilter from "../../Filter/Filter";
+// import ProcessStatusGate from "../../../../../../components/Process/StatusGate";
 import ServiceManufacturingGroupOverview from "./components/GroupOverview";
 import ServiceManufacturingDetails from "./components/ManufacturingDetails";
-import ProcessStatusGate from "../../../../../../components/Process/StatusGate";
+import ServiceManufacturingFreeText from "./components/FreeText";
+import useLoadGroupID from "@/hooks/useLoadGroupID";
 
 interface ServiceManufacturingViewProps {
   process: ManufactoringProcessProps;
@@ -35,23 +34,22 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
 ) => {
   const { process } = props;
   const [activeGroup, setActiveGroup] = React.useState(0);
+  useLoadGroupID({ setActiveGroup });
 
   return (
-    <Container
-      direction="col"
-      justify="center"
-      align="start"
-      width="full"
-      className=" p-0"
-    >
+    <Container direction="col" justify="center" items="start" width="full">
       <ServiceManufacturingGroupOverview
         process={process}
         activeGroup={activeGroup}
         changeActiveGroup={setActiveGroup}
       />
-      <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+      <ServiceManufacturingFreeText
+        activeGroup={activeGroup}
+        process={process}
+      />
+      {/* <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
         <ProcessFilter />
-      </ProcessStatusGate>
+      </ProcessStatusGate> */}
       {process.serviceDetails.groups.length > 0 ? (
         <ServiceManufacturingDetails
           process={process}

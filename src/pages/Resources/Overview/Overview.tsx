@@ -13,6 +13,7 @@ const ResourcesOverview: React.FC<ResourcesOverviewProps> = (props) => {
       <Heading variant="h2">{t("Resources.Overview.header")}</Heading>
       <Divider />
       <Text>{t("Resources.Overview.text")}</Text>
+      <Container width="full"></Container>
     </Container>
   );
 };

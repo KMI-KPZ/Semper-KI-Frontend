@@ -22,7 +22,7 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
   // };
 
   return (
-    <Container width="full" direction="col" align="start" className="gap-0 p-0">
+    <Container width="full" direction="col" items="start" className="gap-0 p-0">
       {/* <Container width="full" justify="start" className="px-3 pb-2">
         <Heading variant="h3">
           {`${t(
@@ -43,7 +43,7 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           width="full"
           className="pb-3"
           direction="col"
-          align="center"
+          items="center"
           justify="center"
         >
           <Text>

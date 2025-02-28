@@ -1,15 +1,15 @@
 import React, { PropsWithChildren } from "react";
 import ProcessMenu from "../Menu";
-import { Container, Divider, Heading } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 
 interface ProcessHeaderProps {
   menuButtonTitle: string;
   pageTitle: string;
 }
 
-const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
-  props
-) => {
+const ProcessContainerHeader: React.FC<
+  PropsWithChildren<ProcessHeaderProps>
+> = (props) => {
   const { children, menuButtonTitle, pageTitle } = props;
 
   return (
@@ -17,12 +17,15 @@ const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
       {children !== undefined ? (
         <ProcessMenu buttonTitle={menuButtonTitle}>{children}</ProcessMenu>
       ) : null}
-      <Container width="full" justify="start">
+      <Container
+        width="full"
+        justify="start"
+        className="rounded-md rounded-b-none bg-white p-2 px-5"
+      >
         <Heading variant="h2">{pageTitle}</Heading>
       </Container>
-      <Divider />
     </>
   );
 };
 
-export default ProcessHeader;
+export default ProcessContainerHeader;

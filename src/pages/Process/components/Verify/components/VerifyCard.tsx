@@ -1,15 +1,21 @@
 import { Container, Heading, Text } from "@component-library/index";
-import React from "react";
+import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import ProcessVerifyStatus from "./VerifyStatus";
 
 interface ProcessVerifyCardProps {
   type: VerifyType;
   status: VerifyStatus;
-  errorMsg?: string;
+  errorMsg?: string | ReactNode;
 }
 
-export type VerifyType = "PRINTABILITY" | "DRAFT" | "CAPACITY" | "STABILITY";
+export type VerifyType =
+  | "PRINTABILITY"
+  | "DRAFT"
+  | "CAPACITY"
+  | "STABILITY"
+  | "FEM"
+  | "PROCESS";
 export enum VerifyStatus {
   "READY",
   "STARTED",
@@ -25,7 +31,7 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
   return (
     <Container
       direction="col"
-      className="card self-stretch"
+      className="card self-stretch bg-white"
       justify="start"
       width="full"
     >
@@ -39,11 +45,11 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
         )}
       </Text>
       {status === VerifyStatus.FAILED && errorMsg !== undefined ? (
-        <Container justify="start" align="start" direction="col">
+        <Container justify="start" items="start" direction="col">
           <Heading variant="h4" className="text-red-500">
             {t("Process.components.Verify.components.VerifyCard.error")}
           </Heading>
-          <Text>{errorMsg}</Text>
+          {typeof errorMsg === "string" ? <Text>{errorMsg}</Text> : errorMsg}
         </Container>
       ) : null}
     </Container>

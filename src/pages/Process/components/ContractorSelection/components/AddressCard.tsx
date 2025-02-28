@@ -91,13 +91,17 @@ const ContractorSelectionAddressCard: React.FC<
     <Container
       width="full"
       direction="col"
-      className="card h-full gap-0 self-stretch"
+      className="card h-full gap-0 self-stretch bg-white"
+      justify="start"
       id={
         type === "billing"
-          ? "types.ProcessError.Process-Address-Billing"
-          : "types.ProcessError.Process-Address-Deliver"
+          ? "Process-Address-Billing"
+          : "Process-Address-Deliver"
       }
     >
+      {showDeliveryAddress === false ? (
+        <div id="Process-Address-Deliver" />
+      ) : null}
       <Container width="fit" className={`gap-2 p-0 `}>
         <ProcessConditionIcon
           error={
@@ -138,14 +142,14 @@ const ContractorSelectionAddressCard: React.FC<
           justify="center"
           className="p-5"
         >
-          <Container width="fit" align="start" direction="col" gap={3}>
+          <Container width="fit" items="start" direction="col" gap={3}>
             {address.company ? <Text>{t("general.company")}</Text> : null}
             <Text>{t("general.name")}</Text>
             <Text>{t("general.street")}</Text>
             <Text>{t("general.city")}</Text>
             <Text>{t("general.country")}</Text>
           </Container>
-          <Container width="fit" align="start" direction="col" gap={3}>
+          <Container width="fit" items="start" direction="col" gap={3}>
             {address.company ? <Text>{address.company}</Text> : null}
             <Text>{`${address.firstName} ${address.lastName}`}</Text>
             <Text>{`${address.street} ${address.houseNumber}`}</Text>
@@ -159,7 +163,7 @@ const ContractorSelectionAddressCard: React.FC<
         direction="col"
         width="full"
         className="gap-1 p-5"
-        align="center"
+        items="center"
       >
         <Container>
           <label

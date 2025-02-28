@@ -9,13 +9,14 @@ import {
 } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { UserAddressProps } from "@/hooks/useUser";
+import useUser, { UserAddressProps, UserType } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "../../../../components/Process/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import ProcessStatusGate from "../../../../components/Process/StatusGate";
+import ProcessContractorCosts from "./components/Costs";
 
 interface ProcessContractorSelectionProps {}
 
@@ -32,8 +33,18 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
+  const { user } = useUser();
 
   const [editContractor, setEditContractor] = useState(false);
+  const [showCosts, setShowCosts] = useState(false);
+
+  const closeCosts = () => {
+    setShowCosts(false);
+  };
+
+  const handleOnClickShowCosts = () => {
+    setShowCosts(true);
+  };
 
   const currentContractor = process.processDetails.provisionalContractor;
 
@@ -76,15 +87,17 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
       start={ProcessStatus.SERVICE_COMPLETED}
       end={ProcessStatus.SERVICE_COMPLETED}
     >
-      <Container width="full" justify="center" align="start" direction="auto">
+      <Container width="full" justify="center" items="start" direction="auto">
         <Container
           width="full"
           justify="start"
           direction="col"
-          className={`card ${!showDeliveryAddress ? "self-stretch" : ""}`}
-          id="Contractor"
+          className={`card bg-white ${
+            !showDeliveryAddress ? "self-stretch" : ""
+          }`}
+          id="Process-Contractor"
         >
-          <Container width="fit" className={`gap-2 p-0 `}>
+          <Container width="fit" className={`gap-2  p-0`}>
             <ProcessConditionIcon
               error={process.processDetails.provisionalContractor === undefined}
             />
@@ -119,6 +132,22 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
                   title={t("general.button.edit")}
                 />
               </ProcessStatusGate>
+              {process.contractor !== undefined &&
+              process.contractor.hashedID !== undefined &&
+              user.usertype === UserType.ORGANIZATION &&
+              user.organization !== undefined &&
+              process.contractor.hashedID === user.organization ? (
+                <Container width="full">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={handleOnClickShowCosts}
+                    title={t(
+                      "Process.components.ContractorSelection.button.costOverview"
+                    )}
+                  />
+                </Container>
+              ) : null}
             </Container>
           )}
         </Container>
@@ -126,7 +155,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           direction="col"
           width="full"
           justify="start"
-          className="self-stretch"
+          className="self-stretch rounded-md "
         >
           <ContractorSelectionAddressCard
             onChangeCheckBox={onChangeCheckBox}
@@ -149,6 +178,16 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
         closeModal={closeEditContractor}
       >
         <ProcessContractorList
+          process={process}
+          closeModal={closeEditContractor}
+        />
+      </Modal>
+      <Modal
+        open={showCosts}
+        modalKey="ProcessContractorCosts"
+        closeModal={closeCosts}
+      >
+        <ProcessContractorCosts
           process={process}
           closeModal={closeEditContractor}
         />

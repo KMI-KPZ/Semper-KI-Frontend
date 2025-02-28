@@ -18,7 +18,7 @@ interface FormData {
 const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
   props
 ) => {
-  const {} = props;
+  const { close } = props;
   const { t } = useTranslation();
   const createProject = useCreateProject();
 
@@ -33,8 +33,10 @@ const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
     e?: React.BaseSyntheticEvent<object, any, any>
   ) => {
     e?.preventDefault();
+    close();
     createProject.mutate(data.name);
   };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault(); // Prevent default form submission

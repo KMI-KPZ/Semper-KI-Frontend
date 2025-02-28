@@ -76,7 +76,7 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
           <Container
             width="full"
             direction="col"
-            align="center"
+            items="center"
             justify="start"
           >
             <TextInput
@@ -117,14 +117,14 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
             <Container
               width="full"
               direction="row"
-              align="start"
+              items="start"
               justify="start"
             >
               <Container
                 direction="col"
                 width="fit"
                 justify="start"
-                align="start"
+                items="start"
                 className="p-3"
                 gap={3}
               >
@@ -142,7 +142,7 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
                 direction="col"
                 width="fit"
                 justify="start"
-                align="start"
+                items="start"
                 className="p-3"
                 gap={3}
               >

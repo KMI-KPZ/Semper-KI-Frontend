@@ -22,7 +22,7 @@ export interface CategoryProps {
   open: boolean;
 }
 
-const generateCategoryList = (
+export const generateFilterCategoryList = (
   filterItemList: FilterItemProps[]
 ): CategoryProps[] => {
   let stringList: FilterCategoryType[] = [];
@@ -64,7 +64,7 @@ const FilterEdit: React.FC<FilterEditProps> = (props) => {
   } = useFilter();
 
   const [categoryList, setCategoryList] = useState<CategoryProps[]>(
-    generateCategoryList(editFilters)
+    generateFilterCategoryList(editFilters)
   );
 
   const setFilterItem = (newFilterItem: FilterItemProps) => {
@@ -136,7 +136,7 @@ const FilterEdit: React.FC<FilterEditProps> = (props) => {
       </Container>
       <Divider />
 
-      <Collapsible initialOpen showButton logName="Filter" animation={false}>
+      <Collapsible initialOpen showButton logName="Filter">
         <Container width="full" direction="col" className="p-5">
           <Container width="full" direction="col">
             <Container width="full" direction="col" className="gap-0 p-0">
@@ -177,7 +177,7 @@ const FilterEdit: React.FC<FilterEditProps> = (props) => {
                 width="full"
                 justify="start"
                 direction="col"
-                align="center"
+                items="center"
                 wrap="wrap"
                 className="gap-3  rounded-md rounded-tl-none border-2 border-gray-400 p-5"
               >

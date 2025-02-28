@@ -1,30 +1,30 @@
 {
   "yup": {
     "requiredName": "{{name}} is required",
-    "required": "is required",
+    "required": "Is required",
     "string": "Please enter character string",
     "number": "Please enter number",
     "email": "Please provide a valid email"
   },
   "zod": {
     "requiredName": "{{name}} is required",
-    "required": "is required",
+    "required": "Is required",
     "string": "Please enter character string",
     "number": "Please enter number",
-    "email": "Please provide a valid email",
+    "email": "Please specify valid email",
     "empty": "Must not be empty",
-    "numberMax": "Must not be larger than {{max}} be",
-    "numberMin": "Must not be smaller than {{min}} be"
+    "numberMax": "Maximum of {{max}}",
+    "numberMin": "Minimum of {{min}}"
   },
   "data": {
     "NavigationItem": {
       "demonstrator": "Get started",
       "edit": "Edit",
-      "home": "Home page",
-      "process": "process",
+      "home": "Home",
+      "process": "Process",
       "model": "Model",
       "upload": "Upload model",
-      "material": "material",
+      "material": "Material",
       "postprocessing": "Post-processing",
       "cart": "Shopping cart",
       "manufacturer": "Manufacturer",
@@ -32,47 +32,47 @@
       "guide": "signpost",
       "order": "Order details",
       "orders": "My orders",
-      "account": "profile",
-      "test": "test",
-      "service": "service",
+      "account": "Profile",
+      "test": "Test",
+      "service": "Service",
       "use": "Claim",
       "provide": "Offer service",
       "portfolio": "Portfolio",
-      "use-service": "Take advantage of the service",
+      "use-service": "Use service",
       "provide-service": "Provide service",
       "continue": "Continue order",
       "new-contract": "New order",
       "proceedings": "Proceedings",
-      "company": "Pursue",
-      "user": "user",
-      "procedure": "Proceedings",
+      "company": "Company",
+      "user": "User",
+      "procedure": "Procedure",
       "printer": "Printer",
       "about-us": "magazine",
-      "login": "Register",
-      "register": "Register",
+      "login": "Log in",
+      "register": "Sign up",
       "logout": "Log out",
-      "organization": "organization",
+      "organization": "Organization",
       "materials": "Materials",
       "printers": "3D printer",
       "postprocessings": "Post-processing",
-      "resources": "resources",
+      "resources": "Resources",
       "add": "Add",
-      "demo": "demo",
+      "demo": "Demo",
       "admin": "Admin area",
       "users": "Manage users",
       "contractorSelection": "Contractor selection",
-      "verification": "examination",
+      "verification": "Examination",
       "registerOrganization": "Register organization",
       "verifyEMail": "Verify email",
       "manufacturing": "Have it manufactured",
       "projects": "My projects",
-      "project": "project"
+      "project": "Project"
     }
   },
   "enum": {
     "UserType": {
       "USER": "Individual",
-      "ORGANIZATION": "organization",
+      "ORGANIZATION": "Organization",
       "ADMIN": "Admin",
       "ANONYM": "Anonymous"
     },
@@ -80,7 +80,7 @@
       "DRAFT": "Draft",
       "WAITING_FOR_OTHER_PROCESS": "Waiting for other processes",
       "SERVICE_READY": "Service ready",
-      "SERVICE_IN_PROGRESS": "Service in progress",
+      "SERVICE_IN_PROGRESS": "Service in processing",
       "SERVICE_COMPLICATION": "Service complication",
       "SERVICE_COMPLETED": "Service completed",
       "CONTRACTOR_SELECTED": "Contractor selected",
@@ -94,27 +94,27 @@
       "REJECTED_BY_CLIENT": "Rejected by customer",
       "PRODUCTION": "In production",
       "DELIVERY": "On the way",
-      "DISPUTE": "dispute",
+      "DISPUTE": "Dispute",
       "COMPLETED": "Completed",
       "FAILED": "Failed",
       "CANCELED": "Aborted",
       "CONTRACTOR_COMPLETED": "Contractor selected",
       "VERIFYING_IN_PROGRESS": "Verification is ongoing",
       "VERIFYING_COMPLETED": "Review completed",
-      "REQUEST_COMPLETED": "Sends request",
+      "REQUEST_COMPLETED": "Scripts sent",
       "OFFER_COMPLETED": "Offer sent",
-      "OFFER_REJECTED": "Request rejected",
+      "OFFER_REJECTED": "Requested request",
       "CONFIRMATION_COMPLETED": "Confirmation sent",
       "CONFIRMATION_REJECTED": "Confirmation rejected",
-      "PRODUCTION_IN_PROGRESS": "Production is underway",
+      "PRODUCTION_IN_PROGRESS": "Production runs",
       "PRODUCTION_COMPLETED": "Production completed",
-      "DELIVERY_IN_PROGRESS": "Delivery is ongoing",
+      "DELIVERY_IN_PROGRESS": "Delivery runs",
       "DELIVERY_COMPLETED": "Delivery completed"
     },
     "ServiceType": {
       "NONE": "Service selection",
-      "ADDITIVE_MANUFACTURING": "Have the model 3D printed",
-      "CREATE_MODEL": "Have the model designed",
+      "ADDITIVE_MANUFACTURING": "Leave the 3D printing model",
+      "CREATE_MODEL": "Let the model design",
       "DELIVERY": "Delivery",
       "POST_PROCESSING": "Post-processing",
       "PACKAGING": "Packaging",
@@ -139,22 +139,22 @@
       "MUILTISELECT": "Multiple selection"
     },
     "FilterCategoryType": {
-      "SELECTED": "All Selected Presets",
+      "SELECTED": "All selected requirements",
       "GENERAL": "Generally",
       "MODEL": "Model",
-      "MATERIAL": "material",
+      "MATERIAL": "Material",
       "PROCEEDING": "Proceedings",
       "MANUFACTURER": "Manufacturer",
-      "POSTPROCESSING": "Post-processing",
+      "POSTPROCESSING": "Post -processing",
       "ADDITIVE": "Additives",
-      "TEST": "test"
+      "TEST": "Test"
     },
     "ProcessHistoryType": {
       "CREATION": "Creation",
-      "STATUS": "status",
+      "STATUS": "Status",
       "MESSAGE": "News",
-      "FILE": "file",
-      "DELETION": "deletion",
+      "FILE": "File",
+      "DELETION": "Deletion",
       "DETAILS": "Process details",
       "OTHER": "Miscellaneous"
     },
@@ -165,7 +165,7 @@
     },
     "ModelComplexity": {
       "LOW": "Low",
-      "LOW_MEDIUM": "Low-Medium",
+      "LOW_MEDIUM": "Low agent",
       "MEDIUM": "Medium",
       "MEDIUM_HIGH": "Medium-High",
       "HIGH": "High"
@@ -185,35 +185,36 @@
       "processes:files": "Read process files"
     },
     "permissionContext": {
-      "orga": "organization",
+      "orga": "Organization",
       "processes": "Processes",
-      "resources": "resources"
+      "resources": "Resources"
     },
     "permissionType": {
       "read": "View",
       "edit": "Edit",
       "delete": "Delete",
       "messages": "News",
-      "files": "files"
+      "files": "Files"
     },
     "ProcessActionStatus": {
       "ACTION_REQUIRED": "Action required",
       "WAITING_CONTRACTOR": "Waiting for contractors",
       "WAITING_CLIENT": "Waiting for customer",
-      "WAITING_PROCESS": "Waiting for trial",
+      "WAITING_PROCESS": "Waiting for a process",
       "IN_PROGRESS": "In Progress",
-      "COMPLETED": "Completed"
+      "COMPLETED": "Completed",
+      "FAILED": "Failed"
     },
     "NotificationSettingsType": {
-      "verification": "verification",
+      "verification": "Verification",
       "processSent": "Process sent",
-      "responseFromContractor": "Response from contractor",
-      "statusChange": "Change of status",
+      "responseFromContractor": "Answer from the contractor",
+      "statusChange": "Status change",
       "newMessage": "New message",
       "actionReminder": "Action reminder",
       "errorOccurred": "Error occurred",
-      "newsletter": "newsletter",
-      "processReceived": "process received",
+      "newsletter": "Newsletter",
+      "processReceived": "Process received",
       "responseFromClient": "Response from customer"
     },
     "OrganizationPriorityType": {
@@ -221,7 +222,7 @@
       "time": "Time",
       "quality": "Quality",
       "quantity": "Crowd",
-      "resilience": "Resilience",
+      "resilience": "Resistance",
       "sustainability": "sustainability"
     },
     "OntoNodeType": {
@@ -237,29 +238,29 @@
     "OntoNodePropertyName": {
       "technology": "technology",
       "buildVolume": "Installation space",
-      "imgPath": "Image path",
+      "imgPath": "Screen",
       "nozzleDiameter": "Nozzle diameter",
       "certificates": "Certificates",
-      "lossOfMaterial": "Loss of material",
+      "lossOfMaterial": "Material loss",
       "fixedCosts": "Fixed costs",
       "machineBatchDistance": "Machine clearance",
-      "fillRate": "Fill rate",
-      "chamberBuildHeight": "Building chamber height",
-      "chamberBuildWidth": "Building chamber width",
-      "chamberBuildLength": "Building chamber length",
+      "fillRate": "Filling rate",
+      "chamberBuildHeight": "Construction chamber height",
+      "chamberBuildWidth": "Construction chamber width",
+      "chamberBuildLength": "Construction chamber length",
       "buildRate": "Build rate",
       "averagePowerConsumption": "Average power consumption",
       "possibleLayerHeights": "Possible layer heights",
-      "machineUsageCosts": "Machine usage costs",
-      "machineSurfaceArea": "machine area",
-      "simpleMachineSetUp": "Easy machine setup",
+      "machineUsageCosts": "Machine use costs",
+      "machineSurfaceArea": "Machine area",
+      "simpleMachineSetUp": "Simple machine device",
       "complexMachineSetUp": "Complex machine setup",
       "machineHourlyRate": "Machine hourly rate",
       "costRatePersonalMachine": "Personnel cost rate machine",
       "coatingTime": "Coating time",
-      "maxPrintingSpeed": "Maximum print speed",
+      "maxPrintingSpeed": "Maximum pressure speed",
       "foodSafe": "Food safe",
-      "heatResistant": "Heat resistant",
+      "heatResistant": "Heat -resistant",
       "flexible": "Flexible",
       "smooth": "Smooth",
       "eModul": "E-modulus",
@@ -277,13 +278,13 @@
       "categorys": "Categories",
       "boxSize": "Box size",
       "materialcategory": "Material category",
-      "volume": "volume",
+      "volume": "Volume",
       "materialCategory": "Material category",
       "proceeding": "Proceedings",
       "manufacturer": "Manufacturer",
-      "postProcessing": "Post-processing",
+      "postProcessing": "Post -processing",
       "date": "Date",
-      "text": "text",
+      "text": "Text",
       "textarea": "Text field",
       "color": "Color",
       "number": "Number",
@@ -300,27 +301,27 @@
     },
     "EventDataReason": {
       "messages": "News",
-      "file": "new file",
-      "files": "new files",
+      "file": "New file",
+      "files": "New files",
       "serviceDetails": "Service details changed",
       "serviceType": "Service type changed",
       "serviceStatus": "Service status changed",
       "processDetails": "Process details changed",
       "processStatus": "Process status changed",
-      "provisionalContractor": "Interim contractor selected",
-      "dependenciesIn": "Dependencies Inbound",
+      "provisionalContractor": "Selected preliminary contractor",
+      "dependenciesIn": "Dependencies in detail",
       "dependenciesOut": "Dependencies Outbound",
-      "test": "test",
+      "test": "Test",
       "roleChanged": "Role Changed",
       "userDeleted": "User Deleted"
     }
   },
   "general": {
-    "email": "e-mail",
-    "name": "name",
-    "company": "company",
+    "email": "Email",
+    "name": "Name",
+    "company": "Company",
     "street": "Street",
-    "houseNumber": "house number",
+    "houseNumber": "House number",
     "zipcode": "Postal code",
     "city": "City",
     "country": "country",
@@ -331,7 +332,7 @@
     "volume": "volume",
     "levelOfDetail": "Level of detail",
     "complexity": "complexity",
-    "tags": "tags",
+    "tags": "The day",
     "easy": "Simply",
     "normal": "Normal",
     "complex": "Complex",
@@ -339,10 +340,11 @@
     "group": "group",
     "total": "In total",
     "min": "Min",
-    "max": "Max",
+    "max": "Max.",
     "button": {
+      "clone": "Duplicate",
       "select": "Choose",
-      "deselect": "Deselect",
+      "deselect": "Vigor",
       "selected": "Selected",
       "edit": "Edit",
       "delete": "Delete",
@@ -358,15 +360,15 @@
       "add": "Add",
       "details": "Details",
       "back": "Back",
-      "expand": "Expand",
-      "collapse": "Fold in",
+      "expand": "Fold out",
+      "collapse": "Fold",
       "showMore": "Show more",
       "showLess": "Show less",
       "send": "Send",
       "reset": "Reset",
       "submit": "Send",
       "download": "Download",
-      "search": "Seek"
+      "search": "Search"
     }
   },
   "component-library": {
@@ -386,11 +388,11 @@
       }
     },
     "Search": {
-      "placeholder": "Seek..."
+      "placeholder": "Search..."
     },
     "ToTopButton": {
       "button": {
-        "toTop": "To the beginning"
+        "toTop": "At the beginning"
       }
     }
   },
@@ -406,7 +408,7 @@
       "Mutation": {
         "useSendContactForm": {
           "error": "Error sending message",
-          "success": "Message sent successfully"
+          "success": "Successfully sent message"
         }
       }
     }
@@ -416,14 +418,14 @@
       "AddressCard": {
         "yes": "Yes",
         "no": "No",
-        "confirmDelete": "Do you really want to delete the address?",
+        "confirmDelete": "Would you really like to delete the address?",
         "company": "Company:",
         "name": "Name:",
         "street": "Street:",
         "city": "City:",
         "country": "Country:",
         "selected": "Selected",
-        "notSelected": "not selected",
+        "notSelected": "Not selected",
         "standard": "Standard address:",
         "button": {
           "delete": "Delete address"
@@ -432,7 +434,7 @@
     },
     "Chatbot": {
       "button": {
-        "open": "assistant"
+        "open": "Assistant"
       }
     },
     "CookieBanner": {
@@ -440,7 +442,7 @@
       "message": "To provide you with the best possible experience, we use technologies such as cookies to store and/or access device information. ",
       "functional": {
         "heading": "Functional",
-        "message": "Technical storage or access is strictly necessary for the legitimate purpose of enabling the use of a specific service expressly requested by the subscriber or user or for the sole purpose of carrying out the transmission of a message over an electronic communications network."
+        "message": "Technical storage or access is absolutely necessary for the right purpose of enabling the use of a specific service, which is expressly desired by the participant or user, or for the sole purpose of carrying out the transfer of a message via an electronic communication network."
       },
       "status": {
         "alwaysActive": "Always active"
@@ -458,23 +460,23 @@
       }
     },
     "Footer": {
-      "imprint": "imprint",
+      "imprint": "Imprint",
       "privacy": "Privacy Policy",
       "contact": "contact",
-      "data-protection": "Privacy Policy",
+      "data-protection": "Data protection declaration",
       "instagram": "Instagram",
       "mastodon": "mastodon"
     },
     "Form": {
       "NotificationForm": {
         "heading": "Notifications",
-        "email": "e-mail",
-        "event": "event"
+        "email": "Email",
+        "event": "Event"
       },
       "PrioritiesForm": {
         "header": "Priorities",
-        "type": "priority",
-        "value": "importance",
+        "type": "Priority",
+        "value": "Importance",
         "points": "Free points: {{freePoints}}",
         "low": "Low",
         "medium": "Medium",
@@ -485,13 +487,13 @@
         "labels": {
           "firstName": "First name *",
           "lastName": "Last name *",
-          "company": "company",
+          "company": "Company",
           "street": "Street *",
           "houseNumber": "House number *",
           "zipcode": "Postal code *",
           "city": "City *",
           "country": "Country *",
-          "standard": "use as default address"
+          "standard": "Use as default address"
         },
         "hint": "* Required field"
       },
@@ -499,8 +501,8 @@
         "heading": "Contact form",
         "subject": "Regarding",
         "message": "News",
-        "name": "name",
-        "email": "E-mail address"
+        "name": "Name",
+        "email": "Email address"
       },
       "DescriptiveModelForm": {
         "heading": "Describe model without file",
@@ -513,36 +515,36 @@
           "height": "Height",
           "volume": "volume",
           "complexity": "complexity",
-          "tags": "Day1, Day2, Day3"
+          "tags": "Tag1, Tag2, Tag3"
         }
       },
       "ExampleForm": {
         "heading": "Edit organization information",
-        "text": "text",
+        "text": "Text",
         "count": "Number",
-        "email": "E-mail",
+        "email": "Email",
         "area": "Area",
         "isTrue": "Is true"
       },
       "OrganizationForm": {
         "heading": "Edit organization information",
         "displayName": "Organization name",
-        "email": "E-mail",
+        "email": "Email",
         "name": "Organization name",
         "adress": "Address of the organization",
         "services": "Services you offer",
         "locale": "Language",
         "supportedServices": "Services you offer",
         "branding_logo_url": "Logo URL",
-        "branding_colors_primary": "primary color",
-        "branding_colors_page_background": "background color",
+        "branding_colors_primary": "Primary color",
+        "branding_colors_page_background": "Background color",
         "taxID": "Tax number",
         "address": "Address",
         "notifications": "Notifications",
         "contractorCard": "Contractor card",
         "notifictionTypes": {
-          "email": "E-mail",
-          "event": "event"
+          "email": "Email",
+          "event": "Event"
         },
         "languages": {
           "en-US": "English",
@@ -552,7 +554,7 @@
       "ProfileForm": {
         "header": "Generally",
         "name": "Name:",
-        "email": "E-mail: ",
+        "email": "Email: ",
         "type": "User type: ",
         "hint": "After changing the email, it must be verified again. "
       },
@@ -565,8 +567,8 @@
     },
     "Header": {
       "button": {
-        "home": "SEMPER AI",
-        "close": "Close menu",
+        "home": "Semper-Ki",
+        "close": "Menu close",
         "open": "Open menu",
         "events": "Notifications"
       },
@@ -585,7 +587,7 @@
       "components": {
         "LanguageMenu": {
           "button": {
-            "languageMenu": "Voice menu",
+            "languageMenu": "Select language",
             "de": "German",
             "gb": "English"
           }
@@ -596,17 +598,32 @@
       "message": "This function cannot be used with your rights"
     },
     "Process": {
+      "Container": {
+        "ActionContainer": {
+          "heading": "Torrent",
+          "noButtonsClient": "No tooth available. ",
+          "noButtonsContractor": "No tooth available. ",
+          "finished": "Process completed. ",
+          "deleteConfirm": "Do you really want to delete the process?",
+          "components": {
+            "ActionContainerWarpper": {
+              "heading": "Your process failed",
+              "reason": "Reason"
+            }
+          }
+        }
+      },
       "File": {
         "components": {
           "FileTable": {
             "noFiles": "No files available",
-            "name": "name",
-            "type": "type",
+            "name": "Name",
+            "type": "Type",
             "size": "Size",
             "date": "Date",
-            "author": "author",
+            "author": "Author",
             "actions": "Actions",
-            "userFilesTitle": "Files for the offer",
+            "userFilesTitle": "Files for offer",
             "uploadFilesTitle": "Upload files",
             "currentFilesTitle": "Current files",
             "button": {
@@ -615,7 +632,7 @@
             }
           },
           "UploadCard": {
-            "heading": "upload new file(s).",
+            "heading": "Upload new file(s).",
             "subHeading": "By drag & drop or click",
             "button": "Select file"
           }
@@ -647,23 +664,23 @@
     },
     "Resources": {
       "EdgeForm": {
-        "heading": "Related ",
+        "heading": "Accompanying ",
         "table": {
-          "noItems": "no entries available",
+          "noItems": "No entries available",
           "caption": "Available",
           "selected": "Selected",
-          "name": "name",
+          "name": "Name",
           "createdBy": "Created by",
           "actions": "Actions"
         }
       },
       "NodeDraft": {
-        "error": "Error loading",
+        "error": "Fault when charging",
         "draft": "Select template",
         "draftDescription": "Select a template to apply the general information and properties.",
         "draftDescription2": "Create a variant to also take over the connection to other resources.",
         "notFound": "Didn't find the right one?",
-        "nodeType": "type",
+        "nodeType": "Type",
         "createdBy": "Created by: ",
         "nodeID": "ID",
         "button": {
@@ -673,7 +690,7 @@
           "details": "Details"
         },
         "table": {
-          "name": "name",
+          "name": "Name",
           "value": "Value",
           "createdBy": "Created by",
           "actions": "Actions",
@@ -690,9 +707,9 @@
         "noTechnologies": "No technology found",
         "noTechnology": "No technology selected",
         "general": "General information",
-        "nodeName": "name",
+        "nodeName": "Name",
         "context": "Description",
-        "confirmDraft": "Are you sure you want to select the template?\n "
+        "confirmDraft": "Are you sure you want to select this template?\n "
       },
       "NodeTable": {
         "subHeading": "Own {{name}}",
@@ -709,7 +726,7 @@
         "properties": "Characteristics",
         "general": "Generally",
         "neighbors": "Related resources",
-        "noProperties": "no properties available",
+        "noProperties": "No features available",
         "button": {
           "draft": "Select template",
           "variant": "Create variant"
@@ -718,16 +735,16 @@
       "PropertyForm": {
         "properties": {
           "header": "Characteristics",
-          "name": "name",
-          "type": "type",
+          "name": "Name",
+          "type": "Type",
           "value": "Value"
         },
         "table": {
-          "noItems": "no entries available",
+          "noItems": "No entries available",
           "caption": "Available",
           "unit": "Unit",
           "selected": "Selected",
-          "name": "name",
+          "name": "Name",
           "createdBy": "Created by",
           "actions": "Actions",
           "value": "Value"
@@ -745,13 +762,13 @@
       }
     },
     "Upload": {
-      "heading_one": "Upload another file",
+      "heading_one": "Upload more file",
       "heading_other": "Upload more files",
-      "subTitle": "By drag & drop or click"
+      "subTitle": "Via drag & drop or click"
     },
     "UserSwitch": {
       "client": "Single user",
-      "organization": "organization"
+      "organization": "Organization"
     }
   },
   "contexts": {
@@ -773,17 +790,18 @@
       "FORWARD-TO-VERIFICATION_COMPLETED": "Complete review",
       "FORWARD-TO-REQUEST_COMPLETED": "Send request",
       "FORWARD-TO-CLARIFICATION": "Ask questions",
-      "FORWARD-TO-OFFER_COMPLETED": "Confirm your request and create an offer",
+      "FORWARD-TO-OFFER_COMPLETED": "Confirm request and create the offer",
       "FORWARD-TO-OFFER_REJECTED": "Decline request",
       "FORWARD-TO-CONFIRMATION_COMPLETED": "Confirm offer",
-      "FORWARD-TO-CONFIRMATION_REJECTED": "Decline offer",
+      "FORWARD-TO-CONFIRMATION_REJECTED": "Reject the offer",
       "FORWARD-TO-PRODUCTION_IN_PROGRESS": "Start production",
       "FORWARD-TO-PRODUCTION_COMPLETED": "Complete production",
       "FORWARD-TO-DELIVERY_IN_PROGRESS": "Start delivery",
       "FORWARD-TO-DELIVERY_COMPLETED": "Complete delivery",
       "FORWARD-TO-FAILED": "Process failed",
       "FORWARD-TO-COMPLETED": "Complete process",
-      "FORWARD-TO-DISPUTE": "Report a dispute",
+      "FORWARD-TO-DISPUTE": "Report dispute",
+      "CLONE": "Clone process",
       "button": {
         "confirmAll": "Do you really want all affected processes {{title}}?"
       }
@@ -815,8 +833,8 @@
       }
     },
     "ResourcesOutlet": {
-      "notSelected": "The Make service is not selected in the organization profile",
-      "subText": "Please select the Connect service in your organization settings to continue",
+      "notSelected": "The manufacturing service is not selected in the organization profile.",
+      "subText": "Please select the manufacturing service in the organization settings to continue.",
       "button": {
         "toOrgaProfile": "To the organization settings"
       }
@@ -840,7 +858,7 @@
         "license": "License",
         "tags": "tags",
         "certificates": "Certificates",
-        "URI": "URI"
+        "URI": "Uri"
       }
     },
     "Organization": {
@@ -865,9 +883,9 @@
         "accessedWhen": "Accessed on",
         "services": "Services",
         "priorities": "Priorities",
-        "notificationSettings": "Notification Settings",
+        "notificationSettings": "Notification settings",
         "empty": "Empty",
-        "email": "E-mail",
+        "email": "Email",
         "created": "Created",
         "accessed": "Accessed",
         "updated": "Updated",
@@ -879,8 +897,8 @@
         "adresses": "Addresses",
         "dates": "Data",
         "taxID": "Tax number",
-        "primaryColor": "primary color",
-        "pageBackground": "background color",
+        "primaryColor": "Primary color",
+        "pageBackground": "Background color",
         "event": "event"
       },
       "form": {
@@ -889,7 +907,7 @@
     },
     "Projects": {
       "header": "Projects",
-      "projectID": "ProjectID",
+      "projectID": "Projectid",
       "clientName": "customer",
       "projectTitle": "title",
       "processesCount": "Number of processes",
@@ -898,7 +916,7 @@
       "created": "Created",
       "updated": "Updated",
       "actions": "Actions",
-      "confirm": "The order {{name}} really delete?"
+      "confirm": "The order {{name}} Really delete?"
     },
     "Resources": {
       "Buttons": {
@@ -911,7 +929,7 @@
       "confirmDelete": "Do you want the knot\"{{name}}\"Really remove it?",
       "heading": "Resource management",
       "name": "name",
-      "nodeType": "Node type",
+      "nodeType": "Knot type",
       "createdBy": "Created by",
       "createdWhen": "Created on",
       "nodeID": "Node ID",
@@ -925,20 +943,20 @@
     },
     "User": {
       "orga": "Organizations",
-      "empty": "no users found",
+      "empty": "No users found",
       "heading": "User management",
       "name": "name",
-      "email": "E-mail",
+      "email": "Email",
       "created": "Created",
       "accessed": "access",
       "updated": "Updated",
-      "lastSeen": "Last login",
+      "lastSeen": "Last registration",
       "actions": "Actions",
       "userType": "User type",
       "locale": "Language",
       "lastLogin": "Last registration on",
-      "locationOfLastLogin": "Location of last login",
-      "numberOfLoginsTotal": "Number of total registrations",
+      "locationOfLastLogin": "Location of the last registration",
+      "numberOfLoginsTotal": "Number of registrations in total",
       "general": "General information",
       "statistics": "statistics",
       "dates": "Data",
@@ -969,14 +987,14 @@
         }
       },
       "Organization": {
-        "heading": "Benefits for organizations",
+        "heading": "Advantages for organizations",
         "text": "Our goal is to make 3D printing more accessible. ",
         "subHeading": "You determine the parameters",
-        "subHeading2": "The Semper AI determines the best possible matching.",
-        "fact1": "Self-created cost function",
+        "subHeading2": "The Semper-KI determines the best possible matching.",
+        "fact1": "Self -made cost function",
         "fact2": "AI-supported infrastructure for all steps of the ordering process",
-        "fact3": "Automated testing services",
-        "fact4": "Automated pre-selection of relevant customers and orders",
+        "fact3": "Automated test services",
+        "fact4": "Automated pre -selection of relevant customers and orders",
         "button": {
           "register": "Register as an organization"
         }
@@ -989,22 +1007,22 @@
   "EmailVerification": {
     "heading": "Verify email",
     "text": "Please confirm your email address by clicking on the link in the email Auth0 sent you.",
-    "text2": "This is necessary to complete the registration and to be able to use Semper-KI.",
+    "text2": "This is necessary to complete the registration and use Semper-KI.",
     "text3": "Thank you for your understanding"
   },
   "Error": {
     "text": "Page not found or something went wrong",
     "text2": "If you tried to reach this page, please reload or contact our support",
-    "button": "Back to home page"
+    "button": "Back to the homepage"
   },
   "Home": {
     "Anonym": {
       "heading": "We make 3D printing intelligent",
       "partner": "Our project partners",
-      "partnertext": "We create an individually tailored production strategy for each product.  ",
+      "partnertext": "We create an individually adapted production strategy for each product.  ",
       "demonstrator": {
         "heading": "Just try it out",
-        "subTitle": "Projects will be taken over when you register later"
+        "subTitle": "Projects are taken over at later registration"
       },
       "button": {
         "demonstrator": "Get started",
@@ -1014,11 +1032,11 @@
       "Introduction": {
         "heading": "3D Printing Connected",
         "text": "With Semper-AI we determine the right network for your production. ",
-        "item1": "User-friendly operation",
+        "item1": "User -friendly operation",
         "item2": "Securing your existence network",
-        "item3": "Production-ready infrastructure"
+        "item3": "Production -ready infrastructure"
       },
-      "PrototypeAlert": "This page is a prototype and is continually being edited",
+      "PrototypeAlert": "This page is a prototype and is continuously processed",
       "Services": {
         "heading": "Our service",
         "items": {
@@ -1028,7 +1046,7 @@
           },
           "questionnaire": {
             "heading": "Simple questionnaires",
-            "text": "We have the expertise you need.  "
+            "text": "We have the expertise you need."
           },
           "benchmarking": {
             "heading": "Anonymous benchmarking",
@@ -1036,7 +1054,7 @@
           },
           "resilience": {
             "heading": "Resilience check",
-            "text": "Resilient delivery networks are the foundation of good 3D printing.  "
+            "text": "Resilient delivery networks are the foundation of good 3D printing."
           }
         }
       },
@@ -1049,11 +1067,11 @@
             "text": "We make 3D printing usable for everyone.  "
           },
           "1": {
-            "heading": "Upload component",
+            "heading": "Upload the component",
             "text": "We make 3D printing usable for everyone.  "
           },
           "2": {
-            "heading": "Select manufacturing",
+            "heading": "Choose production",
             "text": "We make 3D printing usable for everyone.  "
           },
           "3": {
@@ -1082,14 +1100,14 @@
       },
       "Coypu": {
         "heading": "Coypu News",
-        "heading2": "use for research purposes only",
+        "heading2": "Use for research purposes only",
         "button": {
           "link": "To the article"
         }
       },
       "Header": {
-        "heading": "Semper AI - Simply 3D print.",
-        "claim1": "Commission your idea",
+        "heading": "Semper-Ki-just 3D prints.",
+        "claim1": "Order your idea",
         "claim2": "From idea to model",
         "claim3": "From model to prototype",
         "claim4": "From Prototype to Large Scale",
@@ -1107,28 +1125,28 @@
           "services": "Select services",
           "resources": "Add resources",
           "priorities": "Set priorities",
-          "notificationSettings": "Set notification preferences",
+          "notificationSettings": "Set notification settings",
           "branding": "Set branding",
           "adresses": "Add addresses",
-          "user": "Add user",
+          "user": "Add users",
           "lang": "Set language"
         },
         "button": {
-          "orga": "organization"
+          "orga": "Organization"
         }
       },
       "Resources": {
-        "heading": "resources",
+        "heading": "Resources",
         "button": {
           "overview": "Overview",
           "printer": "3D printer",
           "materials": "Materials",
-          "postprocessing": "Post-processing"
+          "postprocessing": "Post -processing"
         }
       },
       "HomeUserProgress": {
         "progress": "Progress {{count}} from {{total}}",
-        "todo": "Profile setup",
+        "todo": "Establishment of the profile",
         "finished": "Setup completed",
         "items": {
           "general": "Add general information",
@@ -1137,7 +1155,7 @@
           "lang": "Set language"
         },
         "button": {
-          "orga": "profile"
+          "orga": "Profile"
         }
       }
     },
@@ -1147,28 +1165,32 @@
       "noProjects": "No projects available",
       "noProjectsSearch": "No projects with \"{{search}}\" found",
       "name": "name",
+      "processCount": "Number of processes",
       "updated": "Updated on",
       "status": "status",
       "quantity": "Number",
       "actions": "Actions",
       "button": {
         "demo": "Try",
-        "new": "Create new project",
+        "new": "Create a new project",
         "filter": "filter",
-        "continue": "Project Continue",
-        "projects": "My projects"
+        "continue": "Continue project",
+        "projects": "My projects",
+        "clone": "Duplicate project",
+        "createProcess": "new process in the project {{name}} invest"
       },
       "Project": {
+        "noProcess": "No processes exist",
         "button": {
           "new": "Create new process"
         }
       },
       "Process": {
-        "deleteConfirm": "Do you really want to delete the process?",
+        "deleteConfirm": "Would you really like to delete the process?",
         "name": "Process name",
         "type": "Service type",
         "updated": "Updated on",
-        "groups": "groups",
+        "groups": "Groups",
         "quantity": "Number",
         "models": "Models",
         "contractor": "contractor",
@@ -1176,56 +1198,61 @@
         "material": "material",
         "postProcessings": "Post-processing",
         "groupName": "group {{count}}",
-        "processErrors": "Notes"
+        "processErrors": "Torrent",
+        "noErrors": "No interactions required",
+        "status": "status",
+        "button": {
+          "clone": "Duplicate process in a new project"
+        }
       }
     }
   },
   "Legal": {
     "Contact": {
       "heading": {
-        "main": "contact",
+        "main": "Contact",
         "semper": "Semper AI",
         "kiss": "KISS project",
         "infai": "Infai",
-        "kmi": "KMI"
+        "kmi": "Kmi"
       },
-      "tel": "phone",
-      "email": "e-mail",
+      "tel": "Phone",
+      "email": "Email",
       "funding-label": "Funding indicator",
-      "infai-describtion": "Institute for Applied Informatics (InfAI) e.V. at the University of Leipzig, InfAI Infinity GmbH Goerdelerring 9 04109 Leipzig Germany",
+      "infai-describtion": "Institute for Applied Computer Science (Infai) e.V. at the University of Leipzig, Infai Infinity GmbH Goerdelerring 9 04109 Leipzig Germany",
       "kmi-describtion": "Artificial | "
     },
     "Imprint": {
       "heading": {
-        "main": "imprint",
+        "main": "Imprint",
         "disclaimer": "Disclaimer – legal information",
         "board": "Authorized board of directors:",
-        "board-members": "Board member:",
+        "board-members": "CEO:",
         "management": "Scheuermann management:",
         "registry-entry": "Register entry:",
         "vat-id": "VAT ID:",
-        "online-regulations": "Note in accordance with the Online Dispute Resolution Regulation",
-        "vsbg": "Note in accordance with the Consumer Dispute Settlement Act (VSBG)",
-        "responsibility": "Responsible for journalistic-editorial content in accordance with Section 55 II RstV",
+        "online-regulations": "Note according to the online dispute settlement regulation",
+        "vsbg": "Note according to the consumer dispute settlement law (VSBG)",
+        "responsibility": "Responsible for journalistic editorial content in accordance with Section 55 II RStV",
         "gender-sensitive": "Note on gender-appropriate language",
-        "content-warning": "§1 Warning about content",
-        "external-links": "§2 External links",
+        "content-warning": "§1 Warning to content",
+        "external-links": "§2 external links",
         "copyright": "§3 Copyright and ancillary copyrights",
         "special-terms": "§4 Special terms of use"
       },
-      "telefon": "phone",
-      "telefax": "fax",
-      "email": "e-mail",
+      "telefon": "Phone",
+      "telefax": "Fax",
+      "email": "Email",
       "chairman": "Chairman",
-      "registry-court": "Registry court",
+      "registry-court": "Register court",
       "registry-number": "Register number",
       "vat": " Sales tax identification number according to Section 27a of the Sales Tax Act:",
-      "online-regulations": " Under applicable law, we are required to inform consumers of the existence of the European Online Dispute Resolution Platform, which can be used to resolve disputes without the need to go to court. ",
-      "vsbg": "We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.",
-      "gender-sensitive": " In order to make the texts easier to read, we randomly and evenly chose either the male or female form of personal nouns",
-      "content-warning": "The free and freely accessible content of this website was created with the greatest possible care. ",
-      "external-links": "This website contains links to third-party websites (“external links”). ",
-      "copyright": " The content published on this website is subject to German copyright and ancillary copyright law. ",
+      "online-regulations": " According to applicable law, we are obliged to point out the existence of the European online dispute settlement platform, which can be used for the settlement of disputes without having to switch on a dish. ",
+      "vsbg": "We are not ready and obliged to take part in dispute settlement procedures in front of a consumer arbitration board.",
+      "gender-sensitive": " In order to make the texts easier to read, we randomly and evenly selected either the male or female form of personal nouns",
+      "content-warning": "The free and freely accessible content on this website was created with the greatest possible care. ",
+      "external-links": "This website contains links to third -party websites (\"external links\"). ",
+      "copyright": " The content published on this website is subject to German copyright and ancillary protection law. ",
       "special-terms": "If special conditions for individual uses of this website deviate from the aforementioned paragraphs, this will be expressly pointed out at the appropriate point. ",
       "src": "source",
       "gender-fit": "[adapted to gender-appropriate language]"
@@ -1237,100 +1264,100 @@
       "general-notes": "General information",
       "data-protection-summary": "The following information provides a simple overview of what happens to your personal data when you visit our website. ",
       "data-collection": "Data collection on our website",
-      "data-collection-responsible": "Who is responsible for data collection on this website? ",
+      "data-collection-responsible": "Who is responsible for data acquisition on this website? ",
       "how-we-collect-data": "How do we collect your data?",
-      "how-we-collect-details": "On the one hand, your data is collected when you provide it to us. ",
+      "how-we-collect-details": "On the one hand, your data will be collected by telling us. ",
       "what-data-we-collect": "What data do we collect?",
       "collected-personal-data": "In order to be able to use the services offered and to process your orders properly, we collect the following personal data:",
-      "data-details": "Salutation, gender Surname, first name if applicable Company name Address Telephone number Email address Date of birth Nationality Account details IP address",
+      "data-details": "Salutation, gender Surname, first name if applicable Company name Address Telephone number email address Date of birth Nationality Account details IP address",
       "usage-purpose": "For what purposes do we use your data?",
-      "data-usage-purpose": "We process the personal data you provide to carry out contractually agreed research and development tasks as well as administrative tasks, member and donor management and public relations. ",
+      "data-usage-purpose": "We process the personal data you provide for the implementation of contractually agreed research and development tasks as well as administrative tasks, membership and donor management and public relations. ",
       "your-rights": "What rights do you have regarding your data?",
       "rights-description": "You have the right to receive information about the origin, recipient and purpose of your stored personal data free of charge at any time. ",
       "tools-analysis": "Analytics and Third Party Tools",
       "tools-analysis-details": "When you visit our website, your surfing behavior can be statistically evaluated. ",
-      "general-info": "2. General information and mandatory information",
+      "general-info": "2. General information and compulsory information",
       "data-protection-heading": "Data protection",
-      "data-protection-details": "The operators of these sites take the protection of your personal data very seriously. ",
+      "data-protection-details": "The operators of these pages take the protection of their personal data very seriously. ",
       "responsible-note": "Note on the responsible body",
       "responsible-details": "The responsible body for data processing on this website is: Institute for Applied Computer Science (InfAI) e. ",
-      "authorized-representative": "Authorized board of directors:",
+      "authorized-representative": "Authorized board member:",
       "authorized-details": "Prof. Dr. ",
       "management": "Management:",
       "management-details": "Andreas Heinecke, Prof. Dr. ",
-      "controller-description": "The responsible body is the natural or legal person who, alone or jointly with others, decides on the purposes and means of processing personal data (e.g. names, email addresses, etc.).",
+      "controller-description": "The responsible body is the natural or legal person who alone or jointly with others decides on the purposes and means of processing personal data (e.g. names, email addresses, etc.).",
       "consent-withdrawal": "Revocation of your consent to data processing",
       "consent-withdrawal-details": "Many data processing operations are only possible with your express consent. ",
-      "objection-right": "Right to object to data collection in special cases and to direct advertising (Art. 21 GDPR)",
+      "objection-right": "Right to object to the data collection in special cases and against direct mail (Art. 21 GDPR)",
       "objection-right-details": "If data processing is carried out on the basis of Article 6 Paragraph 1 Letter e or f GDPR, you have the right to object to the processing of your personal data at any time for reasons arising from your particular situation; ",
-      "complaint-right": "Right to lodge a complaint with the responsible supervisory authority",
+      "complaint-right": "Law of complaint with the responsible supervisory authority",
       "complaint-right-details": "In the event of violations of the GDPR, those affected have the right to lodge a complaint with a supervisory authority, in particular in the member state of their habitual residence, their place of work or the place of the alleged violation. ",
       "data-portability": "Right to data portability",
       "data-portability-details": "You have the right to have data that we process automatically based on your consent or in fulfillment of a contract handed over to you or to a third party in a common, machine-readable format. ",
       "ssl-encryption": "SSL or TLS encryption",
-      "ssl-encryption-details": "For security reasons and to protect the transmission of confidential content, such as orders or inquiries that you send to us as the site operator, this site uses an SSL or. ",
+      "ssl-encryption-details": "This page uses an SSL and ",
       "access-correction-deletion": "Information, blocking, deletion and correction",
       "access-correction-details": "Within the framework of the applicable legal provisions, you have the right to free information at any time about your stored personal data, its origin and recipient and the purpose of data processing and, if necessary, a right to correct, block or delete this data. ",
       "processing-restriction": "Right to restriction of processing",
-      "right-to-restrict-processing": "You have the right to request that the processing of your personal data be restricted. ",
-      "dispute-accuracy-of-data": "If you dispute the accuracy of the personal data we hold about you, we will generally need time to verify this. ",
+      "right-to-restrict-processing": "You have the right to restrict the processing of your personal data. ",
+      "dispute-accuracy-of-data": "If you deny the correctness of your personal data stored by us, we usually need time to check this. ",
       "objection-to-ad-emails": "Objection to advertising emails",
       "imprint-advertising-usage-disclaimer": "The use of contact details published as part of the imprint obligation to send unsolicited advertising and information materials is hereby objected to. ",
       "data-protection-officer": "3. Data protection officer",
       "mandatory-data-protection-officer": "Statutory data protection officer We have appointed a data protection officer for our company.",
       "contact-info": "Institute for Applied Computer Science (InfAI) e. ",
-      "contact-details": "Telephone: +49 341 229037 0 Email: datenschutz@infai.org",
+      "contact-details": "Telephone: +49 341 229037 0 email: datenschutz@infai.org",
       "data-collection2": "4. Data collection on our website",
       "cookies": "Cookies",
-      "cookie-info": "Some of the websites use so-called cookies. ",
+      "cookie-info": "The websites sometimes use so -called cookies. ",
       "server-log-files": "Server log files",
       "server-log-info": "The provider of the pages automatically collects and stores information in so-called server log files, which your browser automatically transmits to us. ",
-      "server-log-details": "Browser type and browser version, operating system used, referrer URL, host name of the accessing computer, time of server request, IP address",
-      "data-processing-agreement": "This data will not be merged with other data sources. ",
+      "server-log-details": "Browser type and browser version, operating system used, referrer URL, host name of the accessible computer, time of the server request, IP address",
+      "data-processing-agreement": "This data is not merged with other data sources. ",
       "contact-form": "Contact form",
-      "contact-form-info": "If you send us inquiries using the contact form, your details from the inquiry form, including the contact details you provided there, will be stored by us in order to process the inquiry and in case of follow-up questions. ",
-      "contact-form-consent": "The data entered into the contact form is therefore processed exclusively on the basis of your consent (Art. 6 Para. 1 lit. a GDPR). ",
+      "contact-form-info": "If you send us inquiries by contact form, your information from the request form including the contact details you specified there will be stored for the purpose of processing the request and in the event of follow -up questions. ",
+      "contact-form-consent": "The data entered in the contact form is therefore carried out exclusively on the basis of your consent (Art. 6 Para. 1 lit. a GDPR). ",
       "data-retention": "The data you enter in the contact form will remain with us until you request us to delete it, revoke your consent to storage or the purpose for data storage no longer applies (e.g. after your request has been processed). ",
       "data-processing-legal": "Processing data (customer and contract data)",
       "data-use-legal-basis": "We collect, process and use personal data only to the extent that it is necessary for the establishment, content or change of the legal relationship (inventory data). ",
-      "data-details2": "The customer data collected will be deleted after the order has been completed or the business relationship has ended. ",
-      "data-transfer-for-contracts": "Data transfer when concluding a contract for services and digital content",
-      "data-transfer-info": "We only transmit personal data to third parties if this is necessary as part of contract processing, for example to the credit institution responsible for processing payments. ",
-      "right-to-object": "Objection to data collection in special cases and to direct advertising (Art. 21 GDPR)",
+      "data-details2": "The customer data collected will be deleted after the order or termination of the business relationship. ",
+      "data-transfer-for-contracts": "Data transmission when the contract is concluded for services and digital content",
+      "data-transfer-info": "We only transmit personal data to third parties if this is necessary in the context of the contract processing, for example to the credit institution commissioned with the payment processing. ",
+      "right-to-object": "Objection to data collection in special cases and against direct advertising (Art. 21 GDPR)",
       "data-deletion": "Revocation of your consent to data processing Many data processing operations are only possible with your express consent. ",
       "social-media": "5. Social media",
-      "share-content-via-plugins": "Sharing content via plugins (Instagram, Mastodon & Co.) The content on our pages cannot yet be shared.",
+      "share-content-via-plugins": "Share content via plugins (Instagram, Mastodon & Co.) The content on our pages cannot yet be shared.",
       "google-web-fonts": "Google Web Fonts",
-      "google-web-fonts-info": "This site uses so-called web fonts, which are provided by Google, for the uniform display of fonts. "
+      "google-web-fonts-info": "This page uses so -called web fonts to present fonts that are provided by Google. "
     },
     "Legal": {
       "heading": "Legal",
       "button": {
-        "imprint": "imprint",
+        "imprint": "Imprint",
         "privacy": "Privacy Policy",
-        "contact": "contact"
+        "contact": "Contact"
       }
     }
   },
   "Login": {
     "header": "Registration",
-    "client": "Register as a private individual",
+    "client": "Register as a private person",
     "orga": "Register as an organization",
     "admin": "Mocked registrations",
     "headerPath": "You must register for the desired page",
     "button": {
-      "login": "Register",
+      "login": "Login",
       "register": "Register",
       "testuser": "Single user",
-      "testorga": "organization",
+      "testorga": "Organization",
       "testadmin": "Admin"
     }
   },
   "Logout": {
-    "redirect": "Redirect to unsubscribe"
+    "redirect": "Forward to deregistration"
   },
   "Organization": {
-    "header": "organization",
+    "header": "Organization",
     "components": {
       "Address": {
         "header": "Addresses",
@@ -1342,8 +1369,8 @@
       },
       "Invitation": {
         "header": "Invite users",
-        "placeholder": "E-mail...",
-        "empty": "no roles created",
+        "placeholder": "Email...",
+        "empty": "No roles created",
         "button": {
           "invite": "Invite",
           "send": "Sent!",
@@ -1351,79 +1378,79 @@
         }
       },
       "UserTable": {
-        "header": "user",
+        "header": "User",
         "confirmDelete": "Are you sure you want to delete the user?",
-        "name": "user name",
+        "name": "User name",
         "picture": "Profile picture",
-        "email": "e-mail",
-        "role": "role",
+        "email": "Email",
+        "role": "Role",
         "created": "Created on",
-        "accessed": "last accessed on",
+        "accessed": "Last accessed on",
         "actions": "Actions",
-        "empty": "no roles created",
+        "empty": "No roles created",
         "error": {
-          "empty": "no users found"
+          "empty": "No users found"
         }
       }
     },
     "View": {
       "Info": {
         "header": "General information",
-        "accessed": "last accessed on",
+        "accessed": "Last accessed on",
         "created": "Created on",
         "updated": "Updated on",
         "services": "Services you offer",
-        "id": "OrganizationID",
+        "id": "Organizational id",
         "img": "Picture",
-        "primary-color": "primary color",
-        "background-color": "background color",
-        "name": "name",
-        "adress": "address",
-        "email": "e-mail",
+        "primary-color": "Primary color",
+        "background-color": "Background color",
+        "name": "Name",
+        "adress": "Address",
+        "email": "Email",
         "taxID": "Tax number",
-        "noService": "no services ",
-        "contractorCard": "Contractor card"
+        "contractorCard": "Contractor card",
+        "noService": "No services "
       }
     },
     "Roles": {
       "header": "Roles/Rights",
-      "empty": "no roles created",
+      "empty": "No roles created",
       "components": {
         "Form": {
           "heading": {
-            "create": "Create role",
+            "create": "Lend a role",
             "edit": "Edit role"
           },
-          "name": "name",
-          "permissions": "right",
+          "name": "Name",
+          "permissions": "Right",
           "description": "Description",
           "validation": {
-            "required": "is required"
+            "required": "Is required"
           }
         },
         "Item": {
-          "name": "name",
+          "name": "Name",
           "description": "Description",
           "actions": "Actions",
-          "empty": "no roles created",
+          "empty": "No roles created",
           "alert": "Really delete a role?"
         },
         "Table": {
-          "name": "name",
+          "name": "Name",
           "description": "Description",
           "actions": "Actions",
-          "orga": "organization",
+          "orga": "Organization",
           "processes": "Projects",
           "data": "Data",
           "files": "More files",
-          "resources": "resources",
-          "read": "view",
-          "edit": "edit",
-          "create": "add",
-          "insert": "add",
-          "delete": "delete",
+          "resources": "Resources",
+          "read": "View",
+          "edit": "Edit",
+          "create": "Add",
+          "insert": "Add",
+          "delete": "Delete",
           "status": "Edit status",
-          "messages": "answer",
+          "messages": "Answer",
           "empty": "no roles created"
         }
       }
@@ -1433,8 +1460,8 @@
     "UserOutlets": {
       "error": {
         "client": "You must be logged in as a customer to view this page",
-        "organization": "You must be logged in as a manufacturer to view this page",
-        "admin": "404 - Page not found"
+        "organization": "You must be registered as a manufacturer to see this page",
+        "admin": "404 - page not found"
       }
     }
   },
@@ -1444,19 +1471,19 @@
     "Item": {
       "use-information": {
         "header": "Find out about 3D printing",
-        "text": "This service allows customers to access valuable information and data relevant to their needs. "
+        "text": "This service enables customers to access valuable information and data that is relevant to your needs. "
       },
       "use-produce": {
-        "header": "Have the component manufactured",
+        "header": "Have the component produced",
         "text": "This service allows customers to leverage our expertise and resources to efficiently achieve high-quality results. "
       },
       "use-design": {
-        "header": "Have the model designed",
+        "header": "Have a model designed",
         "text": "With our model design service, customers can access our creative skills to bring their vision to life. "
       },
       "use-accompany": {
-        "header": "Have the entire process accompanied",
-        "text": "This service offers customers ongoing support and guidance on their journey. "
+        "header": "Have accompanied the overall process",
+        "text": "This service offers customers continuous support and support on their way. "
       },
       "provide-produce": {
         "header": "Manufacture components",
@@ -1464,7 +1491,7 @@
       },
       "provide-design": {
         "header": "Design models",
-        "text": "Contractors who design models demonstrate creative problem-solving skills. "
+        "text": "Treaty who design models is characterized by creative problem -solving skills. "
       },
       "provide-accompany": {
         "header": "Accompany overall processes",
@@ -1478,13 +1505,13 @@
       "Clarify": {
         "heading": "Queries",
         "button": {
-          "menu": "Inquiry menu"
+          "menu": "Queries"
         }
       },
       "Completed": {
         "heading": "Completed",
         "button": {
-          "menu": "Complete menu"
+          "menu": "Completed menu"
         }
       },
       "Confirmation": {
@@ -1502,7 +1529,7 @@
       "ContractorSelection": {
         "heading": {
           "main": "Select contractor",
-          "sub1": "contractor"
+          "sub1": "Contractor"
         },
         "noContractor": "No contractor selected",
         "noContractorFound": "No contractor found",
@@ -1510,7 +1537,7 @@
           "menu": "Manufacturer Menu",
           "selectAddress": "Select address",
           "select": "Select contractor",
-          "edit": "Process contractors"
+          "edit": "Edit contractors"
         },
         "components": {
           "AddressCard": {
@@ -1520,7 +1547,7 @@
               "delivery": "Delivery address"
             },
             "sameAddress": "Delivery address is the same as billing address",
-            "noAddress": "no address selected",
+            "noAddress": "No address selected",
             "button": {
               "editAddress": "Change address",
               "resetAddress": "Reset address"
@@ -1534,7 +1561,7 @@
           },
           "ContractorList": {
             "heading": "Contractor selection",
-            "contractors": "Contractors sorted according to their priorities",
+            "contractors": "Contractors ranked by their priorities",
             "noContractorFound": "No contractor found"
           }
         }
@@ -1546,7 +1573,7 @@
         }
       },
       "Production": {
-        "heading": "production",
+        "heading": "Production",
         "button": {
           "menu": "Production menu"
         }
@@ -1554,7 +1581,7 @@
       "Request": {
         "heading": "Inquiry",
         "clientVerified": "Your process is ready for request",
-        "clientRequested": "The contractor has received the draft and will get back to you shortly.",
+        "clientRequested": "The contractor received the draft and will report to you shortly.",
         "contractorRecieved": "You have received a request",
         "clientVerifiedTitle": "Ready",
         "clientRequestedTitle": "Submitted",
@@ -1567,37 +1594,37 @@
       },
       "Service": {
         "heading": "Draft",
-        "noType": "no service selected",
+        "noType": "No service selected",
         "button": {
           "editType": "Edit service type",
           "complete": "Complete service",
           "menu": "Information menu"
         },
         "Filter": {
-          "heading": "Your requirements/specifications",
+          "heading": "Your requirements / guidelines",
           "menuButtonTitle": "Filter menu",
-          "pageDescription1": "Here you can specify your requirements/specifications for the process.",
-          "pageDescription2": "This helps simplify the selection and gives manufacturers more information.",
           "filtersApplied": "Specifications applied",
-          "noCategory": "no presets category opened",
           "FiterDetails": {},
+          "pageDescription1": "Here you can set your specifications for the process.",
+          "pageDescription2": "This helps make your selection easier.",
+          "noCategory": "No presets category opened",
           "components": {
             "Card": {
-              "noFilters": "no specifications available",
-              "noSelectedFitlers": "no defaults selected"
+              "noFilters": "No specifications available",
+              "noSelectedFitlers": "No defaults selected"
             },
             "MultiSelection": {
               "button": {
                 "all": "All",
                 "checkAll": "Select All",
-                "unCheckAll": "Deselect all"
+                "unCheckAll": "Desire all"
               }
             }
           }
         },
         "ServiceDetails": {
           "dummy": "Dummy service",
-          "dummy2": "Service not yet created",
+          "dummy2": "Service not yet",
           "components": {
             "Manufacturing": {
               "heading": {
@@ -1606,18 +1633,18 @@
                 "model": "Models",
                 "material": "Materials"
               },
-              "pageDescription1": "Select the desired models, materials and post-processing.",
+              "pageDescription1": "Select the desired models, materials and post -processing.",
               "pageDescription2": "This selection is used to find the right manufacturers.",
               "complete": "Selection Complete",
               "incomplete": "Selection Incomplete",
-              "noModels": "no models available",
-              "noPostProcessings": "no post-processing selected",
-              "noMaterials": "no materials selected",
+              "noModels": "No models available",
+              "noPostProcessings": "No post-processing selected",
+              "noMaterials": "No materials selected",
               "MaterialCard": {
                 "img": "Material image",
                 "name": "Name:",
                 "type": "Type:",
-                "cost": "Average acquisition costs:",
+                "cost": "Medium acquisition costs:",
                 "properties": "Characteristics:"
               },
               "GroupOverview": {
@@ -1628,23 +1655,23 @@
                 "nextGroup": "Next group",
                 "previousGroup": "Previous group",
                 "item": "group {{name}} open",
-                "model": "Model(s)",
+                "model": "Model (E)",
                 "material": "material",
                 "postProcessing": "Post-processing(s)",
                 "newGroup": "new group"
               },
               "ModelCard": {
-                "img": "Model picture",
+                "img": "Fashion picture",
                 "quantity": "Number",
                 "levelOfDetail": "Level of detail",
                 "name": "Name:",
                 "dimensions": "Mass",
-                "surface": "surface",
-                "volume": "volume",
-                "complexity": "complexity"
+                "complexity": "complexity",
+                "surface": "Surface",
+                "volume": "Volume"
               },
               "PostProcessingCard": {
-                "name": "name",
+                "name": "Name",
                 "img": "Post-processing image",
                 "type": "Type:",
                 "properties": "Characteristics:"
@@ -1670,7 +1697,7 @@
             "Material": {
               "available": "Available materials",
               "error": {
-                "noMaterials": "no materials found"
+                "noMaterials": "No materials found"
               },
               "components": {
                 "Card": {
@@ -1691,7 +1718,7 @@
                 "Item": {
                   "created": "Created on",
                   "license": "License",
-                  "certificates": "Certificates",
+                  "certificates": "Certificate",
                   "error": {
                     "noCertificates": "no certificates available"
                   }
@@ -1699,7 +1726,7 @@
                 "PreView": {
                   "created": "Created on",
                   "license": "License",
-                  "certificates": "Certificates",
+                  "certificates": "Certificate",
                   "error": {
                     "noCertificates": "no certificates available"
                   }
@@ -1715,11 +1742,11 @@
                 "error": {
                   "tags": "Error tags",
                   "licenses": "no license(s) specified",
-                  "certificates": "Error certificates",
+                  "certificates": "Error Certificates",
                   "file": "Error File"
                 },
                 "button": {
-                  "upload": "Upload model"
+                  "upload": "Upload the model"
                 },
                 "components": {
                   "Card": {
@@ -1729,9 +1756,9 @@
                     "date": "Date",
                     "all": "Apply to all:",
                     "tags": "tags",
-                    "tagsPH": "Day1, Day2, ...",
+                    "tagsPH": "Tag1, Tag2, ...",
                     "quantity": "Number *",
-                    "levelOfDetail": "Level of detail *",
+                    "levelOfDetail": "Degree of detail *",
                     "levelOfDetailPH": "Level of detail",
                     "selectLevelOfDetail": "Select level of detail",
                     "selectLicense": "Select license",
@@ -1749,11 +1776,11 @@
               }
             },
             "NewItem": {
-              "heading": "Create a new process..."
+              "heading": "Create a new process ..."
             },
             "PostProcessing": {
-              "heading": "Available post-processes",
-              "selected": "Selected post-processing",
+              "heading": "Available post -processing",
+              "selected": "Selected post -processing",
               "error": {
                 "noPostProcessings": "no post-processing found"
               },
@@ -1770,7 +1797,7 @@
             }
           },
           "Modeling": {
-            "heading": "Have a model designed"
+            "heading": "Model can be designed"
           }
         },
         "ServiceSelection": {
@@ -1790,14 +1817,14 @@
               "description": {
                 "NONE": "error",
                 "ADDITIVE_MANUFACTURING": "Have your individual 3D model printed professionally. ",
-                "CREATE_MODEL": "Hire an expert to design a custom 3D model for you.",
+                "CREATE_MODEL": "Commission an expert to design an individual 3D model for you.",
                 "MODELING": "Hire an expert to design a custom 3D model for you.",
-                "DELIVERY": "Safe and fast transport of your products.",
-                "POST_PROCESSING": "Optimization and refinement of your 3D printed parts.",
-                "PACKAGING": "Professional packaging solutions for safe shipping.",
-                "QUALITY_CONTROL": "Comprehensive quality checks to ensure the highest standards.",
+                "DELIVERY": "Fast and reliable transport of your products.",
+                "POST_PROCESSING": "Optimization and finishing of your 3D-printed parts.",
+                "PACKAGING": "Professional packaging solutions for safe delivery.",
+                "QUALITY_CONTROL": "Comprehensive quality checks to maintain the highest standards.",
                 "ASSEMBLY": "Professional assembly of your components.",
-                "AFTER_SALES": "Customer service and after-sales support."
+                "AFTER_SALES": "Reliable customer support and assistance after your purchase."
               }
             }
           }
@@ -1810,7 +1837,7 @@
           "header": "Overview",
           "draft": "Draft",
           "service": "service",
-          "contractorSelected": "contractor",
+          "contractorSelected": "Contractor",
           "verified": "examination",
           "requested": "Inquiry",
           "clarification": "Queries",
@@ -1823,7 +1850,7 @@
         }
       },
       "Verify": {
-        "heading": "Check process",
+        "heading": "Check the process",
         "button": {
           "menu": "Review menu"
         },
@@ -1833,19 +1860,19 @@
             "heading": {
               "PRINTABILITY": "Printability",
               "DRAFT": "Design review",
-              "CAPACITY": "Capacity check",
+              "CAPACITY": "Capacity test",
               "STABILITY": "Stability test"
             },
             "description": {
               "PRINTABILITY": "Checking the printability of your 3D model using AI",
               "DRAFT": "Checking the feasibility of your design ",
-              "CAPACITY": "Verification of the manufacturer's capacity",
+              "CAPACITY": "Checking the manufacturer's capacity",
               "STABILITY": "Checking the stability of the 3D model design"
             }
           },
           "VerifyStatus": {
             "READY": "Ready",
-            "STARTED": "Started",
+            "STARTED": "Launched",
             "ONGOING": "Running",
             "COMPLETED": "Successful",
             "FAILED": "Mistake"
@@ -1854,27 +1881,21 @@
       },
       "Info": {
         "name": "Process name:",
-        "updated": "last update:",
+        "updated": "Last update:",
         "created": "Created on:",
         "status": "Process status:",
         "button": {
           "menu": "Information menu",
           "editTitle": "Edit process name"
-        }
-      },
-      "StatusButtons": {
-        "heading": "Todos",
-        "noButtonsClient": "No todos available. ",
-        "noButtonsContractor": "No todos available. ",
-        "finished": "Process Completed. "
-      },
-      "TitleForm": {
-        "heading": "Process name",
-        "describtion": "Give your process a name. ",
-        "name": "Process name",
-        "error": "Please enter a name",
-        "button": {
-          "save": "Save name"
+        },
+        "TitleForm": {
+          "heading": "Process name",
+          "describtion": "Give your process a name. ",
+          "name": "Process name",
+          "error": "Please enter a name",
+          "button": {
+            "save": "Save name"
+          }
         }
       }
     }
@@ -1886,14 +1907,14 @@
       "addAddress": "Add address"
     },
     "existingAddressTitle": "Edit address",
-    "newAddressTitle": "Create new address",
+    "newAddressTitle": "Create a new address",
     "confirmDelete": "Do you really want to permanently delete your account?",
     "Address": {
       "header": "Addresses",
       "noAddress": "No address available"
     },
     "APIToken": {
-      "heading": "API tokens",
+      "heading": "Api token",
       "subTitle": "Create a new API token to access the Semper-KI API",
       "subTitle2": "The token is only displayed once and cannot be restored.\n ",
       "button": {
@@ -1909,16 +1930,16 @@
       }
     },
     "Organization": {
-      "header": "organization",
-      "name": "name"
+      "header": "Organization",
+      "name": "Name"
     },
     "Statistics": {
-      "header": "statistics",
+      "header": "Statistics",
       "created": "Created on",
-      "accessed": "last accessed on",
+      "accessed": "Last accessed on",
       "updated": "Updated on",
       "lastLogin": "Last registration on",
-      "lastLoginLocation": "Place of last registration",
+      "lastLoginLocation": "Place of the last registration",
       "lastLoginNumber": "Number of last logins"
     }
   },
@@ -1929,17 +1950,17 @@
         "serviceName": "Name:",
         "serviceType": "Service Type:",
         "status": "Status:",
-        "updated": "last update:",
+        "updated": "Last update:",
         "count": "Number:",
-        "confirm": "Really delete process?"
+        "confirm": "Really delete the process?"
       },
       "Info": {
         "name": "Project name:",
-        "updated": "last update:",
+        "updated": "Last update:",
         "created": "Created on:",
         "count": "Number of processes:",
-        "inProgess": "of which in progress:",
-        "finished": "of which completed:",
+        "inProgess": "of this in processing:",
+        "finished": "concluded from this:",
         "button": {
           "menu": "Information menu",
           "editTitle": "Edit project name"
@@ -1947,12 +1968,12 @@
       },
       "Processes": {
         "sort": {
-          "title": "title",
+          "title": "Title",
           "processID": "Process ID",
-          "serviceType": "service",
+          "serviceType": "Service",
           "updatedWhen": "Updated",
           "createdWhen": "Created",
-          "ProcessActionStatus": "status",
+          "actionStatus": "status",
           "amount": "Number",
           "imgPath": "Picture",
           "order": "Series",
@@ -1962,7 +1983,7 @@
         "noProcess": "No processes exist",
         "button": {
           "new": "New process",
-          "create": "create another process",
+          "create": "Create another process",
           "sort": "Sort by:"
         }
       },
@@ -1985,14 +2006,15 @@
     "components": {
       "Table": {
         "noProjects": "No projects available",
-        "name": "name",
+        "name": "Name",
         "updated": "Updated on",
-        "status": "status",
+        "status": "Status",
         "count": "Number",
         "actions": "Actions"
       },
       "TableRow": {
-        "deleteConfirm": "Are you sure you want to delete the project?"
+        "deleteConfirm": "Would you really like to delete the project?",
+        "cloneConfirm": "Do you really want to duplicate the project?"
       },
       "TitleForm": {
         "heading": "Create project",
@@ -2014,7 +2036,7 @@
     },
     "form": {
       "display_name": "Organization name",
-      "email": "e-mail",
+      "email": "Email",
       "button": {
         "submit": "Register"
       },
@@ -2029,7 +2051,7 @@
   },
   "ResKriVer": {
     "heading": "Your order is being processed",
-    "loading": "load your data",
+    "loading": "Load your data",
     "data": "Transferred data from ResKriVer:",
     "button": {
       "search": "Continue"
@@ -2045,14 +2067,14 @@
         "postProcessings": "Post-processing",
         "costing": "Cost",
         "request": "Data expansion",
-        "graph": "graph",
+        "graph": "Graph",
         "privat-graph": "Private graph"
       },
       "Table": {
         "action": "Actions",
-        "name": "name",
+        "name": "Name",
         "active": "Active",
-        "noItems": "no entries available",
+        "noItems": "No entries available",
         "confirmDelete": "Would you like \"{{name}}\"really remove them from your organization?",
         "button": {
           "variant": "Create variant"
@@ -2064,10 +2086,10 @@
       "Form": {
         "heading": "Edit costs"
       },
-      "name": "name",
+      "name": "Name",
       "value": "Value",
       "unit": "Unit",
-      "noItems": "no costs available",
+      "noItems": "No costs available",
       "noItemsWithFilter": "There are no costs with the selected filters"
     },
     "Materials": {
@@ -2079,39 +2101,39 @@
     },
     "Overview": {
       "header": "Overview",
-      "text": "Enter your resources to use them for process selection."
+      "text": "Enter your resources to use them for the process selection."
     },
     "PostProcessings": {
       "header": "Post-processing",
-      "own": "Own post-processing",
+      "own": "Own post -processing",
       "button": {
-        "createOwn": "Create post-processing"
+        "createOwn": "Create post -processing"
       }
     },
     "Printers": {
       "header": "3D printer",
       "own": "Own printers",
-      "all": "All available printers",
+      "all": "All available printer",
       "button": {
         "createOwn": "Create printer"
       }
     },
     "RequestInformation": {
       "header": "Data Augmentation Requests",
-      "noItems": "no requests available",
+      "noItems": "No requests available",
       "button": {
-        "new": "new request"
+        "new": "New request"
       }
     }
   },
   "Test": {
     "UITest": {
-      "heading": "UI - Overview | ",
+      "heading": "UI - overview | ",
       "h2": "H2 - heading",
-      "h3": "H3 - Heading",
+      "h3": "H3 - heading",
       "h4": "H4 - heading",
       "subHeading": "subHeading - Subtitles",
-      "text": "Default text",
+      "text": "Standard text",
       "button-heading": "Button overview",
       "primary-buttons": "Primary buttons",
       "secondary-buttons": "Secondary buttons",

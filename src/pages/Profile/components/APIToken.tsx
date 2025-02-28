@@ -12,6 +12,7 @@ import useGetAPIToken from "@/api/Authentification/Querys/useGetAPIToken";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import useCreateAPIToken from "@/api/Authentification/Mutations/useCreateAPIToken";
 import useDeleteAPIToken from "@/api/Authentification/Mutations/useDeleteAPIToken";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 interface ProfileAPITokenProps {}
 
@@ -54,6 +55,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
           {t("Profile.APIToken.subTitle2")}
         </Text>
       </Container>
+
       {shortApiToken.isLoading ? (
         <LoadingAnimation />
       ) : shortApiToken.data === undefined || shortApiToken.data === "" ? (
@@ -80,6 +82,17 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
               variant="secondary"
               onClick={handleOnClickButtonDelete}
               title={t("general.button.delete")}
+            />
+            <Button
+              title={t("Profile.APIToken.button.link")}
+              variant="primary"
+              size="sm"
+              extern
+              target="_blank"
+              endIcon={<LaunchIcon />}
+              to={
+                process.env.VITE_HTTP_API_URL + "/public/api/schema/swagger-ui/"
+              }
             />
           </Container>
         </Container>

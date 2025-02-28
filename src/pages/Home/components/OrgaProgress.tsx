@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import useOrganization from "@/hooks/useOrganization";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 import useGetOrganizationUsers from "@/api/Organization/Querys/useGetOrganizationUsers";
-import HomeProgressItem, { HomeProgressItemData } from "./ProgressItem";
+import { HomeProgressItemData } from "./ProgressItem";
 import HomeContainer from "./Container";
+import Flowchart from "./FlowChart";
 
 interface HomeOrgaAccountProgressProps {}
 
@@ -23,6 +24,28 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
       title: t("Home.components.HomeOrgaAccountProgress.items.general"),
       finished: organization.name !== "",
       link: "organization#OrganizationInfo",
+    },
+    {
+      title: t("Home.components.HomeOrgaAccountProgress.items.branding"),
+      finished:
+        organization.details.branding !== undefined &&
+        organization.details.branding.logo_url !== undefined &&
+        organization.details.branding.logo_url !== "" &&
+        organization.details.branding.colors.page_background !== undefined &&
+        organization.details.branding.colors.page_background !== "",
+      link: "organization#OrganizationInfo",
+    },
+    {
+      title: t("Home.components.HomeOrgaAccountProgress.items.adresses"),
+      finished:
+        organization.details.addresses !== undefined &&
+        organization.details.addresses.length > 0,
+      link: "organization/#OrganizationAddress",
+    },
+    {
+      title: t("Home.components.HomeOrgaAccountProgress.items.user"),
+      finished: userQuery.data !== undefined && userQuery.data.length > 0,
+      link: "organization/#OrganizationUserTable",
     },
     {
       title: t("Home.components.HomeOrgaAccountProgress.items.services"),
@@ -55,62 +78,49 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
         organization.details.notificationSettings.organization.length > 0,
       link: "organization#NotificationForm",
     },
-    {
-      title: t("Home.components.HomeOrgaAccountProgress.items.branding"),
-      finished:
-        organization.details.branding !== undefined &&
-        organization.details.branding.logo_url !== undefined &&
-        organization.details.branding.logo_url !== "" &&
-        organization.details.branding.colors.page_background !== undefined &&
-        organization.details.branding.colors.page_background !== "",
-      link: "organization#OrganizationInfo",
-    },
-    {
-      title: t("Home.components.HomeOrgaAccountProgress.items.adresses"),
-      finished:
-        organization.details.addresses !== undefined &&
-        organization.details.addresses.length > 0,
-      link: "organization/#OrganizationAddress",
-    },
-    {
-      title: t("Home.components.HomeOrgaAccountProgress.items.user"),
-      finished: userQuery.data !== undefined && userQuery.data.length > 0,
-      link: "organization/#OrganizationUserTable",
-    },
   ];
 
   const allFinished = items.every((item) => item.finished);
+  const [showFlow, setShowFlow] = React.useState(!allFinished);
 
-  if (getAllNodeNeighbours.isLoading || userQuery.isLoading || allFinished)
-    return null;
+  useEffect(() => {
+    if (allFinished) {
+      setShowFlow(false);
+    }
+  }, [allFinished]);
+
+  const handleOnButtonClickShow = () => {
+    setShowFlow((prev) => !prev);
+  };
 
   return (
     <HomeContainer>
       <Heading variant="h2">
         {t("Home.components.HomeOrgaAccountProgress.todo")}
       </Heading>
-      <Container width="full" direction="col">
-        <Text className="text-black">
-          {t("Home.components.HomeOrgaAccountProgress.progress", {
-            count: items.filter((item) => item.finished).length,
-            total: items.length,
-          })}
-        </Text>
-        <Container
-          width="full"
-          direction="row"
-          className="max-w-4xl flex-wrap gap-3"
-        >
-          {items.map((item, index) => (
-            <HomeProgressItem key={index} item={item} />
-          ))}
-        </Container>
+      <Text className="text-black">
+        {t("Home.components.HomeOrgaAccountProgress.progress", {
+          count: items.filter((item) => item.finished).length,
+          total: items.length,
+        })}
+      </Text>
+      {showFlow ? <Flowchart items={items} /> : null}
+      <Container width="full" direction="row" justify="center">
+        <Button
+          title={t("Home.components.HomeOrgaAccountProgress.button.orga")}
+          size="sm"
+          variant="primary"
+        />
+        <Button
+          title={
+            showFlow === true
+              ? t("general.button.showLess")
+              : t("general.button.showMore")
+          }
+          onClick={handleOnButtonClickShow}
+          size="sm"
+        />
       </Container>
-      <Button
-        title={t("Home.components.HomeOrgaAccountProgress.button.orga")}
-        size="sm"
-        to="organization"
-      />
     </HomeContainer>
   );
 };

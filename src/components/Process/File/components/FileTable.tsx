@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Heading, Text } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import ProcessFileRow from "./ProcessFileRow";
 import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -27,12 +27,32 @@ type CurrentFileTableProps = {
 
 type GenericFileTableProps = {
   origin: ProcessOrigin;
+  title?: string;
+  noFilesMessage?: string;
+  onlyFromOrigin?: boolean;
 };
 const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
-  const { files, type, origin } = props;
+  const {
+    files,
+    type,
+    origin,
+    title,
+    onlyFromOrigin = false,
+    noFilesMessage: _noFilesMessage,
+  } = props;
   const { t } = useTranslation();
   const downloadZIP = useDownloadZIP();
   const uploadFiles = useUploadFiles();
+
+  const heading = title
+    ? title
+    : type === "current"
+    ? t("components.Process.File.components.FileTable.currentFilesTitle")
+    : t("components.Process.File.components.FileTable.uploadFilesTitle");
+
+  const noFilesMessage = _noFilesMessage
+    ? _noFilesMessage
+    : t("components.Process.File.components.FileTable.noFiles");
 
   const handleOnButtonClickUpload = () => {
     if (type === "upload")
@@ -42,41 +62,55 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
       );
   };
   const handleOnButtonClickDownload = () => {
-    if (type !== "upload") downloadZIP.mutate(files.map((file) => file.id));
+    if (type !== "upload")
+      downloadZIP.mutate(
+        files
+          .filter(
+            (file) =>
+              !onlyFromOrigin || (onlyFromOrigin && file.origin === origin)
+          )
+          .map((file) => file.id)
+      );
   };
 
   if (files.length === 0 && type === "upload") return null;
-  if (files.length === 0 && type === "current")
+  if (
+    type === "current" &&
+    ((files.length === 0 && !onlyFromOrigin) ||
+      (onlyFromOrigin &&
+        files.filter((file) => onlyFromOrigin && file.origin === origin)
+          .length === 0))
+  )
     return (
-      <Container className="rounded-md border-2 p-5">
-        <Text>{t("components.Process.File.components.FileTable.noFiles")}</Text>
+      <Container width="full" className="rounded-md border-2 bg-white p-5">
+        <Heading variant="h3">{noFilesMessage}</Heading>
       </Container>
     );
   return (
-    <Container width="full" direction="col" className="rounded-md border-2 p-5">
-      <Heading variant="h3">
-        {type === "current"
-          ? t("components.Process.File.components.FileTable.currentFilesTitle")
-          : t("components.Process.File.components.FileTable.uploadFilesTitle")}
-      </Heading>
+    <Container
+      width="full"
+      direction="col"
+      className="rounded-md border-2 bg-white p-5"
+    >
+      <Heading variant="h3">{heading}</Heading>
       <table className="w-full border-separate border-spacing-x-0 border-spacing-y-2 ">
         <thead>
           <tr>
             <th className="text-left">
               {t("components.Process.File.components.FileTable.name")}
             </th>
-            {/* <th className="text-left">
-              {t("components.Process.File.components.FileTable.size")}
-            </th> */}
-            {/* <th className="text-left">
-              {t("components.Process.File.components.FileTable.type")}
-            </th> */}
+
             <th className="text-left">
               {t("components.Process.File.components.FileTable.date")}
             </th>
             <th className="text-left">
               {t("components.Process.File.components.FileTable.author")}
             </th>
+            {type === "current" ? (
+              <th className="text-left">
+                {t("components.Process.File.components.FileTable.origin")}
+              </th>
+            ) : null}
             <th>{t("components.Process.File.components.FileTable.actions")}</th>
           </tr>
         </thead>
@@ -90,9 +124,15 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
                   index={index}
                 />
               ))
-            : files.map((file, index) => (
-                <ProcessFileRow file={file} key={index} />
-              ))}
+            : files
+                .filter(
+                  (file) =>
+                    !onlyFromOrigin ||
+                    (onlyFromOrigin && file.origin === origin)
+                )
+                .map((file, index) => (
+                  <ProcessFileRow file={file} key={index} />
+                ))}
         </tbody>
       </table>
       {type === "upload" ? (

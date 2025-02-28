@@ -154,14 +154,14 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
           className="gap-0  rounded-md border-2 border-t-0 border-gray-300 p-0"
         >
           {project.data.processes.length > 0 ? (
-            sortProcesses(project.data.processes).map((process) => (
+            sortProcesses(project.data.processes).map((process, index, all) => (
               <React.Fragment key={process.processID}>
                 <HomeProcess
                   project={project.data}
                   process={process}
                   owner={owner}
                 />
-                <Divider />
+                {!owner && index === all.length - 1 ? null : <Divider />}
               </React.Fragment>
             ))
           ) : (
@@ -177,13 +177,15 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
               <Divider />
             </>
           )}
-          <Button
-            title={t("Home.Projects.Project.button.new")}
-            onClick={handleOnClickButtonNew}
-            className="my-5"
-            size="sm"
-            variant="primary"
-          />
+          {owner ? (
+            <Button
+              title={t("Home.Projects.Project.button.new")}
+              onClick={handleOnClickButtonNew}
+              className="my-5"
+              size="sm"
+              variant="primary"
+            />
+          ) : null}
         </Container>
       </td>
     </tr>

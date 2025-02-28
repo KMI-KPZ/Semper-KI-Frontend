@@ -29,6 +29,7 @@ export interface ContractorSelectionFormData {
 const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
   const { process, closeModal } = props;
   const contractors = useGetContractors();
+  const [onlyVerified, setOnlyVerified] = React.useState(false);
   const { t } = useTranslation();
   const updateProcess = useUpdateProcess();
   const [selectedContractor, setSelectedContractor] = React.useState<
@@ -59,6 +60,11 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
   const selectContractor = (contractor: ContractorProps) => {
     setSelectedContractor(contractor);
   };
+  const handleOnChangeOnlyVerified = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setOnlyVerified(e.target.checked);
+  };
 
   if (contractors.isLoading) return <LoadingAnimation />;
   return (
@@ -79,19 +85,42 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
           "Process.components.ContractorSelection.components.ContractorList.contractors"
         )}
       </Heading>
+      <Container width="full" direction="row">
+        <input
+          type="checkbox"
+          id="verified"
+          checked={onlyVerified}
+          onChange={handleOnChangeOnlyVerified}
+          className="h-6 w-6 hover:cursor-pointer"
+        />
+        <label htmlFor="verified" className="hover:cursor-pointer">
+          {t(
+            "Process.components.ContractorSelection.components.ContractorList.onlyVerified"
+          )}
+        </label>
+      </Container>
 
-      {contractors.data !== undefined && contractors.data.length > 0 ? (
+      {contractors.data !== undefined &&
+      contractors.data.filter((contractor) =>
+        onlyVerified ? contractor.verified : true
+      ).length > 0 ? (
         <form className="flex flex-col items-center justify-start gap-5">
           <Container direction="col" width="full">
-            {contractors.data.map((contractor, index) => (
-              <ContractorCard
-                selectContractor={selectContractor}
-                key={index}
-                contractor={contractor}
-                process={process}
-                selected={contractor.hashedID === selectedContractor?.hashedID}
-              />
-            ))}
+            {contractors.data
+              .filter((contractor) =>
+                onlyVerified ? contractor.verified : true
+              )
+              .map((contractor, index) => (
+                <ContractorCard
+                  selectContractor={selectContractor}
+                  key={index}
+                  contractor={contractor}
+                  process={process}
+                  selected={
+                    contractor.hashedID === selectedContractor?.hashedID
+                  }
+                />
+              ))}
           </Container>
           <Button
             onClick={saveContractor}

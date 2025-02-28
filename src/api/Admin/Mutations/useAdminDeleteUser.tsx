@@ -11,9 +11,9 @@ const useAdminDeleteUser = () => {
   const queryClient = useQueryClient();
   const deleteUser = async (data: AdminDeleteUserProps) =>
     authorizedCustomAxios
-      .delete(`${process.env.VITE_HTTP_API_URL}/public/admin/user/delete/`, {
-        data,
-      })
+      .delete(
+        `${process.env.VITE_HTTP_API_URL}/public/admin/user/delete/${data.hashedID}/`
+      )
       .then((response) => {
         logger("useAdminDeleteUser | deleteUser ✅ |", response);
         return response.data;

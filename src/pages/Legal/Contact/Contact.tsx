@@ -11,7 +11,7 @@ const Contact: React.FC<ContactProps> = (props) => {
   return (
     <article
       data-testid="contact"
-      className="flex w-full flex-col items-center justify-center gap-5  bg-white  p-5"
+      className="flex w-full flex-col items-start justify-start gap-5  bg-white  p-5"
     >
       <Heading variant="h2" className="w-full p-5 text-center">
         {t("Legal.Contact.heading.main")}

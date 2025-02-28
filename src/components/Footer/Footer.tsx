@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
-import { URL_LinkedIn, URL_Mastodon } from "@/config/constants";
+import { URL_LinkedIn, URL_Magazin, URL_Mastodon } from "@/config/constants";
 import { Button, Modal } from "@component-library/index";
 import ContactForm from "../Form/ContactForm";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 
 interface Props {}
 
@@ -55,9 +56,19 @@ const Footer: React.FC<Props> = (props) => {
           <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
             <div className="flex flex-row items-center justify-center gap-2">
               <Button
+                title={t("components.Footer.magazin")}
+                to={URL_Magazin}
+                variant="tertiary"
+                target="_blank"
+                extern
+                children={<NewspaperIcon />}
+                className="text-white hover:bg-slate-700 "
+              />
+              <Button
                 title={t("components.Footer.instagram")}
                 to={URL_LinkedIn}
                 variant="tertiary"
+                target="_blank"
                 extern
                 children={<LinkedInIcon />}
                 className="text-white hover:bg-slate-700 "
@@ -65,6 +76,7 @@ const Footer: React.FC<Props> = (props) => {
               <Button
                 title={t("components.Footer.mastodon")}
                 to={URL_Mastodon}
+                target="_blank"
                 variant="tertiary"
                 extern
                 children={<MastodonIcon />}

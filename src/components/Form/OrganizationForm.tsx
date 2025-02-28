@@ -177,7 +177,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       <Heading variant={`h1`}>
         {t("components.Form.OrganizationForm.heading")}
       </Heading>
-      <Container direction="col" align="start">
+      <Container direction="col" items="start">
         {labels.map((label) => (
           <GeneralInput
             type={label[1]}
@@ -212,13 +212,15 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
               prices: { groupCosts: [[333, 666]] },
               contractorCoordinates: [0, 0],
               distance: 0,
+              verified: true,
+              groups: [],
             }}
           />
         </Container>
         <Container
           direction="row"
           justify="start"
-          align="center"
+          items="center"
           className="flex-wrap"
         >
           <Text
@@ -245,7 +247,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
         <Container
           direction="row"
           justify="start"
-          align="center"
+          items="center"
           className="flex-wrap"
         >
           <Text
@@ -256,7 +258,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           >
             {t(`components.Form.OrganizationForm.supportedServices`)}
           </Text>
-          <Container className="w-fit" direction="col" align="start">
+          <Container className="w-fit" direction="col" items="start">
             {servicesQuery.data !== undefined
               ? servicesQuery.data.map((service, index) => (
                   <label key={index} className={`flex items-center gap-5`}>

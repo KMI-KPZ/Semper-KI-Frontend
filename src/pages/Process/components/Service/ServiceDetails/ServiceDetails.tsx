@@ -18,7 +18,11 @@ const ServiceDetails: React.FC<ServiceProps> = (props) => {
       return <ServiceManufacturingView process={process} />;
     default:
       return (
-        <Container direction="col">
+        <Container
+          direction="col"
+          className="rounded-md bg-white p-5"
+          width="full"
+        >
           {/* <Text>{t("Process.components.Service.ServiceDetails.dummy")}</Text> */}
           <Text>{t("Process.components.Service.ServiceDetails.dummy2")}</Text>
         </Container>

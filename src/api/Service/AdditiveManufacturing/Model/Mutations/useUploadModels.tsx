@@ -13,6 +13,9 @@ interface ModelUploadDetails {
   certificates: string[];
   quantity: number;
   levelOfDetail: ModelLevelOfDetail;
+  femRequested?: boolean;
+  testType?: "elongation" | "compression";
+  pressure?: number;
 }
 
 export interface UploadModel {
@@ -20,7 +23,7 @@ export interface UploadModel {
   file: File;
 }
 
-interface ModelsUpload {
+export interface ModelsUpload {
   projectID: string;
   processID: string;
   groupID: number;

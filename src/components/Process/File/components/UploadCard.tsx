@@ -7,24 +7,10 @@ interface ProcessUploadCardProps {
   addFiles: (files: File[]) => void;
   title?: string;
   subTitle?: string;
+  icon?: React.ReactNode;
+  showIcon?: boolean;
+  fileTypes?: string[];
 }
-
-const dataTypes: string[] = [
-  ".STEP",
-  ".STP",
-  ".SLDPRT",
-  ".STL",
-  ".SAT",
-  ".3DXML",
-  ".3MF",
-  ".PRT",
-  ".IPT",
-  ".CATPART",
-  ".X_T",
-  ".PTC",
-  ".X_B",
-  ".DXF",
-];
 
 const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
   const { t } = useTranslation();
@@ -32,6 +18,9 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
     addFiles,
     title = t("components.Process.File.components.UploadCard.heading"),
     subTitle = t("components.Process.File.components.UploadCard.subHeading"),
+    icon = <UploadIcon className="h-20 w-20" />,
+    showIcon = true,
+    fileTypes = ["*"],
   } = props;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -90,12 +79,12 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
         title={t("components.Process.File.components.UploadCard.heading")}
         href="#"
       >
-        <UploadIcon className="h-20 w-20" />
+        {showIcon ? icon : null}
         <Heading variant="h2">{title}</Heading>
         {subTitle}
       </a>
       <input
-        accept={dataTypes.map((type: string) => type).join(",")}
+        accept={fileTypes.map((type: string) => type).join(",")}
         type="file"
         ref={hiddenFileInput}
         onChange={handleChangeHiddenInput}

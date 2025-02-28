@@ -20,7 +20,7 @@ const ProcessMessages: React.FC<ProcessMessagesProps> = (props) => {
   return (
     <Container width="full" direction="col">
       {messages.length === 0 ? (
-        <Container width="full" direction="col" className="card">
+        <Container width="full" direction="col" className="card bg-white">
           <Text>{t("components.Process.Messages.noMessages")}</Text>
         </Container>
       ) : (

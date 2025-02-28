@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Divider, Heading } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
@@ -107,15 +107,15 @@ const ServiceManufacturingGroupOverview: React.FC<
       width="full"
       direction="col"
       justify="start"
-      align="start"
-      className="rounded-md border-2 "
+      items="start"
+      className="gap-0 rounded-md border-2 bg-white"
     >
       <Container
         width="full"
         direction="col"
         justify="center"
-        align="start"
-        className="p-3 pb-0"
+        items="start"
+        className="p-3"
       >
         <Heading variant="h3">
           {t(
@@ -123,7 +123,6 @@ const ServiceManufacturingGroupOverview: React.FC<
           )}
         </Heading>
       </Container>
-      <Divider />
       <Container
         width="full"
         direction="row"
@@ -159,7 +158,7 @@ const ServiceManufacturingGroupOverview: React.FC<
               )}
               onClick={() => handleOnClickGroup(index)}
               key={index}
-              className={`flex flex-row items-center  rounded-md border-2 p-2 hover:cursor-pointer hover:bg-slate-50 ${
+              className={`flex flex-row items-center rounded-md border-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-slate-50 ${
                 activeGroup === index ? "border-blau-button " : ""
               }`}
             >
@@ -221,7 +220,7 @@ const ServiceManufacturingGroupOverview: React.FC<
                 endExclude
                 end={ProcessStatus.SERVICE_COMPLETED}
               >
-                <Container width="fit" justify="center" align="center">
+                <Container width="fit" justify="center" items="center">
                   <Button
                     size="sm"
                     variant="text"

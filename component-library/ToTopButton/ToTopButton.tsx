@@ -37,7 +37,7 @@ const ToTopButton: React.FC<ToTopButtonProps> = (props) => {
     <a
       className={`${
         scrolled ? "visible opacity-100" : "invisible opacity-0"
-      } fixed bottom-5 right-5 flex items-center justify-center rounded-full duration-300 md:bottom-3 md:right-3  `}
+      }  flex items-center justify-center rounded-full duration-300 `}
       href="#"
       onClick={handleOnClick}
       title={t("component-library.ToTopButton.button.toTop")}

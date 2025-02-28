@@ -13,8 +13,7 @@ interface HomeServicesProps {}
 
 interface HomeServiceItem {
   id: number;
-  title: string;
-  text: string;
+  type: "questionnaire" | "matching" | "benchmarking" | "resilience";
   image: string;
 }
 
@@ -24,26 +23,22 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
   const items: HomeServiceItem[] = [
     {
       id: 0,
-      title: t("Home.Anonym.Services.items.matching.heading"),
-      text: t("Home.Anonym.Services.items.matching.text"),
+      type: "matching",
       image: MatchingIMG,
     },
     {
       id: 1,
-      title: t("Home.Anonym.Services.items.questionnaire.heading"),
-      text: t("Home.Anonym.Services.items.questionnaire.text"),
+      type: "questionnaire",
       image: QuestionnaireIMG,
     },
     {
       id: 2,
-      title: t("Home.Anonym.Services.items.benchmarking.heading"),
-      text: t("Home.Anonym.Services.items.benchmarking.text"),
+      type: "benchmarking",
       image: BenchmarkingIMG,
     },
     {
       id: 3,
-      title: t("Home.Anonym.Services.items.resilience.heading"),
-      text: t("Home.Anonym.Services.items.resilience.text"),
+      type: "resilience",
       image: ResilienceIMG,
     },
   ];
@@ -52,24 +47,26 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
   );
 
   return (
-    <Container width="full" className="" align="start" direction="col">
+    <Container width="full" className="" items="start" direction="col">
       <HomeHeader variant="h2" title={t("Home.Anonym.Services.heading")} />
       <Container width="full" direction="col">
         <Container
           width="full"
           justify="start"
           className="items-center justify-center gap-10 md:items-start md:justify-start "
-          align="start"
+          items="start"
         >
           <img src={currentItem.image} className="object-cover md:w-3/5 " />
-          <Container direction="col" align="start" className="md:w-2/5">
+          <Container direction="col" items="start" className="md:w-2/5">
             <Heading
               variant="h3"
               className="text-white transition-all duration-300 "
             >
-              {currentItem.title}
+              {t(`Home.Anonym.Services.items.${currentItem.type}.heading`)}
             </Heading>
-            <Text>{currentItem.text}</Text>
+            <Text>
+              {t(`Home.Anonym.Services.items.${currentItem.type}.text`)}
+            </Text>
           </Container>
         </Container>
         <Container width="full" direction="row">

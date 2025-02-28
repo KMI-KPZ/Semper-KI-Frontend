@@ -1,25 +1,26 @@
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import useStatusButtons, {
   StatusButtonProps,
 } from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import { useEffect, useState } from "react";
-import ProcessConditionItem from "./components/ConditionItem";
 import { useTranslation } from "react-i18next";
 import ActionContainerWarpper, {
   isProcessFailed,
 } from "./components/FailedContainer";
 import ActionStatusCard from "../../ActionStatusCard";
 import logger from "@/hooks/useLogger";
+import ActionContainerTodos from "./components/Todos";
 
 interface ActionContainerProps {
   start: ProcessStatus;
   end?: ProcessStatus;
+  showDelete?: boolean;
 }
 
 const ActionContainer: React.FC<ActionContainerProps> = (props) => {
-  const { end, start } = props;
+  const { end, start, showDelete = false } = props;
   const { process } = useProcess();
   const { getStatusButtons, handleOnClickButton } = useStatusButtons();
   const [error, setError] = useState(false);
@@ -43,6 +44,19 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
   ) => {
     if (
       button.action.type === "request" &&
+      button.action.data.type === "backstepStatus"
+    ) {
+      window.confirm(
+        t("components.Process.Container.ActionContainer.backConfirm") +
+          "\n" +
+          t("components.Process.Container.ActionContainer.backConfirm2") +
+          "\n" +
+          t("components.Process.Container.ActionContainer.backConfirm3")
+      ) === true
+        ? handleOnClickButton(button, processID)
+        : logger("delete canceled");
+    } else if (
+      button.action.type === "request" &&
       button.action.data.type === "deleteProcess"
     ) {
       window.confirm(
@@ -61,34 +75,13 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
 
   const statusButtons = getStatusButtons(
     process,
-    process.actionStatus !== "ACTION_REQUIRED"
+    process.actionStatus !== "ACTION_REQUIRED" || showDelete
   );
 
   if (showDependingOnProcessStatus)
     return (
       <ActionContainerWarpper failed={isProcessFailed(process)}>
-        {process.processErrors === undefined ||
-        process.processErrors.length === 0 ? null : (
-          <Container
-            align="center"
-            direction="col"
-            wrap="wrap"
-            className={`gap-5 rounded-md border-2 px-10 py-5 md:min-w-[500px] ${
-              error ? "border-red-500" : ""
-            }`}
-          >
-            <Heading variant="h2">
-              {t("components.Process.Container.ActionContainer.heading")}
-            </Heading>
-            {process.processErrors.map((error, index) => (
-              <ProcessConditionItem key={index} error={error} />
-            ))}
-          </Container>
-        )}
-        {process.actionStatus !== "ACTION_REQUIRED" &&
-        statusButtons.length > 0 ? (
-          <ActionStatusCard process={process} className="w-fit" />
-        ) : null}
+        <ActionContainerTodos process={process} error={error} />
         {statusButtons.length > 0 ? (
           <Container width="full" direction="row" wrap="wrap">
             {statusButtons.map((button, index) => (

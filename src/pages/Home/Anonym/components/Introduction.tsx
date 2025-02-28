@@ -14,15 +14,15 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container width="full" className="gap-20" align="start" direction="col">
-      <Container width="full" align="stretch" className="gap-10">
+    <Container width="full" className="gap-20" items="start" direction="col">
+      <Container width="full" items="stretch" className="gap-10">
         <Container
           direction="col"
           width="full"
           className="md:w-2/5"
           height="full"
           justify="start"
-          align="start"
+          items="start"
         >
           <HomeHeader
             variant="h2"
@@ -32,7 +32,7 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
           <Container
             width="full"
             className="md:mt-20"
-            align="start"
+            items="start"
             direction="col"
           >
             <Container direction="row" width="full" justify="start">
@@ -53,7 +53,7 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
           direction="col"
           width="full"
           justify="center"
-          align="center"
+          items="center"
           className="md:w-3/5"
         >
           <img src={IntroductionIMG} />

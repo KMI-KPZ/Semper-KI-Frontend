@@ -33,7 +33,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
       updates: {
         changes: {
           serviceDetails: {
-            groups: [...prevGroups, { model: [model] }, ...nextGroups],
+            groups: [...prevGroups, { models: [model] }, ...nextGroups],
           },
         },
       },

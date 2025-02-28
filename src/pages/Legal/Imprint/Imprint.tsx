@@ -11,7 +11,7 @@ const Imprint: React.FC<ImprintProps> = (props) => {
   return (
     <article
       data-testid="imprint"
-      className="flex w-full flex-col items-center justify-center gap-5 p-5"
+      className="flex w-full flex-col items-center justify-start gap-5 p-5"
     >
       <Heading variant="h2" className="w-full bg-white p-5 text-center">
         {t("Legal.Imprint.heading.main")}

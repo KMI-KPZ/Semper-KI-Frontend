@@ -2,17 +2,16 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export interface AdminDeleteOrgaProps {}
+export interface AdminDeleteOrgaProps {
+  hashedID: string;
+}
 
 const useAdminDeleteOrganization = () => {
   const queryClient = useQueryClient();
   const deleteOrganization = async (data: AdminDeleteOrgaProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/admin/organization/delete/`,
-        {
-          data,
-        }
+        `${process.env.VITE_HTTP_API_URL}/public/admin/organization/delete/${data.hashedID}/`
       )
       .then((response) => {
         logger(

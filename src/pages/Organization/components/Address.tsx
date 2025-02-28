@@ -43,7 +43,7 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
       <Divider />
       {organization.details.addresses !== undefined &&
       organization.details.addresses.length > 0 ? (
-        <Container width="full" justify="start" align="start" wrap="wrap">
+        <Container width="full" justify="start" items="start" wrap="wrap">
           {organization.details.addresses.map((address, index) => (
             <AddressCard key={index} address={address} type="organization" />
           ))}

@@ -30,6 +30,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { nodeType, setFormToDraft } = props;
   const { t } = useTranslation();
   const nodes = useGetOrgaNodesByType(nodeType);
+  const [paginationAll, setPaginationAll] = React.useState<number>(5);
   const { organization } = useOrganization();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
@@ -53,7 +54,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   if (nodes.isLoading) return <LoadingAnimation />;
   if (nodes.data !== undefined)
     return (
-      <Container width="full" direction="col" className="card gap-0">
+      <Container width="full" direction="col" className="card gap-0 bg-white">
         <Heading variant="h3" className="">
           {t("components.Resources.NodeDraft.draft")}
         </Heading>
@@ -74,7 +75,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
               direction="col"
               className="mb-5 overflow-auto"
               justify="start"
-              align="start"
+              items="start"
             >
               <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
                 <thead>
@@ -121,6 +122,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                 <tbody>
                   {nodes.data
                     .filter((node) => filterDataBySearchInput(node))
+                    .slice(0, paginationAll)
                     .sort(sortItems)
                     .map((node: OntoNode, index) => (
                       <tr key={node.nodeID}>
@@ -170,6 +172,35 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                         </td>
                       </tr>
                     ))}
+                  {nodes.data.length > paginationAll ||
+                  nodes.data.length > 0 ? (
+                    <tr key="more">
+                      <td colSpan={3} className="border-t-2 p-3">
+                        <Container width="full">
+                          {nodes.data.length > paginationAll ? (
+                            <Button
+                              onClick={() =>
+                                setPaginationAll((prevState) => prevState + 5)
+                              }
+                              title={t("general.button.showMore")}
+                              size="sm"
+                              variant="text"
+                            />
+                          ) : null}
+                          {paginationAll > 0 ? (
+                            <Button
+                              onClick={() =>
+                                setPaginationAll((prevState) => prevState - 5)
+                              }
+                              title={t("general.button.showLess")}
+                              size="sm"
+                              variant="text"
+                            />
+                          ) : null}
+                        </Container>
+                      </td>
+                    </tr>
+                  ) : null}
                   <tr>
                     <td
                       colSpan={3}

@@ -13,10 +13,12 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 // import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ModelLevelOfDetail } from "@/api/Process/Querys/useGetProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import ModelLoadingScreen from "../components/ModelLoadingScreen";
 
 interface Props {}
 
 export interface ProcessModelUploadFormProps {
+  check: boolean;
   models: ManufacturingModelUploadData[];
 }
 
@@ -29,6 +31,9 @@ export interface ManufacturingModelUploadData {
   quantity?: number;
   levelOfDetail?: ModelLevelOfDetail;
   scalingFactor?: number;
+  femRequested?: boolean;
+  testType?: "elongation" | "compression";
+  pressure?: number;
 }
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
@@ -45,20 +50,16 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   // const updateProcess = useUpdateProcess();
 
   const formSchema = z.object({
+    check: z.boolean().refine((val) => val === true, {
+      message: t("zod.required"),
+    }),
     models: z.array(
       z.object({
         modelID: z.string().optional(),
         file: z.instanceof(File).optional(),
         tags: z.string().optional(),
         scalingFactor: z.number().min(1).max(100000).optional(),
-        licenses: z.string().min(
-          1,
-          t("zod.requiredName", {
-            name: t(
-              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
-            ),
-          })
-        ),
+        licenses: z.string().optional(),
         certificates: z.string().optional(),
         quantity: z
           .number()
@@ -73,6 +74,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
             }),
           }),
         }),
+        femRequested: z.boolean().optional(),
+        testType: z.string().optional(),
+        pressure: z.number().min(0).optional(),
       })
     ),
   });
@@ -95,11 +99,19 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     name: "models",
   });
 
-  const dataTypes: string[] = [".STL"];
+  const dataTypes: string[] = [".STL", ".STP", ".STEP"];
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {
-      append({ file, quantity: 1, scalingFactor: 100 });
+      append({
+        file,
+        quantity: 1,
+        scalingFactor: 100,
+        levelOfDetail: ModelLevelOfDetail.MEDIUM,
+        femRequested: false,
+        testType: "elongation",
+        pressure: 0,
+      });
     });
   };
 
@@ -161,43 +173,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   const sendModels = (data: ProcessModelUploadFormProps) => {
-    // const updatedModels: ProcessModel[] = data.models
-    //   .filter(
-    //     (model) => model.file === undefined && model.modelID !== undefined
-    //   )
-    //   .map((model) => ({
-    //     item: model,
-    //     model: group.models?.find(
-    //       (existingModel) => existingModel.id === model.modelID
-    //     )!,
-    //   }))
-    //   .map(
-    //     (data): ProcessModel => ({
-    //       ...data.model,
-    //       certificates:
-    //         data.item.certificates === undefined
-    //           ? []
-    //           : data.item.certificates.split(",").map((item) => item.trim()),
-    //       licenses:
-    //         data.item.licenses === undefined
-    //           ? []
-    //           : data.item.licenses.split(",").map((item) => item.trim()),
-    //       tags:
-    //         data.item.tags === undefined
-    //           ? []
-    //           : data.item.tags.split(",").map((item) => item.trim()),
-    //       quantity: data.item.quantity !== undefined ? data.item.quantity : 1,
-    //       levelOfDetail:
-    //         data.item.levelOfDetail !== undefined
-    //           ? data.item.levelOfDetail
-    //           : ModelLevelOfDetail.MEDIUM,
-    //       scalingFactor:
-    //         data.item.scalingFactor !== undefined
-    //           ? data.item.scalingFactor
-    //           : 100,
-    //     })
-    //   );
-
     uploadModels.mutate(
       {
         processID: process.processID,
@@ -229,6 +204,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   : ModelLevelOfDetail.MEDIUM,
               scalingFactor:
                 item.scalingFactor !== undefined ? item.scalingFactor : 100,
+              femRequested:
+                item.femRequested !== undefined ? item.femRequested : false,
+              testType: item.testType,
+              pressure: item.pressure,
             },
           })),
       },
@@ -274,6 +253,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
               {fields.map((model, index) => {
                 return (
                   <UploadModelCard
+                    watch={watch}
                     errors={errors}
                     deleteModel={deleteModel}
                     saveForAll={saveForAll}
@@ -293,9 +273,42 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 width="full"
                 direction="row"
                 justify="end"
-                align="end"
-                className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
+                items="end"
+                className="fixed bottom-5 z-10 w-fit self-center pr-5 md:sticky md:self-end"
               >
+                <Container
+                  width="fit"
+                  direction="col"
+                  className="rounded-md border-2 bg-white p-3"
+                >
+                  <Text className="text-center text-sm">
+                    {t(
+                      "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimer2"
+                    )}
+                  </Text>
+                  <Container width="full" direction="row">
+                    <input
+                      type="checkbox"
+                      id="disclaimerCheckbox"
+                      {...register("check")}
+                      className="h-6 w-6"
+                    />
+                    <label htmlFor="disclaimerCheckbox" className="text-sm">
+                      {t(
+                        "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimerCheckBox"
+                      )}
+                    </label>
+                    <Button
+                      className="text-sm"
+                      variant="text"
+                      title={t(
+                        "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.nda"
+                      )}
+                      size="xs"
+                      to="/legal/nda"
+                    />
+                  </Container>
+                </Container>
                 {errors !== undefined && getCompressedErrors().length > 0 ? (
                   <Container
                     className="rounded-md border-2 bg-white p-3"
@@ -312,6 +325,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   width="fit"
                   loading={uploadModels.isLoading}
                   variant="primary"
+                  active={watch("check") === true}
                   title={t(
                     `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.button.upload`
                   )}
@@ -338,7 +352,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           )}
           href="#"
         >
-          <UploadIcon className="h-32 w-32" />
+          <UploadIcon className="h-20 w-20 " />
           <Heading variant="h2">
             {t(
               "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
@@ -357,6 +371,37 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           multiple
         />
       </Container>
+      <Container direction="col" width="full" className="gap-1">
+        <Text className="text-center text-xs">
+          {t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimer"
+          )}
+        </Text>
+        <Container width="full" className="gap-2">
+          <Button
+            className="text-sm"
+            variant="text"
+            title={t(
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.termsOfService"
+            )}
+            size="xs"
+            to="/legal/termsOfService"
+          />
+          <Button
+            className="text-sm"
+            size="xs"
+            variant="text"
+            to="/legal/privacyPolicy"
+            title={t(
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.privacyPolicy"
+            )}
+          />
+        </Container>
+      </Container>
+      <ModelLoadingScreen
+        loading={uploadModels.isLoading}
+        uploadModels={uploadModels}
+      />
     </form>
   );
 };

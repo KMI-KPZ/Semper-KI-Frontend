@@ -6,15 +6,15 @@ interface Props {
   setFilterItem(filterItem: FilterItemProps): void;
 }
 
-export const parseFilterSelectionValue = (value: any): string => {
+export const parseFilterSelectionValue = (answer: any): string => {
   if (
-    value !== null &&
-    value !== undefined &&
-    typeof value === "object" &&
-    value.id !== undefined &&
-    value.name !== undefined
+    answer !== null &&
+    answer !== undefined &&
+    typeof answer === "object" &&
+    answer.value !== undefined &&
+    answer.value !== null
   ) {
-    return value.id;
+    return answer.value;
   } else return "default";
 };
 

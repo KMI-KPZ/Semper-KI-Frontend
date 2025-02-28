@@ -29,12 +29,28 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       to: "/resources/material",
     },
     {
+      title: t("Resources.components.Menu.colors"),
+      to: "/resources/color",
+    },
+    {
       title: t("Resources.components.Menu.postProcessings"),
       to: "/resources/additionalRequirement",
     },
     {
       title: t("Resources.components.Menu.costing"),
       to: "/resources/costing",
+    },
+    {
+      title: t("Resources.components.Menu.characterisation"),
+      to: "/resources/characterisation",
+    },
+    {
+      title: t("Resources.components.Menu.maturity"),
+      to: "/resources/maturity",
+    },
+    {
+      title: t("Resources.components.Menu.resilience"),
+      to: "/resources/resilience",
     },
     // {
     //   title: t("Resources.components.Menu.request"),

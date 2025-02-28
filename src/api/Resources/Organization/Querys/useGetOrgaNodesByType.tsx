@@ -30,13 +30,46 @@ export const clientNodeTypes: OntoNodeType[] = [
   "printer",
   "material",
   "additionalRequirement",
+  "materialCategory",
+  "technology",
+  "color",
 ];
+
+export const getNodeTypes = (nodeType: OntoNodeType): OntoNodeType[] => {
+  switch (nodeType) {
+    case "color":
+      return ["material", "additionalRequirement"];
+    case "material":
+      return [
+        "materialCategory",
+        "materialType",
+        "printer",
+        "color",
+        "additionalRequirement",
+      ];
+    case "additionalRequirement":
+      return ["printer", "material", "color"];
+    case "printer":
+      return ["material", "additionalRequirement"];
+    case "materialCategory":
+      return [];
+    case "technology":
+      return [];
+    case "materialType":
+      return [];
+    case "organization":
+      return [];
+  }
+};
+
 export const adminNodeTypes: OntoNodeType[] = [
   "printer",
   "organization",
   "material",
   "additionalRequirement",
   "color",
+  "materialCategory",
+  "technology",
 ];
 
 export interface OntoNodeNew {
@@ -59,9 +92,16 @@ export type OntoNodeProperty =
   | OntoNodePropertyText
   | OntoNodePropertyNumber
   | OntoNodePropertyDate
-  | OntoNodePropertyBoolean;
+  | OntoNodePropertyBoolean
+  | OntoNodePropertyArray;
 
-export type OntoNodePropertyType = "text" | "number" | "date" | "boolean";
+export type OntoNodePropertyType =
+  | "text"
+  | "number"
+  | "date"
+  | "boolean"
+  | "array";
+
 export type OntoNodePropertyName =
   | "imgPath"
   | "nozzleDiameter"
@@ -95,11 +135,13 @@ export type OntoNodePropertyName =
   | "acquisitionCosts"
   | "treatmentCosts"
   | "flexibility";
+
 export interface OntoNodePropertyGeneral {
   name: string;
   value: any;
   unit: string;
   type: OntoNodePropertyType;
+  key: string;
 }
 export interface OntoNodePropertyText extends OntoNodePropertyGeneral {
   type: "text";
@@ -116,6 +158,10 @@ export interface OntoNodePropertyDate extends OntoNodePropertyGeneral {
 export interface OntoNodePropertyBoolean extends OntoNodePropertyGeneral {
   type: "boolean";
   value: boolean;
+}
+export interface OntoNodePropertyArray extends OntoNodePropertyGeneral {
+  type: "array";
+  value: string;
 }
 
 export const parseOntoNode = (node: any): OntoNode => {
@@ -170,7 +216,7 @@ export const isOntoNodePropertyName = (
   ].includes(name as OntoNodePropertyName);
 };
 
-const useGetOrgaNodesByType = (nodeType: OntoNodeType) => {
+const useGetOrgaNodesByType = (nodeType?: OntoNodeType) => {
   const { user } = useUser();
   const getOrgaNodesByType = async () =>
     authorizedCustomAxios
@@ -190,6 +236,7 @@ const useGetOrgaNodesByType = (nodeType: OntoNodeType) => {
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeType],
     queryFn: getOrgaNodesByType,
+    enabled: nodeType !== undefined,
   });
 };
 

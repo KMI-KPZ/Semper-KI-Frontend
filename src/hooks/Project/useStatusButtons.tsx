@@ -14,7 +14,6 @@ import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonReque
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
 import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
-import logger from "../useLogger";
 import DoneIcon from "@mui/icons-material/Done";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -259,7 +258,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
             },
             {
               onSuccess(_, __, ___) {
-                logger("--------", button);
                 if (
                   button.action.type === "request" &&
                   button.action.data.type === "cloneProcesses"

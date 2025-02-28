@@ -3,7 +3,7 @@ import { useTopics } from "@/contexts/ChatbotContextProvider";
 import { Button, Container } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import ThreePIcon from "@mui/icons-material/ThreeP";
-import { BubbleChat } from 'flowise-embed-react';
+import {useNavigate} from "react-router-dom";
 
 
 declare global {
@@ -37,12 +37,13 @@ function formatTopicsToJSON(topics: Map<string, string>): string {
 
 function extractAndParseJSON(input: string): any {
   // Extrahiere den JSON-Teil zwischen  <pre><code>##JSON{&quot;more_help&quot;: &quot;semper-ki&quot;}##</code></pre>
-  const jsonMatch = input.match(/##JSON{(.+)}##/);
+  const jsonMatch = input.match(/##JSON\s*{(.+)}\s*##/);
   if (jsonMatch && jsonMatch[1]) {
     const jsonString = `{${jsonMatch[1]}}`;
     // Dekodiere HTML-Entities
     const decodedString = decodeHTMLEntities(jsonString);
     // Parse JSON
+    console.log("Decoded String: ", decodedString);
     return JSON.parse(decodedString);
   }
   return { empty: true };
@@ -85,6 +86,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   let botAlreadyOpenend = useRef(false);
   // let eventListenerAttached: boolean = false;
   const detailedHelpRef = useRef(detailedHelp);
+  const navigate = useNavigate();
 
   const sendDetailedHelp = (helpKey: string) => {
     debugger;
@@ -224,6 +226,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           ) {
             lastAnswer.current = parsedObject.more_help;
             sendDetailedHelp(parsedObject.more_help);
+          }
+
+          if (parsedObject.goto_url) {
+            navigate(parsedObject.goto_url);
           }
         } catch (error) {
           // if(logger)console.log("Chatbot JSON parsing error: ", error);

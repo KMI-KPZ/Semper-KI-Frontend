@@ -8,7 +8,7 @@ describe("<ResourcesMenu>", () => {
   });
   it("should render menu items", () => {
     render(<ResourcesMenu />);
-    expect(screen.getAllByTestId("resources-menu-item")).toHaveLength(6);
+    expect(screen.getAllByTestId("resources-menu-item")).toHaveLength(10);
   });
 
   it("should have active button", () => {

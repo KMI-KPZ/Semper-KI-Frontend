@@ -122,8 +122,13 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       const script = document.createElement("script");
       botAlreadyLoaded.current = true;
       if (logger) console.log("Chatbot will be loaded");
-      script.src =
-        "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js";
+
+      script.src = window.location.hostname.includes("localhost")
+          ? "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js"
+          : "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
+
+      // script.src =
+      //   "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js";
 
       script.async = true;
 

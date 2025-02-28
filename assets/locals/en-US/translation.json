@@ -1046,7 +1046,7 @@
           },
           "questionnaire": {
             "heading": "Simple questionnaires",
-            "text": "We have the expertise you need.  "
+            "text": "We have the expertise you need."
           },
           "benchmarking": {
             "heading": "Anonymous benchmarking",
@@ -1054,7 +1054,7 @@
           },
           "resilience": {
             "heading": "Resilience check",
-            "text": "Resilient delivery networks are the foundation of good 3D printing.  "
+            "text": "Resilient delivery networks are the foundation of good 3D printing."
           }
         }
       },

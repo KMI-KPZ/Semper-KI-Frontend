@@ -27,6 +27,7 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
         width="full"
         className="flex-row gap-5 self-stretch"
         direction="row"
+        justify="start"
       >
         <Container
           width="fit"

@@ -41,6 +41,15 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
     }
   };
 
+  const showFEM = () => {
+    return (
+      _process.serviceType === ServiceType.ADDITIVE_MANUFACTURING &&
+      _process.serviceDetails.groups.some((group) =>
+        group.models.some((model) => model.femRequested)
+      )
+    );
+  };
+
   return (
     <ProcessContainer
       id="Verification"
@@ -67,7 +76,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
               : undefined
           }
         />
-        {_process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
+        {showFEM() ? (
           <ProcessVerifyCard
             status={getVerifyStatus("FEM")}
             type="FEM"

@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Heading } from "@component-library/index";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import GrayContainer from "@component-library/Container/GrayContainer";
 
 interface ActionContainerWarpperProps {
   failed: boolean;
@@ -22,16 +23,22 @@ const ActionContainerWarpper: React.FC<
   const { t } = useTranslation();
 
   return (
-    <Container width="full" direction="col" className="bg-white p-5">
-      {failed ? (
-        <Heading variant="h2">
-          {t(
-            "components.Process.Container.ActionContainer.components.ActionContainerWarpper.heading"
-          )}
-        </Heading>
-      ) : null}
-      {children}
-    </Container>
+    <GrayContainer width="full" direction="col">
+      <Container
+        width="full"
+        direction="col"
+        className="rounded-md bg-white p-5"
+      >
+        {failed ? (
+          <Heading variant="h2">
+            {t(
+              "components.Process.Container.ActionContainer.components.ActionContainerWarpper.heading"
+            )}
+          </Heading>
+        ) : null}
+        {children}
+      </Container>
+    </GrayContainer>
   );
 };
 

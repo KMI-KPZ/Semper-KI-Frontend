@@ -16,6 +16,7 @@ import ProcessStatusGate from "@/components/Process/StatusGate";
 import useProcess from "@/hooks/Process/useProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
+import { getFileSizeAsString } from "@/services/utils";
 
 interface ProcessServiceModelCardProps {
   model: ProcessModel;
@@ -65,14 +66,14 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
       <Container direction="col" width="full" className="gap-2">
         <Text variant="strong">{model.fileName}</Text>
         <img
-          src={TestImg}
-          className="max-h-40 w-full object-contain md:w-fit"
+          src={model.imgPath ? model.imgPath : TestImg}
+          className="aspect-square max-h-40 w-full rounded-md border-2 object-cover md:w-fit"
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.img"
           )}
         />
       </Container>
-      <Container direction="col" width="full" className="gap-1">
+      <Container direction="col" width="full" className="gap-0">
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
@@ -113,6 +114,16 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
                 }`
               )}
             </Text>
+          </Container>
+        ) : null}
+        {model.size !== undefined && model.isFile ? (
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.size"
+              )}
+            </Text>
+            <Text>{getFileSizeAsString(model.size)}</Text>
           </Container>
         ) : null}
         {calculation !== undefined ? (
@@ -158,6 +169,28 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
                 2
               )} mm³`}</Text>
             </Container>
+            {model.isFile ? (
+              <Container direction="row" justify="between" width="full">
+                <Text>
+                  {t(
+                    "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.fem"
+                  )}
+                </Text>
+                <Text>
+                  {model.femRequested === true &&
+                  model.testType !== undefined &&
+                  model.pressure !== undefined
+                    ? t(
+                        "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.femValue",
+                        {
+                          testType: t(`types.FemTestType.${model.testType}`),
+                          pressure: model.pressure,
+                        }
+                      )
+                    : "---"}
+                </Text>
+              </Container>
+            ) : null}
           </>
         ) : null}
       </Container>

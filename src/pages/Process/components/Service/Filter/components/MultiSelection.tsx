@@ -47,7 +47,13 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
   };
 
   const toggleAllValues = () => {
-    setParentFilterItem(allChecked ? [] : options.map((option) => option.id));
+    setParentFilterItem(
+      allChecked
+        ? []
+        : options.map((option) =>
+            option.id !== undefined ? option.id : option.name
+          )
+    );
   };
 
   return (
@@ -99,7 +105,11 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
                    : "hover:ultramarinblau border-gray-200 hover:cursor-pointer"
                }`}
               key={index}
-              onClick={() => handleSelectOption(value.id)}
+              onClick={() =>
+                handleSelectOption(
+                  value.id !== undefined ? value.id : value.name
+                )
+              }
             >
               {/* <input
                 value={name}

@@ -9,7 +9,7 @@ const ServiceDetailsCard: React.FC<
   const { children } = props;
 
   return (
-    <Container width="full" className="card" justify="center">
+    <Container width="full" className="card bg-gray-100" justify="center">
       {children}
     </Container>
   );

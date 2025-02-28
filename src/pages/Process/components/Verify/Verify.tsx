@@ -5,56 +5,136 @@ import { useTranslation } from "react-i18next";
 import ProcessContainer from "@/components/Process/Container/Container";
 import ProcessVerifyCard, { VerifyStatus } from "./components/VerifyCard";
 import useProcess from "@/hooks/Process/useProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface ProcessVerifyProps {}
 
 const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { process } = useProcess();
+  const { process: _process } = useProcess();
 
-  const getVerifyStatus = (): VerifyStatus => {
-    if (process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
+  const getVerifyStatus = (type: "serviceReady" | "FEM"): VerifyStatus => {
+    if (_process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
       return VerifyStatus.READY;
     }
-    if (process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS) {
+    if (_process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS) {
       return VerifyStatus.STARTED;
     }
     {
-      return VerifyStatus.COMPLETED;
+      switch (type) {
+        case "serviceReady":
+          return _process.processDetails.verificationResults !== undefined &&
+            _process.processDetails.verificationResults.serviceReady
+              .isSuccessful
+            ? VerifyStatus.COMPLETED
+            : VerifyStatus.FAILED;
+        case "FEM":
+          return _process.processDetails.verificationResults !== undefined &&
+            _process.processDetails.verificationResults.serviceSpecificTasks
+              .FEM !== undefined &&
+            _process.processDetails.verificationResults.serviceSpecificTasks.FEM
+              .isSuccessful
+            ? VerifyStatus.COMPLETED
+            : VerifyStatus.FAILED;
+      }
     }
+  };
+
+  const showFEM = () => {
+    return (
+      _process.serviceType === ServiceType.ADDITIVE_MANUFACTURING &&
+      _process.serviceDetails.groups.some((group) =>
+        group.models.some((model) => model.femRequested)
+      )
+    );
   };
 
   return (
     <ProcessContainer
       id="Verification"
       start={ProcessStatus.CONTRACTOR_COMPLETED}
-      end={ProcessStatus.VERIFYING_IN_PROGRESS}
+      end={ProcessStatus.VERIFICATION_FAILED}
       menuButtonTitle={t("Process.components.Verify.button.menu")}
       pageTitle={t("Process.components.Verify.heading")}
+      showDelete={_process.processStatus === ProcessStatus.VERIFICATION_FAILED}
     >
       <Container
         width="full"
         direction="row"
         className="flex-wrap md:flex-nowrap"
-        align="start"
+        items="start"
       >
-        <ProcessVerifyCard status={getVerifyStatus()} type="PRINTABILITY" />
-        <ProcessVerifyCard status={getVerifyStatus()} type="DRAFT" />
-        <ProcessVerifyCard status={getVerifyStatus()} type="CAPACITY" />
         <ProcessVerifyCard
-          status={
-            getVerifyStatus() === VerifyStatus.COMPLETED
-              ? VerifyStatus.FAILED
-              : getVerifyStatus()
-          }
-          type="STABILITY"
+          status={getVerifyStatus("serviceReady")}
+          type="PROCESS"
           errorMsg={
-            getVerifyStatus() === VerifyStatus.COMPLETED
-              ? "Stützkonstruktion nicht ausreichend"
+            _process.processDetails.verificationResults !== undefined &&
+            _process.processDetails.verificationResults.serviceReady
+              .isSuccessful === false
+              ? t("Process.components.Verify.serviceReady")
               : undefined
           }
         />
+        {showFEM() ? (
+          <ProcessVerifyCard
+            status={getVerifyStatus("FEM")}
+            type="FEM"
+            errorMsg={
+              _process.processDetails.verificationResults !== undefined &&
+              _process.processDetails.verificationResults.serviceSpecificTasks
+                .FEM !== undefined &&
+              _process.processDetails.verificationResults.serviceSpecificTasks
+                .FEM.isSuccessful === false ? (
+                <Container
+                  direction="col"
+                  width="full"
+                  className=" rounded-md border-2 "
+                >
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th className=" border-r p-2 text-center align-text-top">
+                          {t("general.group")}
+                        </th>
+                        <th className=" border-r p-2 text-center align-text-top">
+                          {t("general.model")}
+                        </th>
+                        <th className=" p-2 text-center align-text-top">
+                          {t("general.error")}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {_process.processDetails.verificationResults.serviceSpecificTasks.FEM.groups.map(
+                        (group, _index) =>
+                          group.models.map((model, index) => (
+                            <tr key={index}>
+                              {index === 0 ? (
+                                <td className="border-r border-t p-2 text-center align-text-top">
+                                  {group.groupID + 1}
+                                </td>
+                              ) : (
+                                <td />
+                              )}
+                              <td className="border-r border-t p-2 text-center  align-text-top">
+                                {model.name}
+                              </td>
+                              <td className="border-t p-2 text-center  align-text-top ">
+                                {t(
+                                  `types.ProcessVerificationResultFEMError.${model.type}`
+                                )}
+                              </td>
+                            </tr>
+                          ))
+                      )}
+                    </tbody>
+                  </table>
+                </Container>
+              ) : undefined
+            }
+          />
+        ) : null}
       </Container>
     </ProcessContainer>
   );

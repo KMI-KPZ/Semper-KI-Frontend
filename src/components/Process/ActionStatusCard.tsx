@@ -37,7 +37,7 @@ const ActionStatusCard: React.FC<ActionStatusCardProps> = (props) => {
       // className=" py-2"
       width="full"
       justify="center"
-      align="center"
+      items="center"
       direction="col"
       className={twMerge(
         ` gap-0 rounded-md border-2  ${getProcessActionStatusContainerColor(

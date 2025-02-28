@@ -19,15 +19,15 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import useModal from "@/hooks/useModal";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 
 interface DescriptiveModelFormProps {
   model?: ProcessModel;
 }
 
 export interface DescriptiveModelFormData {
-  name: string;
+  fileName: string;
   quantity: number;
   width: number;
   length: number;
@@ -48,13 +48,11 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     process: { processID },
   } = useProcess();
   const { deleteModal } = useModal();
+  const updateModel = useUpdateModel();
 
   const navigate = useNavigate();
   const uploadDescriptiveModel = useUploadDescriptiveModel();
-  const updateProcess = useUpdateProcess();
-  const { prevGroups, nextGroups, groupID } = useContext(
-    ManufacturingGroupContext
-  );
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const closeModal = () => {
     deleteModal("");
@@ -62,7 +60,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
   };
 
   const formSchema = z.object({
-    name: z
+    fileName: z
       .string({
         required_error: t("zod.required"),
         invalid_type_error: t("zod.string"),
@@ -134,7 +132,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
             quantity: model.quantity ?? 1,
             levelOfDetail: model.levelOfDetail ?? 1,
             complexity: model.complexity,
-            name: model.fileName,
+            fileName: model.fileName,
           }
         : {
             quantity: 1,
@@ -152,37 +150,25 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
           projectID,
           origin: "Service",
           ...data,
+          name: data.fileName,
           tags: data.tags.split(","),
         },
         { onSuccess: closeModal }
       );
     } else {
-      updateProcess.mutate(
+      updateModel.mutate(
         {
-          processIDs: [processID],
-          updates: {
-            changes: {
-              serviceDetails: {
-                groups: [
-                  ...prevGroups,
-                  {
-                    model: [
-                      {
-                        ...model,
-                        ...data,
-                        tags:
-                          data.tags === undefined
-                            ? []
-                            : data.tags.split(",").map((item) => item.trim()),
-                        quantity:
-                          data.quantity !== undefined ? data.quantity : 1,
-                      },
-                    ],
-                  },
-                  ...nextGroups,
-                ],
-              },
-            },
+          projectID,
+          processID,
+          groupID: groupID.toString(),
+          model: {
+            ...model,
+            ...data,
+            tags:
+              data.tags === undefined
+                ? []
+                : data.tags.split(",").map((item) => item.trim()),
+            quantity: data.quantity !== undefined ? data.quantity : 1,
           },
         },
         { onSuccess: closeModal }
@@ -198,7 +184,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     unit?: string;
   }[] = [
     {
-      key: "name",
+      key: "fileName",
       type: "text",
       optional: false,
       placeholder: t("components.Form.DescriptiveModelForm.placeholder.name"),
@@ -267,7 +253,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
                     width="full"
                     direction="row"
                     justify="start"
-                    align="center"
+                    items="center"
                   >
                     <input
                       type={entrie.type}

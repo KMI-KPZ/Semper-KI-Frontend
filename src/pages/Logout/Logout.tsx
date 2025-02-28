@@ -14,7 +14,7 @@ const Logout = () => {
   }, []);
 
   return (
-    <Container direction="col" width="full" align="center" justify="center">
+    <Container direction="col" width="full" items="center" justify="center">
       <LoadingAnimation />
       <Heading variant="h1">{t("Logout.redirect")}</Heading>
     </Container>

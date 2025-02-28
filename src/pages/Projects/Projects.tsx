@@ -97,7 +97,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         </Container>
       </div>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <Container direction="col" justify="start" align="start" width="full">
+      <Container direction="col" justify="start" items="start" width="full">
         <Heading variant="h2">
           {user.usertype === UserType.ADMIN
             ? t("Projects.adminProjects")
@@ -114,7 +114,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       {user.usertype === UserType.ORGANIZATION ? (
         <>
           <Divider />
-          <Container direction="col" justify="start" align="start" width="full">
+          <Container direction="col" justify="start" items="start" width="full">
             <Heading variant="h2">{t("Projects.receivedProjects")}</Heading>
             <LoadingSuspense query={dashboardProject}>
               <ProjectsTable

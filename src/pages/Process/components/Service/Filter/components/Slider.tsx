@@ -17,7 +17,7 @@ interface Props {
 }
 
 function instanceOfIRangeMinMax(object: any): object is RangeMinMaxProps {
-  return ("min" || "max") in object;
+  return "min" in object && "max" in object;
 }
 
 const ProcessFilterSlider: React.FC<Props> = (props) => {
@@ -94,6 +94,7 @@ const ProcessFilterSlider: React.FC<Props> = (props) => {
         onChange={handleChangeSlider}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
+        step={0.1}
       />
       <Container direction="row">
         <input

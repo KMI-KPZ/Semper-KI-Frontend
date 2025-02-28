@@ -2,15 +2,21 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { objectToArray } from "@/services/utils";
+import { ModelLevelOfDetail } from "@/api/Process/Querys/useGetProcess";
 
 export interface RepositoryModel {
-  name: string;
-  license: string;
-  preview: string;
+  certificates: string[];
+  complexity: number;
   file: string;
+  levelOfDetail: ModelLevelOfDetail;
+  license: string[];
+  name: string;
+  preview: string;
+  size: number;
+  tags: string[];
 }
 
-const useGetModels = () => {
+const useGetRepositoryModels = () => {
   const getModels = async () =>
     authorizedCustomAxios
       .get(
@@ -31,4 +37,4 @@ const useGetModels = () => {
   });
 };
 
-export default useGetModels;
+export default useGetRepositoryModels;

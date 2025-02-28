@@ -36,7 +36,7 @@ const AdminOrganization: React.FC<AdminOrganization> = (props) => {
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
     if (window.confirm(t("Admin.Organization.confirm", { name: name })))
-      deleteOrganization.mutate({ hashedID, name });
+      deleteOrganization.mutate({ hashedID });
   };
 
   const handleOnClickButtonDetails = (hashedID: string) => {

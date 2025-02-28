@@ -1,9 +1,9 @@
 import { AuthorizedUser, UserType } from "@/hooks/useUser";
 import React from "react";
-import HomeProjects from "../Projects/Projects";
 import HomeOrgaResources from "../components/Resources";
 import HomeUserProgress from "../components/UserProgress";
 import HomeOrgaProgress from "../components/OrgaProgress";
+import ProjectsOverview from "../Projects/ProjectsOverview";
 
 interface AuthorizedPropsHome {
   user: AuthorizedUser;
@@ -19,10 +19,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
     >
       <HomeUserProgress user={user} />
       {user.usertype === UserType.ORGANIZATION ? <HomeOrgaProgress /> : null}
-      <HomeProjects user={user} />
-      {user.usertype === UserType.ORGANIZATION ? (
-        <HomeProjects recieved user={user} />
-      ) : null}
+      <ProjectsOverview />
       <HomeOrgaResources />
     </div>
   );

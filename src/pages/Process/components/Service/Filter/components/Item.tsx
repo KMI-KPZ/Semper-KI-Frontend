@@ -22,7 +22,7 @@ type FilterTitleType =
   | "amount"
   | "categorys"
   | "boxSize"
-  | "materialcategory"
+  | "materialType"
   | "volume"
   | "materialCategory"
   | "proceeding"
@@ -33,7 +33,11 @@ type FilterTitleType =
   | "textarea"
   | "color"
   | "number"
-  | "multiselection";
+  | "multiselection"
+  | "tensileStrength"
+  | "density"
+  | "elongationAtBreak"
+  | "certificates";
 
 const ProcessFilterItem: React.FC<Props> = (props) => {
   const { filterItem, setFilterItem } = props;
@@ -121,7 +125,7 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
       "amount",
       "categorys",
       "boxSize",
-      "materialcategory",
+      "materialType",
       "volume",
       "materialCategory",
       "proceeding",
@@ -133,6 +137,10 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
       "color",
       "number",
       "multiselection",
+      "tensileStrength",
+      "density",
+      "elongationAtBreak",
+      "certificates",
     ];
     if (titles.includes(title as FilterTitleType)) {
       return t(`types.FilterCategoryType.${title as FilterTitleType}`);
@@ -146,7 +154,7 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
       direction="col"
       justify="start"
       width="full"
-      align="start"
+      items="start"
       gap={3}
     >
       <Container>

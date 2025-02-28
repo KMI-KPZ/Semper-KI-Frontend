@@ -19,6 +19,7 @@ import ProcessServiceModelCard from "./ModelCard";
 import ProcessStatusGate from "@/components/Process/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
+import Hint from "@/components/Hint/Hint";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -30,7 +31,12 @@ const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
   const { service, activeGroup } = props;
-  const { models = [], material = undefined, postProcessings = [] } = service;
+  const {
+    models = [],
+    material = undefined,
+    postProcessings = [],
+    color = undefined,
+  } = service;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -48,9 +54,9 @@ const ServiceManufacturingDetails: React.FC<
     <Container
       direction="col"
       justify="center"
-      align="start"
+      items="start"
       width="full"
-      className="gap-0 rounded-md border-2 p-0"
+      className="gap-0 rounded-md border-2 bg-white p-0"
     >
       <Container
         width="fit"
@@ -63,18 +69,22 @@ const ServiceManufacturingDetails: React.FC<
             "Process.components.Service.ServiceDetails.components.Manufacturing.heading.main"
           )}
         </Heading>
-      </Container>
-      <Container width="full" direction="col" className="gap-0 p-2">
-        <Text>
-          {t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
-          )}
-        </Text>
-        <Text>
-          {t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
-          )}
-        </Text>
+        <Hint
+          title={
+            <Container width="full" direction="col" className="gap-0 p-2">
+              <Text className="text-center">
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
+                )}
+              </Text>
+              <Text className="text-center">
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
+                )}
+              </Text>
+            </Container>
+          }
+        />
       </Container>
       <Divider />
       <Container
@@ -161,26 +171,25 @@ const ServiceManufacturingDetails: React.FC<
           <ProcessServiceMaterialCard
             material={material}
             groupID={activeGroup}
+            color={color}
           />
         )}
-        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                material === undefined ? "addMaterial" : "addMore"
-              }`
-            )}
-            size={material === undefined ? "sm" : "xs"}
-            variant={material === undefined ? "primary" : "secondary"}
-            onClick={handleOnButtonClickMaterial}
-            startIcon={<AddIcon />}
-            children={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                material === undefined ? "addMaterial" : "addMore"
-              }`
-            )}
-          />
-        </ProcessStatusGate>
+        {material === undefined ? (
+          <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+            <Button
+              title={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickMaterial}
+              startIcon={<AddIcon />}
+              children={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+              )}
+            />
+          </ProcessStatusGate>
+        ) : null}
       </Container>
       <Divider />
       <Container

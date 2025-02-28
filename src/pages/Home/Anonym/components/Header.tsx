@@ -24,7 +24,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = (props) => {
       width="fit"
       direction="col"
       justify="start"
-      align="start"
+      items="start"
       className="relative pb-10"
     >
       <Heading

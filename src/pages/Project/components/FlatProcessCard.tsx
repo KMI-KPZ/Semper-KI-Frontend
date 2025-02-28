@@ -50,8 +50,8 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
     >
       <img src={TestImg} alt="" className="h-full " />
       <Container width="full" direction="row" justify="between" className="p-5">
-        <Container direction="row" align="start">
-          <Container direction="col" align="start" gap={3}>
+        <Container direction="row" items="start">
+          <Container direction="col" items="start" gap={3}>
             <Text variant="strong">
               {t("Project.components.FlatProcessCard.serviceName")}
             </Text>
@@ -62,7 +62,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
               {t("Project.components.FlatProcessCard.status")}
             </Text>
           </Container>
-          <Container direction="col" align="start" gap={3}>
+          <Container direction="col" items="start" gap={3}>
             <Text>{process.title}</Text>
             <Text>
               {t(
@@ -76,8 +76,8 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
             </Text>
           </Container>
         </Container>
-        <Container direction="row" align="start">
-          <Container direction="col" align="start" gap={3}>
+        <Container direction="row" items="start">
+          <Container direction="col" items="start" gap={3}>
             <Text variant="strong">
               {t("Project.components.FlatProcessCard.updated")}
             </Text>
@@ -85,7 +85,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
               {t("Project.components.FlatProcessCard.count")}
             </Text>
           </Container>
-          <Container direction="col" align="start" gap={3}>
+          <Container direction="col" items="start" gap={3}>
             <Text>{process.updatedWhen.toLocaleString()}</Text>
             <Text>{process.amount}</Text>
           </Container>

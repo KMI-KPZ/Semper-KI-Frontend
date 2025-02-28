@@ -11,7 +11,7 @@ const HomeTeam: React.FC<HomeTeamProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container width="full" className="" align="start" direction="col">
+    <Container width="full" className="" items="start" direction="col">
       <HomeHeader variant="h2" title={t("Home.Anonym.partner")} color="light" />
       <Container width="full" justify="start">
         <Text className="text-black md:w-1/3">

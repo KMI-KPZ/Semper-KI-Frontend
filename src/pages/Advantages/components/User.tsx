@@ -29,7 +29,7 @@ const AdvantagesUser: React.FC<AdvantagesUserProps> = (props) => {
         gap={5}
         width="fit"
         justify="start"
-        align="start"
+        items="start"
       >
         <Text>{t("Advantages.components.User.fact1")}</Text>
         <Text>{t("Advantages.components.User.fact2")}</Text>

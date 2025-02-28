@@ -32,7 +32,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
       <img
         src={item.imgPath}
         alt="post-processing"
-        className="h-60 w-full object-cover"
+        className="h-60 w-full object-contain"
       />
       <Divider />
       <Container direction="col" className="p-5">

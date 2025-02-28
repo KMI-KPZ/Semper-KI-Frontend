@@ -123,7 +123,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                   width="full"
                   wrap="wrap"
                   direction="row"
-                  align="start"
+                  items="start"
                 >
                   {loadedPostProcessings.data
                     .filter(filterBySearch)

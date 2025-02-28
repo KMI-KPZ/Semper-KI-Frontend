@@ -3,6 +3,8 @@ import { useTopics } from "@/contexts/ChatbotContextProvider";
 import { Button, Container } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import ThreePIcon from "@mui/icons-material/ThreeP";
+import {useNavigate} from "react-router-dom";
+
 
 declare global {
   interface Window {
@@ -35,12 +37,13 @@ function formatTopicsToJSON(topics: Map<string, string>): string {
 
 function extractAndParseJSON(input: string): any {
   // Extrahiere den JSON-Teil zwischen  <pre><code>##JSON{&quot;more_help&quot;: &quot;semper-ki&quot;}##</code></pre>
-  const jsonMatch = input.match(/##JSON{(.+)}##/);
+  const jsonMatch = input.match(/##JSON\s*{(.+)}\s*##/);
   if (jsonMatch && jsonMatch[1]) {
     const jsonString = `{${jsonMatch[1]}}`;
     // Dekodiere HTML-Entities
     const decodedString = decodeHTMLEntities(jsonString);
     // Parse JSON
+    console.log("Decoded String: ", decodedString);
     return JSON.parse(decodedString);
   }
   return { empty: true };
@@ -83,6 +86,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   let botAlreadyOpenend = useRef(false);
   // let eventListenerAttached: boolean = false;
   const detailedHelpRef = useRef(detailedHelp);
+  const navigate = useNavigate();
 
   const sendDetailedHelp = (helpKey: string) => {
     debugger;
@@ -119,11 +123,21 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       botAlreadyLoaded.current = true;
       if (logger) console.log("Chatbot will be loaded");
       script.src =
-        "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
+        "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js";
 
       script.async = true;
 
       document.body.appendChild(script);
+
+      // const test_script = document.createElement("script");
+      // test_script.type ="module";
+      // test_script.text = "import Chatbot from \"https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js\"\n" +
+      //     "          Chatbot.init({\n" +
+      //     "          \"chatflowid\": \"dc0de093-b290-4c68-9d0e-e9bb08b44655\",\n" +
+      //     "          \"apiHost\": \"http://localhost:3005\",\n" +
+      //     "        })\n";
+      //   document.body.appendChild(test_script);
+
 
       // const iframe = document.getElementById(
       //   "USUChatbotIframe"
@@ -213,6 +227,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
             lastAnswer.current = parsedObject.more_help;
             sendDetailedHelp(parsedObject.more_help);
           }
+
+          if (parsedObject.goto_url) {
+            navigate(parsedObject.goto_url);
+          }
         } catch (error) {
           // if(logger)console.log("Chatbot JSON parsing error: ", error);
         }
@@ -300,34 +318,35 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   }, [bounce]);
 
   return (
-    <Container width="fit" className="">
-      <Button
-        className={` rounded-full p-3 duration-300 md:hidden ${
-          bounce && isChatbotEnabled && !botAlreadyLoaded.current
-            ? "animate-bounce"
-            : "animate-none"
-        }`}
-        width="fit"
-        title={t("components.Chatbot.button.open")}
-        variant="secondary"
-        size="sm"
-        onClick={handleOnClickButton}
-        children={<ThreePIcon />}
-        active={isChatbotEnabled && !botAlreadyLoaded.current}
-      />
-      <Button
-        active={isChatbotEnabled && !botAlreadyLoaded.current}
-        className={`hidden rounded-full  duration-300 md:flex ${
-          bounce ? "animate-bounce " : "animate-none"
-        }`}
-        width="fit"
-        title={t("components.Chatbot.button.open")}
-        variant="secondary"
-        size="sm"
-        onClick={handleOnClickButton}
-        startIcon={<ThreePIcon />}
-      />
-    </Container>
+      <Container width="fit" className="fixed bottom-4 right-4 z-50">
+        <Button
+            className={` rounded-full p-3 duration-300 md:hidden ${
+                bounce && isChatbotEnabled && !botAlreadyLoaded.current
+                    ? "animate-bounce"
+                    : "animate-none"
+            }`}
+            width="fit"
+            title={t("components.Chatbot.button.open")}
+            variant="secondary"
+            size="sm"
+            onClick={handleOnClickButton}
+            children={<ThreePIcon/>}
+            active={isChatbotEnabled && !botAlreadyOpenend.current}
+        />
+        <Button
+            active={isChatbotEnabled && !botAlreadyOpenend.current}
+            className={`hidden rounded-full  duration-300 md:flex ${
+                bounce ? "animate-bounce " : "animate-none"
+            }`}
+            width="fit"
+            title={t("components.Chatbot.button.open")}
+            variant="secondary"
+            size="sm"
+            onClick={handleOnClickButton}
+            startIcon={<ThreePIcon/>}
+        />
+
+      </Container>
   );
   // <script src="https://chat.semper-ki.org/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js"></script>
 };

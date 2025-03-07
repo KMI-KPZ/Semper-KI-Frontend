@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Container, Divider, Heading } from "@component-library/index";
 import { OrganizationPriority } from "@/api/Organization/Querys/useGetOrganization";
 import PrioritiesFormItem from "./PrioritiesFormItem";
+import { twMerge } from "tailwind-merge";
 
 interface PrioritiesFormProps {
   type: "orga" | "process";
@@ -33,7 +34,13 @@ const PrioritiesForm: React.FC<PrioritiesFormProps> = (props) => {
               <th rowSpan={3} className="text-left align-text-top">
                 {t("components.Form.PrioritiesForm.type")}
               </th>
-              <th colSpan={7} className="text-center">
+              <th
+                colSpan={7}
+                className={twMerge(
+                  `text-center`,
+                  freePoints < 0 ? "text-red-500" : "text-green-500"
+                )}
+              >
                 {t("components.Form.PrioritiesForm.value")}
                 {" | "}
                 {t("components.Form.PrioritiesForm.points", { freePoints })}
@@ -62,12 +69,7 @@ const PrioritiesForm: React.FC<PrioritiesFormProps> = (props) => {
           </thead>
           <tbody>
             {priorities.map((priority: OrganizationPriority, index) => (
-              <PrioritiesFormItem
-                type={type}
-                priority={priority}
-                key={index}
-                freePoints={freePoints}
-              />
+              <PrioritiesFormItem type={type} priority={priority} key={index} />
             ))}
           </tbody>
         </table>

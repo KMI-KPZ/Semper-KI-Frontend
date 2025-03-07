@@ -1958,6 +1958,7 @@
                     "levelOfDetailPH": "Detailgrad",
                     "selectLevelOfDetail": "Detailgrad auswählen",
                     "selectLicense": "Lizenz auswählen",
+                    "noLicense": "keine Lizenz",
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
                     "scalingFactor": "Skalierung",

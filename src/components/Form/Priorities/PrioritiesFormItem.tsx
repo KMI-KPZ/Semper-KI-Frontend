@@ -7,17 +7,16 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
 
 interface PrioritiesFormItemProps {
-  freePoints: number;
   priority: OrganizationPriority;
   type: "orga" | "process";
 }
 
 const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
-  const { priority, freePoints, type } = props;
+  const { priority, type } = props;
   const { t } = useTranslation();
   const updateOrganization = useUpdateOrganization();
-  const { process } = useProcess();
   const updateProcess = useUpdateProcess();
+  const { process } = useProcess();
 
   const length = 7;
 
@@ -25,11 +24,10 @@ const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const parsedValue = parseInt(e.target.value, 10);
-    const value =
-      freePoints + priority.value - parsedValue >= 0
-        ? parsedValue
-        : freePoints + priority.value;
+    updatePriorities(parsedValue, type);
+  };
 
+  const updatePriorities = (value: number, type: "orga" | "process") => {
     if (type === "orga")
       updateOrganization.mutate({
         changes: {
@@ -67,7 +65,7 @@ const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
             onChange={handleChange}
             name={priority.type}
             checked={priority.value === value}
-            disabled={freePoints + priority.value - value < 0}
+            // disabled={freePoints + priority.value - value < 0}
             className="h-6 w-6"
           />
         </td>

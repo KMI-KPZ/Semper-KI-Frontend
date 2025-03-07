@@ -14,6 +14,7 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { ModelLevelOfDetail } from "@/api/Process/Querys/useGetProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 import ModelLoadingScreen from "../components/ModelLoadingScreen";
+import ErrorDisplay from "@/components/Form/ErrorDisplay";
 
 interface Props {}
 
@@ -219,23 +220,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     );
   };
 
-  const getCompressedErrors = (): string[] => {
-    const uniqueErrors = new Set<string>();
-
-    // Iterate through the nested errors object
-    Object.values(errors.models || []).forEach((modelErrors) => {
-      if (modelErrors && typeof modelErrors === "object") {
-        Object.values(modelErrors).forEach((error) => {
-          if (error && "message" in error) {
-            uniqueErrors.add((error as { message: string }).message);
-          }
-        });
-      }
-    });
-
-    return Array.from(uniqueErrors);
-  };
-
   return (
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
@@ -309,18 +293,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     />
                   </Container>
                 </Container>
-                {errors !== undefined && getCompressedErrors().length > 0 ? (
-                  <Container
-                    className="rounded-md border-2 bg-white p-3"
-                    direction="col"
-                  >
-                    {getCompressedErrors().map((error, index) => (
-                      <Text key={index} className=" text-red-500">
-                        {error}
-                      </Text>
-                    ))}
-                  </Container>
-                ) : null}
+                <ErrorDisplay errors={errors} />
                 <Button
                   width="fit"
                   loading={uploadModels.isLoading}

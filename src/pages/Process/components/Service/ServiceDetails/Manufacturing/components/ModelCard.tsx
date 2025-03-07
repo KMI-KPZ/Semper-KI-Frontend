@@ -224,7 +224,6 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
       </Container>
     </ServiceDetailsCard>
   );
-  return "";
 };
 
 export default ProcessServiceModelCard;

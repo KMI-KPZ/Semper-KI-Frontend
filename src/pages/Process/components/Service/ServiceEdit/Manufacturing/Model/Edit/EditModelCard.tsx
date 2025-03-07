@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 import useModal from "@/hooks/useModal";
+import ErrorDisplay from "@/components/Form/ErrorDisplay";
 
 interface EditModelCardProps {
   model: ProcessModel;
@@ -161,11 +162,10 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                   className={`flex w-full rounded-md border-2 p-2 ${
                     errors.licenses ? "border-red-500 " : ""
                   }`}
-                  defaultValue=""
                 >
-                  <option value="" disabled>
+                  <option value="">
                     {t(
-                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.noLicense`
                     )}
                   </option>
                   <option value="CC BY">CC BY</option>
@@ -184,7 +184,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
               <td>
                 <input
                   className={`flex w-full rounded-md border-2 p-2
-            ${errors.tags ? "border-red-500 bg-red-500" : ""}}`}
+            ${errors.tags ? "border-red-500 " : ""}}`}
                   placeholder={t(
                     "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tagsPH"
                   )}
@@ -199,7 +199,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
               <td>
                 <input
                   className={`flex w-full rounded-md border-2 p-2
-            ${errors.quantity ? "border-red-500 bg-red-500" : ""}}`}
+            ${errors.quantity ? "border-red-500 " : ""}}`}
                   {...register(`quantity`, {
                     valueAsNumber: true,
                   })}
@@ -244,9 +244,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                 <Container direction="row">
                   <input
                     className={`flex w-full rounded-md border-2 p-2
-                    ${
-                      errors.scalingFactor ? "border-red-500 bg-red-500" : ""
-                    }}`}
+                    ${errors.scalingFactor ? "border-red-500" : ""}}`}
                     {...register(`scalingFactor`, {
                       valueAsNumber: true,
                     })}
@@ -264,9 +262,9 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                 <Container direction="row">
                   <input
                     id={"femRequested"}
-                    className={`h-4 w-4 hover:cursor-pointer
-                    ${errors?.femRequested ? "border-red-500 bg-red-500" : ""}
-                    }`}
+                    className={`h-4 w-4 hover:cursor-pointer ${
+                      errors?.femRequested ? "border-red-500 " : ""
+                    } }`}
                     type="checkbox"
                     {...register(`femRequested`)}
                   />
@@ -379,6 +377,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
             </tr>
           </tbody>
         </table>
+        <ErrorDisplay errors={errors} />
         <Button
           title={t("general.button.save")}
           variant="primary"

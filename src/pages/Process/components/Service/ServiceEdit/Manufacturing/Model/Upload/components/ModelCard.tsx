@@ -157,9 +157,9 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
                     modelErrors?.licenses ? "border-red-500 " : ""
                   }`}
                 >
-                  <option value="" disabled>
+                  <option value="">
                     {t(
-                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.noLicense`
                     )}
                   </option>
                   <option value="CC BY">CC BY</option>

@@ -37,7 +37,22 @@ export interface UpdateOrgaChanges {
 }
 
 export interface UpdatePriorities {
-  [key: string]: {
+  cost?: {
+    value: number;
+  };
+  time?: {
+    value: number;
+  };
+  quality?: {
+    value: number;
+  };
+  quantity?: {
+    value: number;
+  };
+  resilience?: {
+    value: number;
+  };
+  sustainability?: {
     value: number;
   };
 }

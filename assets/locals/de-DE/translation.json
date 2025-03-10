@@ -540,7 +540,10 @@
         "points": "Freie Punkte: {{freePoints}}",
         "low": "Niedrig",
         "medium": "Mittel",
-        "high": "Hoch"
+        "high": "Hoch",
+        "button": {
+          "save": "Auftragnehmer sortieren"
+        }
       },
       "AddressForm": {
         "header": "Adresse bearbeiten",

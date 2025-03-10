@@ -2,21 +2,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@component-library/index";
 import { OrganizationPriority } from "@/api/Organization/Querys/useGetOrganization";
-import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import useProcess from "@/hooks/Process/useProcess";
 
 interface PrioritiesFormItemProps {
   priority: OrganizationPriority;
-  type: "orga" | "process";
+  updateState: (value: number, priority: OrganizationPriority) => void;
 }
 
 const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
-  const { priority, type } = props;
+  const { priority, updateState } = props;
   const { t } = useTranslation();
-  const updateOrganization = useUpdateOrganization();
-  const updateProcess = useUpdateProcess();
-  const { process } = useProcess();
 
   const length = 7;
 
@@ -24,32 +18,7 @@ const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const parsedValue = parseInt(e.target.value, 10);
-    updatePriorities(parsedValue, type);
-  };
-
-  const updatePriorities = (value: number, type: "orga" | "process") => {
-    if (type === "orga")
-      updateOrganization.mutate({
-        changes: {
-          priorities: {
-            [priority.type]: { value },
-          },
-        },
-      });
-    else {
-      updateProcess.mutate({
-        processIDs: [process.processID],
-        updates: {
-          changes: {
-            processDetails: {
-              priorities: {
-                [priority.type]: { value },
-              },
-            },
-          },
-        },
-      });
-    }
+    updateState(parsedValue, priority);
   };
 
   return (

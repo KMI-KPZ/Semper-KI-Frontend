@@ -44,6 +44,31 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
 
   const seletedColor = material.colors.find((color) => colorIsSelected(color));
 
+  const getBackgroundColor = (colorNode: OntoNode): string => {
+    const colorHEX = colorNode.properties.find(
+      (property) => property.key === "colorHEX"
+    )?.value as string;
+
+    if (colorHEX) {
+      return colorHEX.split(",").length > 1
+        ? `linear-gradient(to bottom, ${colorHEX})`
+        : colorHEX;
+    }
+
+    const colorRAL = colorNode.properties.find(
+      (property) => property.key === "colorRAL"
+    )?.value;
+
+    if (colorRAL) {
+      return (
+        (ralColors.data?.find((color) => color.RAL === colorRAL)
+          ?.Hex as string) || "#FFFFFF"
+      );
+    }
+
+    return "#FFFFFF";
+  };
+
   return (
     <Container
       className={` w-full justify-between gap-0 self-stretch overflow-clip rounded-md border-2 bg-white md:w-[calc(50%-10px)] ${
@@ -121,26 +146,7 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
                           }`}
                       onClick={() => handleOnClickButtonColor(colorNode)}
                       style={{
-                        background:
-                          colorNode.properties.find(
-                            (property) => property.key === "colorHEX"
-                          ) !== undefined
-                            ? `linear-gradient(to bottom, ${
-                                colorNode.properties.find(
-                                  (property) => property.key === "colorHEX"
-                                )?.value
-                              })`
-                            : colorNode.properties.find(
-                                (property) => property.key === "colorRAL"
-                              ) !== undefined
-                            ? ralColors.data?.find(
-                                (color) =>
-                                  color.RAL ===
-                                  colorNode.properties.find(
-                                    (property) => property.key === "colorRAL"
-                                  )?.value
-                              )?.Hex
-                            : "#FFFFFF",
+                        background: getBackgroundColor(colorNode),
                       }}
                     >
                       {colorIsSelected(colorNode) ? (

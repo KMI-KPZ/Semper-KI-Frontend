@@ -31,15 +31,25 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
     showDelete = false,
   } = props;
 
+  const [open, setOpen] = React.useState(true);
+
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
   return (
     <>
       <GrayContainer
+        open={open}
         direction="col"
         width="full"
         className={twMerge("relative rounded-md  ", className)}
         id={id}
         headerChildren={
           <ProcessContainerHeader
+            id={id}
+            open={open}
+            toggleOpen={toggleOpen}
             menuButtonTitle={menuButtonTitle}
             pageTitle={pageTitle}
           >

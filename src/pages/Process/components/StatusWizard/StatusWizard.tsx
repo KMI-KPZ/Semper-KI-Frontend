@@ -39,7 +39,7 @@ export type StatusWizardItem = {
     | "completed";
 };
 
-const statusWizardItems: StatusWizardItem[] = [
+export const statusWizardItems: StatusWizardItem[] = [
   // {
   //   icon: <InfoIcon />,
   //   text: "processInfo",

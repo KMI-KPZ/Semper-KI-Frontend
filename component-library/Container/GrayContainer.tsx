@@ -4,12 +4,18 @@ import { twMerge } from "tailwind-merge";
 
 type GrayContainerProps = {
   headerChildren?: React.ReactNode;
+  open?: boolean;
 };
 
 const GrayContainer: React.FC<
   PropsWithChildren<GrayContainerProps & ContainerProps>
 > = (props) => {
-  const { className: _className = "", headerChildren, children } = props;
+  const {
+    className: _className = "",
+    headerChildren,
+    children,
+    open = true,
+  } = props;
 
   const gradientStyle = {
     background: `linear-gradient(
@@ -32,9 +38,11 @@ const GrayContainer: React.FC<
         style={gradientStyle}
       >
         {headerChildren}
-        <Container {...props} className={twMerge("p-5", _className)}>
-          {children}
-        </Container>
+        {open ? (
+          <Container {...props} className={twMerge("p-5", _className)}>
+            {children}
+          </Container>
+        ) : null}
       </Container>
     );
 
@@ -45,7 +53,7 @@ const GrayContainer: React.FC<
       direction="col"
       style={gradientStyle}
     >
-      {children}
+      {open ? children : null}
     </Container>
   );
 };

@@ -122,7 +122,6 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
           ))}
         </Container>
       ) : null}
-
       {contractors.data !== undefined &&
       contractors.data.contractors.filter((contractor) =>
         onlyVerified ? contractor.verified : true
@@ -145,7 +144,6 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
                 />
               ))}
           </Container>
-
           <Button
             onClick={saveContractor}
             variant="primary"

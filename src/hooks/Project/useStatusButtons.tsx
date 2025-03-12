@@ -65,7 +65,7 @@ export type StatusButtonPropsGeneric = {
   showIn: StatusButtonShowInType;
   user?: UserType;
   allowedStates?: ProcessStatus[];
-  iconPosition: "left" | "right";
+  iconPosition: "left" | "right" | "up";
 };
 
 export type StatusButtonShowInType = "project" | "process" | "both";
@@ -119,19 +119,31 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
 
   const getStatusButtons = (
     process: Process,
-    includeDelete?: boolean
+    includeDelete?: boolean,
+    getServiceCardButtons?: boolean
   ): StatusButtonProps[] => {
+    if (process.processStatusButtons === undefined) return [];
     const include = includeDelete === undefined ? false : includeDelete;
 
-    return transformExternalStatusButtons(
-      process.processStatusButtons !== undefined && include === false
-        ? process.processStatusButtons.filter(
-            (button) => button.title !== "DELETE"
-          )
-        : process.processStatusButtons !== undefined && include === true
-        ? process.processStatusButtons
-        : []
-    );
+    if (getServiceCardButtons)
+      return transformExternalStatusButtons(
+        process.processStatusButtons.filter(
+          (button) => button.iconPosition === "up"
+        )
+      );
+    if (include === true)
+      return transformExternalStatusButtons(
+        process.processStatusButtons.filter(
+          (button) => button.iconPosition !== "up"
+        )
+      );
+    if (include === false)
+      return transformExternalStatusButtons(
+        process.processStatusButtons.filter(
+          (button) => button.title !== "DELETE" && button.iconPosition !== "up"
+        )
+      );
+    return [];
   };
 
   const transformExternalStatusButtons = (

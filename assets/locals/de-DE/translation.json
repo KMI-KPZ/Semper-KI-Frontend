@@ -360,6 +360,12 @@
       "MODEL": "Das Ausgewählte Modell hat einen Fehler in Berechnung geworfen",
       "BREAKS": "Das Modell bricht bei der Belastung",
       "ERROR": "Fehler in der Berechnung"
+    },
+    "ContractorsErrorType": {
+      "material": "Das gewählte Material ist derzeit bei keinem Auftragnehmer verfügbar",
+      "color": "Die gewählte Farbe ist derzeit bei keinem Auftragnehmer verfügbar",
+      "postProcessing": "Die gewählte(n) Nachbearbeitung(en) ist derzeit bei keinem Auftragnehmer verfügbar",
+      "printer": "Es gibt keinen Auftragnehmer der ihr Modell in dieser Größe drucken kann"
     }
   },
   "general": {
@@ -1727,7 +1733,9 @@
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden",
-            "onlyVerified": "Nur verifizierte Auftragnehmer anzeigen"
+            "noVerifiedContractorFound": "Kein verifizierter Auftragnehmer gefunden",
+            "onlyVerified": "Nur verifizierte Auftragnehmer anzeigen",
+            "errors": "Hinweis"
           },
           "Costs": {
             "heading": "Kostenaufstellung"

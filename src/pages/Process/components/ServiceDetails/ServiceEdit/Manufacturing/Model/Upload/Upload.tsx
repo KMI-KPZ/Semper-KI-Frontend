@@ -179,7 +179,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         processID: process.processID,
         projectID: project.projectID,
         groupID: groupID,
-        origin: "Service",
+        origin: "ServiceDetails",
         models: data.models
           .filter((model) => model.file !== undefined)
           .map((item) => ({

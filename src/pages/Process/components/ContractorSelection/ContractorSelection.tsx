@@ -66,24 +66,18 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
     setEditContractor(false);
   };
 
-  const menuButtonTitle = t(
-    "Process.components.ContractorSelection.button.menu"
-  );
-  const pageTitle = `${t(
-    "Process.components.ContractorSelection.heading.main"
-  )}: ${
-    process.contractor === undefined ||
-    process.contractor.name === undefined ||
-    process.contractor.name === ""
+  const pageTitle = `${
+    process.processDetails.provisionalContractor === undefined ||
+    process.processDetails.provisionalContractor.name === undefined ||
+    process.processDetails.provisionalContractor.name === ""
       ? t("Process.components.ContractorSelection.noContractor")
-      : process.contractor.name
+      : process.processDetails.provisionalContractor.name
   }`;
 
   return (
     <ProcessContainer
       id="Contractor"
-      pageTitle={pageTitle}
-      menuButtonTitle={menuButtonTitle}
+      titleAddition={pageTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
       end={ProcessStatus.SERVICE_COMPLETED}
     >

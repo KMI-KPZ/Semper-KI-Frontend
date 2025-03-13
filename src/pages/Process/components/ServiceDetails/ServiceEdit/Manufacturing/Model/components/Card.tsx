@@ -35,7 +35,7 @@ export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
         processID: process.processID,
         projectID: project.projectID,
         model: model,
-        origin: "Service",
+        origin: "ServiceDetails",
       },
       { onSuccess: () => closeModal() }
     );

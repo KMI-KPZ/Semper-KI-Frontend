@@ -79,7 +79,7 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
       ${inView ? "ring-2 ring-ultramarinblau " : "ring-0"}`}
       >
         {item.icon}
-        <Text>{t(`Process.components.StatusWizard.Card.${item.text}`)}</Text>
+        <Text>{t(`types.ProcessOrigin.${item.targetID}`)}</Text>
       </Container>
     </Badge>
   );

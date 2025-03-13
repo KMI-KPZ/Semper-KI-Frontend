@@ -17,8 +17,7 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
   return (
     <ProcessContainer
       id="Contract"
-      menuButtonTitle={t("Process.components.Contract.button.menu")}
-      pageTitle={`${t("Process.components.Contract.heading")}:`}
+      titleAddition={`${t("Process.components.Contract.heading")}:`}
       start={ProcessStatus.REQUEST_COMPLETED}
       end={ProcessStatus.OFFER_REJECTED}
     >

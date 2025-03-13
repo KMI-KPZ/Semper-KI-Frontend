@@ -13,6 +13,8 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 import GrayContainer from "@component-library/Container/GrayContainer";
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 
 interface ProcessStatusWizardProps {
   process: Process;
@@ -22,97 +24,62 @@ export type StatusWizardItem = {
   startStatus?: ProcessStatus;
   endStatus?: ProcessStatus;
   icon: ReactNode;
-  targetID: ProcessOrigin | string;
-  text:
-    | "processInfo"
-    | "header"
-    | "draft"
-    | "service"
-    | "contractorSelected"
-    | "verified"
-    | "requested"
-    | "clarification"
-    | "offer"
-    | "confirmation"
-    | "production"
-    | "delivery"
-    | "completed";
+  targetID: ProcessOrigin;
 };
 
 export const statusWizardItems: StatusWizardItem[] = [
-  // {
-  //   icon: <InfoIcon />,
-  //   text: "processInfo",
-  //   targetID: "header",
-  // },
   {
     startStatus: ProcessStatus.DRAFT,
+    endStatus: ProcessStatus.DRAFT,
+    icon: <DashboardCustomizeIcon />,
+    targetID: "ServiceSelection",
+  },
+  {
+    startStatus: ProcessStatus.SERVICE_READY,
     endStatus: ProcessStatus.SERVICE_COMPLICATION,
     icon: <DesignServicesIcon />,
-    text: "draft",
-    targetID: "Service",
+    targetID: "ServiceDetails",
   },
   {
     startStatus: ProcessStatus.SERVICE_COMPLETED,
     endStatus: ProcessStatus.SERVICE_COMPLETED,
-    icon: <FactoryIcon />,
-    text: "contractorSelected",
+    icon: <PersonSearchIcon />,
     targetID: "Contractor",
   },
   {
     startStatus: ProcessStatus.CONTRACTOR_COMPLETED,
     endStatus: ProcessStatus.VERIFYING_IN_PROGRESS,
     icon: <AssignmentTurnedInIcon />,
-    text: "verified",
     targetID: "Verification",
   },
   {
     startStatus: ProcessStatus.VERIFYING_COMPLETED,
     endStatus: ProcessStatus.VERIFYING_COMPLETED,
     icon: <EmailIcon />,
-    text: "requested",
     targetID: "Request",
   },
-  // {
-  //   startStatus: ProcessStatus.CLARIFICATION,
-  //   endStatus: ProcessStatus.CLARIFICATION,
-  //   icon: <QuestionMarkIcon />,
-  //   text: "clarification",
-  //   targetID: "Clarification",
-  // },
   {
     startStatus: ProcessStatus.REQUEST_COMPLETED,
     endStatus: ProcessStatus.OFFER_REJECTED,
     icon: <DescriptionIcon />,
-    text: "offer",
     targetID: "Contract",
   },
-  // {
-  //   startStatus: ProcessStatus.CONFIRMATION_COMPLETED,
-  //   endStatus: ProcessStatus.CONFIRMATION_REJECTED,
-  //   icon: <CheckIcon />,
-  //   text: "confirmation",
-  //   targetID: "Confirmation",
-  // },
   {
     startStatus: ProcessStatus.CONFIRMATION_COMPLETED,
     endStatus: ProcessStatus.PRODUCTION_IN_PROGRESS,
     icon: <FactoryIcon />,
-    text: "production",
     targetID: "Production",
   },
   {
     startStatus: ProcessStatus.PRODUCTION_COMPLETED,
     endStatus: ProcessStatus.DELIVERY_IN_PROGRESS,
     icon: <LocalShippingIcon />,
-    text: "delivery",
     targetID: "Delivery",
   },
   {
     startStatus: ProcessStatus.DELIVERY_COMPLETED,
     endStatus: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
-    text: "completed",
     targetID: "Completed",
   },
 ];
@@ -147,7 +114,7 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
     >
       {statusWizardItems.map((item) => {
         return (
-          <StatusWizardCard key={item.text} item={item} process={process} />
+          <StatusWizardCard key={item.targetID} item={item} process={process} />
         );
       })}
     </GrayContainer>

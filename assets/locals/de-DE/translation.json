@@ -338,18 +338,17 @@
       "userDeleted": "Benutzer Gelöscht"
     },
     "ProcessOrigin": {
-      "Service": "Service",
+      "ServiceSelection": "Serviceauswahl",
+      "ServiceDetails": "Servicedetails",
       "Contractor": "Auftragnehmer",
       "Verification": "Überprüfung",
       "Request": "Anfrage",
-      "Clarification": "Rückfragen",
       "Contract": "Vertrag",
-      "ContractFiles": "Vertragsdateien",
-      "Confirmation": "Bestätigung",
       "Production": "Produktion",
       "Delivery": "Lieferung",
+      "Completed": "Abgeschlossen",
       "PaymentFiles": "Rechnung",
-      "Completed": "Abgeschlossen"
+      "ContractFiles": "Vertragsdateien"
     },
     "FemTestType": {
       "elongation": "Dehnung",
@@ -391,6 +390,7 @@
     "complex": "Komplex",
     "modelID": "Modell ID",
     "group": "Gruppe",
+    "groups": "Gruppen",
     "total": "Gesamt",
     "min": "Min",
     "max": "Max",
@@ -1809,6 +1809,10 @@
         "ServiceDetails": {
           "dummy": "Dummy Service",
           "dummy2": "Service noch nicht angelegt",
+          "group_one": "eine Gruppe",
+          "group_other": "{{count}} Gruppen",
+          "model_one": "mit einem Modell",
+          "model_other": "mit {{count}} Modellen",
           "components": {
             "Manufacturing": {
               "heading": {

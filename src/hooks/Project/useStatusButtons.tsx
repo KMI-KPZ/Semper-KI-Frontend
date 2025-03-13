@@ -24,7 +24,8 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 interface UseStatusButtonsReturnProps {
   getStatusButtons: (
     process: Process,
-    includeDelete?: boolean
+    includeDelete?: boolean,
+    getServiceCardButtons?: boolean
   ) => StatusButtonProps[];
   handleOnClickButtonCount: (button: StatusButtonProcessProps) => void;
   handleOnClickButton: (button: StatusButtonProps, processID: string) => void;

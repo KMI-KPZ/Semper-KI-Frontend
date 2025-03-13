@@ -55,8 +55,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
       id="Verification"
       start={ProcessStatus.CONTRACTOR_COMPLETED}
       end={ProcessStatus.VERIFICATION_FAILED}
-      menuButtonTitle={t("Process.components.Verify.button.menu")}
-      pageTitle={t("Process.components.Verify.heading")}
+      titleAddition={t("Process.components.Verify.heading")}
       showDelete={_process.processStatus === ProcessStatus.VERIFICATION_FAILED}
     >
       <Container

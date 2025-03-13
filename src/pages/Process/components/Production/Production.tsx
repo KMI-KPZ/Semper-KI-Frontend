@@ -15,8 +15,7 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
   return (
     <ProcessContainer
       id="Production"
-      menuButtonTitle={t("Process.components.Production.button.menu")}
-      pageTitle={`${t("Process.components.Production.heading")}:`}
+      titleAddition={`${t("Process.components.Production.heading")}:`}
       start={ProcessStatus.CONFIRMATION_COMPLETED}
       end={ProcessStatus.PRODUCTION_IN_PROGRESS}
     >

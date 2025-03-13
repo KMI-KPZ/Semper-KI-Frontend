@@ -34,6 +34,9 @@ export interface UpdateOrgaChanges {
   taxID?: string;
   priorities?: UpdatePriorities;
   services?: OrganizationService;
+  todos?: {
+    show: boolean;
+  };
 }
 
 export interface UpdatePriorities {

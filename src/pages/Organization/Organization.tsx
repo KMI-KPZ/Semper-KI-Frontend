@@ -36,6 +36,7 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
       <OrganizationAddress organization={organization} />
       <Container className="container" width="full">
         <NotificationForm
+          showProgress={organization.details.todos.show}
           type="orga"
           settings={organization.details.notificationSettings?.organization}
         />

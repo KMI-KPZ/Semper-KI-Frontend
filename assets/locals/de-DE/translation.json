@@ -536,6 +536,7 @@
     "Form": {
       "NotificationForm": {
         "heading": "Benachrichtungen",
+        "progress": "Fortschritt auf Startseite anzeigen",
         "email": "E-Mail",
         "event": "Event"
       },
@@ -1230,7 +1231,8 @@
           "lang": "Sprache festlegen"
         },
         "button": {
-          "orga": "Profil"
+          "orga": "Profil",
+          "hide": "Ausblenden"
         }
       }
     },

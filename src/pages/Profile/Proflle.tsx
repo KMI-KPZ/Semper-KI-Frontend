@@ -46,6 +46,7 @@ const Profile: React.FC<Props> = (props) => {
         <ProfileLocals user={user} />
         <ProfileStatistics user={user} />
         <NotificationForm
+          showProgress={user.details.todos.show}
           type="user"
           settings={
             user.usertype === UserType.USER

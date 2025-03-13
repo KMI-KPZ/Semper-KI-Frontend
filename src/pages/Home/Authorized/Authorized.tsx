@@ -4,6 +4,7 @@ import HomeOrgaResources from "../components/Resources";
 import HomeUserProgress from "../components/UserProgress";
 import HomeOrgaProgress from "../components/OrgaProgress";
 import ProjectsOverview from "../Projects/ProjectsOverview";
+import useOrganization from "@/hooks/useOrganization";
 
 interface AuthorizedPropsHome {
   user: AuthorizedUser;
@@ -11,14 +12,23 @@ interface AuthorizedPropsHome {
 
 const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
   const { user } = props;
+  const { organization } = useOrganization();
 
   return (
     <div
       className="flex w-full flex-col items-center justify-center gap-5 "
       data-testid="home-authorized"
     >
-      <HomeUserProgress user={user} />
-      {user.usertype === UserType.ORGANIZATION ? <HomeOrgaProgress /> : null}
+      {user.details.todos.show === undefined ||
+      user.details.todos.show === true ? (
+        <HomeUserProgress user={user} />
+      ) : null}
+      {user.usertype === UserType.ORGANIZATION &&
+      organization !== undefined &&
+      (organization.details.todos.show === undefined ||
+        organization.details.todos.show === true) ? (
+        <HomeOrgaProgress />
+      ) : null}
       <ProjectsOverview />
       <HomeOrgaResources />
     </div>

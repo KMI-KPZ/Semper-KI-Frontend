@@ -7,7 +7,9 @@ import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { twMerge } from "tailwind-merge";
 import { statusWizardItems } from "@/pages/Process/components/StatusWizard/StatusWizard";
-import useStatusButtons from "@/hooks/Project/useStatusButtons";
+import useStatusButtons, {
+  StatusButtonProps,
+} from "@/hooks/Project/useStatusButtons";
 import useProcess from "@/hooks/Process/useProcess";
 import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 import logger from "@/hooks/useLogger";
@@ -30,22 +32,37 @@ export const getPageIcon = (id: string): ReactNode => {
 const ProcessContainerHeader: React.FC<ProcessHeaderProps> = (props) => {
   const { titleAddition, id, toggleOpen, open } = props;
   const { t } = useTranslation();
-  const { getStatusButtons } = useStatusButtons();
+  const { getStatusButtons, handleOnClickButton } = useStatusButtons();
   const { process } = useProcess();
 
   const handleOnClickButtonExpand = () => {
     toggleOpen();
   };
 
-  const handleOnClickButtonEdit = () => {
-    console.log("Edit");
+  const handleOnClickButtonEdit = (button: StatusButtonProps) => {
+    window.confirm(
+      t("components.Process.Container.Header.editConfirm") +
+        "\n" +
+        t("components.Process.Container.Header.editConfirm2")
+    ) === true
+      ? handleOnClickButton(button, process.processID)
+      : logger("delete canceled");
   };
-  const handleOnClickButtonDelete = () => {
-    console.log("Delete");
+  const handleOnClickButtonDelete = (button: StatusButtonProps) => {
+    window.confirm(
+      t("components.Process.Container.Header.deleteConfirm") +
+        "\n" +
+        t("components.Process.Container.Header.deleteConfirm2")
+    ) === true
+      ? handleOnClickButton(button, process.processID)
+      : logger("delete canceled");
   };
 
-  const statusButtons = getStatusButtons(process, true, true);
-  logger(id, "-------", statusButtons);
+  const statusButtons = getStatusButtons(process, true, id);
+  const deleteButton = statusButtons.find(
+    (button) => button.title === "DELETE"
+  );
+  const editButton = statusButtons.find((button) => button.title === "EDIT");
 
   return (
     <Container
@@ -65,22 +82,26 @@ const ProcessContainerHeader: React.FC<ProcessHeaderProps> = (props) => {
         </Heading>
       </Container>
       <Container width="fit" direction="row" className="p-0">
-        <Button
-          title={t("general.button.edit")}
-          variant="text"
-          className="text-white"
-          size="md"
-          children={<EditIcon />}
-          onClick={handleOnClickButtonEdit}
-        />
-        <Button
-          variant="text"
-          className="text-white"
-          size="md"
-          title={t("general.button.delete")}
-          children={<DeleteIcon />}
-          onClick={handleOnClickButtonDelete}
-        />
+        {editButton !== undefined ? (
+          <Button
+            title={t("general.button.edit")}
+            variant="text"
+            className="text-white"
+            size="md"
+            children={<EditIcon />}
+            onClick={() => handleOnClickButtonEdit(editButton)}
+          />
+        ) : null}
+        {deleteButton !== undefined ? (
+          <Button
+            variant="text"
+            className="text-white"
+            size="md"
+            title={t("general.button.delete")}
+            children={<DeleteIcon />}
+            onClick={() => handleOnClickButtonDelete(deleteButton)}
+          />
+        ) : null}
         <Button
           variant="text"
           className="text-white"

@@ -682,6 +682,12 @@
               "reason": "Grund"
             }
           }
+        },
+        "Header": {
+          "editConfirm": "Möchten Sie wirklich diesen Schritt bearbeiten?",
+          "editConfirm2": "Dabei gehen alle Information aus vorhergehenden Schritt verloren.",
+          "deleteConfirm": "Möchten Sie wirklich diesen Schritt löschen?",
+          "deleteConfirm2": "Dabei gehen alle Information aus vorhergehenden und diesem Schritt verloren."
         }
       },
       "File": {
@@ -863,7 +869,7 @@
   "hooks": {
     "useStatusButtons": {
       "NONE": "Translation error",
-      "DELETE": "Prozess löschen",
+      "DELETE_PROCESS": "Prozess löschen",
       "BACK-TO-SERVICE_READY": "Zurück",
       "BACK-TO-DRAFT": "Zurück",
       "BACK-TO-SERVICE_COMPLETED": "Zurück",
@@ -1813,8 +1819,8 @@
           "dummy2": "Service noch nicht angelegt",
           "group_one": "eine Gruppe",
           "group_other": "{{count}} Gruppen",
-          "model_one": "mit einem Modell",
-          "model_other": "mit {{count}} Modellen",
+          "model_one": "mit insgesamt einem Modell",
+          "model_other": "mit insgesamt {{count}} Modellen",
           "components": {
             "Manufacturing": {
               "heading": {

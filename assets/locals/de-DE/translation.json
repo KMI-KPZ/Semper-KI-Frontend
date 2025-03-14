@@ -1691,6 +1691,12 @@
       },
       "Contract": {
         "heading": "Angebot",
+        "noContract": "nicht Vorhanden",
+        "isContract": "Vorhanden",
+        "rejectedClient": "vom Kunden abgelehnt",
+        "acceptedClient": "vom Kunden bestätigt",
+        "rejectedContractor": "vom Kunden bestätigt und vom Auftragnehmer abgelehnt",
+        "acceptedContractor": "vom Kunden und Auftragnehmer bestätigt",
         "button": {
           "menu": "Angebotsmenu"
         },
@@ -1752,6 +1758,11 @@
       },
       "Delivery": {
         "heading": "Lieferung",
+        "noFile": "keine Rechnung hochgeladen",
+        "isFile": "Rechnung hochgeladen",
+        "inProgress": "Läuft",
+        "completed": "Abgeschlossen",
+        "failed": "Fehlgeschlagen",
         "button": {
           "menu": "Lieferungsmenu"
         },
@@ -1766,6 +1777,10 @@
       },
       "Production": {
         "heading": "Produktion",
+        "ready": "Bereit",
+        "inProgress": "Läuft",
+        "completed": "Abgeschlossen",
+        "failed": "Fehlgeschlagen",
         "button": {
           "menu": "Produktionsmenu"
         }

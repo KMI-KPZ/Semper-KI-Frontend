@@ -12,10 +12,20 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
   const { t } = useTranslation();
   const { process } = useProcess();
 
+  const getAddtionalTitle = (): string => {
+    if (process.processStatus === ProcessStatus.CONFIRMATION_COMPLETED)
+      return t("Process.components.Production.ready");
+    if (process.processStatus === ProcessStatus.PRODUCTION_IN_PROGRESS)
+      return t("Process.components.Production.inProgress");
+    if (process.processStatus === ProcessStatus.FAILED)
+      return t("Process.components.Production.failed");
+    return t("Process.components.Production.completed");
+  };
+
   return (
     <ProcessContainer
       id="Production"
-      titleAddition={`${t("Process.components.Production.heading")}:`}
+      titleAddition={getAddtionalTitle()}
       start={ProcessStatus.CONFIRMATION_COMPLETED}
       end={ProcessStatus.PRODUCTION_IN_PROGRESS}
     >

@@ -12,7 +12,7 @@ const ProcessCompleted: React.FC<ProcessCompletedProps> = (props) => {
   return (
     <ProcessContainer
       id="Completed"
-      titleAddition={`${t("Process.components.Completed.heading")}:`}
+      titleAddition=""
       start={ProcessStatus.DELIVERY_COMPLETED}
     ></ProcessContainer>
   );

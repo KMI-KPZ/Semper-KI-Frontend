@@ -50,12 +50,24 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
     );
   };
 
+  const getAddtionalTitle = () => {
+    if (_process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED)
+      return t("Process.components.Verify.components.VerifyStatus.READY");
+    if (_process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS)
+      return t(`Process.components.Verify.components.VerifyStatus.STARTED`);
+    if (_process.processStatus === ProcessStatus.VERIFICATION_FAILED)
+      return t(`Process.components.Verify.components.VerifyStatus.FAILED`);
+    if (_process.processStatus === ProcessStatus.VERIFYING_COMPLETED)
+      return t(`Process.components.Verify.components.VerifyStatus.COMPLETED`);
+    return t(`Process.components.Verify.components.VerifyStatus.COMPLETED`);
+  };
+
   return (
     <ProcessContainer
       id="Verification"
       start={ProcessStatus.CONTRACTOR_COMPLETED}
       end={ProcessStatus.VERIFICATION_FAILED}
-      titleAddition={t("Process.components.Verify.heading")}
+      titleAddition={getAddtionalTitle()}
       showDelete={_process.processStatus === ProcessStatus.VERIFICATION_FAILED}
     >
       <Container

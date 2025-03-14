@@ -47,12 +47,10 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
     return "nix gefunden ProcessRequest";
   };
 
-  const pageTitle = `${t("Process.components.Request.heading")}: ${getTitle()}`;
-
   return (
     <ProcessContainer
       id="Request"
-      titleAddition={pageTitle}
+      titleAddition={getTitle()}
       start={ProcessStatus.VERIFYING_COMPLETED}
       end={ProcessStatus.VERIFYING_COMPLETED}
     >

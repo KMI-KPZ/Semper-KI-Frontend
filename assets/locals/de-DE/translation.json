@@ -1118,6 +1118,11 @@
         "item2": "Existensicherndes Netzwerk",
         "item3": "Produktionsbereite Infrastruktur"
       },
+      "Maturity": {
+        "heading": "Das Reifegradmodell",
+        "text": "Das Supply Chain Collaboration Maturity Assessment ist ein strukturierter Rahmen zur Bewertung der Effektivität der Zusammenarbeit zwischen den Teilnehmern der Lieferkette. Dieses schnelle und praktische Instrument hilft Unternehmen, ihre Bereitschaft zur nahtlosen Zusammenarbeit mit Lieferanten, Partnern und Kunden zu bewerten, um Effizienz und Leistung zu steigern. Mit sechs Reifegraden bietet die Bewertung einen klaren Maßstab, um Stärken und verbesserungswürdige Bereiche zu identifizieren. Durch die Messung von Schlüsselaspekten wie Vertrauen, Transparenz, Integration und gemeinsamer Wertschöpfung erhalten Unternehmen verwertbare Erkenntnisse zur Verbesserung der Zusammenarbeit und zur Optimierung der Lieferkettenabläufe.",
+        "button": "Zum Fragebogen"
+      },
       "PrototypeAlert": "Diese Seite ist ein Prototyp und wird fortlaufend bearbeitet",
       "Services": {
         "heading": "Unser Service",

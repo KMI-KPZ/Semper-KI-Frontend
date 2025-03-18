@@ -14,12 +14,10 @@ import useGetDashboardProjects, {
   FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
 import useSearch from "@/hooks/useSearch";
-import TuneIcon from "@mui/icons-material/Tune";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
 import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
-import logger from "@/hooks/useLogger";
 import { AuthorizedUser } from "@/hooks/useUser";
 import useModal from "@/hooks/useModal";
 import { gradientStyle } from "@component-library/Container/GrayContainer";
@@ -101,15 +99,6 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
         <Search
           handleSearchInputChange={handleSearchInputChange}
           style={gradientStyle}
-        />
-        <Button
-          title={t("Home.Projects.button.filter")}
-          size="sm"
-          variant="text"
-          onClick={() => {
-            logger("info", "Filter button clicked");
-          }}
-          children={<TuneIcon className="text-white" />}
         />
       </Container>
       <Container width="full">

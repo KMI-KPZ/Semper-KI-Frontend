@@ -12,7 +12,7 @@ const ProjectsOverview: React.FC<ProjectsOverviewProps> = (props) => {
   const { projectID } = useParams();
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="p-0">
       <HomeProjects
         projectID={projectID}
         user={user.usertype === UserType.ANONYM ? undefined : user}

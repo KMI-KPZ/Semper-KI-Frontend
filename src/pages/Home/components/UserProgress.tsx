@@ -6,6 +6,7 @@ import { AuthorizedUser } from "@/hooks/useUser";
 import HomeContainer from "./Container";
 import Flowchart from "./FlowChart";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface HomeUserProgressProps {
   user: AuthorizedUser;
@@ -55,11 +56,14 @@ const HomeUserProgress: React.FC<HomeUserProgressProps> = (props) => {
   };
 
   return (
-    <HomeContainer>
-      <Heading variant="h2">
+    <HomeContainer
+      style={gradientStyle}
+      className="rounded-md bg-transparent text-white"
+    >
+      <Heading variant="h2" className="text-white">
         {t("Home.components.HomeUserProgress.todo")}
       </Heading>
-      <Text className="text-center text-black">
+      <Text className="text-center text-white">
         {t("Home.components.HomeUserProgress.progress", {
           count: items.filter((item) => item.finished).length,
           total: items.length,

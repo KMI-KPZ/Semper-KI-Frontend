@@ -4,14 +4,16 @@ import { Process } from "@/api/Process/Querys/useGetProcess";
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
 interface ProcessImagePreviewProps {
   process: Process;
   size?: "sm" | "md";
+  className?: string;
 }
 
 const ProcessImagePreview: React.FC<ProcessImagePreviewProps> = (props) => {
-  const { process, size = "sm" } = props;
+  const { process, size = "sm", className } = props;
   const { t } = useTranslation();
 
   const [currentImage, setCurrentImage] = React.useState<number>(0);
@@ -34,7 +36,10 @@ const ProcessImagePreview: React.FC<ProcessImagePreviewProps> = (props) => {
     <Container
       width="fit"
       direction="col"
-      className={`relative  ${size === "sm" ? "w-40" : "w-60"} p-3`}
+      className={twMerge(
+        `relative  ${size === "sm" ? "w-40" : "w-60"} p-3`,
+        className
+      )}
     >
       {process.processDetails.imagePath.length > 1 ? (
         <Button

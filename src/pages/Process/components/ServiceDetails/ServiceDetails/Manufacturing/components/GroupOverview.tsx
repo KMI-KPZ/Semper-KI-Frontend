@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Heading } from "@component-library/index";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -12,6 +12,9 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ProcessStatusGate from "@/components/Process/StatusGate";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import Hint from "@/components/Hint/Hint";
 
 interface ServiceManufacturingGroupOverviewProps {
   process: ManufactoringProcessProps;
@@ -27,6 +30,9 @@ const ServiceManufacturingGroupOverview: React.FC<
 
   const groups: ManufacturingServiceProps[] = process.serviceDetails.groups;
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [open, setOpen] = useState<boolean>(
+    process.serviceDetails.groups.length > 1
+  );
   const updatedProcess = useUpdateProcess();
 
   useEffect(() => {
@@ -112,149 +118,193 @@ const ServiceManufacturingGroupOverview: React.FC<
     >
       <Container
         width="full"
-        direction="col"
+        direction="row"
         justify="center"
-        items="start"
-        className="p-3"
+        items="center"
+        className="gap-3 p-4 px-5"
       >
-        <Heading variant="h3">
+        <Heading variant="h3" className="whitespace-nowrap">
           {t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.heading"
+          )}{" "}
+          {t(
+            `Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.group`,
+            {
+              count: groups.length,
+            }
           )}
         </Heading>
-      </Container>
-      <Container
-        width="full"
-        direction="row"
-        justify="between"
-        className="p-3 pt-0"
-      >
-        <Button
+        <Hint
           title={t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.previousGroup"
+            `Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.hint`
           )}
-          className="rounded-full border-2 p-2 hover:cursor-pointer hover:bg-slate-50"
-          onClick={handleOnClickPreviousGroup}
-        >
-          <KeyboardArrowLeftIcon />
-        </Button>
+        />
+        <Container width="full">
+          {!open ? (
+            <Button
+              title={t("general.button.expand")}
+              children={<ExpandMoreIcon />}
+              width="full"
+              variant="text"
+              size="xs"
+              onClick={() => setOpen((prev) => !prev)}
+            />
+          ) : null}
+        </Container>
+      </Container>
+      {open ? (
         <Container
           width="full"
           direction="row"
-          justify="start"
-          className="max-w-3xl overflow-auto "
+          justify="between"
+          className="p-3 pt-0"
         >
-          {groups.map((group, index) => (
-            <div
-              ref={(el) => (buttonRefs.current[index] = el)}
-              title={t(
-                "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.item",
-                {
-                  name:
-                    group.models !== undefined && group.models.length > 0
-                      ? group.models.map((model) => model.fileName).join(", ")
-                      : index,
-                }
-              )}
-              onClick={() => handleOnClickGroup(index)}
-              key={index}
-              className={`flex flex-row items-center rounded-md border-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-slate-50 ${
-                activeGroup === index ? "border-blau-button " : ""
-              }`}
-            >
-              <table className="w-fit table-auto border-separate border-spacing-1 border-spacing-x-2">
-                <tbody>
-                  <tr>
-                    <th className="text-center" colSpan={2}>
-                      {`${t("general.group")} ${index + 1}`}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th className="text-left">
-                      {t(
-                        "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.model"
-                      )}
-                    </th>
-                    <td className="whitespace-nowrap">
-                      {group.models !== undefined && group.models.length > 0
+          <Button
+            title={t(
+              "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.previousGroup"
+            )}
+            className="rounded-full border-2 p-2 hover:cursor-pointer hover:bg-slate-50"
+            onClick={handleOnClickPreviousGroup}
+          >
+            <KeyboardArrowLeftIcon />
+          </Button>
+          <Container
+            width="full"
+            direction="row"
+            justify="start"
+            className="max-w-3xl overflow-auto "
+          >
+            {groups.map((group, index) => (
+              <div
+                ref={(el) => (buttonRefs.current[index] = el)}
+                title={t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.item",
+                  {
+                    name:
+                      group.models !== undefined && group.models.length > 0
                         ? group.models.map((model) => model.fileName).join(", ")
-                        : t(
-                            "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noModel"
-                          )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="text-left">
-                      {t(
-                        "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.material"
-                      )}
-                    </th>
-                    <td className="whitespace-nowrap">
-                      {group.material !== undefined
-                        ? group.material.title
-                        : t(
-                            "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noMaterial"
-                          )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="text-left">
-                      {t(
-                        "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.postProcessing"
-                      )}
-                    </th>
-                    <td className="whitespace-nowrap">
-                      {group.postProcessings !== undefined &&
-                      group.postProcessings.length > 0
-                        ? group.postProcessings
-                            .map((model) => model.title)
-                            .join(", ")
-                        : t(
-                            "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noPostProcessing"
-                          )}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <ProcessStatusGate
-                endExclude
-                end={ProcessStatus.SERVICE_COMPLETED}
+                        : index,
+                  }
+                )}
+                onClick={() => handleOnClickGroup(index)}
+                key={index}
+                className={`flex flex-row items-center rounded-md border-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-slate-50 ${
+                  activeGroup === index ? "border-blau-button " : ""
+                }`}
               >
-                <Container width="fit" justify="center" items="center">
-                  <Button
-                    size="sm"
-                    variant="text"
-                    title={t("general.button.delete")}
-                    onClick={() => handleOnClickDelete(index)}
+                <table className="w-fit table-auto border-separate border-spacing-1 border-spacing-x-2">
+                  <tbody>
+                    <tr>
+                      <th className="text-center" colSpan={2}>
+                        {`${t("general.group")} ${index + 1}`}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th className="text-left">
+                        {t(
+                          "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.model"
+                        )}
+                      </th>
+                      <td className="whitespace-nowrap">
+                        {group.models !== undefined && group.models.length > 0
+                          ? group.models
+                              .map((model) => model.fileName)
+                              .join(", ")
+                          : t(
+                              "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noModel"
+                            )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="text-left">
+                        {t(
+                          "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.material"
+                        )}
+                      </th>
+                      <td className="whitespace-nowrap">
+                        {group.material !== undefined
+                          ? group.material.title
+                          : t(
+                              "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noMaterial"
+                            )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="text-left">
+                        {t(
+                          "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.postProcessing"
+                        )}
+                      </th>
+                      <td className="whitespace-nowrap">
+                        {group.postProcessings !== undefined &&
+                        group.postProcessings.length > 0
+                          ? group.postProcessings
+                              .map((model) => model.title)
+                              .join(", ")
+                          : t(
+                              "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noPostProcessing"
+                            )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ProcessStatusGate
+                  endExclude
+                  end={ProcessStatus.SERVICE_COMPLETED}
+                >
+                  <Container
+                    width="fit"
+                    justify="center"
+                    items="start"
+                    className="self-stretch"
                   >
-                    <DeleteIcon />
-                  </Button>
-                </Container>
-              </ProcessStatusGate>
-            </div>
-          ))}
-          <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-            <Button
-              title={t(
-                "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.newGroup"
-              )}
-              className=" border-2 p-2 hover:bg-slate-50"
-              onClick={handleOnClickNewGroup}
-            >
-              <AddIcon />
-            </Button>
-          </ProcessStatusGate>
+                    <Button
+                      size="sm"
+                      variant="text"
+                      title={t("general.button.delete")}
+                      onClick={() => handleOnClickDelete(index)}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </Container>
+                </ProcessStatusGate>
+              </div>
+            ))}
+            <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+              <Button
+                title={t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.newGroup"
+                )}
+                className=" border-2 p-2 hover:bg-slate-50"
+                onClick={handleOnClickNewGroup}
+              >
+                <AddIcon />
+              </Button>
+            </ProcessStatusGate>
+          </Container>
+          <Button
+            title={t(
+              "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.nextGroup"
+            )}
+            className="rounded-full border-2 p-2 hover:cursor-pointer hover:bg-slate-50"
+            onClick={handleOnClickNextGroup}
+          >
+            <KeyboardArrowRightIcon />
+          </Button>
         </Container>
-        <Button
-          title={t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.nextGroup"
-          )}
-          className="rounded-full border-2 p-2 hover:cursor-pointer hover:bg-slate-50"
-          onClick={handleOnClickNextGroup}
-        >
-          <KeyboardArrowRightIcon />
-        </Button>
-      </Container>
+      ) : null}
+      {open ? (
+        <Container width="full" className="p-3">
+          <Button
+            title={t("general.button.collapse")}
+            children={<ExpandLessIcon />}
+            variant="text"
+            width="full"
+            size="xs"
+            onClick={() => setOpen((prev) => !prev)}
+          />
+        </Container>
+      ) : null}
     </Container>
   );
 };

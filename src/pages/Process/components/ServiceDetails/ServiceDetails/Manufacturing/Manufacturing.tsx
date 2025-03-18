@@ -43,13 +43,6 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
         activeGroup={activeGroup}
         changeActiveGroup={setActiveGroup}
       />
-      <ServiceManufacturingFreeText
-        activeGroup={activeGroup}
-        process={process}
-      />
-      {/* <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-        <ProcessFilter />
-      </ProcessStatusGate> */}
       {process.serviceDetails.groups.length > 0 ? (
         <ServiceManufacturingDetails
           process={process}
@@ -57,6 +50,10 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
           activeGroup={activeGroup}
         />
       ) : null}
+      <ServiceManufacturingFreeText
+        activeGroup={activeGroup}
+        process={process}
+      />
     </Container>
   );
 };

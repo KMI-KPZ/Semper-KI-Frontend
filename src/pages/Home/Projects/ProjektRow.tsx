@@ -14,6 +14,7 @@ import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate
 import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface HomeProjektRowProps {
   project: FlatDashboardProject;
@@ -61,19 +62,26 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
   return (
     <>
       <tr
-        className="bg-gradient-to-br from-white/60 to-white/20 hover:cursor-pointer"
+        className={`bg-gradient-to-br  hover:cursor-pointer`}
         onClick={() => handleOpen(project.projectID)}
+        style={gradientStyle}
       >
-        <td className=" rounded-md rounded-br-none rounded-tr-none border-2 border-r-0 border-ultramarinblau-dark border-opacity-20 p-1 text-center">
+        <td
+          className={`padding rounded-md rounded-br-none rounded-tr-none   p-1 text-center ${
+            open ? "rounded-bl-none" : ""
+          }`}
+        >
           {project.projectDetails.title}
         </td>
-        <td className="border-op b border-b-2 border-t-2 border-ultramarinblau-dark border-opacity-20 p-1 text-center">
+        <td className={` border-ultramarinblau-dark  p-1 text-center`}>
           {project.updatedWhen.toLocaleString()}
         </td>
-        <td className="border-b-2 border-t-2 border-ultramarinblau-dark border-opacity-20 p-1 text-center">
-          {project.processesCount}
-        </td>
-        <td className="rounded-md rounded-bl-none rounded-tl-none border-2 border-l-0 border-ultramarinblau-dark border-opacity-20 p-1">
+        <td className={` p-1 text-center`}>{project.processesCount}</td>
+        <td
+          className={`rounded-md rounded-bl-none rounded-tl-none  p-1 ${
+            open ? "rounded-br-none" : ""
+          }`}
+        >
           <Container justify="center" width="full" direction="row">
             {!recieved ||
             (user.usertype === UserType.ORGANIZATION &&
@@ -89,6 +97,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                     onClick={() => {
                       handleOnClickButtonClone();
                     }}
+                    className="text-white"
                   />
                 ) : null}
                 <Button
@@ -101,6 +110,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                   onClick={() => {
                     handleOnClickButtonCreateProcess();
                   }}
+                  className="text-white"
                 />
                 <Button
                   title={t("general.button.edit")}
@@ -110,6 +120,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                   onClick={() => {
                     handleOnClickButtonEditTitle();
                   }}
+                  className="text-white"
                 />
                 <Button
                   title={t("general.button.delete")}
@@ -117,6 +128,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                   variant="text"
                   children={<DeleteIcon />}
                   onClick={() => handleOnClickButtonDelete()}
+                  className="text-white"
                 />
               </>
             ) : null}
@@ -134,6 +146,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                   <ExpandMoreIcon />
                 </div>
               }
+              className="text-white"
             />
             <Modal
               modalKey="projectTitleEdit"
@@ -156,6 +169,9 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
       {open && (
         <HomeProject projectID={project.projectID} owner={project.owner} />
       )}
+      <tr>
+        <td colSpan={4} className="h-2" />
+      </tr>
     </>
   );
 };

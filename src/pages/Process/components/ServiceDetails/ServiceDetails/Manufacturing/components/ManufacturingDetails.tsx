@@ -62,7 +62,7 @@ const ServiceManufacturingDetails: React.FC<
         width="fit"
         direction="row"
         justify="start"
-        className="p-5 pb-2"
+        className="gap-3 p-5 pb-2"
       >
         <Heading variant="h3">
           {t(

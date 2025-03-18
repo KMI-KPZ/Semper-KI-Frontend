@@ -8,6 +8,7 @@ import { HomeProgressItemData } from "./ProgressItem";
 import HomeContainer from "./Container";
 import Flowchart from "./FlowChart";
 import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface HomeOrgaAccountProgressProps {}
 
@@ -104,11 +105,14 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
   };
 
   return (
-    <HomeContainer>
-      <Heading variant="h2">
+    <HomeContainer
+      style={gradientStyle}
+      className="rounded-md bg-transparent text-white"
+    >
+      <Heading variant="h2" className="text-white">
         {t("Home.components.HomeOrgaAccountProgress.todo")}
       </Heading>
-      <Text className="text-black">
+      <Text className="text-white">
         {t("Home.components.HomeOrgaAccountProgress.progress", {
           count: items.filter((item) => item.finished).length,
           total: items.length,

@@ -1860,7 +1860,10 @@
                 "color": "Farbe:"
               },
               "GroupOverview": {
-                "heading": "Gruppenübersicht",
+                "heading": "Gruppenübersicht:",
+                "hint": "Eine Gruppe besteht aus einem Material und einem oder mehreren Modellen und Nachbearbeitungen. Alle Gruppen gehen an den gleichen Hersteller.",
+                "group_one": "eine Gruppe",
+                "group_other": "{{count}} Gruppen",
                 "noModel": "kein Modell",
                 "noMaterial": "kein Material",
                 "noPostProcessing": "keine Nachbearbeitung",

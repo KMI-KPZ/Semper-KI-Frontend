@@ -61,7 +61,7 @@
       "admin": "Admin area",
       "users": "Manage users",
       "contractorSelection": "Contractor selection",
-      "verification": "Examination",
+      "verification": "Review",
       "registerOrganization": "Register organization",
       "verifyEMail": "Verify email",
       "manufacturing": "Have it manufactured",
@@ -113,7 +113,7 @@
     },
     "ServiceType": {
       "NONE": "Service selection",
-      "ADDITIVE_MANUFACTURING": "Leave the 3D printing model",
+      "ADDITIVE_MANUFACTURING": "Draft: Have a 3D Model Printed",
       "CREATE_MODEL": "Let the model design",
       "DELIVERY": "Delivery",
       "POST_PROCESSING": "Post-processing",
@@ -145,7 +145,7 @@
       "MATERIAL": "Material",
       "PROCEEDING": "Proceedings",
       "MANUFACTURER": "Manufacturer",
-      "POSTPROCESSING": "Post -processing",
+      "POSTPROCESSING": "Post-processing",
       "ADDITIVE": "Additives",
       "TEST": "Test"
     },
@@ -259,17 +259,17 @@
       "costRatePersonalMachine": "Personnel cost rate machine",
       "coatingTime": "Coating time",
       "maxPrintingSpeed": "Maximum pressure speed",
-      "foodSafe": "Food safe",
-      "heatResistant": "Heat -resistant",
+      "foodSafe": "Food-safe",
+      "heatResistant": "Heat resistant",
       "flexible": "Flexible",
       "smooth": "Smooth",
-      "eModul": "E-modulus",
+      "eModul": "Elastic modulus",
       "poissonRatio": "Poisson's ratio",
-      "density": "density",
+      "density": "Density",
       "printingSpeed": "Print speed",
       "acquisitionCosts": "Acquisition costs",
       "treatmentCosts": "Treatment costs",
-      "flexibility": "flexibility"
+      "flexibility": "Flexibility"
     },
     "FilterCategoryType": {
       "costs": "Cost",
@@ -282,7 +282,7 @@
       "materialCategory": "Material category",
       "proceeding": "Proceedings",
       "manufacturer": "Manufacturer",
-      "postProcessing": "Post -processing",
+      "postProcessing": "Post-processing",
       "date": "Date",
       "text": "Text",
       "textarea": "Text field",
@@ -856,7 +856,7 @@
         "name": "name",
         "date": "Date",
         "license": "License",
-        "tags": "tags",
+        "tags": "Tags",
         "certificates": "Certificates",
         "URI": "Uri"
       }
@@ -1030,11 +1030,11 @@
         "testModel": "Test your component"
       },
       "Introduction": {
-        "heading": "3D Printing Connected",
-        "text": "With Semper-AI we determine the right network for your production. ",
-        "item1": "User -friendly operation",
-        "item2": "Securing your existence network",
-        "item3": "Production -ready infrastructure"
+        "heading": "Connected 3D Printing",
+        "text": "With Semper-AI, we determine the right network for your production. ",
+        "item1": "User-friendly operation",
+        "item2": "Ensuring fail-safe production with our network",
+        "item3": "Production-ready infrastructure"
       },
       "PrototypeAlert": "This page is a prototype and is continuously processed",
       "Services": {
@@ -1060,7 +1060,7 @@
       },
       "Tutorial": {
         "heading": "How to use our platform",
-        "subTitle": "Record your needs using our user-friendly questionnaires.",
+        "subTitle": "Capture your needs with our user-friendly questionnaires.",
         "items": {
           "0": {
             "heading": "Registration",
@@ -1141,7 +1141,7 @@
           "overview": "Overview",
           "printer": "3D printer",
           "materials": "Materials",
-          "postprocessing": "Post -processing"
+          "postprocessing": "Post-processing"
         }
       },
       "HomeUserProgress": {
@@ -1193,7 +1193,7 @@
         "groups": "Groups",
         "quantity": "Number",
         "models": "Models",
-        "contractor": "contractor",
+        "contractor": "Contractor",
         "noContractor": "No contractor selected",
         "material": "material",
         "postProcessings": "Post-processing",
@@ -1500,7 +1500,7 @@
     }
   },
   "Process": {
-    "heading": "Process details",
+    "heading": "Process Details",
     "components": {
       "Clarify": {
         "heading": "Queries",
@@ -1633,8 +1633,8 @@
                 "model": "Models",
                 "material": "Materials"
               },
-              "pageDescription1": "Select the desired models, materials and post -processing.",
-              "pageDescription2": "This selection is used to find the right manufacturers.",
+              "pageDescription1": "Select the desired models, materials and post-processing.",
+              "pageDescription2": "This selection helps identify the most suitable manufacturers.",
               "complete": "Selection Complete",
               "incomplete": "Selection Incomplete",
               "noModels": "No models available",
@@ -1649,16 +1649,16 @@
               },
               "GroupOverview": {
                 "heading": "Group overview",
-                "noModel": "no model",
-                "noMaterial": "no material",
-                "noPostProcessing": "no post-processing",
+                "noModel": "No model",
+                "noMaterial": "No material",
+                "noPostProcessing": "No post-processing",
                 "nextGroup": "Next group",
                 "previousGroup": "Previous group",
                 "item": "group {{name}} open",
                 "model": "Model (E)",
-                "material": "material",
+                "material": "Material",
                 "postProcessing": "Post-processing(s)",
-                "newGroup": "new group"
+                "newGroup": "New group"
               },
               "ModelCard": {
                 "img": "Fashion picture",
@@ -1709,7 +1709,7 @@
               "selected": "Selected models",
               "available": "Available models",
               "error": {
-                "noModels": "no models found"
+                "noModels": "No models found"
               },
               "components": {
                 "Card": {
@@ -1755,10 +1755,10 @@
                     "type": "File type",
                     "date": "Date",
                     "all": "Apply to all:",
-                    "tags": "tags",
+                    "tags": "Tags",
                     "tagsPH": "Tag1, Tag2, ...",
                     "quantity": "Number *",
-                    "levelOfDetail": "Degree of detail *",
+                    "levelOfDetail": "Level of detail *",
                     "levelOfDetailPH": "Level of detail",
                     "selectLevelOfDetail": "Select level of detail",
                     "selectLicense": "Select license",
@@ -1779,10 +1779,10 @@
               "heading": "Create a new process ..."
             },
             "PostProcessing": {
-              "heading": "Available post -processing",
-              "selected": "Selected post -processing",
+              "heading": "Available post-processing",
+              "selected": "Selected post-processing",
               "error": {
-                "noPostProcessings": "no post-processing found"
+                "noPostProcessings": "No post-processing found"
               },
               "components": {
                 "Card": {
@@ -1838,13 +1838,13 @@
           "draft": "Draft",
           "service": "service",
           "contractorSelected": "Contractor",
-          "verified": "examination",
+          "verified": "Review",
           "requested": "Inquiry",
           "clarification": "Queries",
           "offer": "Offer",
           "confirmation": "Confirmation",
           "confirmed": "Confirmed",
-          "production": "production",
+          "production": "Production",
           "delivery": "Delivery",
           "completed": "Completed"
         }
@@ -2105,9 +2105,9 @@
     },
     "PostProcessings": {
       "header": "Post-processing",
-      "own": "Own post -processing",
+      "own": "Own post-processing",
       "button": {
-        "createOwn": "Create post -processing"
+        "createOwn": "Create post-processing"
       }
     },
     "Printers": {

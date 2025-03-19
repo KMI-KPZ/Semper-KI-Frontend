@@ -3,7 +3,7 @@ import { Button, Container, Modal, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Collapsible from "@/components/Collapsible/Collapsible";
-import ProjectTitleForm from "./TitleForm";
+import ProjectTitleForm from "../../../../Home/Projects/ProcessTitleForm";
 import ProcessMenu from "@/components/Process/Menu";
 import EditIcon from "@mui/icons-material/Edit";
 

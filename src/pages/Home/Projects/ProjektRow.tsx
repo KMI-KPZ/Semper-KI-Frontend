@@ -8,7 +8,7 @@ import HomeProject from "./Project";
 import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 import logger from "@/hooks/useLogger";
-import ProjectTitleForm from "@/pages/Project/components/TitleForm";
+import ProjectTitleForm from "@/pages/Home/Projects/ProcessTitleForm";
 import useUser, { UserType } from "@/hooks/useUser";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";

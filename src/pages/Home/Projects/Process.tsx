@@ -61,7 +61,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
       width="full"
       direction="col"
       justify="start"
-      className="m-0 gap-0 rounded-md bg-white px-5 py-2"
+      className="m-0 gap-0 rounded-md bg-white "
     >
       <Container width="full" direction="row">
         {process.dependenciesIn.length > 0 ? (
@@ -351,7 +351,11 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
           </tbody>
         </table>
 
-        <Container width="fit" direction="col" className="min-w-[200px] gap-2">
+        <Container
+          width="fit"
+          direction="col"
+          className="min-w-[200px] shrink-0 gap-2"
+        >
           <ActionStatusCard process={process} className="mb-3" />
           <Button
             title={t("general.button.open")}

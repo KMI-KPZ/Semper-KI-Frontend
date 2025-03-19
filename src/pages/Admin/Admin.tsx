@@ -11,7 +11,7 @@ import ResourcesNodeView from "@/components/Resources/NodeView";
 import AdminResourcesOverView from "./Resources/OverView";
 import OrgaGraph from "../Resources/components/OrgaGraph";
 import ProjectOutlet from "@/outlets/ProjectOutlet";
-import ProjectPage from "../Project/ProjectPage";
+import ProjectPage from "./Projects/Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";

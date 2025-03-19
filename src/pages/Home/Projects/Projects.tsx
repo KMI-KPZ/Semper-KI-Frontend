@@ -17,7 +17,7 @@ import useSearch from "@/hooks/useSearch";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
-import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
+import CreateProjectTitleForm from "@/pages/Home/Projects/CreateProjectTitleForm";
 import { AuthorizedUser } from "@/hooks/useUser";
 import useModal from "@/hooks/useModal";
 import { gradientStyle } from "@component-library/Container/GrayContainer";

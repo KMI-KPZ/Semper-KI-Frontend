@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
@@ -135,9 +135,15 @@ const ServiceManufacturingGroupOverview: React.FC<
           )}
         </Heading>
         <Hint
-          title={t(
-            `Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.hint`
-          )}
+          title={
+            <Container width="full" direction="col" className="gap-0 p-2">
+              <Text className="text-center">
+                {t(
+                  `Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.hint`
+                )}
+              </Text>
+            </Container>
+          }
         />
         <Container width="full">
           {!open ? (

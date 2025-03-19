@@ -31,11 +31,11 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <Container direction="col" width="full">
           <ServiceSelection process={process} />
           <ProcessStatusGate start={ProcessStatus.SERVICE_READY}>
+            <ServiceDetails process={process} />
+          </ProcessStatusGate>
+          <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
             <AuthorizedUserOutlet>
               <DefinedProcessOutlet>
-                <ProcessStatusGate start={ProcessStatus.SERVICE_READY}>
-                  <ServiceDetails process={process} />
-                </ProcessStatusGate>
                 <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
                   <ProcessContractorSelection />
                 </ProcessStatusGate>

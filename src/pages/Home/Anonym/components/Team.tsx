@@ -17,7 +17,7 @@ const HomeTeam: React.FC<HomeTeamProps> = (props) => {
         <Text className="text-black md:w-1/3">
           {t("Home.Anonym.partnertext")}
         </Text>
-        <Container className="w-2/3" width="none">
+        <Container className="w-2/3 rounded-md border-2 p-2" width="none">
           <HomeImgCarousel />
         </Container>
       </Container>

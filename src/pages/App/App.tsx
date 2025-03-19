@@ -128,7 +128,9 @@ const App: React.FC = () => {
               <Route path="login/redirect" element={<RedirectLogin />} />
               <Route path="register" element={<Login />} />
               <Route path="legal/*" element={<Legal />} />
-              <Route path="demo/*" element={<Demo />} />
+              <Route path="demo/*" element={<Demo />}>
+                <Route path=":serviceType" element={<Demo />} />
+              </Route>
               <Route path="projects/*">
                 <Route
                   index

@@ -4,8 +4,8 @@ import { Container, Text } from "@component-library/index";
 import IntroductionIMG from "@images/introduction.svg";
 import HomeHeader from "./Header";
 import HomeButton from "./Button";
-import UploadIcon from "@mui/icons-material/Upload";
 import SemperKIIcon from "@images/SemperKI_ListIcon.svg";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 interface HomeIntroductionProps {}
 
@@ -66,9 +66,9 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
         direction="row"
       >
         <HomeButton
-          text={t("Home.Anonym.button.testModel")}
-          icon={<UploadIcon />}
-          to="/projects"
+          text={t("Home.Anonym.button.demonstrator")}
+          icon={<RocketLaunchIcon />}
+          to="/demo"
         />
       </Container>
     </Container>

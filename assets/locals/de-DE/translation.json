@@ -1109,7 +1109,8 @@
       "button": {
         "demonstrator": "Loslegen",
         "magazin": "Zur Projektseite",
-        "testModel": "Testen Sie ihr Bauteil"
+        "testModel": "Testen Sie ihr Bauteil",
+        "manufacturing": "3D-Modell drucken lassen"
       },
       "Introduction": {
         "heading": "3D-Druck Vernetzt",
@@ -1150,20 +1151,24 @@
         "subTitle": "Erfassen Sie Ihren Bedarf durch unsere nutzerfreundlichen Fragebögen.",
         "items": {
           "0": {
-            "heading": "Anmeldung",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Service auswählen",
+            "text": "Wählen sie einen Service aus, den Sie benötigen. Wir bieten eine Vielzahl an Services an, die Sie nutzen können."
           },
           "1": {
-            "heading": "Bauteil Hochladen",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Beispiel (Modell 3D-Drucken) 3D-Modell hochladen oder auswählen",
+            "text": "Laden sie ihr eigens 3D-Modell hoch oder wählen sie ein Modell aus unserer Datenbank aus."
           },
           "2": {
-            "heading": "Fertigung wählen",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Material und Nachbearbeitung auswählen",
+            "text": "Wählen sie aus einer vielzahl von Matieralien und Nachbearbeitungen aus, die Sie für Ihr Modell benötigen."
           },
           "3": {
-            "heading": "Veredelung wählen",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Hersteller auswählen",
+            "text": "Wählen sie einen Hersteller aus, der Ihr Modell drucken soll."
+          },
+          "4": {
+            "heading": "Prozess abschließen",
+            "text": "Nachdem Sie alle Schritte abgeschlossen haben, können Sie den Prozess abschließen und Ihr Modell wird gedruckt."
           }
         },
         "button": "Fragen? Wir haben Antworten."

@@ -34,7 +34,7 @@ const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
   ) => {
     e?.preventDefault();
     close();
-    createProject.mutate(data.name);
+    createProject.mutate({ title: data.name });
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

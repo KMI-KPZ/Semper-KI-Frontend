@@ -2,8 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Heading, Text } from "@component-library/index";
 import HomeHeader from "./Header";
-import UploadIcon from "@mui/icons-material/Upload";
-import HomeButton from "./Button";
 import MatchingIMG from "@images/home_service_matching.png";
 import BenchmarkingIMG from "@images/home_service_benchmarking.png";
 import QuestionnaireIMG from "@images/home_service_questionnaire.png";
@@ -90,18 +88,6 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
             />
           ))}
         </Container>
-      </Container>
-      <Container
-        width="full"
-        justify="center"
-        className=" lg:pr-30 justify-center md:justify-end md:pr-20"
-        direction="row"
-      >
-        <HomeButton
-          text={t("Home.Anonym.button.testModel")}
-          icon={<UploadIcon />}
-          to="/projects"
-        />
       </Container>
     </Container>
   );

@@ -66,7 +66,13 @@
       "verifyEMail": "Verify email",
       "manufacturing": "Have it manufactured",
       "projects": "My projects",
-      "project": "Project"
+      "project": "Project",
+      "additionalRequirement": "Post-processing(s) #",
+      "characterisation": "Verification #",
+      "costing": "Costs #",
+      "dashboard": "Dashboard #",
+      "maturity": "Maturity level #",
+      "resilience": "Resilience #"
     }
   },
   "enum": {
@@ -101,6 +107,7 @@
       "CONTRACTOR_COMPLETED": "Contractor selected",
       "VERIFYING_IN_PROGRESS": "Verification is ongoing",
       "VERIFYING_COMPLETED": "Review completed",
+      "VERIFICATION_FAILED": "Verification failed #",
       "REQUEST_COMPLETED": "Scripts sent",
       "OFFER_COMPLETED": "Offer sent",
       "OFFER_REJECTED": "Requested request",
@@ -169,6 +176,12 @@
       "MEDIUM": "Medium",
       "MEDIUM_HIGH": "Medium-High",
       "HIGH": "High"
+    },
+    "CharacterisationStatus": {
+      "REQUESTED": "Requested #",
+      "SEND": "Sent #",
+      "UNVERIFIED": "Unverified #",
+      "VERIFIED": "Checked #"
     }
   },
   "types": {
@@ -288,7 +301,12 @@
       "textarea": "Text field",
       "color": "Color",
       "number": "Number",
-      "multiselection": "Multiple selection"
+      "multiselection": "Multiple selection",
+      "tensileStrength": "Tensile strength #",
+      "materialType": "Material type #",
+      "density": "Density #",
+      "elongationAtBreak": "Elongation at break #",
+      "certificates": "Certificates #"
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Please select/upload a model",
@@ -297,7 +315,12 @@
       "Process-Contractor": "Please select a contractor",
       "Process-Address-Billing": "Please select a billing address",
       "Process-Address-Deliver": "Please select a delivery address",
-      "Process-ServiceType": "Please select a service"
+      "Process-ServiceType": "Please select a service",
+      "Process-ContractFiles": "Please upload a contract #",
+      "Process-Dependency": "Process is waiting for other process(es) #",
+      "Process-Payment": "Please upload an invoice #",
+      "Process-VerificationFailed": "Please update input data #",
+      "Service-VerificationFailed": "The FEM verification failed, you are still free to send the request #"
     },
     "EventDataReason": {
       "messages": "News",
@@ -314,6 +337,35 @@
       "test": "Test",
       "roleChanged": "Role Changed",
       "userDeleted": "User Deleted"
+    },
+    "ContractorsErrorType": {
+      "color": "The selected color is currently not available from any contractor #",
+      "material": "The selected material is currently not available from any contractor #",
+      "postProcessing": "The selected post-processing(s) are currently not available from any contractor #",
+      "printer": "There is no contractor who can print your model in this size #"
+    },
+    "FemTestType": {
+      "compression": "Compression #",
+      "elongation": "Elongation #"
+    },
+    "ProcessOrigin": {
+      "Completed": "Completed #",
+      "Contract": "Contract #",
+      "ContractFiles": "Contract files #",
+      "Contractor": "Contractor #",
+      "Delivery": "Delivery #",
+      "PaymentFiles": "Invoice #",
+      "Production": "Production #",
+      "Request": "Request #",
+      "ServiceDetails": "Service details #",
+      "ServiceSelection": "Service selection #",
+      "Verification": "Verification #"
+    },
+    "ProcessVerificationResultFEMError": {
+      "BREAKS": "The model breaks under the load #",
+      "ERROR": "Error in calculation #",
+      "MATERIAL": "The selected material has no FEM data #",
+      "MODEL": "The selected model threw an error in calculation #"
     }
   },
   "general": {
@@ -341,6 +393,8 @@
     "total": "In total",
     "min": "Min",
     "max": "Max.",
+    "saving": "Will be saved #",
+    "waiting": "Waiting #",
     "button": {
       "clone": "Duplicate",
       "select": "Choose",
@@ -368,7 +422,21 @@
       "reset": "Reset",
       "submit": "Send",
       "download": "Download",
-      "search": "Search"
+      "search": "Search",
+      "client": "Client #",
+      "contractor": "Contractor #",
+      "createdBy": "Created by #",
+      "createdWhen": "Created on #",
+      "error": "Error #",
+      "fileName": "File name #",
+      "groups": "Groups #",
+      "manufacturer": "Manufacturer #",
+      "model": "Model #",
+      "next": "Next #",
+      "previous": "Previous #",
+      "updatedBy": "Updated by #",
+      "updatedWhen": "Updated on #",
+      "you": "You #"
     }
   },
   "component-library": {
@@ -465,13 +533,15 @@
       "contact": "contact",
       "data-protection": "Data protection declaration",
       "instagram": "Instagram",
-      "mastodon": "mastodon"
+      "mastodon": "mastodon",
+      "magazin": "Magazine"
     },
     "Form": {
       "NotificationForm": {
         "heading": "Notifications",
         "email": "Email",
-        "event": "Event"
+        "event": "Event",
+        "progress": "Show progress on start page #"
       },
       "PrioritiesForm": {
         "header": "Priorities",
@@ -480,7 +550,10 @@
         "points": "Free points: {{freePoints}}",
         "low": "Low",
         "medium": "Medium",
-        "high": "High"
+        "high": "High",
+        "button": {
+          "save": "Sort contractors #"
+        }
       },
       "AddressForm": {
         "header": "Edit address",
@@ -600,6 +673,10 @@
     "Process": {
       "Container": {
         "ActionContainer": {
+          "backConfirm": "Do you really want to take a step back? #",
+          "backConfirm2": "All information from the current step is lost. #",
+          "backConfirm3": "(but not the information from the previous steps) #",
+
           "heading": "Torrent",
           "noButtonsClient": "No tooth available. ",
           "noButtonsContractor": "No tooth available. ",
@@ -611,11 +688,18 @@
               "reason": "Reason"
             }
           }
+        },
+        "Header": {
+          "deleteConfirm": "Do you really want to delete this step? #",
+          "deleteConfirm2": "All information from the previous and this step is lost. #",
+          "editConfirm": "Do you really want to edit this step? #",
+          "editConfirm2": "All information from the previous step is lost. #"
         }
       },
       "File": {
         "components": {
           "FileTable": {
+            "origin": "Origin #",
             "noFiles": "No files available",
             "name": "Name",
             "type": "Type",
@@ -650,6 +734,9 @@
         }
       },
       "ContractorCard": {
+        "distance": "Distance: {{distance}} km #",
+        "noDistance": "not available #",
+        "verified": "Verified #",
         "priceRange": "Price range"
       },
       "Menu": {
@@ -709,7 +796,19 @@
         "general": "General information",
         "nodeName": "Name",
         "context": "Description",
-        "confirmDraft": "Are you sure you want to select this template?\n "
+        "confirmDraft": "Are you sure you want to select this template?\n ",
+        "errorLoadingRalColors": "Error loading RAL colors #",
+        "hexColors": "Colors #",
+        "materialCategory": "Material category #",
+        "materialType": "Material type #",
+        "noHexColors": "No color selected #",
+        "noMaterialCategories": "No material category found #",
+        "noMaterialCategory": "Keine Materialkategorie ausgewählt #",
+        "noMaterialType": "No material category selected #",
+        "noMaterialTypes": "No material types found #",
+        "noRalColor": "No RAL color selected #",
+        "or": "or #",
+        "ralColors": "RAL color codes #"
       },
       "NodeTable": {
         "subHeading": "Own {{name}}",
@@ -780,6 +879,7 @@
     "useStatusButtons": {
       "NONE": "Translation error",
       "DELETE": "Delete process",
+      "DELETE_PROCESS": "Delete process",
       "BACK-TO-SERVICE_READY": "Back",
       "BACK-TO-DRAFT": "Back",
       "BACK-TO-SERVICE_COMPLETED": "Back",
@@ -1027,7 +1127,8 @@
       "button": {
         "demonstrator": "Get started",
         "magazin": "To the project page",
-        "testModel": "Test your component"
+        "testModel": "Test your component",
+        "manufacturing": "Have a 3D model printed #"
       },
       "Introduction": {
         "heading": "Connected 3D Printing",
@@ -1063,23 +1164,32 @@
         "subTitle": "Capture your needs with our user-friendly questionnaires.",
         "items": {
           "0": {
-            "heading": "Registration",
-            "text": "We make 3D printing usable for everyone.  "
+            "heading": "Select service",
+            "text": "Choose the service you need. We offer a wide range of services that you can use."
           },
           "1": {
-            "heading": "Upload the component",
-            "text": "We make 3D printing usable for everyone.  "
+            "heading": "Example (3D print model) Upload or select 3D model",
+            "text": "Upload your own 3D model or select a model from our database."
           },
           "2": {
-            "heading": "Choose production",
-            "text": "We make 3D printing usable for everyone.  "
+            "heading": "Select material and post-processing",
+            "text": "Choose from a wide range of materials and finishes that you need for your model."
           },
           "3": {
-            "heading": "Choose finishing",
-            "text": "We make 3D printing usable for everyone.  "
+            "heading": "Select manufacturer",
+            "text": "Select a manufacturer to print your model."
+          },
+          "4": {
+            "heading": "Finalize process",
+            "text": "Once you have completed all the steps, you can finalize the process and your model will be printed."
           }
         },
         "button": "Questions? "
+      },
+      "Maturity": {
+        "button": "To the questionnaire #",
+        "heading": "The maturity model #",
+        "text": "The Supply Chain Collaboration Maturity Assessment is a structured framework for evaluating the effectiveness of collaboration between supply chain participants. This quick and practical tool helps companies assess their readiness to collaborate seamlessly with suppliers, partners and customers to improve efficiency and performance. With six maturity levels, the assessment provides a clear benchmark to identify strengths and areas for improvement. By measuring key aspects such as trust, transparency, integration and shared value, companies gain actionable insights to improve collaboration and optimize supply chain operations. #"
       }
     },
     "components": {
@@ -1155,7 +1265,8 @@
           "lang": "Set language"
         },
         "button": {
-          "orga": "Profile"
+          "orga": "Profile",
+          "hide": "Hide #"
         }
       }
     },
@@ -1201,8 +1312,20 @@
         "processErrors": "Torrent",
         "noErrors": "No interactions required",
         "status": "status",
+        "addDependencie": "Add dependency #",
+        "dependenciesIn": "Incoming dependencies #",
+        "dependenciesInHeading": "Previous processes: #",
+        "dependenciesOut": "Outgoing dependencies #",
+        "dependenciesOutHeading": "Subsequent processes: #",
+        "dependenciesTable": {
+          "name": "Process name #",
+          "processStatus": "Process status #",
+          "selected": "Selected #",
+          "serviceType": "Servicetyp #"
+        },
         "button": {
-          "clone": "Duplicate process in a new project"
+          "clone": "Duplicate process in a new project",
+          "addDependencie": "Add dependency #"
         }
       }
     }
@@ -1330,12 +1453,88 @@
       "google-web-fonts": "Google Web Fonts",
       "google-web-fonts-info": "This page uses so -called web fonts to present fonts that are provided by Google. "
     },
+    "Nda": {
+      "1": {
+        "heading": "Confidentiality of the uploaded models #",
+        "text": "We undertake to treat all uploaded 3D models and related information as strictly confidential. #"
+      },
+      "2": {
+        "heading": "No disclosure to third parties #",
+        "text": "Your files will not be passed on to third parties, sold or used for purposes other than those stated. #"
+      },
+      "3": {
+        "heading": "Access restriction #",
+        "text": "Access to your data is only permitted to authorized employees who need it to fulfill your request. #"
+      },
+      "4": {
+        "heading": "Storage and deletion #",
+        "text": "Uploaded files are only stored for as long as is necessary for processing. If desired, they can be deleted immediately after completion. #"
+      },
+      "5": {
+        "heading": "Exceptions #",
+        "text": "This confidentiality agreement does not apply to information that is already in the public domain or has been legally provided to us by third parties. #"
+      },
+      "heading": "NDA guideline (non-disclosure agreement) #"
+    },
+    "PrivacyPolicy": {
+      "1": {
+        "heading": "General Information #",
+        "text": "This privacy policy explains what data we collect, how we process it, and what rights you have. #"
+      },
+      "2": {
+        "heading": "Collected Data #",
+        "text1": "Uploaded 3D models #",
+        "text2": "Username, email address (if required) #",
+        "text3": "Usage data of our website #"
+      },
+      "3": {
+        "heading": "Purpose of Data Use #",
+        "text1": "Processing and storing uploaded models #",
+        "text2": "Improving our services #",
+        "text3": "Communication with you (if necessary) #"
+      },
+      "4": {
+        "heading": "Data Security #",
+        "text": "We use technical and organizational measures to protect your data from unauthorized access. #"
+      },
+      "5": {
+        "heading": "User Rights #",
+        "text": "You have the right to access your stored data, have it corrected or deleted. Contact us at info@semper-ki.org. #"
+      },
+      "heading": "Privacy Policy #"
+    },
+    "TermsOfService": {
+      "1": {
+        "heading": "General Provisions #",
+        "text": "By using our platform, you agree to these terms of service. #"
+      },
+      "2": {
+        "heading": "Use of the Platform #",
+        "text": "You may only upload 3D models for which you have the necessary rights. You are solely responsible for the content of the uploaded files. #"
+      },
+      "3": {
+        "heading": "Copyright and Disclaimer #",
+        "text": "We assume no liability for copyright infringements by users. If a copyright infringement is reported, we reserve the right to remove the affected model. #"
+      },
+      "4": {
+        "heading": "Storage and Deletion of Content #",
+        "text": "We reserve the right to automatically delete uploaded files after a certain period or to remove them upon request. #"
+      },
+      "5": {
+        "heading": "Changes to the Terms of Service #",
+        "text": "These terms may be changed at any time. The current version is always available on our website. #"
+      },
+      "heading": "Terms of Service #"
+    },
     "Legal": {
       "heading": "Legal",
       "button": {
         "imprint": "Imprint",
         "privacy": "Privacy Policy",
-        "contact": "Contact"
+        "contact": "Contact",
+        "nda": "NDA Guideline #",
+        "privacyPolice": "Privacy policy #",
+        "termsOfService": "Terms of use #"
       }
     }
   },
@@ -1524,6 +1723,20 @@
         "heading": "Offer",
         "button": {
           "menu": "Offer menu"
+        },
+        "acceptedClient": "Confirmed by client #",
+        "acceptedContractor": "Confirmed by client and contractor #",
+        "isContract": "Available #",
+        "noContract": "Not available #",
+        "rejectedClient": "Rejected by client #",
+        "rejectedContractor": "Confirmed by client and rejected by contractor #",
+        "ContractUpload": {
+          "button": {
+            "upload": "Upload contract #"
+          },
+          "heading": "Upload contract #",
+          "noUploadedContracts": "No contracts uploaded #",
+          "uploadedContracts": "Uploaded contracts #"
         }
       },
       "ContractorSelection": {
@@ -1537,7 +1750,8 @@
           "menu": "Manufacturer Menu",
           "selectAddress": "Select address",
           "select": "Select contractor",
-          "edit": "Edit contractors"
+          "edit": "Edit contractors",
+          "costOverview": "Your cost breakdown #"
         },
         "components": {
           "AddressCard": {
@@ -1562,7 +1776,13 @@
           "ContractorList": {
             "heading": "Contractor selection",
             "contractors": "Contractors ranked by their priorities",
-            "noContractorFound": "No contractor found"
+            "noContractorFound": "No contractor found",
+            "errors": "Note #",
+            "noVerifiedContractorFound": "No verified contractor found #",
+            "onlyVerified": "Show only verified contractors #"
+          },
+          "Costs": {
+            "heading": "Cost breakdown #"
           }
         }
       },
@@ -1570,13 +1790,30 @@
         "heading": "Delivery",
         "button": {
           "menu": "Delivery menu"
-        }
+        },
+        "completed": "Completed #",
+        "DeliveryUpload": {
+          "button": {
+            "upload": "Upload invoice #"
+          },
+          "heading": "Upload invoice #",
+          "noUploadedRecipes": "No invoice uploaded #",
+          "uploadedRecipes": "Uploaded invoice #"
+        },
+        "failed": "Failed #",
+        "inProgress": "In progress #",
+        "isFile": "Invoice uploaded #",
+        "noFile": "No invoice uploaded #"
       },
       "Production": {
         "heading": "Production",
         "button": {
           "menu": "Production menu"
-        }
+        },
+        "completed": "Completed #",
+        "failed": "Failed #",
+        "inProgress": "In progress #",
+        "ready": "Ready #"
       },
       "Request": {
         "heading": "Inquiry",
@@ -1625,6 +1862,10 @@
         "ServiceDetails": {
           "dummy": "Dummy service",
           "dummy2": "Service not yet",
+          "group_one": "one group #",
+          "group_other": "{{count}} groups #",
+          "model_one": "with a total of one model #",
+          "model_other": "with a total of {{count}} models #",
           "components": {
             "Manufacturing": {
               "heading": {
@@ -1645,7 +1886,10 @@
                 "name": "Name:",
                 "type": "Type:",
                 "cost": "Medium acquisition costs:",
-                "properties": "Characteristics:"
+                "properties": "Characteristics:",
+                "fem": "FEM Analysis #",
+                "femValue": "{{testType}} with {{pressure}} MPa #",
+                "size": "Size: #"
               },
               "GroupOverview": {
                 "heading": "Group overview",
@@ -1658,7 +1902,10 @@
                 "model": "Model (E)",
                 "material": "Material",
                 "postProcessing": "Post-processing(s)",
-                "newGroup": "New group"
+                "newGroup": "New group",
+                "group_one": "one group #",
+                "group_other": "{{count}} groups #",
+                "hint": "A group consists of a material and one or more models and post-processings. All groups go to the same manufacturer. #"
               },
               "ModelCard": {
                 "img": "Fashion picture",
@@ -1668,7 +1915,8 @@
                 "dimensions": "Mass",
                 "complexity": "complexity",
                 "surface": "Surface",
-                "volume": "Volume"
+                "volume": "Volume",
+                "color": "Color:"
               },
               "PostProcessingCard": {
                 "name": "Name",
@@ -1688,6 +1936,10 @@
                 "deleteModel": "Delete model",
                 "deleteMaterial": "Delete material",
                 "deletePostProcessing": "Delete post-processing"
+              },
+              "FreeText": {
+                "heading": "Comment/Free text for additional information #",
+                "placeholder": "Here you can leave additional information for the manufacturer... #"
               }
             }
           }
@@ -1701,7 +1953,13 @@
               },
               "components": {
                 "Card": {
-                  "props": "Characteristics"
+                  "props": "Characteristics",
+                  "colors": "Colors #",
+                  "noColorProps": "No properties available #",
+                  "noColors": "No colors available #"
+                },
+                "Filter": {
+                  "heading": "Filter / Specifications #"
                 }
               }
             },
@@ -1713,7 +1971,12 @@
               },
               "components": {
                 "Card": {
-                  "license": "License"
+                  "certificates": "Certificates #",
+                  "complexity": "Complexity #",
+                  "levelOfDetail": "Level of detail #",
+                  "license": "License #",
+                  "size": "Size #",
+                  "tags": "Tags #"
                 },
                 "Item": {
                   "created": "Created on",
@@ -1739,6 +2002,12 @@
                 "loading": "Model is being uploaded",
                 "heading": "Upload your own models",
                 "text": "via drag & drop or click",
+                "disclaimer": "By uploading, you confirm that you have the rights to use this model and agree to our terms of service and privacy policy.#",
+                "disclaimer2": "By proceeding, you confirm that you own this 3D model or have permission to use it. We are not liable for copyright infringements. Additionally, we handle your data securely and do not share your files. For more information, see our NDA policy.#",
+                "disclaimerCheckBox": "I agree to the terms mentioned above.#",
+                "nda": "NDA Guideline #",
+                "privacyPolicy": "Privacy Policy #",
+                "termsOfService": "Terms of Service #",
                 "error": {
                   "tags": "Error tags",
                   "licenses": "no license(s) specified",
@@ -1749,6 +2018,9 @@
                   "upload": "Upload the model"
                 },
                 "components": {
+                  "LoadingScreen": {
+                    "heading": "Model(s) are being uploaded and analyzed #"
+                  },
                   "Card": {
                     "name": "name",
                     "size": "Size",
@@ -1768,6 +2040,14 @@
                     "license": "License of the file *",
                     "licensePH": "License1, License2...",
                     "mandatory": "* Required field",
+                    "elongation": "Elongation #",
+                    "fem": "FEM Analysis #",
+                    "fem_pressure": "Pressure #",
+                    "fem_testType": "Test type #",
+                    "femHint": "The FEM analysis roughly simulates whether the component breaks under the given pressure. #",
+                    "femLabel": "Perform #",
+                    "compression": "Compression #",
+                    "noLicense": "No license #",
                     "button": {
                       "saveAll": "Apply to all models"
                     }
@@ -1851,6 +2131,7 @@
       },
       "Verify": {
         "heading": "Check the process",
+        "serviceReady": "Service verification failed! Inputs no longer up-to-date #",
         "button": {
           "menu": "Review menu"
         },
@@ -1858,16 +2139,20 @@
           "VerifyCard": {
             "error": "Cause:",
             "heading": {
-              "PRINTABILITY": "Printability",
-              "DRAFT": "Design review",
-              "CAPACITY": "Capacity test",
-              "STABILITY": "Stability test"
+              "PRINTABILITY": "Printability #",
+              "DRAFT": "Design review #",
+              "CAPACITY": "Capacity test #",
+              "STABILITY": "Stability test #",
+              "FEM": "FEM analysis #",
+              "PROCESS": "Process review #"
             },
             "description": {
               "PRINTABILITY": "Checking the printability of your 3D model using AI",
               "DRAFT": "Checking the feasibility of your design ",
               "CAPACITY": "Checking the manufacturer's capacity",
-              "STABILITY": "Checking the stability of the 3D model design"
+              "STABILITY": "Checking the stability of the 3D model design",
+              "FEM": "Check whether the component breaks under the given pressure.#",
+              "PROCESS": "Check the process for validity.#"
             }
           },
           "VerifyStatus": {
@@ -1918,7 +2203,8 @@
       "subTitle": "Create a new API token to access the Semper-KI API",
       "subTitle2": "The token is only displayed once and cannot be restored.\n ",
       "button": {
-        "reCreate": "Recreate"
+        "reCreate": "Recreate",
+        "link": "Open Swagger #"
       }
     },
     "Locals": {
@@ -2068,7 +2354,11 @@
         "costing": "Cost",
         "request": "Data expansion",
         "graph": "Graph",
-        "privat-graph": "Private graph"
+        "privat-graph": "Private graph",
+        "characterisation": "Verification #",
+        "colors": "Colors #",
+        "maturity": "Maturity level #",
+        "resilience": "Resilience #"
       },
       "Table": {
         "action": "Actions",
@@ -2092,12 +2382,47 @@
       "noItems": "No costs available",
       "noItemsWithFilter": "There are no costs with the selected filters"
     },
+    "Characterisation": {
+      "actions": "Actions #",
+      "button": {
+        "downloadDetails": "Download details #",
+        "downloadInstructions": "Download instructions #",
+        "downloadModel": "Download model #",
+        "reverified": "Re-verify #",
+        "send": "Send model #",
+        "verify": "Verify #"
+      },
+      "describtion": "Here you can verify your capabilities by printing a characterization part and sending it to our partner (Fraunhofer IWU). You will then receive feedback on the quality of your print and it will be displayed in the customer's selection that you are verified. The verification refers to a pair of printer and material. #",
+      "header": "Verification #",
+      "material": "Material #",
+      "noItems": "No verifications/printer-material pairs available #",
+      "noItemsWithFilter": "No verifications/printer-material pairs available with the selected filters #",
+      "printer": "3D printer #",
+      "verified": "Verified #"
+    },
     "Materials": {
       "header": "Materials",
       "own": "Own materials",
       "button": {
         "createOwn": "Create material"
       }
+    },
+    "Maturity": {
+      "assessmentBlockId": "Name #",
+      "blocks": "Additional information #",
+      "blocksValue": "Value #",
+      "button": {
+        "calculate": "Determine maturity level #",
+        "recalculate": "Recalculate maturity level #"
+      },
+      "describtion": "The maturity model is used to assess the maturity level of your company to support you in digitization and connect you with partners who have a similar level as you. Advantages on the platform: more accurate customer allocation and higher visibility of the company #",
+      "header": "Maturity level #",
+      "header2": "Evaluation #",
+      "level": "Maturity level: #",
+      "noLevel": "not yet determined #",
+      "noRecommendations": "no recommendations available #",
+      "recommendations": "Recommendations #",
+      "value": "Value #"
     },
     "Overview": {
       "header": "Overview",
@@ -2124,6 +2449,23 @@
       "button": {
         "new": "New request"
       }
+    },
+    "Resilience": {
+      "assessmentBlockId": "Name #",
+      "blocks": "Additional information #",
+      "blocksValue": "Value #",
+      "button": {
+        "calculate": "Determine resilience #",
+        "recalculate": "Recalculate resilience #"
+      },
+      "describtion": "The resilience value indicates how well your company is prepared for crises and how quickly it can recover from crises. #",
+      "header": "Resilience #",
+      "header2": "Evaluation #",
+      "level": "Resilience value: #",
+      "noLevel": "not yet determined #",
+      "noRecommendations": "no recommendations available #",
+      "recommendations": "Recommendations #",
+      "value": "Value #"
     }
   },
   "Test": {

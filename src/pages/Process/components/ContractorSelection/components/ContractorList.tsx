@@ -99,14 +99,36 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
           )}
         </label>
       </Container>
-
       {contractors.data !== undefined &&
-      contractors.data.filter((contractor) =>
+      contractors.data.errors !== undefined &&
+      contractors.data.errors.length > 0 ? (
+        <Container
+          width="fit"
+          direction="col"
+          className="gap-0 rounded-md border-2 border-orange-500"
+        >
+          <Heading variant="h3" className="p-3">
+            {t(
+              "Process.components.ContractorSelection.components.ContractorList.errors"
+            )}
+          </Heading>
+          <Divider />
+          {contractors.data.errors.map((error, index) => (
+            <Text key={index} className="p-3">
+              {t("general.group")} {error.groupID + 1}
+              {": "}
+              {t(`types.ContractorsErrorType.${error.error}`)}
+            </Text>
+          ))}
+        </Container>
+      ) : null}
+      {contractors.data !== undefined &&
+      contractors.data.contractors.filter((contractor) =>
         onlyVerified ? contractor.verified : true
       ).length > 0 ? (
         <form className="flex flex-col items-center justify-start gap-5">
           <Container direction="col" width="full">
-            {contractors.data
+            {contractors.data.contractors
               .filter((contractor) =>
                 onlyVerified ? contractor.verified : true
               )
@@ -132,7 +154,9 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
       ) : (
         <Text>
           {t(
-            "Process.components.ContractorSelection.components.ContractorList.noContractorFound"
+            onlyVerified
+              ? "Process.components.ContractorSelection.components.ContractorList.noVerifiedContractorFound"
+              : "Process.components.ContractorSelection.components.ContractorList.noContractorFound"
           )}
         </Text>
       )}

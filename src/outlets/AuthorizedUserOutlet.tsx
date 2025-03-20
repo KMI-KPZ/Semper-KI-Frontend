@@ -4,6 +4,7 @@ import useUser, { AuthorizedUser, UserType } from "@/hooks/useUser";
 import { Button, Container } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { UseQueryResult } from "@tanstack/react-query";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface AuthorizedUserOutletProps {}
 
@@ -39,13 +40,24 @@ const AuthorizedUserOutlet: React.FC<
   ) : children === undefined ? (
     <Navigate to={`/login?redirectURL=${pathname}`} />
   ) : (
-    <Container direction="col" className=" bg-white p-5" width="full">
-      <h1>{t("outlets.AuthorizedUserOutlet.login")}</h1>
-      <Button
-        title={t("outlets.AuthorizedUserOutlet.button.login")}
-        variant="primary"
-        to={`/login?redirectURL=${pathname}`}
-      />
+    <Container
+      direction="col"
+      className="  p-5"
+      style={gradientStyle}
+      width="full"
+    >
+      <Container
+        width="full"
+        direction="col"
+        className="gap-5 rounded-md bg-white p-5"
+      >
+        <h1>{t("outlets.AuthorizedUserOutlet.login")}</h1>
+        <Button
+          title={t("outlets.AuthorizedUserOutlet.button.login")}
+          variant="primary"
+          to={`/login?redirectURL=${pathname}`}
+        />
+      </Container>
     </Container>
   );
 };

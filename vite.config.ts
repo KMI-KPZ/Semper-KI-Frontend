@@ -17,5 +17,7 @@ export default defineConfig({
   },
   build:{
     outDir: 'build',
+  },   define: {
+    __APP_VERSION__: JSON.stringify(Date.now()), // Use a timestamp to force reload
   }
 });

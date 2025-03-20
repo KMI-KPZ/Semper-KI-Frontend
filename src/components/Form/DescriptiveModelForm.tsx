@@ -148,7 +148,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
           groupID: groupID,
           processID,
           projectID,
-          origin: "Service",
+          origin: "ServiceDetails",
           ...data,
           name: data.fileName,
           tags: data.tags.split(","),

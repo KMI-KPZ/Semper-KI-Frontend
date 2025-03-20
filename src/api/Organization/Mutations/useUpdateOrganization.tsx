@@ -34,10 +34,28 @@ export interface UpdateOrgaChanges {
   taxID?: string;
   priorities?: UpdatePriorities;
   services?: OrganizationService;
+  todos?: {
+    show: boolean;
+  };
 }
 
 export interface UpdatePriorities {
-  [key: string]: {
+  cost?: {
+    value: number;
+  };
+  time?: {
+    value: number;
+  };
+  quality?: {
+    value: number;
+  };
+  quantity?: {
+    value: number;
+  };
+  resilience?: {
+    value: number;
+  };
+  sustainability?: {
     value: number;
   };
 }

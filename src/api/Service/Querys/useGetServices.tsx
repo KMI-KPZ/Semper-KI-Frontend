@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
+import { ModelingServiceProps } from "@/pages/Process/components/ServiceDetails/ServiceEdit/Modelling/Modelling";
 import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";

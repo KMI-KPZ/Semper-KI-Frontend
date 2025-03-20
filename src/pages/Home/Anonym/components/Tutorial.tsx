@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Container, Heading, Text } from "@component-library/index";
 import HomeHeader from "./Header";
 import YouTube from "react-youtube";
-import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import HomeButton from "./Button";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
 
 interface HomeTutorialProps {}
 
@@ -43,6 +43,12 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
       title: t("Home.Anonym.Tutorial.items.3.heading"),
       description: t("Home.Anonym.Tutorial.items.3.text"),
     },
+    {
+      id: 5,
+      id2: 5,
+      title: t("Home.Anonym.Tutorial.items.4.heading"),
+      description: t("Home.Anonym.Tutorial.items.4.text"),
+    },
   ];
 
   const sortItemsID = (a: TutorialItem, b: TutorialItem) => {
@@ -72,8 +78,9 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
           <Container
             key={index}
             className={`relative px-10`}
-            width="none"
+            width="full"
             direction="col"
+            items="start"
           >
             <Heading variant="h3" className="w-full hyphens-auto text-white">
               {item.title}
@@ -96,6 +103,7 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
             className={`relative w-1/2 px-10`}
             width="none"
             direction="col"
+            items="start"
           >
             <Heading variant="h3" className="w-full hyphens-auto text-white">
               {item.title}
@@ -114,9 +122,9 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
         direction="row"
       >
         <HomeButton
-          text={t("Home.Anonym.Tutorial.button")}
-          icon={<ContactSupportIcon />}
-          to="/projects"
+          text={t("Home.Anonym.button.manufacturing")}
+          icon={<ViewInArIcon />}
+          to="/demo/1"
         />
       </Container>
     </Container>

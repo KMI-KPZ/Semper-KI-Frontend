@@ -1,17 +1,18 @@
-import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import {
+  ProcessOrigin,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import ActionContainer from "@/components/Process/Container/ActionContainer/ActionContainer";
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 import ProcessContainerHeader from "./Header";
 import GrayContainer from "@component-library/Container/GrayContainer";
 
 interface ProcessContainerProps {
-  id: string;
+  id: ProcessOrigin;
   className?: string;
-  menuChildren?: ReactNode;
-  menuButtonTitle: string;
-  pageTitle: string;
   start: ProcessStatus;
+  titleAddition?: string;
   end?: ProcessStatus;
   showDelete?: boolean;
 }
@@ -24,27 +25,32 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
     id,
     className = "",
     end,
-    menuButtonTitle,
-    pageTitle,
+    titleAddition = "",
     start,
-    menuChildren,
     showDelete = false,
   } = props;
+
+  const [open, setOpen] = React.useState(true);
+
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
+  };
 
   return (
     <>
       <GrayContainer
+        open={open}
         direction="col"
         width="full"
         className={twMerge("relative rounded-md  ", className)}
         id={id}
         headerChildren={
           <ProcessContainerHeader
-            menuButtonTitle={menuButtonTitle}
-            pageTitle={pageTitle}
-          >
-            {menuChildren}
-          </ProcessContainerHeader>
+            id={id}
+            open={open}
+            toggleOpen={toggleOpen}
+            titleAddition={titleAddition}
+          />
         }
       >
         {children}

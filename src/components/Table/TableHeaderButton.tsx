@@ -1,15 +1,17 @@
 import React from "react";
 import { Button } from "@component-library/index";
+import { twMerge } from "tailwind-merge";
 
 interface TableHeaderButtonProps<T> {
   handleSort: (column: keyof T) => void;
   getSortIcon: (column: keyof T) => React.ReactNode;
   title: string;
   objectKey: keyof T;
+  className?: string;
 }
 
 const TableHeaderButton = <T,>(props: TableHeaderButtonProps<T>) => {
-  const { getSortIcon, handleSort, title, objectKey } = props;
+  const { getSortIcon, handleSort, title, objectKey, className } = props;
 
   return (
     <th>
@@ -18,9 +20,9 @@ const TableHeaderButton = <T,>(props: TableHeaderButtonProps<T>) => {
           variant="text"
           title={title}
           onClick={() => handleSort(objectKey)}
-          className="whitespace-nowrap"
+          className={twMerge(`whitespace-nowrap`, className)}
         >
-          <div className="ml-6 flex flex-row items-center justify-center">
+          <div className={`ml-6 flex flex-row items-center justify-center`}>
             {title}
             {getSortIcon(objectKey)}
           </div>

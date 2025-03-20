@@ -11,6 +11,7 @@ import ActionStatusCard from "@/components/Process/ActionStatusCard";
 import DependenciesForm from "@/components/Form/DependenciesForm";
 import { tanslateProcessErrorTypeKey } from "@/components/Process/Container/ActionContainer/components/ConditionItem";
 import ProcessImagePreview from "@/components/Process/ImagePreview";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface HomeProcessProps {
   project: DashboardProject;
@@ -60,7 +61,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
       width="full"
       direction="col"
       justify="start"
-      className="m-0 gap-0 px-5 py-2"
+      className="m-0 gap-0 rounded-md bg-white "
     >
       <Container width="full" direction="row">
         {process.dependenciesIn.length > 0 ? (
@@ -87,8 +88,11 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
         justify="between"
         className="m-0 px-5 py-2"
       >
-        <ProcessImagePreview process={process} size="md" />
-        <table className="w-fit table-auto border-separate border-spacing-x-2">
+        <ProcessImagePreview process={process} size="md" className="shrink-0" />
+        <table
+          className="w-full
+         table-auto border-separate border-spacing-x-2"
+        >
           <tbody>
             <tr>
               <th className="text-left">{t("Home.Projects.Process.name")}</th>
@@ -155,137 +159,143 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                       <Container
                         width="full"
                         key={index}
-                        className="rounded-md border-2 p-1"
+                        className="rounded-md  bg-ultramarinblau-dark p-0 text-white"
                       >
-                        <table className="w-full table-auto border-collapse">
-                          <tbody>
-                            <tr>
-                              <th className="" colSpan={2}>
-                                {service.name === undefined
-                                  ? t(`Home.Projects.Process.groupName`, {
-                                      count: index + 1,
-                                    })
-                                  : service.name}
-                              </th>
-                            </tr>
-                            <tr>
-                              <th className="px-2 text-left align-text-top">
-                                {t("Home.Projects.Process.models")}
-                              </th>
-                              <td className="px-2">
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  items="start"
-                                  className="gap-0"
-                                >
-                                  {service.models.length > 0 &&
-                                  service.models !== undefined ? (
-                                    service.models.map((model, index) => (
-                                      <Text
-                                        key={index}
-                                      >{`•  ${model.quantity}x ${model.fileName}`}</Text>
-                                    ))
-                                  ) : process.processErrors.find(
-                                      (error) =>
-                                        error.groupID !== undefined &&
-                                        error.groupID === index &&
-                                        error.key ===
-                                          "Service-ADDITIVE_MANUFACTURING-models"
-                                    ) !== undefined ? (
-                                    <Button
-                                      title={`
+                        <Container
+                          width="full"
+                          style={gradientStyle}
+                          className="rounded-md  p-1"
+                        >
+                          <table className="w-full table-auto border-collapse ">
+                            <tbody>
+                              <tr>
+                                <th className="" colSpan={2}>
+                                  {service.name === undefined
+                                    ? t(`Home.Projects.Process.groupName`, {
+                                        count: index + 1,
+                                      })
+                                    : service.name}
+                                </th>
+                              </tr>
+                              <tr>
+                                <th className="px-2 text-left align-text-top">
+                                  {t("Home.Projects.Process.models")}
+                                </th>
+                                <td className="px-2">
+                                  <Container
+                                    width="full"
+                                    direction="col"
+                                    justify="start"
+                                    items="start"
+                                    className="gap-0"
+                                  >
+                                    {service.models.length > 0 &&
+                                    service.models !== undefined ? (
+                                      service.models.map((model, index) => (
+                                        <Text
+                                          key={index}
+                                        >{`•  ${model.quantity}x ${model.fileName}`}</Text>
+                                      ))
+                                    ) : process.processErrors.find(
+                                        (error) =>
+                                          error.groupID !== undefined &&
+                                          error.groupID === index &&
+                                          error.key ===
+                                            "Service-ADDITIVE_MANUFACTURING-models"
+                                      ) !== undefined ? (
+                                      <Button
+                                        title={`
                                               ${t(
                                                 `types.ProcessError.Service-ADDITIVE_MANUFACTURING-models`
                                               )}
                                             `}
-                                      size="sm"
-                                      width="fit"
-                                      className="text-orange-500"
-                                      variant="text"
-                                      to={`/projects/${project.projectID}/${process.processID}#Service-ADDITIVE_MANUFACTURING-models`}
-                                    />
-                                  ) : (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th className="px-2 text-left align-text-top">
-                                {t("Home.Projects.Process.material")}
-                              </th>
-                              <td className="px-2">
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  items="start"
-                                  className="gap-0"
-                                >
-                                  {service.material !== undefined ? (
-                                    <Text>{`•  ${service.material.title}`}</Text>
-                                  ) : process.processErrors.find(
-                                      (error) =>
-                                        error.groupID !== undefined &&
-                                        error.groupID === index &&
-                                        error.key ===
-                                          "Service-ADDITIVE_MANUFACTURING-material"
-                                    ) !== undefined ? (
-                                    <Button
-                                      title={`
+                                        size="sm"
+                                        width="fit"
+                                        className="text-orange-500"
+                                        variant="text"
+                                        to={`/projects/${project.projectID}/${process.processID}#Service-ADDITIVE_MANUFACTURING-models`}
+                                      />
+                                    ) : (
+                                      <Text className="w-full text-center">
+                                        ---
+                                      </Text>
+                                    )}
+                                  </Container>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th className="px-2 text-left align-text-top">
+                                  {t("Home.Projects.Process.material")}
+                                </th>
+                                <td className="px-2">
+                                  <Container
+                                    width="full"
+                                    direction="col"
+                                    justify="start"
+                                    items="start"
+                                    className="gap-0"
+                                  >
+                                    {service.material !== undefined ? (
+                                      <Text>{`•  ${service.material.title}`}</Text>
+                                    ) : process.processErrors.find(
+                                        (error) =>
+                                          error.groupID !== undefined &&
+                                          error.groupID === index &&
+                                          error.key ===
+                                            "Service-ADDITIVE_MANUFACTURING-material"
+                                      ) !== undefined ? (
+                                      <Button
+                                        title={`
                                               ${t(
                                                 `types.ProcessError.Service-ADDITIVE_MANUFACTURING-material`
                                               )}
                                             `}
-                                      size="sm"
-                                      width="fit"
-                                      className="text-orange-500"
-                                      variant="text"
-                                      to={`/projects/${project.projectID}/${process.processID}#Service-ADDITIVE_MANUFACTURING-material`}
-                                    />
-                                  ) : (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th className="px-2 text-left align-text-top">
-                                {t("Home.Projects.Process.postProcessings")}
-                              </th>
-                              <td className="px-2 ">
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  items="start"
-                                  className="gap-0"
-                                >
-                                  {service.postProcessings.length === 0 ||
-                                  service.postProcessings === undefined ? (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  ) : (
-                                    service.postProcessings.map(
-                                      (postProcessing, index) => (
-                                        <Text
-                                          key={index}
-                                        >{`•  ${postProcessing.title}`}</Text>
+                                        size="sm"
+                                        width="fit"
+                                        className="text-orange-500"
+                                        variant="text"
+                                        to={`/projects/${project.projectID}/${process.processID}#Service-ADDITIVE_MANUFACTURING-material`}
+                                      />
+                                    ) : (
+                                      <Text className="w-full text-center">
+                                        ---
+                                      </Text>
+                                    )}
+                                  </Container>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th className="px-2 text-left align-text-top">
+                                  {t("Home.Projects.Process.postProcessings")}
+                                </th>
+                                <td className="px-2 ">
+                                  <Container
+                                    width="full"
+                                    direction="col"
+                                    justify="start"
+                                    items="start"
+                                    className="gap-0"
+                                  >
+                                    {service.postProcessings.length === 0 ||
+                                    service.postProcessings === undefined ? (
+                                      <Text className="w-full text-center">
+                                        ---
+                                      </Text>
+                                    ) : (
+                                      service.postProcessings.map(
+                                        (postProcessing, index) => (
+                                          <Text
+                                            key={index}
+                                          >{`•  ${postProcessing.title}`}</Text>
+                                        )
                                       )
-                                    )
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                                    )}
+                                  </Container>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </Container>
                       </Container>
                     ))}
                   </Container>
@@ -326,7 +336,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                               `}
                             size="sm"
                             width="fit"
-                            className="p-0 text-orange-500 md:whitespace-normal"
+                            className=" p-0 text-orange-500 md:whitespace-normal"
                             variant="text"
                             to={`/projects/${project.projectID}/${
                               process.processID
@@ -341,7 +351,11 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
           </tbody>
         </table>
 
-        <Container width="fit" direction="col" className="gap-2">
+        <Container
+          width="fit"
+          direction="col"
+          className="min-w-[200px] shrink-0 gap-2"
+        >
           <ActionStatusCard process={process} className="mb-3" />
           <Button
             title={t("general.button.open")}

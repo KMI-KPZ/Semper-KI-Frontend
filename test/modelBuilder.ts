@@ -68,7 +68,7 @@ export class ModelBuilder {
             createdBy: this.createdBy,
             createdByID: "1",
             type: "Model",
-            origin: "Service",
+            origin: "ServiceDetails",
             size: 1,
             imgPath:"",
             isFile: true,

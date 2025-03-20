@@ -13,8 +13,9 @@ export type ContainerProps = {
   id?: string;
   tabIndex?: boolean;
   style?: React.CSSProperties;
-  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   title?: string;
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
 export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
@@ -32,6 +33,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     height,
     className,
     onClick,
+    onKeyDown,
     id,
     style,
     title,
@@ -91,6 +93,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
         className
       )}
       onClick={onClick}
+      onKeyDown={onKeyDown}
       tabIndex={tabIndex === true ? 0 : undefined}
     >
       {children}

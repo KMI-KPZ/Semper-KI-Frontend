@@ -7,6 +7,8 @@ import useGetOrganizationUsers from "@/api/Organization/Querys/useGetOrganizatio
 import { HomeProgressItemData } from "./ProgressItem";
 import HomeContainer from "./Container";
 import Flowchart from "./FlowChart";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface HomeOrgaAccountProgressProps {}
 
@@ -18,6 +20,7 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
     organization.hashedID
   );
   const userQuery = useGetOrganizationUsers();
+  const updateOrga = useUpdateOrganization();
 
   const items: HomeProgressItemData[] = [
     {
@@ -93,12 +96,23 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
     setShowFlow((prev) => !prev);
   };
 
+  const handleOnButtonClickHide = () => {
+    updateOrga.mutate({
+      changes: {
+        todos: { show: false },
+      },
+    });
+  };
+
   return (
-    <HomeContainer>
-      <Heading variant="h2">
+    <HomeContainer
+      style={gradientStyle}
+      className="rounded-md bg-transparent text-white"
+    >
+      <Heading variant="h2" className="text-white">
         {t("Home.components.HomeOrgaAccountProgress.todo")}
       </Heading>
-      <Text className="text-black">
+      <Text className="text-white">
         {t("Home.components.HomeOrgaAccountProgress.progress", {
           count: items.filter((item) => item.finished).length,
           total: items.length,
@@ -108,7 +122,7 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
       <Container width="full" direction="row" justify="center">
         <Button
           title={t("Home.components.HomeOrgaAccountProgress.button.orga")}
-          size="sm"
+          size="xs"
           variant="primary"
         />
         <Button
@@ -118,7 +132,12 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
               : t("general.button.showMore")
           }
           onClick={handleOnButtonClickShow}
-          size="sm"
+          size="xs"
+        />
+        <Button
+          title={t("Home.components.HomeUserProgress.button.hide")}
+          size="xs"
+          onClick={handleOnButtonClickHide}
         />
       </Container>
     </HomeContainer>

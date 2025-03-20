@@ -1,7 +1,7 @@
 import { Container } from "@component-library/index";
 import React from "react";
 import useProcess from "@/hooks/Process/useProcess";
-import Service from "./components/Service/Service";
+import ServiceDetails from "./components/ServiceDetails/ServiceDetails";
 import ProcessStatusWizard from "./components/StatusWizard/StatusWizard";
 import ProcessContractorSelection from "./components/ContractorSelection/ContractorSelection";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
@@ -15,6 +15,7 @@ import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 import ProcessHaeder from "./components/Header/Haeder";
+import ServiceSelection from "./components/ServiceSelection/ServiceSelection";
 
 interface ProcessPageProps {}
 
@@ -28,7 +29,10 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
       <Container width="full" items="start" direction="row" justify="start">
         <ProcessStatusWizard process={process} />
         <Container direction="col" width="full">
-          <Service process={process} />
+          <ServiceSelection process={process} />
+          <ProcessStatusGate start={ProcessStatus.SERVICE_READY}>
+            <ServiceDetails process={process} />
+          </ProcessStatusGate>
           <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
             <AuthorizedUserOutlet>
               <DefinedProcessOutlet>

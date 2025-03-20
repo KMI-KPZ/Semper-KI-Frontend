@@ -35,6 +35,7 @@ export interface OrganizationDetails {
   priorities?: OrganizationPriority[];
   branding?: OrganizationBranding;
   services?: OrganizationService;
+  todos: { show: boolean };
 }
 
 export type OrganizationService = {

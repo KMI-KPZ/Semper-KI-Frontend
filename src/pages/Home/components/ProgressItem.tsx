@@ -24,7 +24,7 @@ const HomeProgressItem: React.FC<HomeProgressItemProps> = (props) => {
       width="full"
       direction="row"
       onClick={() => navigate(item.link)}
-      className={`flex justify-start rounded-md border-2 p-3 text-black duration-300 hover:scale-105  hover:cursor-pointer  md:w-[calc(50%-10px)] ${
+      className={`flex justify-start rounded-md border-2 bg-white p-3 text-black duration-300 hover:scale-105  hover:cursor-pointer  md:w-[calc(50%-10px)] ${
         item.finished ? "border-green-500" : "border-orange-500"
       }`}
     >

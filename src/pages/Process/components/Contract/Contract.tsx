@@ -14,11 +14,37 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
   const { t } = useTranslation();
   const { process } = useProcess();
 
+  const getAddtionalTitle = () => {
+    const contractFiles = process.files.filter(
+      (file) => file.origin === "ContractFiles"
+    );
+    if (
+      contractFiles.length === 0 &&
+      process.processStatus === ProcessStatus.REQUEST_COMPLETED
+    ) {
+      return t("Process.components.Contract.noContract");
+    }
+    if (
+      contractFiles.length > 0 &&
+      process.processStatus === ProcessStatus.REQUEST_COMPLETED
+    ) {
+      return t("Process.components.Contract.isContract");
+    }
+    if (process.processStatus === ProcessStatus.OFFER_REJECTED) {
+      return t("Process.components.Contract.rejectedClient");
+    }
+    if (process.processStatus === ProcessStatus.OFFER_COMPLETED)
+      return t("Process.components.Contract.acceptedClient");
+    if (process.processStatus === ProcessStatus.CONFIRMATION_REJECTED)
+      return t("Process.components.Contract.rejectedContractor");
+    if (process.processStatus === ProcessStatus.CONFIRMATION_COMPLETED)
+      return t("Process.components.Contract.acceptedContractor");
+  };
+
   return (
     <ProcessContainer
       id="Contract"
-      menuButtonTitle={t("Process.components.Contract.button.menu")}
-      pageTitle={`${t("Process.components.Contract.heading")}:`}
+      titleAddition={getAddtionalTitle()}
       start={ProcessStatus.REQUEST_COMPLETED}
       end={ProcessStatus.OFFER_REJECTED}
     >

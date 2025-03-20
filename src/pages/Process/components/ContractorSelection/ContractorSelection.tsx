@@ -46,7 +46,11 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
     setShowCosts(true);
   };
 
-  const currentContractor = process.processDetails.provisionalContractor;
+  const currentContractor =
+    process.processDetails.provisionalContractor &&
+    Object.keys(process.processDetails.provisionalContractor).length > 0
+      ? process.processDetails.provisionalContractor
+      : undefined;
 
   const [showDeliveryAddress, setShowDeliveryAddress] =
     useState<boolean>(false);
@@ -66,24 +70,18 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
     setEditContractor(false);
   };
 
-  const menuButtonTitle = t(
-    "Process.components.ContractorSelection.button.menu"
-  );
-  const pageTitle = `${t(
-    "Process.components.ContractorSelection.heading.main"
-  )}: ${
-    process.contractor === undefined ||
-    process.contractor.name === undefined ||
-    process.contractor.name === ""
+  const pageTitle = `${
+    currentContractor === undefined ||
+    currentContractor.name === undefined ||
+    currentContractor.name === ""
       ? t("Process.components.ContractorSelection.noContractor")
-      : process.contractor.name
+      : currentContractor.name
   }`;
 
   return (
     <ProcessContainer
       id="Contractor"
-      pageTitle={pageTitle}
-      menuButtonTitle={menuButtonTitle}
+      titleAddition={pageTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
       end={ProcessStatus.SERVICE_COMPLETED}
     >
@@ -98,15 +96,13 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           id="Process-Contractor"
         >
           <Container width="fit" className={`gap-2  p-0`}>
-            <ProcessConditionIcon
-              error={process.processDetails.provisionalContractor === undefined}
-            />
+            <ProcessConditionIcon error={currentContractor === undefined} />
 
             <Heading variant="h3">
               {t("Process.components.ContractorSelection.heading.sub1")}
             </Heading>
           </Container>
-          {process.processDetails.provisionalContractor === undefined ? (
+          {currentContractor === undefined ? (
             <Container width="full" height="full" direction="col">
               <Button
                 size="sm"

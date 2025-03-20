@@ -338,18 +338,17 @@
       "userDeleted": "Benutzer Gelöscht"
     },
     "ProcessOrigin": {
-      "Service": "Service",
+      "ServiceSelection": "Serviceauswahl",
+      "ServiceDetails": "Servicedetails",
       "Contractor": "Auftragnehmer",
       "Verification": "Überprüfung",
       "Request": "Anfrage",
-      "Clarification": "Rückfragen",
       "Contract": "Vertrag",
-      "ContractFiles": "Vertragsdateien",
-      "Confirmation": "Bestätigung",
       "Production": "Produktion",
       "Delivery": "Lieferung",
+      "Completed": "Abgeschlossen",
       "PaymentFiles": "Rechnung",
-      "Completed": "Abgeschlossen"
+      "ContractFiles": "Vertragsdateien"
     },
     "FemTestType": {
       "elongation": "Dehnung",
@@ -360,6 +359,12 @@
       "MODEL": "Das Ausgewählte Modell hat einen Fehler in Berechnung geworfen",
       "BREAKS": "Das Modell bricht bei der Belastung",
       "ERROR": "Fehler in der Berechnung"
+    },
+    "ContractorsErrorType": {
+      "material": "Das gewählte Material ist derzeit bei keinem Auftragnehmer verfügbar",
+      "color": "Die gewählte Farbe ist derzeit bei keinem Auftragnehmer verfügbar",
+      "postProcessing": "Die gewählte(n) Nachbearbeitung(en) ist derzeit bei keinem Auftragnehmer verfügbar",
+      "printer": "Es gibt keinen Auftragnehmer der ihr Modell in dieser Größe drucken kann"
     }
   },
   "general": {
@@ -385,6 +390,7 @@
     "complex": "Komplex",
     "modelID": "Modell ID",
     "group": "Gruppe",
+    "groups": "Gruppen",
     "total": "Gesamt",
     "min": "Min",
     "max": "Max",
@@ -530,6 +536,7 @@
     "Form": {
       "NotificationForm": {
         "heading": "Benachrichtungen",
+        "progress": "Fortschritt auf Startseite anzeigen",
         "email": "E-Mail",
         "event": "Event"
       },
@@ -540,7 +547,10 @@
         "points": "Freie Punkte: {{freePoints}}",
         "low": "Niedrig",
         "medium": "Mittel",
-        "high": "Hoch"
+        "high": "Hoch",
+        "button": {
+          "save": "Auftragnehmer sortieren"
+        }
       },
       "AddressForm": {
         "header": "Adresse bearbeiten",
@@ -672,6 +682,12 @@
               "reason": "Grund"
             }
           }
+        },
+        "Header": {
+          "editConfirm": "Möchten Sie wirklich diesen Schritt bearbeiten?",
+          "editConfirm2": "Dabei gehen alle Information aus vorhergehenden Schritt verloren.",
+          "deleteConfirm": "Möchten Sie wirklich diesen Schritt löschen?",
+          "deleteConfirm2": "Dabei gehen alle Information aus vorhergehenden und diesem Schritt verloren."
         }
       },
       "File": {
@@ -853,7 +869,7 @@
   "hooks": {
     "useStatusButtons": {
       "NONE": "Translation error",
-      "DELETE": "Prozess löschen",
+      "DELETE_PROCESS": "Prozess löschen",
       "BACK-TO-SERVICE_READY": "Zurück",
       "BACK-TO-DRAFT": "Zurück",
       "BACK-TO-SERVICE_COMPLETED": "Zurück",
@@ -1093,7 +1109,8 @@
       "button": {
         "demonstrator": "Loslegen",
         "magazin": "Zur Projektseite",
-        "testModel": "Testen Sie ihr Bauteil"
+        "testModel": "Testen Sie ihr Bauteil",
+        "manufacturing": "3D-Modell drucken lassen"
       },
       "Introduction": {
         "heading": "3D-Druck Vernetzt",
@@ -1101,6 +1118,11 @@
         "item1": "Benutzerfreundliche Bedienung",
         "item2": "Existensicherndes Netzwerk",
         "item3": "Produktionsbereite Infrastruktur"
+      },
+      "Maturity": {
+        "heading": "Das Reifegradmodell",
+        "text": "Das Supply Chain Collaboration Maturity Assessment ist ein strukturierter Rahmen zur Bewertung der Effektivität der Zusammenarbeit zwischen den Teilnehmern der Lieferkette. Dieses schnelle und praktische Instrument hilft Unternehmen, ihre Bereitschaft zur nahtlosen Zusammenarbeit mit Lieferanten, Partnern und Kunden zu bewerten, um Effizienz und Leistung zu steigern. Mit sechs Reifegraden bietet die Bewertung einen klaren Maßstab, um Stärken und verbesserungswürdige Bereiche zu identifizieren. Durch die Messung von Schlüsselaspekten wie Vertrauen, Transparenz, Integration und gemeinsamer Wertschöpfung erhalten Unternehmen verwertbare Erkenntnisse zur Verbesserung der Zusammenarbeit und zur Optimierung der Lieferkettenabläufe.",
+        "button": "Zum Fragebogen"
       },
       "PrototypeAlert": "Diese Seite ist ein Prototyp und wird fortlaufend bearbeitet",
       "Services": {
@@ -1129,20 +1151,24 @@
         "subTitle": "Erfassen Sie Ihren Bedarf durch unsere nutzerfreundlichen Fragebögen.",
         "items": {
           "0": {
-            "heading": "Anmeldung",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Service auswählen",
+            "text": "Wählen sie einen Service aus, den Sie benötigen. Wir bieten eine Vielzahl an Services an, die Sie nutzen können."
           },
           "1": {
-            "heading": "Bauteil Hochladen",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Beispiel (Modell 3D-Drucken) 3D-Modell hochladen oder auswählen",
+            "text": "Laden sie ihr eigens 3D-Modell hoch oder wählen sie ein Modell aus unserer Datenbank aus."
           },
           "2": {
-            "heading": "Fertigung wählen",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Material und Nachbearbeitung auswählen",
+            "text": "Wählen sie aus einer vielzahl von Matieralien und Nachbearbeitungen aus, die Sie für Ihr Modell benötigen."
           },
           "3": {
-            "heading": "Veredelung wählen",
-            "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            "heading": "Hersteller auswählen",
+            "text": "Wählen sie einen Hersteller aus, der Ihr Modell drucken soll."
+          },
+          "4": {
+            "heading": "Prozess abschließen",
+            "text": "Nachdem Sie alle Schritte abgeschlossen haben, können Sie den Prozess abschließen und Ihr Modell wird gedruckt."
           }
         },
         "button": "Fragen? Wir haben Antworten."
@@ -1221,7 +1247,8 @@
           "lang": "Sprache festlegen"
         },
         "button": {
-          "orga": "Profil"
+          "orga": "Profil",
+          "hide": "Ausblenden"
         }
       }
     },
@@ -1674,6 +1701,12 @@
       },
       "Contract": {
         "heading": "Angebot",
+        "noContract": "nicht Vorhanden",
+        "isContract": "Vorhanden",
+        "rejectedClient": "vom Kunden abgelehnt",
+        "acceptedClient": "vom Kunden bestätigt",
+        "rejectedContractor": "vom Kunden bestätigt und vom Auftragnehmer abgelehnt",
+        "acceptedContractor": "vom Kunden und Auftragnehmer bestätigt",
         "button": {
           "menu": "Angebotsmenu"
         },
@@ -1724,7 +1757,9 @@
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden",
-            "onlyVerified": "Nur verifizierte Auftragnehmer anzeigen"
+            "noVerifiedContractorFound": "Kein verifizierter Auftragnehmer gefunden",
+            "onlyVerified": "Nur verifizierte Auftragnehmer anzeigen",
+            "errors": "Hinweis"
           },
           "Costs": {
             "heading": "Kostenaufstellung"
@@ -1733,6 +1768,11 @@
       },
       "Delivery": {
         "heading": "Lieferung",
+        "noFile": "keine Rechnung hochgeladen",
+        "isFile": "Rechnung hochgeladen",
+        "inProgress": "Läuft",
+        "completed": "Abgeschlossen",
+        "failed": "Fehlgeschlagen",
         "button": {
           "menu": "Lieferungsmenu"
         },
@@ -1747,6 +1787,10 @@
       },
       "Production": {
         "heading": "Produktion",
+        "ready": "Bereit",
+        "inProgress": "Läuft",
+        "completed": "Abgeschlossen",
+        "failed": "Fehlgeschlagen",
         "button": {
           "menu": "Produktionsmenu"
         }
@@ -1798,6 +1842,10 @@
         "ServiceDetails": {
           "dummy": "Dummy Service",
           "dummy2": "Service noch nicht angelegt",
+          "group_one": "eine Gruppe",
+          "group_other": "{{count}} Gruppen",
+          "model_one": "mit insgesamt einem Modell",
+          "model_other": "mit insgesamt {{count}} Modellen",
           "components": {
             "Manufacturing": {
               "heading": {
@@ -1822,7 +1870,10 @@
                 "color": "Farbe:"
               },
               "GroupOverview": {
-                "heading": "Gruppenübersicht",
+                "heading": "Gruppenübersicht:",
+                "hint": "Eine Gruppe besteht aus einem Material und einem oder mehreren Modellen und Nachbearbeitungen. Alle Gruppen gehen an den gleichen Hersteller.",
+                "group_one": "eine Gruppe",
+                "group_other": "{{count}} Gruppen",
                 "noModel": "kein Modell",
                 "noMaterial": "kein Material",
                 "noPostProcessing": "keine Nachbearbeitung",
@@ -1958,6 +2009,7 @@
                     "levelOfDetailPH": "Detailgrad",
                     "selectLevelOfDetail": "Detailgrad auswählen",
                     "selectLicense": "Lizenz auswählen",
+                    "noLicense": "keine Lizenz",
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
                     "scalingFactor": "Skalierung",

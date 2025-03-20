@@ -16,6 +16,7 @@ export interface FlatDashboardProject {
   processesCount: number;
   processIDs?: string[];
   owner: boolean;
+  searchableData: string[];
 }
 
 export const isDashboardProject = (
@@ -74,6 +75,7 @@ const useGetDashboardProjects = () => {
                   : project.projectDetails.title,
               updatedWhen: new Date(project.updatedWhen),
               processIDs: project.processIDs,
+              searchableData: project.searchableData,
             })
           );
 

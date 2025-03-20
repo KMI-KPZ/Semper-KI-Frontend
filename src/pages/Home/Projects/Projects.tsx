@@ -14,14 +14,13 @@ import useGetDashboardProjects, {
   FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
 import useSearch from "@/hooks/useSearch";
-import TuneIcon from "@mui/icons-material/Tune";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
-import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
-import logger from "@/hooks/useLogger";
+import CreateProjectTitleForm from "@/pages/Home/Projects/CreateProjectTitleForm";
 import { AuthorizedUser } from "@/hooks/useUser";
 import useModal from "@/hooks/useModal";
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 
 interface HomeProjectsProps {
   recieved?: boolean;
@@ -78,9 +77,9 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   };
 
   return (
-    <HomeContainer className="">
+    <HomeContainer className="gap-3 rounded-md bg-transparent  px-0  text-white">
       <Container width="full" direction="row" justify="between">
-        <Heading variant="h2">
+        <Heading variant="h2" className="text-white">
           {recieved
             ? t("Home.Projects.receivedProjects")
             : t("Home.Projects.heading")}
@@ -89,7 +88,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
           <Button
             title={t("Home.Projects.button.new")}
             size="sm"
-            variant="primary"
+            variant="secondary"
             onClick={() => {
               setCreateProjectTitleFormOpen(true);
             }}
@@ -97,19 +96,13 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
         ) : null}
       </Container>
       <Container width="full" direction="row" justify="between">
-        <Search handleSearchInputChange={handleSearchInputChange} />
-        <Button
-          title={t("Home.Projects.button.filter")}
-          size="sm"
-          variant="text"
-          onClick={() => {
-            logger("info", "Filter button clicked");
-          }}
-          children={<TuneIcon />}
+        <Search
+          handleSearchInputChange={handleSearchInputChange}
+          style={gradientStyle}
         />
       </Container>
       <Container width="full">
-        <table className="w-full table-auto border-separate border-spacing-x-0 border-spacing-y-2">
+        <table className="w-full table-auto border-separate border-spacing-x-0 border-spacing-y-0">
           <thead>
             <tr>
               <TableHeaderButton
@@ -117,18 +110,21 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
                 getSortIcon={getSortIcon}
                 title={t("Home.Projects.name")}
                 objectKey="projectTitle"
+                className=" text-white hover:text-white"
               />
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
                 title={t("Home.Projects.updated")}
                 objectKey="updatedWhen"
+                className="text-white hover:text-white"
               />
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
                 title={t("Home.Projects.processCount")}
                 objectKey="processesCount"
+                className="text-white hover:text-white"
               />
               <th>
                 <Text className="font-bold">{t("Home.Projects.actions")}</Text>
@@ -168,7 +164,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
                 </td>
               </tr>
             ) : (
-              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+              <tr style={gradientStyle} className="text-center ">
                 <td
                   colSpan={4}
                   className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"

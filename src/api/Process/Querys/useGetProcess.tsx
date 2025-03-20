@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
+import { ModelingServiceProps } from "@/pages/Process/components/ServiceDetails/ServiceEdit/Modelling/Modelling";
 import { UserAddressProps } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "@/hooks/Project/useStatusButtons";
 import {
@@ -123,6 +123,7 @@ export type ProcessVerificationResultFEMError =
   | "MODEL"
   | "BREAKS"
   | "ERROR";
+
 export type ProcessVerificationResultFEM = {
   isSuccessful: boolean;
   groups: {
@@ -184,18 +185,17 @@ export interface GenericProcessFile {
 export type ProcessFileType = "Model" | "File";
 
 export type ProcessOrigin =
-  | "Service"
+  | "ServiceSelection"
+  | "ServiceDetails"
   | "Contractor"
   | "Verification"
   | "Request"
-  | "Clarification"
   | "Contract"
-  | "ContractFiles"
-  | "Confirmation"
   | "Production"
   | "Delivery"
+  | "Completed"
   | "PaymentFiles"
-  | "Completed";
+  | "ContractFiles";
 
 export type DefaultProcessFile = {
   type: "File";

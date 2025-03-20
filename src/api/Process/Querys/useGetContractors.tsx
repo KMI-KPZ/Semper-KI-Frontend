@@ -4,6 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { OrganizationBranding } from "@/api/Organization/Querys/useGetOrganization";
 
+export interface ContractorReturnProps {
+  contractors: ContractorProps[];
+  errors: ContractorsError[];
+}
+export type ContractorsErrorType =
+  | "material"
+  | "color"
+  | "postProcessing"
+  | "printer";
+
+export interface ContractorsError {
+  groupID: number;
+  error: ContractorsErrorType;
+}
+
 export interface ContractorProps {
   hashedID: string;
   name: string;
@@ -25,12 +40,12 @@ const useGetContractors = () => {
       .then((response) => {
         const responseData = response.data;
 
-        const contractors: ContractorProps[] = responseData;
+        const contractors: ContractorReturnProps = responseData;
         logger("useGetContractors | getContractors ✅ |", response);
         return contractors;
       });
 
-  return useQuery<ContractorProps[], Error>({
+  return useQuery<ContractorReturnProps, Error>({
     queryKey: ["project", projectID, processID, "contractors"],
     queryFn: getContractors,
     enabled: processID !== undefined && processID !== "",

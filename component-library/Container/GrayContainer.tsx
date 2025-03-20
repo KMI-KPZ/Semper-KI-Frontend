@@ -4,23 +4,30 @@ import { twMerge } from "tailwind-merge";
 
 type GrayContainerProps = {
   headerChildren?: React.ReactNode;
+  open?: boolean;
+};
+
+export const gradientStyle = {
+  background: `linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.3) 0%,   /* New stop from the second image */
+    rgba(255, 255, 255, 0.1) 100%, /* New stop from the second image */
+    rgba(38, 54, 82, 0.2) 0%,
+    rgba(38, 54, 82, 0.5) 75%,
+    rgba(38, 54, 82, 0.8) 100%
+  )`,
 };
 
 const GrayContainer: React.FC<
   PropsWithChildren<GrayContainerProps & ContainerProps>
 > = (props) => {
-  const { className: _className = "", headerChildren, children } = props;
+  const {
+    className: _className = "",
+    headerChildren,
+    children,
+    open = true,
+  } = props;
 
-  const gradientStyle = {
-    background: `linear-gradient(
-      to bottom right,
-      rgba(255, 255, 255, 0.4) 0%,   /* New stop from the second image */
-      rgba(255, 255, 255, 0.1) 100%, /* New stop from the second image */
-      rgba(38, 54, 82, 0.1) 30%,
-      rgba(38, 54, 82, 0.5) 75%,
-      rgba(38, 54, 82, 0.6) 100%
-    )`,
-  };
   const className = "gap-0 rounded-md p-0";
 
   if (headerChildren !== undefined)
@@ -32,9 +39,11 @@ const GrayContainer: React.FC<
         style={gradientStyle}
       >
         {headerChildren}
-        <Container {...props} className={twMerge("p-5", _className)}>
-          {children}
-        </Container>
+        {open ? (
+          <Container {...props} className={twMerge("p-5", _className)}>
+            {children}
+          </Container>
+        ) : null}
       </Container>
     );
 
@@ -45,7 +54,7 @@ const GrayContainer: React.FC<
       direction="col"
       style={gradientStyle}
     >
-      {children}
+      {open ? children : null}
     </Container>
   );
 };

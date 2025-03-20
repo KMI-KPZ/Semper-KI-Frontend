@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 
 interface SearchProps {
   handleSearchInputChange: (search: string) => void;
+  style?: React.CSSProperties;
 }
 
 export const Search: React.FC<SearchProps> = (props) => {
-  const { handleSearchInputChange } = props;
+  const { handleSearchInputChange, style } = props;
   const { t } = useTranslation();
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -19,6 +20,7 @@ export const Search: React.FC<SearchProps> = (props) => {
   return (
     <div className="flex w-full flex-col gap-5 md:flex-row">
       <input
+        style={style}
         onKeyDown={handleOnKeyDown}
         onChange={handleOnChange}
         defaultValue=""

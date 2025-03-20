@@ -11,7 +11,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
-import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import {
+  Process,
+  ProcessOrigin,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
 import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
 import DoneIcon from "@mui/icons-material/Done";
@@ -24,7 +28,8 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 interface UseStatusButtonsReturnProps {
   getStatusButtons: (
     process: Process,
-    includeDelete?: boolean
+    includeDelete?: boolean,
+    processOrigin?: ProcessOrigin | "Active"
   ) => StatusButtonProps[];
   handleOnClickButtonCount: (button: StatusButtonProcessProps) => void;
   handleOnClickButton: (button: StatusButtonProps, processID: string) => void;
@@ -32,7 +37,7 @@ interface UseStatusButtonsReturnProps {
 
 export type StatusButtonTitleType =
   | "NONE"
-  | "DELETE"
+  | "DELETE_PROCESS"
   | "BACK-TO-SERVICE_READY"
   | "BACK-TO-DRAFT"
   | "BACK-TO-SERVICE_COMPLETED"
@@ -62,13 +67,11 @@ export type StatusButtonPropsGeneric = {
   buttonVariant: "primary" | "secondary";
   action: StatusButtonAction;
   active: boolean;
-  showIn: StatusButtonShowInType;
+  showIn: ProcessOrigin | "Active";
   user?: UserType;
   allowedStates?: ProcessStatus[];
-  iconPosition: "left" | "right";
+  iconPosition: "left" | "right" | "up";
 };
-
-export type StatusButtonShowInType = "project" | "process" | "both";
 
 export type StatusButtonPropsExtern = {
   icon: string;
@@ -119,19 +122,33 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
 
   const getStatusButtons = (
     process: Process,
-    includeDelete?: boolean
+    includeDelete?: boolean,
+    processOrigin?: ProcessOrigin | "Active"
   ): StatusButtonProps[] => {
+    if (process.processStatusButtons === undefined) return [];
     const include = includeDelete === undefined ? false : includeDelete;
 
-    return transformExternalStatusButtons(
-      process.processStatusButtons !== undefined && include === false
-        ? process.processStatusButtons.filter(
-            (button) => button.title !== "DELETE"
-          )
-        : process.processStatusButtons !== undefined && include === true
-        ? process.processStatusButtons
-        : []
-    );
+    if (processOrigin !== undefined)
+      return transformExternalStatusButtons(
+        process.processStatusButtons.filter(
+          (button) =>
+            button.iconPosition === "up" && button.showIn === processOrigin
+        )
+      );
+    if (include === true)
+      return transformExternalStatusButtons(
+        process.processStatusButtons.filter(
+          (button) => button.iconPosition !== "up"
+        )
+      );
+    if (include === false)
+      return transformExternalStatusButtons(
+        process.processStatusButtons.filter(
+          (button) =>
+            button.title !== "DELETE_PROCESS" && button.iconPosition !== "up"
+        )
+      );
+    return [];
   };
 
   const transformExternalStatusButtons = (
@@ -175,7 +192,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const transformTitle = (title: string): string => {
     const validStatusButtonTitles: StatusButtonTitleType[] = [
       "NONE",
-      "DELETE",
+      "DELETE_PROCESS",
       "BACK-TO-SERVICE_READY",
       "BACK-TO-DRAFT",
       "BACK-TO-SERVICE_COMPLETED",

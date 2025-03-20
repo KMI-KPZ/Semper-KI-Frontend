@@ -47,14 +47,10 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
     return "nix gefunden ProcessRequest";
   };
 
-  const menuButtonTitle = t("Process.components.Request.button.menu");
-  const pageTitle = `${t("Process.components.Request.heading")}: ${getTitle()}`;
-
   return (
     <ProcessContainer
       id="Request"
-      menuButtonTitle={menuButtonTitle}
-      pageTitle={pageTitle}
+      titleAddition={getTitle()}
       start={ProcessStatus.VERIFYING_COMPLETED}
       end={ProcessStatus.VERIFYING_COMPLETED}
     >

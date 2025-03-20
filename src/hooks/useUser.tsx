@@ -52,6 +52,7 @@ export interface UserDetailsProps {
     user: UserNotificationSetting[];
     organization: OrgaNotificationSetting[];
   };
+  todos: { show: boolean };
 }
 
 export type GeneralNotificationSettings = {

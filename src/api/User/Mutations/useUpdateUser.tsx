@@ -26,6 +26,9 @@ export interface UpdateUserChanges {
       };
     };
   };
+  todos?: {
+    show: boolean;
+  };
 }
 
 export interface NewUserAddressProps {

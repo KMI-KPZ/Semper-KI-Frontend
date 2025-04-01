@@ -9,6 +9,7 @@ import HomeBackground from "./components/Background";
 import React from "react";
 import AnonymHomeContainer from "../components/AnonymContainer";
 import HomeMaturity from "./components/Maturity";
+import HomeResilience from "./components/Resilience";
 
 interface HomeProps {}
 
@@ -40,6 +41,9 @@ const Home: React.FC<HomeProps> = (props) => {
       </AnonymHomeContainer>
       <AnonymHomeContainer className="bg-gray-700">
         <HomeMaturity />
+      </AnonymHomeContainer>
+      <AnonymHomeContainer>
+        <HomeResilience />
       </AnonymHomeContainer>
       <AnonymHomeContainer className="bg-white">
         <HomeTeam />

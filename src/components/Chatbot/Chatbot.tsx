@@ -4,6 +4,7 @@ import { Button, Container } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import ThreePIcon from "@mui/icons-material/ThreeP";
 import {useNavigate} from "react-router-dom";
+import useUser, {UserType} from "@/hooks/useUser";
 
 
 declare global {
@@ -54,6 +55,8 @@ function formatDynamicPrompt(
   maintopic: string,
   choices: object
 ): object {
+
+  const {user} = useUser();
   return {
     query:
       '__[++ {topics: "' +
@@ -61,6 +64,8 @@ function formatDynamicPrompt(
       '", maintopic: {"' +
       maintopic +
       '"}}, currentChoices: ' +
+        "," +
+        '"user_logged_in" : ' + (user.usertype !== UserType.ANONYM ? '"true"' : '"false"') +
       JSON.stringify(choices) +
       "]__",
   };
@@ -87,6 +92,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   // let eventListenerAttached: boolean = false;
   const detailedHelpRef = useRef(detailedHelp);
   const navigate = useNavigate();
+  const { user } = useUser();
 
   const sendDetailedHelp = (helpKey: string) => {
     debugger;
@@ -123,9 +129,11 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       botAlreadyLoaded.current = true;
       if (logger) console.log("Chatbot will be loaded");
 
-      script.src = window.location.hostname.includes("localhost")
-          ? "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js"
-          : "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
+      // script.src = (window.location.hostname.includes("localhost") || window.location.hostname.includes("127.0.0.1"))
+      //     ? "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js"
+      //     : "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
+
+      script.src = "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
 
       // script.src =
       //   "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js";
@@ -272,6 +280,8 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
 
   const handleOnClickButton = () => {
     const bot = window.ChatbotIframe;
+
+    console.log(user);
     if (bot !== undefined && !botAlreadyOpenend.current) {
       bot.eventsBus.emit("openChatbot", {
         query:
@@ -281,6 +291,8 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           maintopic +
           '"}}, currentChoices: ' +
           JSON.stringify(choices) +
+           "," +
+            '"user_logged_in" : ' + (user.usertype !== UserType.ANONYM ? '"true"' : '"false"') +
           "]__",
       });
       botAlreadyOpenend.current = true;
@@ -298,6 +310,8 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           maintopic +
           '"}}, currentChoices: ' +
           JSON.stringify(choices) +
+            "," +
+            '"user_logged_in" : ' + (user.usertype !== UserType.ANONYM ? '"true"' : '"false"') +
           "]__",
       });
     }

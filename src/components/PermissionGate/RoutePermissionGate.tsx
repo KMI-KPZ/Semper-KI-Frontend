@@ -25,6 +25,7 @@ const RoutePermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
     </>
   ) : inDebugMode ? (
     <div className="overflow-clip rounded-md border-2 border-red-500 ">
+      <Text className="text-red-500">{element}</Text>
       {children}
       <Outlet />
     </div>

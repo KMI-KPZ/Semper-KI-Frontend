@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@component-library/index";
+import usePermissionGate from "./hooks/usePermissionGate";
 
 interface PermissionProps {
   element: string;
@@ -13,9 +14,23 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   const { children, showMessage = false } = props;
   const { t } = useTranslation();
 
-  const inDebugMode = process.env.NODE_ENV === "development";
+  const { hasPermission } = usePermissionGate();
 
-  if (true) return <>{children}</>;
+  const inDebugMode = process.env.NODE_ENV === "development";
+  if (hasPermission(props.element))
+    return (
+      <div className="w-fit border-2 border-green-500 p-2">
+        <Text className="text-green-500">{props.element}</Text>
+        {children}
+      </div>
+    );
+
+  return (
+    <div className="w-fit border-2 border-red-500 p-2">
+      <Text className="text-red-500">{props.element}</Text>
+      {children}
+    </div>
+  );
   if (inDebugMode)
     return (
       <div className="w-fit overflow-clip rounded-md border-2 border-red-500 ">

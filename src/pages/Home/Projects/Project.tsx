@@ -11,6 +11,7 @@ import HomeProcess from "./Process";
 import useGetDashboardProject from "@/api/Project/Querys/useGetDashboardProject";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { gradientStyle } from "@component-library/Container/GrayContainer";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface HomeProjectProps {
   projectID: string;
@@ -107,15 +108,17 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
               </Container>
             </>
           )}
-          {owner ? (
-            <Button
-              title={t("Home.Projects.Project.button.new")}
-              onClick={handleOnClickButtonNew}
-              className=""
-              size="sm"
-              variant="secondary"
-            />
-          ) : null}
+          <PermissionGate element="ProjectCreateProcess">
+            {owner ? (
+              <Button
+                title={t("Home.Projects.Project.button.new")}
+                onClick={handleOnClickButtonNew}
+                className=""
+                size="sm"
+                variant="secondary"
+              />
+            ) : null}
+          </PermissionGate>
         </Container>
       </td>
     </tr>

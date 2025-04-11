@@ -10,26 +10,29 @@ const usePermissionGate = (): ReturnProps => {
   const { permissions, permissionGates } = usePermissions();
 
   const hasPermission = (element: string): boolean => {
-    if (user.usertype === UserType.ANONYM) return true;
+    if (
+      user.usertype === UserType.ANONYM ||
+      user.usertype === UserType.ADMIN ||
+      user.usertype === UserType.USER
+    )
+      return true;
 
     const permissionGate: PermissionGateType | undefined =
       permissionGates?.find((permissionGate) =>
         permissionGate.elements.includes(element)
       );
 
-    const allowAccess =
-      user.usertype === UserType.ADMIN ||
-      user.usertype === UserType.USER ||
-      (user.usertype === UserType.ORGANIZATION &&
-        permissions !== undefined &&
-        permissionGate !== undefined &&
-        permissions.find(
-          (permission) =>
-            permission.context === permissionGate.permission.context &&
-            permission.permission === permissionGate.permission.permission
-        ) !== undefined);
+    const allowAccessToOrgaUser =
+      user.usertype === UserType.ORGANIZATION &&
+      permissions !== undefined &&
+      permissionGate !== undefined &&
+      permissions.find(
+        (permission) =>
+          permission.context === permissionGate.permission.context &&
+          permission.permission === permissionGate.permission.permission
+      ) !== undefined;
 
-    return allowAccess;
+    return allowAccessToOrgaUser;
   };
 
   return { hasPermission };

@@ -16,6 +16,7 @@ import {
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import ColorView from "@/components/Resources/NodeCustomForm/components/ColorView";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;
@@ -153,24 +154,28 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.editMaterial"
-            )}
-            size="sm"
-            variant="secondary"
-            onClick={handleOnButtonClickMaterial}
-            children={t("general.button.edit")}
-          />
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteMaterial"
-            )}
-            size="sm"
-            variant="text"
-            onClick={() => handleOnButtonClickDeleteMaterial()}
-            children={t("general.button.delete")}
-          />
+          <PermissionGate element="ProcessManufacturingServiceEditMaterial">
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.editMaterial"
+              )}
+              size="sm"
+              variant="secondary"
+              onClick={handleOnButtonClickMaterial}
+              children={t("general.button.edit")}
+            />
+          </PermissionGate>
+          <PermissionGate element="ProcessManufacturingServiceDeleteMaterial">
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteMaterial"
+              )}
+              size="sm"
+              variant="text"
+              onClick={() => handleOnButtonClickDeleteMaterial()}
+              children={t("general.button.delete")}
+            />
+          </PermissionGate>
         </ProcessStatusGate>
       </Container>
       <Modal

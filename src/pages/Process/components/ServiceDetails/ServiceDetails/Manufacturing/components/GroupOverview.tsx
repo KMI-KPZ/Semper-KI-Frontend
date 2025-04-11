@@ -15,6 +15,7 @@ import ProcessStatusGate from "@/components/Process/StatusGate";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Hint from "@/components/Hint/Hint";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ServiceManufacturingGroupOverviewProps {
   process: ManufactoringProcessProps;
@@ -264,28 +265,32 @@ const ServiceManufacturingGroupOverview: React.FC<
                     items="start"
                     className="self-stretch"
                   >
-                    <Button
-                      size="sm"
-                      variant="text"
-                      title={t("general.button.delete")}
-                      onClick={() => handleOnClickDelete(index)}
-                    >
-                      <DeleteIcon />
-                    </Button>
+                    <PermissionGate element="ProcessManufacturingServiceDeleteGroup">
+                      <Button
+                        size="sm"
+                        variant="text"
+                        title={t("general.button.delete")}
+                        onClick={() => handleOnClickDelete(index)}
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </PermissionGate>
                   </Container>
                 </ProcessStatusGate>
               </div>
             ))}
             <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-              <Button
-                title={t(
-                  "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.newGroup"
-                )}
-                className=" border-2 p-2 hover:bg-slate-50"
-                onClick={handleOnClickNewGroup}
-              >
-                <AddIcon />
-              </Button>
+              <PermissionGate element="ProcessManufacturingServiceAddGroup">
+                <Button
+                  title={t(
+                    "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.newGroup"
+                  )}
+                  className=" border-2 p-2 hover:bg-slate-50"
+                  onClick={handleOnClickNewGroup}
+                >
+                  <AddIcon />
+                </Button>
+              </PermissionGate>
             </ProcessStatusGate>
           </Container>
           <Button

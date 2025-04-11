@@ -17,6 +17,7 @@ import ContractorSelectionAddressCard from "./components/AddressCard";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import ProcessStatusGate from "../../../../components/Process/StatusGate";
 import ProcessContractorCosts from "./components/Costs";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -104,14 +105,16 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           </Container>
           {currentContractor === undefined ? (
             <Container width="full" height="full" direction="col">
-              <Button
-                size="sm"
-                onClick={handleOnClickButtonSelectContractor}
-                variant="primary"
-                title={t(
-                  "Process.components.ContractorSelection.button.select"
-                )}
-              />
+              <PermissionGate element="ProcessSelectContractorSelect">
+                <Button
+                  size="sm"
+                  onClick={handleOnClickButtonSelectContractor}
+                  variant="primary"
+                  title={t(
+                    "Process.components.ContractorSelection.button.select"
+                  )}
+                />
+              </PermissionGate>
             </Container>
           ) : currentContractor === undefined ? (
             <Text>
@@ -121,12 +124,14 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
             <Container width="full" direction="col">
               <ContractorCard contractor={currentContractor} />
               <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-                <Button
-                  size="sm"
-                  onClick={handleOnClickButtonEditContractor}
-                  variant="secondary"
-                  title={t("general.button.edit")}
-                />
+                <PermissionGate element="ProcessSelectContractorEdit">
+                  <Button
+                    size="sm"
+                    onClick={handleOnClickButtonEditContractor}
+                    variant="secondary"
+                    title={t("general.button.edit")}
+                  />
+                </PermissionGate>
               </ProcessStatusGate>
               {process.contractor !== undefined &&
               process.contractor.hashedID !== undefined &&
@@ -134,14 +139,16 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
               user.organization !== undefined &&
               process.contractor.hashedID === user.organization ? (
                 <Container width="full">
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={handleOnClickShowCosts}
-                    title={t(
-                      "Process.components.ContractorSelection.button.costOverview"
-                    )}
-                  />
+                  <PermissionGate element="ProcessSelectContractorCostOverView">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={handleOnClickShowCosts}
+                      title={t(
+                        "Process.components.ContractorSelection.button.costOverview"
+                      )}
+                    />
+                  </PermissionGate>
                 </Container>
               ) : null}
             </Container>
@@ -173,20 +180,24 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
         modalKey="ProcessContractorList"
         closeModal={closeEditContractor}
       >
-        <ProcessContractorList
-          process={process}
-          closeModal={closeEditContractor}
-        />
+        <PermissionGate element="ProcessSelectContractorContractorList">
+          <ProcessContractorList
+            process={process}
+            closeModal={closeEditContractor}
+          />
+        </PermissionGate>
       </Modal>
       <Modal
         open={showCosts}
         modalKey="ProcessContractorCosts"
         closeModal={closeCosts}
       >
-        <ProcessContractorCosts
-          process={process}
-          closeModal={closeEditContractor}
-        />
+        <PermissionGate element="ProcessSelectContractorCostOverView">
+          <ProcessContractorCosts
+            process={process}
+            closeModal={closeEditContractor}
+          />
+        </PermissionGate>
       </Modal>
     </ProcessContainer>
   );

@@ -1,4 +1,11 @@
-# 🚀 Semper-KI Frontend
+#  Semper-KI: Frontend
+
+<p align="center">
+  <a href="https://semper-ki.org/">
+    <img src="public/logo192.png" alt="logo" width="130" height="130">
+  </a>
+</p>
+
 
 ## 🔍 Project Overview
 
@@ -12,6 +19,25 @@ The Semper-KI Frontend acts as a platform where users can submit their 3D printi
 
 (Note: This is a science project, and the demo may not be available later on.)
 
+### Tech Stack
+
+- **Frontend**: React, React Router, Tailwind CSS, MUI, Three.js
+- **State Management**: Zustand, React Query
+- **Forms**: Formik, React Hook Form
+- **3D & Visualization**: Three.js, D3
+- **Internationalization**: i18next
+- **Testing**: Jest, Testing Library
+- **Code Quality**: ESLint, Prettier
+- **Bundler**: Vite
+- **Containerization**: Docker
+
+## 📚 Table of Contents
+
+1. [Getting Started](#-Getting-Started)
+2. [Development](#-Development)
+3. [Deployment](#-Deployment)
+4. [Connection-to-Backend](#Connection-to-Backend)
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -22,23 +48,6 @@ Make sure you have the following installed on your machine:
 - **Yarn**: v1.22.19
 - **npm**: v8.19.2
 - **Docker**: Latest version
-
-### VSCode Extensions
-
-For an optimal development experience, install the following extensions:
-
-#### WSL Extensions
-
-- Tailwind CSS IntelliSense v0.10.5
-- Prettier - Code formatter v10.1.0
-- Jest v5.2.3
-- Docker v1.28.0
-- GitHub Copilot v1.156.0
-
-#### Local Extensions
-
-- Tailwind CSS IntelliSense v0.10.5
-- WSL v0.81.9
 
 ### Installation
 
@@ -64,6 +73,14 @@ VITE_HTTP_API_URL='http://127.0.0.1:8000'
 VITE_WS_API_URL='ws://127.0.0.1:8000'
 VITE_RESILIENCE='http://127.0.0.1:3010'
 VITE_MATURITY='http://127.0.0.1:3020'
+```
+
+### Running the Development Server
+
+To start the development server, run:
+
+```bash
+yarn start
 ```
 
 ## 🛠️ Development
@@ -108,25 +125,61 @@ The following scripts can be run using `yarn <scriptname>`. For example, to star
   "doc": "typedoc --options typedoc.json"
   ```
 
-### Running the Development Server
-
-To start the development server, run:
-
-```bash
-yarn start
-```
-
 The server will be running at: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
 
 ### TypeDoc
 
-You can generate documentation using TypeDoc with the following command:
+You can generate technical documentation using TypeDoc with the following command:
 
 ```bash
 yarn doc
 ```
 
 This command generates a documentation overview in the `.doc` folder. You can view the documentation by opening the `index.html` file in a web browser.
+
+This technical Documentation is based on the types, classes, interfaces and JSDoc comments in the code.
+
+### 🗃️ Folder Structure
+
+```bash
+.
+├── assets                   # Static assets like fonts, icons, images, and localization files
+│   ├── fonts                # Font files used in the project
+│   ├── icons                # Icon files used in the project
+│   ├── images               # Image files used in the project
+│   │   ├── partner          # Partner-related images
+│   │   └── nru              # NRU-related images
+│   ├── locals               # Localization files
+│   │   ├── en-US            # English localization files
+│   │   └── de-DE            # German localization files
+│   └── test                 # Test assets
+├── component-library        # Shared component library
+├── nginx                    # Nginx configuration files
+├── public                   # Public assets served directly
+├── test                     # Test files and utilities
+├── types                    # TypeScript type definitions
+├── src                      # Source code
+│   ├── api                  # API modules
+│   │   ├── [Modules]        # Specific API modules
+│   │   │   ├── Queries      # API query functions
+│   │   │   └── Mutations    # API mutation functions
+│   │   ...
+│   ├── components           # Reusable components
+│   ├── config               # Configuration files
+│   ├── contexts             # React context providers
+│   ├── data                 # Static data files
+│   ├── hooks                # Custom React hooks
+│   ├── outlets              # Outlet components
+│   ├── services             # Service functions and utilities
+│   ├── types                # Additional TypeScript type definitions
+│   ├── pages                # Page components
+│   │   ├── [Page]           # Specific page components
+│   │   │   ├── components   # Components specific to the page
+│   │   │   ├── [Subpages]   # Subpages of the specific page
+│   │   │   │   └── ...      # Additional subpage components
+│   │   │   ├── Page.tsx     # Main page component
+│   │   ...
+```
 
 ### Naming
 
@@ -254,47 +307,6 @@ export const OrganizationOutlet: React.FC<PropsWithChildren<Props>> = (
   - **Mutations** are API calls that are actively triggered by the user's interaction (e.g., clicking a button).
   - **Queries** are API calls that are loaded automatically when rendering a component.
 
-### 🗃️ Folder Structure
-
-```bash
-.
-├── assets                   # Static assets like fonts, icons, images, and localization files
-│   ├── fonts                # Font files used in the project
-│   ├── icons                # Icon files used in the project
-│   ├── images               # Image files used in the project
-│   │   ├── partner          # Partner-related images
-│   │   └── nru              # NRU-related images
-│   ├── locals               # Localization files
-│   │   ├── en-US            # English localization files
-│   │   └── de-DE            # German localization files
-│   └── test                 # Test assets
-├── component-library        # Shared component library
-├── nginx                    # Nginx configuration files
-├── public                   # Public assets served directly
-├── test                     # Test files and utilities
-├── types                    # TypeScript type definitions
-├── src                      # Source code
-│   ├── api                  # API modules
-│   │   ├── [Modules]        # Specific API modules
-│   │   │   ├── Queries      # API query functions
-│   │   │   └── Mutations    # API mutation functions
-│   │   ...
-│   ├── components           # Reusable components
-│   ├── config               # Configuration files
-│   ├── contexts             # React context providers
-│   ├── data                 # Static data files
-│   ├── hooks                # Custom React hooks
-│   ├── outlets              # Outlet components
-│   ├── services             # Service functions and utilities
-│   ├── types                # Additional TypeScript type definitions
-│   ├── pages                # Page components
-│   │   ├── [Page]           # Specific page components
-│   │   │   ├── components   # Components specific to the page
-│   │   │   ├── [Subpages]   # Subpages of the specific page
-│   │   │   │   └── ...      # Additional subpage components
-│   │   │   ├── Page.tsx     # Main page component
-│   │   ...
-```
 
 ### Running Tests
 
@@ -349,17 +361,7 @@ docker compose -f "docker-compose.staging.yml" up -d --build
 
 Access at: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
 
-## 🛠️ Tech Stack
 
-- **Frontend**: React, React Router, Tailwind CSS, MUI, Three.js
-- **State Management**: Zustand, React Query
-- **Forms**: Formik, React Hook Form
-- **3D & Visualization**: Three.js, D3
-- **Internationalization**: i18next
-- **Testing**: Jest, Testing Library
-- **Code Quality**: ESLint, Prettier
-- **Bundler**: Vite
-- **Containerization**: Docker
 
 ## Connection to Backend
 

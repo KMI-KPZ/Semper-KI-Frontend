@@ -1,6 +1,6 @@
 #  Semper-KI: Frontend
 
-<p align="center">
+<p style="text-align: center;">
   <a href="https://semper-ki.org/">
     <img src="public/logo192.png" alt="logo" width="130" height="130">
   </a>
@@ -11,7 +11,10 @@
 
 ### Short Description
 
-The Semper-KI Frontend acts as a platform where users can submit their 3D printing requirements and find suitable service providers. It leverages artificial intelligence to optimize the matching process, considering factors such as material properties, printing technology, pricing, and delivery options. The user-friendly interface allows users to easily navigate, submit their requirements, and track order progress, streamlining the process of connecting supply and demand in the 3D printing industry.
+The Semper-KI Frontend acts as a platform where users can submit their 3D printing requirements and find suitable service providers. 
+It leverages artificial intelligence to optimize the matching process by considering factors such as material properties, printing technology, 
+pricing, and delivery options. The user-friendly interface allows users to easily navigate, submit their requirements, and track order progress, 
+streamlining the process of connecting supply and demand in the 3D printing industry.
 
 ### Live Demo/Preview
 
@@ -23,7 +26,7 @@ The Semper-KI Frontend acts as a platform where users can submit their 3D printi
 
 - **Frontend**: React, React Router, Tailwind CSS, MUI, Three.js
 - **State Management**: Zustand, React Query
-- **Forms**: Formik, React Hook Form
+- **Forms**: React Hook Form
 - **3D & Visualization**: Three.js, D3
 - **Internationalization**: i18next
 - **Testing**: Jest, Testing Library
@@ -36,7 +39,9 @@ The Semper-KI Frontend acts as a platform where users can submit their 3D printi
 1. [Getting Started](#-Getting-Started)
 2. [Development](#-Development)
 3. [Deployment](#-Deployment)
-4. [Connection-to-Backend](#Connection-to-Backend)
+4. [Best Practices](#-Best-Practices)
+5. [License](#-License)
+
 
 ## 🚀 Getting Started
 
@@ -44,10 +49,10 @@ The Semper-KI Frontend acts as a platform where users can submit their 3D printi
 
 Make sure you have the following installed on your machine:
 
-- **Node.js**: v18.12.0
-- **Yarn**: v1.22.19
-- **npm**: v8.19.2
-- **Docker**: Latest version
+- `Node.js`: v18.12.0
+- `Yarn`: v1.22.19
+- `npm`: v8.19.2
+- `Docker`: Latest version
 
 ### Installation
 
@@ -85,44 +90,51 @@ yarn start
 
 ## 🛠️ Development
 
+### Connection to Backend
+
+The Semper-KI Frontend is designed to connect to the [Semper-KI Backend](https://github.com/KMI-KPZ/Semper-KI-Backend). Please refer to the documentation of the Semper-KI Backend for instructions on how to set up and configure the backend.
+
 ### Scripts
 
 The following scripts can be run using `yarn <scriptname>`. For example, to start the development server, use `yarn start`.
+All scripts can be found in the [package.json](https://github.com/KMI-KPZ/Semper-KI-Frontend/blob/main/package.json).
+
+Script names:
 
 - **start**: Starts the development server using Vite.
   
-  ```json
-  "start": "vite"
+  ```
+  vite
   ```
 
 - **build**: Compiles TypeScript and builds the project using Vite.
   
-  ```json
-  "build": "tsc && vite build"
+  ```
+  tsc && vite build
   ```
 
 - **serve**: Serves the built project using Vite on port 3000.
   
-  ```json
-  "serve": "vite preview --port 3000"
+  ```
+  vite preview --port 3000
   ```
 
 - **test**: Runs tests with Jest, including coverage and CI reporting.
   
-  ```json
-  "test": "jest --coverage --ci --reporters=default --reporters=jest-junit"
+  ```
+  jest --coverage --ci --reporters=default --reporters=jest-junit
   ```
 
-- **test:ci**: Runs tests with Jest in CI mode, compiles TypeScript, and builds the project. (used in Github Action)
+- **test:ci**: Runs tests with Jest in CI mode, compiles TypeScript, and builds the project. (used in GitHub Action)
   
-  ```json
-  "test:ci": "jest --ci --reporters=default && tsc && vite build"
+  ```
+  jest --ci --reporters=default && tsc && vite build
   ```
 
 - **doc**: Generates documentation using TypeDoc.
   
-  ```json
-  "doc": "typedoc --options typedoc.json"
+  ```
+  typedoc --options typedoc.json
   ```
 
 The server will be running at: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
@@ -135,9 +147,10 @@ You can generate technical documentation using TypeDoc with the following comman
 yarn doc
 ```
 
-This command generates a documentation overview in the `.doc` folder. You can view the documentation by opening the `index.html` file in a web browser.
+This command generates a documentation overview in the `.doc` folder. 
+You can view the documentation by opening the `index.html` file in a web browser.
 
-This technical Documentation is based on the types, classes, interfaces and JSDoc comments in the code.
+This technical documentation is based on the types, classes, interfaces and JSDoc comments in the code.
 
 ### 🗃️ Folder Structure
 
@@ -181,31 +194,25 @@ This technical Documentation is based on the types, classes, interfaces and JSDo
 │   │   ...
 ```
 
-### Naming
+### API Calls & Data Fetching
 
-| Type                | Naming Convention | Example             |
-|---------------------|-------------------|---------------------|
-| Components          | PascalCase        | `MyComponent`       |
-| Component folders   | PascalCase        | `MyComponentFolder` |
-| Functions           | camelCase         | `myFunction`        |
-| Variables           | camelCase         | `myVariable`        |
-| Interfaces/Types    | PascalCase        | `MyInterface`       |
-| Hooks               | use{PascalCase}   | `useMyHook`         |
+- All API endpoints are stored in the `api` folder.
+- TanStack Query and Axios are used for API calls.
+- Every endpoint should have its own file.
+- Separation of mutations and queries:
+  - **Mutations** are API calls that are actively triggered by the user's interaction (e.g., clicking a button).
+  - **Queries** are API calls that are loaded automatically when rendering a component.
 
-### Best Practices
-
-- Functional components with hooks over class components
-- Keeping components small and reusable
-- Using TypeScript/PropTypes for type safety
-- Handling side effects properly (useEffect, useMemo, etc.)
-  - try avoiding useEffect or put it in Hooks
-- Avoiding unnecessary re-renders with memoization
+### State Management
 
 #### Context-Provider Usage
 
-The `ContextProvider` is used to provide information to all children components. It is responsible for storing or loading data. When the context changes, all children are re-rendered, so use changes of the context with consideration. This ensures fresh Data in the children.
+The `ContextProvider` is used to provide information to all children components. 
+It is responsible for storing or loading data. When the context changes, all children are re-rendered, so use changes of the context with consideration.
+This ensures fresh data in the child components.
 
-In some cases, the context is not used directly but rather through hooks. This approach provides additional functionality with the raw data, making it easier to use (e.g., `useProcess` or `useProject`).
+In some cases, the context is not used directly but rather through hooks. 
+This approach provides additional functionality with the raw data, making it easier to use (e.g., `useProcess` or `useProject`).
 
 ##### Implementation Context-Provider
 
@@ -245,14 +252,13 @@ const ExampleContextProvider: React.FC = () => {
 ##### Usage Context-Provider
 
 ```text
-...
 const { data } = useContext(ExampleContext);
-...
 ```
 
 #### Outlet Usage
 
-Similar to the `ContextProvider`, but with the difference that when the data is not loaded, it renders something else. It uses a context provider inside.
+Similar to the `ContextProvider`, but with the added functionality of rendering fallback content when data is not yet loaded. 
+It uses a context provider inside.
 
 In the `index.tsx`, most of the essentials are loaded, so the exception renders a loading screen.
 
@@ -294,20 +300,6 @@ export const OrganizationOutlet: React.FC<PropsWithChildren<Props>> = (
 };
 ```
 
-### Styling Guidelines
-
-- Use of Tailwind, if applicable
-
-### API Calls & Data Fetching
-
-- All API endpoints are stored in the `api` folder.
-- TanStack Query and Axios are used for API calls.
-- Every endpoint should have its own file.
-- Separation of mutations and queries:
-  - **Mutations** are API calls that are actively triggered by the user's interaction (e.g., clicking a button).
-  - **Queries** are API calls that are loaded automatically when rendering a component.
-
-
 ### Running Tests
 
 To run tests and check coverage, use the following command:
@@ -317,10 +309,6 @@ yarn test
 ```
 
 The test results and coverage report can be viewed by opening the `index.html` file located in the `.coverage/lcov-report` directory.
-
-### Linting and Formatting
-
-The linting and formatting happen on save of a file using the extension Prettier - Code formatter v10.1.0.
 
 ## 💾 Deployment
 
@@ -362,7 +350,63 @@ docker compose -f "docker-compose.staging.yml" up -d --build
 Access at: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
 
 
+## 🌟 Best Practices
 
-## Connection to Backend
+### Clean Code
 
-The Semper-KI Frontend is designed to connect to the Semper-KI Backend. Please refer to the documentation of the Semper-KI Backend for instructions on how to set up and configure the backend.
+- Functional components with hooks over class components
+- Keeping components small and reusable
+- Using TypeScript/PropTypes for type safety
+- Handling side effects properly (useEffect, useMemo, etc.)
+  - Try avoiding useEffect directly or encapsulate it in custom hooks
+- Avoiding unnecessary re-renders with memoization
+
+
+### Naming
+
+| Type                | Naming Convention | Example             |
+|---------------------|-------------------|---------------------|
+| Components          | PascalCase        | `MyComponent`       |
+| Component folders   | PascalCase        | `MyComponentFolder` |
+| Functions           | camelCase         | `myFunction`        |
+| Variables           | camelCase         | `myVariable`        |
+| Interfaces/Types    | PascalCase        | `MyInterface`       |
+| Hooks               | use{PascalCase}   | `useMyHook`         |
+
+
+### Styling Guidelines
+
+- Use of Tailwind, if applicable
+
+
+### Linting and Formatting
+
+The linting and formatting happen on save of a file using the extension Prettier - Code formatter v10.1.0.
+
+
+### VSCode Extensions
+
+For an optimal development experience, install the following extensions:
+
+#### WSL Extensions
+
+- Tailwind CSS IntelliSense v0.10.5
+- Prettier - Code formatter v10.1.0
+- Jest v5.2.3
+- Docker v1.28.0
+- GitHub Copilot v1.156.0
+
+#### Local Extensions
+
+- Tailwind CSS IntelliSense v0.10.5
+- WSL v0.81.9
+
+
+## 📜 License
+
+This project is licensed under the [Eclipse Public License 2.0 (EPL-2.0)](https://www.eclipse.org/legal/epl-2.0/).
+
+You are free to use, modify, and distribute this software, provided that you comply with the terms of the license.
+
+For more details, see the [LICENSE](./LICENSE) file in this repository.
+

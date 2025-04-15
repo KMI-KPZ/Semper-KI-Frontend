@@ -25,7 +25,7 @@ streamlining the process of connecting supply and demand in the 3D printing indu
 ### Tech Stack
 
 - **Frontend**: React, React Router, Tailwind CSS, MUI, Three.js
-- **State Management**: Zustand, React Query
+- **State Management**: tanstack query, useContext
 - **Forms**: React Hook Form
 - **3D & Visualization**: Three.js, D3
 - **Internationalization**: i18next
@@ -376,7 +376,8 @@ Access at: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
 
 ### Styling Guidelines
 
-- Use of Tailwind, if applicable
+- Always use Tailwind CSS, if applicable
+- Preferable use the existing custom component library rather than creating new components from scratch
 
 
 ### Linting and Formatting

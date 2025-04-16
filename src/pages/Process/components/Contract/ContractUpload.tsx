@@ -8,6 +8,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import ProcessStatusGate from "@/components/Process/StatusGate";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ContractUploadProps {}
 
@@ -57,14 +58,16 @@ const ContractUpload: React.FC<ContractUploadProps> = (props) => {
       <ProcessStatusGate end={ProcessStatus.OFFER_COMPLETED} endExclude>
         <OwnerGate type="organization" process={process}>
           <Container width="full" direction="col" id="Process-ContractFiles">
-            <ProcessUploadCard
-              icon={
-                <UploadFileIcon style={{ height: "60px", width: "60px" }} />
-              }
-              addFiles={addFiles}
-              title={t("Process.components.Contract.ContractUpload.heading")}
-              fileTypes={[".pdf", ".xml"]}
-            />
+            <PermissionGate element="ProcessContractUpload">
+              <ProcessUploadCard
+                icon={
+                  <UploadFileIcon style={{ height: "60px", width: "60px" }} />
+                }
+                addFiles={addFiles}
+                title={t("Process.components.Contract.ContractUpload.heading")}
+                fileTypes={[".pdf", ".xml"]}
+              />
+            </PermissionGate>
           </Container>
         </OwnerGate>
       </ProcessStatusGate>

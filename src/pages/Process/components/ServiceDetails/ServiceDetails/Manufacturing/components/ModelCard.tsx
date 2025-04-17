@@ -203,7 +203,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
         className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <PermissionGate element="ProcessManufacturingSeriveEditModel">
+          <PermissionGate element="ProcessManufacturingServiceEditModel">
             <Button
               title={t(
                 "Process.components.Service.ServiceDetails.components.Manufacturing.button.editModel"
@@ -214,7 +214,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
               children={t("general.button.edit")}
             />
           </PermissionGate>
-          <PermissionGate element="ProcessManufacturingSeriveDeleteModel">
+          <PermissionGate element="ProcessManufacturingServiceDeleteModel">
             <Button
               title={t(
                 "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteModel"

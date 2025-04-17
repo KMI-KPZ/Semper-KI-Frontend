@@ -16,27 +16,22 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
 
   const { hasPermission } = usePermissionGate();
 
-  const inDebugMode = process.env.NODE_ENV === "development";
-  if (hasPermission(props.element))
+  const inDebugMode = false;
+  if (inDebugMode && hasPermission(props.element))
     return (
       <div className="w-fit border-2 border-green-500 p-2">
         <Text className="text-green-500">{props.element}</Text>
         {children}
       </div>
     );
-
-  return (
-    <div className="w-fit border-2 border-red-500 p-2">
-      <Text className="text-red-500">{props.element}</Text>
-      {children}
-    </div>
-  );
-  if (inDebugMode)
+  if (inDebugMode && !hasPermission(props.element))
     return (
-      <div className="w-fit overflow-clip rounded-md border-2 border-red-500 ">
+      <div className="w-fit border-2 border-red-500 p-2">
+        <Text className="text-red-500">{props.element}</Text>
         {children}
       </div>
     );
+  if (hasPermission(props.element)) return children;
   if (showMessage !== undefined || showMessage === true)
     return (
       <Text variant="body" children={t("components.PermissionGate.message")} />

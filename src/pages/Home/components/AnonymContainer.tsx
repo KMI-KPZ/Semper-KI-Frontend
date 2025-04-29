@@ -1,3 +1,4 @@
+import { gradientStyle } from "@component-library/Container/GrayContainer";
 import React, { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -12,8 +13,9 @@ const AnonymHomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
   return (
     <div
       {...restProps}
+      style={gradientStyle}
       className={twMerge(
-        "relative z-10 flex w-full flex-col items-center justify-normal gap-20 p-10  text-white  md:p-20  lg:p-40",
+        "relative z-10 flex w-full flex-col items-center justify-normal gap-20 rounded-md p-10  text-white  ",
         className
       )}
     >

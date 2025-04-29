@@ -10,15 +10,7 @@ export interface ProjectContextProps {
 }
 
 export const ProjectContext = createContext<ProjectContextProps>({
-  project: {
-    client: "",
-    createdWhen: new Date(),
-    projectDetails: {},
-    processes: [],
-    projectID: "",
-    updatedWhen: new Date(),
-    projectStatus: 0,
-  },
+  project: {} as Project,
 });
 
 const ProjectContextProvider: React.FC<

@@ -21,6 +21,7 @@ import CreateProjectTitleForm from "@/pages/Home/Projects/CreateProjectTitleForm
 import { AuthorizedUser } from "@/hooks/useUser";
 import useModal from "@/hooks/useModal";
 import { gradientStyle } from "@component-library/Container/GrayContainer";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface HomeProjectsProps {
   recieved?: boolean;
@@ -84,16 +85,18 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             ? t("Home.Projects.receivedProjects")
             : t("Home.Projects.heading")}
         </Heading>
-        {!recieved ? (
-          <Button
-            title={t("Home.Projects.button.new")}
-            size="sm"
-            variant="secondary"
-            onClick={() => {
-              setCreateProjectTitleFormOpen(true);
-            }}
-          />
-        ) : null}
+        <PermissionGate element="ProjectCreate">
+          {!recieved ? (
+            <Button
+              title={t("Home.Projects.button.new")}
+              size="sm"
+              variant="secondary"
+              onClick={() => {
+                setCreateProjectTitleFormOpen(true);
+              }}
+            />
+          ) : null}
+        </PermissionGate>
       </Container>
       <Container width="full" direction="row" justify="between">
         <Search

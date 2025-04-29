@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Container } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 interface RawProcessFileRowProps {
   file: File;
   deleteFile: (fileIndex: number) => void;
@@ -27,13 +28,15 @@ const RawProcessFileRow: React.FC<RawProcessFileRowProps> = (props) => {
       {/* <td>{file.}</td> */}
       <td>
         <Container width="full">
-          <Button
-            size="sm"
-            variant="text"
-            title={t("general.button.delete")}
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonDelete}
-          />
+          <PermissionGate element="ProcessFileRowDelete">
+            <Button
+              size="sm"
+              variant="text"
+              title={t("general.button.delete")}
+              children={<DeleteIcon />}
+              onClick={handleOnClickButtonDelete}
+            />
+          </PermissionGate>
         </Container>
       </td>
     </tr>

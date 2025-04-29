@@ -8,13 +8,10 @@ import {
   getAuthorizedUserType,
   parseAddress,
   removeItemByIndex,
-  getModelURI,
   isKey,
   splitFindArray,
   splitArray,
 } from "./utils";
-
-import { ModelBuilder } from "@test/builder";
 
 describe("Utils", () => {
   describe("Test getFileSizeAsString", () => {
@@ -145,21 +142,6 @@ describe("Utils", () => {
       const value2 = removeItemByIndex(array, 3);
       expect(value).toStrictEqual(["a", "b", "c"]);
       expect(value2).toStrictEqual(["a", "b", "c"]);
-    });
-  });
-  describe.skip("Test getModelURI", () => {
-    it("should return uri", () => {
-      const model = new ModelBuilder().build();
-      const value = getModelURI(model);
-      expect(value).toBe("https://test.test.png");
-    });
-    it("should return uri", () => {
-      const model = new ModelBuilder()
-        .withCreatedBy("lucas")
-        .withURI("b'/9j/test//Z'")
-        .build();
-      const value = getModelURI(model);
-      expect(value).toBe("data:image/jpeg;base64,/9j/test//Z");
     });
   });
   describe("Test isKey", () => {

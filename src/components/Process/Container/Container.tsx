@@ -7,6 +7,7 @@ import React, { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 import ProcessContainerHeader from "./Header";
 import GrayContainer from "@component-library/Container/GrayContainer";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessContainerProps {
   id: ProcessOrigin;
@@ -55,7 +56,9 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
       >
         {children}
       </GrayContainer>
-      <ActionContainer start={start} end={end} showDelete={showDelete} />
+      <PermissionGate element="ProcessActionContainer">
+        <ActionContainer start={start} end={end} showDelete={showDelete} />
+      </PermissionGate>
     </>
   );
 };

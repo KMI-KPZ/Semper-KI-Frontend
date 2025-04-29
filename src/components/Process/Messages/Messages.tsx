@@ -7,6 +7,7 @@ import {
 } from "@/api/Process/Querys/useGetProcess";
 import ProcessMessageItem from "@/components/Process/Messages/components/MessageItem";
 import ProcessTextInput from "@/components/Process/Messages/components/TextInput";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessMessagesProps {
   messages: ChatMessageProps[] | undefined;
@@ -42,7 +43,9 @@ const ProcessMessages: React.FC<ProcessMessagesProps> = (props) => {
           ))}
         </Container>
       )}
-      <ProcessTextInput origin={origin} />
+      <PermissionGate element="ChatInput">
+        <ProcessTextInput origin={origin} />
+      </PermissionGate>
     </Container>
   );
 };

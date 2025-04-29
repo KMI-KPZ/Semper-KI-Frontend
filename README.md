@@ -1,8 +1,8 @@
 #  Semper-KI: Frontend
 
-<p style="text-align: center;">
+<p align="center">
   <a href="https://semper-ki.org/">
-    <img src="public/logo192.png" alt="logo" width="130" height="130">
+    <img src="public/logo192.png" alt="kiss-logo" width="130" height="130">
   </a>
 </p>
 
@@ -11,7 +11,7 @@
 
 ### Short Description
 
-The Semper-KI Frontend acts as a platform where users can submit their 3D printing requirements and find suitable service providers. 
+The Semper-KI acts as a platform where users can submit their 3D printing requirements and find suitable service providers. 
 It leverages artificial intelligence to optimize the matching process by considering factors such as material properties, printing technology, 
 pricing, and delivery options. The user-friendly interface allows users to easily navigate, submit their requirements, and track order progress, 
 streamlining the process of connecting supply and demand in the 3D printing industry.
@@ -60,7 +60,7 @@ Clone the repository:
 
 ```bash
 git clone git@github.com:KMI-KPZ/Frontend.git
-cd Frontend
+cd Semper-KI-Frontend
 ```
 
 Install dependencies:
@@ -323,7 +323,7 @@ Upon a push to the staging or main branch, GitHub Actions triggers a webhook to 
 ### Dockerized Servers
 
 **Development**
-Start the development container with HMR:
+Start the development container with HMR (Hot Module Replacement):
 
 ```bash
 docker compose -f "docker-compose.dev.yml" up -d --build

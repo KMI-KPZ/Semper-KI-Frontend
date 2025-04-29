@@ -5,7 +5,6 @@ import HomePrototypeAlert from "./components/PrototypeAlert";
 import HomeTutorial from "./components/Tutorial";
 import HomeTeam from "./components/Team";
 import { useTranslation } from "react-i18next";
-import HomeBackground from "./components/Background";
 import React from "react";
 import AnonymHomeContainer from "../components/AnonymContainer";
 import HomeMaturity from "./components/Maturity";
@@ -19,33 +18,32 @@ const Home: React.FC<HomeProps> = (props) => {
 
   return (
     <div
-      className={`relative  flex w-full   flex-col items-center justify-start`}
+      className={`relative  flex w-full flex-col items-center justify-start  gap-10 p-10 pt-0`}
       data-testid="home-anonym"
     >
-      <HomeBackground />
       <HomePrototypeAlert />
-      <AnonymHomeContainer>
+      <AnonymHomeContainer className="rounded-t-none">
         <Heading
           variant="h1"
-          className="pt-32 text-center text-4xl font-black tracking-wide text-white  md:text-7xl"
+          className="text-center text-4xl font-black tracking-wide text-white  md:text-7xl"
         >
           {t("Home.Anonym.heading")}
         </Heading>
         <HomeIntroduction />
       </AnonymHomeContainer>
-      <AnonymHomeContainer className="bg-gray-700">
+      <AnonymHomeContainer>
         <HomeServices />
       </AnonymHomeContainer>
       <AnonymHomeContainer>
         <HomeTutorial />
       </AnonymHomeContainer>
-      <AnonymHomeContainer className="bg-gray-700">
+      <AnonymHomeContainer>
         <HomeMaturity />
       </AnonymHomeContainer>
       <AnonymHomeContainer>
         <HomeResilience />
       </AnonymHomeContainer>
-      <AnonymHomeContainer className="bg-white">
+      <AnonymHomeContainer>
         <HomeTeam />
       </AnonymHomeContainer>
     </div>

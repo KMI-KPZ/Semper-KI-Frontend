@@ -9,6 +9,7 @@ import {
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
 import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
+import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 
 interface ServiceManufacturingFreeTextProps {
   process: ManufactoringProcessProps;
@@ -29,6 +30,7 @@ const ServiceManufacturingFreeText: React.FC<
   );
   const [showSavingHint, setShowSavingHint] = useState(false);
   const updatedProcess = useUpdateProcess();
+  const { hasPermission } = usePermissionGate();
 
   useEffect(() => {
     setText(
@@ -40,7 +42,8 @@ const ServiceManufacturingFreeText: React.FC<
   }, [activeGroup, process.serviceDetails.groups]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
+    if (hasPermission("ProcessManipulateServiceEditFreeText"))
+      setText(e.target.value);
   };
 
   const showHint = () => {
@@ -51,21 +54,23 @@ const ServiceManufacturingFreeText: React.FC<
   };
 
   const handleOnBlur = () => {
-    showHint();
-    updatedProcess.mutate({
-      processIDs: [process.processID],
-      updates: {
-        changes: {
-          serviceDetails: {
-            groups: [
-              ...groups.slice(0, activeGroup).map(() => ({})),
-              { context: text },
-              ...groups.slice(activeGroup + 1).map(() => ({})),
-            ],
+    if (hasPermission("ProcessManipulateServiceEditFreeText")) {
+      showHint();
+      updatedProcess.mutate({
+        processIDs: [process.processID],
+        updates: {
+          changes: {
+            serviceDetails: {
+              groups: [
+                ...groups.slice(0, activeGroup).map(() => ({})),
+                { context: text },
+                ...groups.slice(activeGroup + 1).map(() => ({})),
+              ],
+            },
           },
         },
-      },
-    });
+      });
+    }
   };
 
   return (
@@ -92,6 +97,7 @@ const ServiceManufacturingFreeText: React.FC<
           className="min-h-[100px] w-full rounded-md border-2 bg-gray-100 p-3 placeholder:text-gray-800"
           onChange={handleOnChange}
           onBlur={handleOnBlur}
+          disabled={!hasPermission("ProcessManipulateServiceEditFreeText")}
           value={text}
           placeholder={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.FreeText.placeholder"

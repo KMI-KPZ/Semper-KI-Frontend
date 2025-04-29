@@ -13,6 +13,7 @@ import useStatusButtons, {
 import useProcess from "@/hooks/Process/useProcess";
 import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 import logger from "@/hooks/useLogger";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessHeaderProps {
   titleAddition: string;
@@ -82,26 +83,30 @@ const ProcessContainerHeader: React.FC<ProcessHeaderProps> = (props) => {
         </Heading>
       </Container>
       <Container width="fit" direction="row" className="p-0">
-        {editButton !== undefined ? (
-          <Button
-            title={t("general.button.edit")}
-            variant="text"
-            className="text-white"
-            size="md"
-            children={<EditIcon />}
-            onClick={() => handleOnClickButtonEdit(editButton)}
-          />
-        ) : null}
-        {deleteButton !== undefined ? (
-          <Button
-            variant="text"
-            className="text-white"
-            size="md"
-            title={t("general.button.delete")}
-            children={<DeleteIcon />}
-            onClick={() => handleOnClickButtonDelete(deleteButton)}
-          />
-        ) : null}
+        <PermissionGate element="ProcessEditService">
+          {editButton !== undefined ? (
+            <Button
+              title={t("general.button.edit")}
+              variant="text"
+              className="text-white"
+              size="md"
+              children={<EditIcon />}
+              onClick={() => handleOnClickButtonEdit(editButton)}
+            />
+          ) : null}
+        </PermissionGate>
+        <PermissionGate element="ProcessDeleteService">
+          {deleteButton !== undefined ? (
+            <Button
+              variant="text"
+              className="text-white"
+              size="md"
+              title={t("general.button.delete")}
+              children={<DeleteIcon />}
+              onClick={() => handleOnClickButtonDelete(deleteButton)}
+            />
+          ) : null}
+        </PermissionGate>
         <Button
           variant="text"
           className="text-white"

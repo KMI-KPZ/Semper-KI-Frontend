@@ -1,0 +1,16 @@
+{
+  "out": "docs",
+  "entryPoints": ["src","component-library"],
+  "entryPointStrategy": "expand",
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],
+  "theme": "default",
+  "name": "Semper-KI",
+  "tsconfig": "tsconfig.json",
+  "hideGenerator": false,
+  "excludeExternals": true,
+  "includeVersion": false,
+  "excludeInternal":false,
+  "categorizeByGroup": true,
+  "sort": ["alphabetical", "static-first", "instance-first"],
+  "plugin": ["typedoc-plugin-missing-exports"]
+}

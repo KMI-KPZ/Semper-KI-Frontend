@@ -5,6 +5,7 @@ import HomeUserProgress from "../components/UserProgress";
 import HomeOrgaProgress from "../components/OrgaProgress";
 import ProjectsOverview from "../Projects/ProjectsOverview";
 import useOrganization from "@/hooks/useOrganization";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface AuthorizedPropsHome {
   user: AuthorizedUser;
@@ -29,8 +30,12 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
         organization.details.todos.show === true) ? (
         <HomeOrgaProgress />
       ) : null}
-      <ProjectsOverview />
-      <HomeOrgaResources />
+      <PermissionGate element="HomeProjects">
+        <ProjectsOverview />
+      </PermissionGate>
+      <PermissionGate element="HomeOrgaResources">
+        <HomeOrgaResources />
+      </PermissionGate>
     </div>
   );
 };

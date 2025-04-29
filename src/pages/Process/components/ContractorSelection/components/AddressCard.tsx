@@ -17,6 +17,8 @@ import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "../../../../../components/Process/StatusGate";
+import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ContractorSelectionAddressCardProps {
   showDeliveryAddress: boolean;
@@ -29,6 +31,7 @@ const ContractorSelectionAddressCard: React.FC<
 > = (props) => {
   const { type, showDeliveryAddress, onChangeCheckBox } = props;
   const { t } = useTranslation();
+  const { hasPermission } = usePermissionGate();
 
   const { process } = useDefinedProcess();
   const address =
@@ -176,7 +179,8 @@ const ContractorSelectionAddressCard: React.FC<
               checked={!showDeliveryAddress}
               className="h-4 w-4"
               disabled={
-                process.processStatus >= ProcessStatus.CONTRACTOR_COMPLETED
+                process.processStatus >= ProcessStatus.CONTRACTOR_COMPLETED ||
+                !hasPermission("ProcessContractorSelectionSameAddress")
               }
               onChange={handleOnChangeAddressEqual}
             />
@@ -189,22 +193,26 @@ const ContractorSelectionAddressCard: React.FC<
         </Container>
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Container width="full" gap={3}>
-            <Button
-              variant="text"
-              size="sm"
-              title={t(
-                "Process.components.ContractorSelection.components.AddressCard.button.editAddress"
-              )}
-              onClick={handleOnButtonClickEdit}
-            />
-            <Button
-              variant="text"
-              size="sm"
-              title={t(
-                "Process.components.ContractorSelection.components.AddressCard.button.resetAddress"
-              )}
-              onClick={handleOnButtonClickReset}
-            />
+            <PermissionGate element="ProcessContractorSelectionEditAddress">
+              <Button
+                variant="text"
+                size="sm"
+                title={t(
+                  "Process.components.ContractorSelection.components.AddressCard.button.editAddress"
+                )}
+                onClick={handleOnButtonClickEdit}
+              />
+            </PermissionGate>
+            <PermissionGate element="ProcessContractorSelectionResetAddress">
+              <Button
+                variant="text"
+                size="sm"
+                title={t(
+                  "Process.components.ContractorSelection.components.AddressCard.button.resetAddress"
+                )}
+                onClick={handleOnButtonClickReset}
+              />
+            </PermissionGate>
           </Container>
         </ProcessStatusGate>
       </Container>
@@ -215,12 +223,14 @@ const ContractorSelectionAddressCard: React.FC<
           setEdit(false);
         }}
       >
-        <AddressSelection
-          selectAddress={selectAddress}
-          closeModal={() => {
-            setEdit(false);
-          }}
-        />
+        <PermissionGate element="ProcessContractorSelectionSelectAddress">
+          <AddressSelection
+            selectAddress={selectAddress}
+            closeModal={() => {
+              setEdit(false);
+            }}
+          />
+        </PermissionGate>
       </Modal>
     </Container>
   );

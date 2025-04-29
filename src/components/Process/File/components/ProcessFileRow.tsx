@@ -9,6 +9,7 @@ import { createDownload } from "@/services/utils";
 import { UserType } from "@/hooks/useUser";
 import DownloadIcon from "@mui/icons-material/Download";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 interface ProcessFileRowProps {
   file: ProcessFile;
 }
@@ -39,27 +40,31 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
       <td>{t(`types.ProcessOrigin.${file.origin}`)}</td>
       <td>
         <Container width="full">
-          <Button
-            size="sm"
-            variant="text"
-            title={t("general.button.download")}
-            children={<DownloadIcon />}
-            onClick={handleOnButtonClickDownload}
-            loading={downloadFile.isLoading}
-          />
+          <PermissionGate element="ProcessFileRowDownload">
+            <Button
+              size="sm"
+              variant="text"
+              title={t("general.button.download")}
+              children={<DownloadIcon />}
+              onClick={handleOnButtonClickDownload}
+              loading={downloadFile.isLoading}
+            />
+          </PermissionGate>
           {user.usertype === UserType.ADMIN ||
           (user.usertype === UserType.USER &&
             file.createdByID === user.hashedID) ||
           (user.usertype === UserType.ORGANIZATION &&
             file.createdByID === user.organization) ? (
-            <Button
-              size="sm"
-              variant="text"
-              title={t("general.button.delete")}
-              children={<DeleteIcon />}
-              onClick={handleOnButtonClickDelete}
-              loading={deleteFile.isLoading}
-            />
+            <PermissionGate element="ProcessFileRowDelete">
+              <Button
+                size="sm"
+                variant="text"
+                title={t("general.button.delete")}
+                children={<DeleteIcon />}
+                onClick={handleOnButtonClickDelete}
+                loading={deleteFile.isLoading}
+              />
+            </PermissionGate>
           ) : null}
         </Container>
       </td>

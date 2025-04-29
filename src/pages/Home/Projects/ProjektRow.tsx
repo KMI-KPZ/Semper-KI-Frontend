@@ -15,6 +15,7 @@ import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { gradientStyle } from "@component-library/Container/GrayContainer";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface HomeProjektRowProps {
   project: FlatDashboardProject;
@@ -88,48 +89,56 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
               user.organization !== undefined &&
               user.organization === project.client) ? (
               <>
-                {project.owner ? (
+                <PermissionGate element="ProjectClone">
+                  {project.owner ? (
+                    <Button
+                      title={t("Home.Projects.button.clone")}
+                      size="sm"
+                      variant="text"
+                      children={<ControlPointDuplicateIcon />}
+                      onClick={() => {
+                        handleOnClickButtonClone();
+                      }}
+                      className="text-white"
+                    />
+                  ) : null}
+                </PermissionGate>
+                <PermissionGate element="ProjectCreateProcess">
                   <Button
-                    title={t("Home.Projects.button.clone")}
+                    title={t("Home.Projects.button.createProcess", {
+                      name: project.projectDetails.title,
+                    })}
                     size="sm"
                     variant="text"
-                    children={<ControlPointDuplicateIcon />}
+                    children={<AddCircleOutlineIcon />}
                     onClick={() => {
-                      handleOnClickButtonClone();
+                      handleOnClickButtonCreateProcess();
                     }}
                     className="text-white"
                   />
-                ) : null}
-                <Button
-                  title={t("Home.Projects.button.createProcess", {
-                    name: project.projectDetails.title,
-                  })}
-                  size="sm"
-                  variant="text"
-                  children={<AddCircleOutlineIcon />}
-                  onClick={() => {
-                    handleOnClickButtonCreateProcess();
-                  }}
-                  className="text-white"
-                />
-                <Button
-                  title={t("general.button.edit")}
-                  size="sm"
-                  variant="text"
-                  children={<EditIcon />}
-                  onClick={() => {
-                    handleOnClickButtonEditTitle();
-                  }}
-                  className="text-white"
-                />
-                <Button
-                  title={t("general.button.delete")}
-                  size="sm"
-                  variant="text"
-                  children={<DeleteIcon />}
-                  onClick={() => handleOnClickButtonDelete()}
-                  className="text-white"
-                />
+                </PermissionGate>
+                <PermissionGate element="ProjectEdit">
+                  <Button
+                    title={t("general.button.edit")}
+                    size="sm"
+                    variant="text"
+                    children={<EditIcon />}
+                    onClick={() => {
+                      handleOnClickButtonEditTitle();
+                    }}
+                    className="text-white"
+                  />
+                </PermissionGate>
+                <PermissionGate element="ProjectDelete">
+                  <Button
+                    title={t("general.button.delete")}
+                    size="sm"
+                    variant="text"
+                    children={<DeleteIcon />}
+                    onClick={() => handleOnClickButtonDelete()}
+                    className="text-white"
+                  />
+                </PermissionGate>
               </>
             ) : null}
             <Button

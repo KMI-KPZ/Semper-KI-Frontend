@@ -59,6 +59,7 @@ export const parseAuthorizedUser = (userData: any): AuthorizedUser => {
         user: userNotificationSettings,
         organization: orgaNotificationSettings,
       },
+      todos: userData.details.todos ? userData.details.todos : { show: true },
     },
     accessedWhen: new Date(userData.accessedWhen),
     createdWhen: new Date(userData.createdWhen),

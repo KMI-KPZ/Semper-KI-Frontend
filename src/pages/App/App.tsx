@@ -49,6 +49,7 @@ import Demo from "../Demo/Demo";
 import ToTopButton from "@component-library/ToTopButton/ToTopButton";
 import BottomFixedContainer from "@component-library/Container/BottomFixedContainer";
 import ProjectsOverview from "../Home/Projects/ProjectsOverview";
+import RoutePermissionGate from "@/components/PermissionGate/RoutePermissionGate";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -131,7 +132,10 @@ const App: React.FC = () => {
               <Route path="demo/*" element={<Demo />}>
                 <Route path=":serviceType" element={<Demo />} />
               </Route>
-              <Route path="projects/*">
+              <Route
+                path="projects/*"
+                element={<RoutePermissionGate showMessage element="Project" />}
+              >
                 <Route
                   index
                   element={

@@ -12,6 +12,7 @@ import DependenciesForm from "@/components/Form/DependenciesForm";
 import { tanslateProcessErrorTypeKey } from "@/components/Process/Container/ActionContainer/components/ConditionItem";
 import ProcessImagePreview from "@/components/Process/ImagePreview";
 import { gradientStyle } from "@component-library/Container/GrayContainer";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface HomeProcessProps {
   project: DashboardProject;
@@ -366,29 +367,35 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
           />
           {owner ? (
             <>
-              {showDeleteButton() ? (
+              <PermissionGate element="ProcessDelete">
+                {showDeleteButton() ? (
+                  <Button
+                    title={t("general.button.delete")}
+                    size="sm"
+                    width="fit"
+                    variant="text"
+                    onClick={() => handleOnClickButtonDelete(process.processID)}
+                  />
+                ) : null}
+              </PermissionGate>
+              <PermissionGate element="ProcessClone">
                 <Button
-                  title={t("general.button.delete")}
+                  title={t("Home.Projects.Process.button.clone")}
                   size="sm"
                   width="fit"
                   variant="text"
-                  onClick={() => handleOnClickButtonDelete(process.processID)}
+                  onClick={() => handleOnClickButtonClone()}
                 />
-              ) : null}
-              <Button
-                title={t("Home.Projects.Process.button.clone")}
-                size="sm"
-                width="fit"
-                variant="text"
-                onClick={() => handleOnClickButtonClone()}
-              />
-              <Button
-                title={t("Home.Projects.Process.button.addDependencie")}
-                size="sm"
-                width="fit"
-                variant="text"
-                onClick={() => handleOnClickButtonAddDependencie()}
-              />
+              </PermissionGate>
+              <PermissionGate element="ProcessAddDependencies">
+                <Button
+                  title={t("Home.Projects.Process.button.addDependencie")}
+                  size="sm"
+                  width="fit"
+                  variant="text"
+                  onClick={() => handleOnClickButtonAddDependencie()}
+                />
+              </PermissionGate>
             </>
           ) : null}
         </Container>

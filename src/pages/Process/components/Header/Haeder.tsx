@@ -7,6 +7,7 @@ import ActionContainerTodos from "@/components/Process/Container/ActionContainer
 import ProcessImagePreview from "@/components/Process/ImagePreview";
 import EditIcon from "@mui/icons-material/Edit";
 import ProcessTitleForm from "../Info/TitleForm";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessHaederProps {
   process: Process;
@@ -49,16 +50,18 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
                 className="gap-1"
               >
                 <Text variant="strong">{process.processDetails.title}</Text>
-                <Button
-                  size="xs"
-                  className="p-0"
-                  variant="text"
-                  title={t("general.button.edit")}
-                  onClick={handleOnClickButton}
-                  children={
-                    <EditIcon className="text-white" fontSize="small" />
-                  }
-                />
+                <PermissionGate element="ProcessEditTitle">
+                  <Button
+                    size="xs"
+                    className="p-0"
+                    variant="text"
+                    title={t("general.button.edit")}
+                    onClick={handleOnClickButton}
+                    children={
+                      <EditIcon className="text-white" fontSize="small" />
+                    }
+                  />
+                </PermissionGate>
               </Container>
               <Text className="whitespace-nowrap">
                 {t("general.createdWhen")}

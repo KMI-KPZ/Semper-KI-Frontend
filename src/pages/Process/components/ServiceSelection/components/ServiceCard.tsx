@@ -2,9 +2,11 @@ import {
   ServiceItemProps,
   ServiceType,
 } from "@/api/Service/Querys/useGetServices";
+import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 import { Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
 interface ServiceCardProps {
   service: ServiceItemProps;
@@ -14,9 +16,10 @@ interface ServiceCardProps {
 const ServiceCard: React.FC<ServiceCardProps> = (props) => {
   const { service, onClick } = props;
   const { t } = useTranslation();
+  const { hasPermission } = usePermissionGate();
 
   const handleOnClick = () => {
-    onClick(service.type);
+    if (hasPermission("ProcessEditService")) onClick(service.type);
   };
 
   return (
@@ -24,7 +27,12 @@ const ServiceCard: React.FC<ServiceCardProps> = (props) => {
       onClick={handleOnClick}
       direction="col"
       gap={3}
-      className="max-w-[30%] justify-start self-stretch rounded-lg border-2 bg-white p-3 shadow-xl ring-0 ring-gray-200  duration-300 hover:cursor-pointer hover:bg-gray-50 hover:ring-2"
+      className={twMerge(
+        "max-w-[30%] justify-start self-stretch rounded-lg border-2 bg-white p-3 shadow-xl ring-0 ring-gray-200  duration-300  ",
+        hasPermission("ProcessEditService")
+          ? " hover:cursor-pointer hover:bg-gray-50 hover:ring-2"
+          : "hover:cursor-not-allowed"
+      )}
     >
       <Heading variant="h3">
         {t(

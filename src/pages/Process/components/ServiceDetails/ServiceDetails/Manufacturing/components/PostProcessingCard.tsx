@@ -14,6 +14,7 @@ import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
@@ -102,26 +103,30 @@ const ProcessSericePostProcessingCard: React.FC<
         className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.editPostProcessing"
-            )}
-            size="sm"
-            variant="secondary"
-            onClick={handleOnButtonClickPostProcessing}
-            children={t("general.button.edit")}
-          />
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.deletePostProcessing"
-            )}
-            size="sm"
-            variant="text"
-            onClick={() =>
-              handleOnButtonClickDeletePostProcessing(postProcessing.id)
-            }
-            children={t("general.button.delete")}
-          />
+          <PermissionGate element="ProcessManufacturingServiceEditPostProcessing">
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.editPostProcessing"
+              )}
+              size="sm"
+              variant="secondary"
+              onClick={handleOnButtonClickPostProcessing}
+              children={t("general.button.edit")}
+            />
+          </PermissionGate>
+          <PermissionGate element="ProcessManufacturingServiceDeletePostProcessing">
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.deletePostProcessing"
+              )}
+              size="sm"
+              variant="text"
+              onClick={() =>
+                handleOnButtonClickDeletePostProcessing(postProcessing.id)
+              }
+              children={t("general.button.delete")}
+            />
+          </PermissionGate>
         </ProcessStatusGate>
       </Container>
     </ServiceDetailsCard>

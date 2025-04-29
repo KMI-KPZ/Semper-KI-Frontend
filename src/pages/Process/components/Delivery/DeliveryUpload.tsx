@@ -8,6 +8,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/components/Process/StatusGate";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface DeliveryUploadProps {}
 
@@ -54,12 +55,16 @@ const DeliveryUpload: React.FC<DeliveryUploadProps> = (props) => {
       />
       <ProcessStatusGate end={ProcessStatus.DELIVERY_IN_PROGRESS} endExclude>
         <OwnerGate type="organization" process={process}>
-          <ProcessUploadCard
-            icon={<UploadFileIcon style={{ height: "60px", width: "60px" }} />}
-            addFiles={addFiles}
-            title={t("Process.components.Delivery.DeliveryUpload.heading")}
-            fileTypes={[".pdf", ".xml"]}
-          />
+          <PermissionGate element="ProcessPaymentUpload">
+            <ProcessUploadCard
+              icon={
+                <UploadFileIcon style={{ height: "60px", width: "60px" }} />
+              }
+              addFiles={addFiles}
+              title={t("Process.components.Delivery.DeliveryUpload.heading")}
+              fileTypes={[".pdf", ".xml"]}
+            />
+          </PermissionGate>
         </OwnerGate>
       </ProcessStatusGate>
     </Container>

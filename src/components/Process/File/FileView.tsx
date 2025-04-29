@@ -9,6 +9,7 @@ import ProcessFileTable from "./components/FileTable";
 import ProcessUploadCard from "./components/UploadCard";
 import ProcessStatusGate from "@/components/Process/StatusGate";
 import { useTranslation } from "react-i18next";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessFileViewProps {
   origin: ProcessOrigin;
@@ -60,7 +61,9 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
             deleteFile={deleteFile}
           />
           <ProcessStatusGate endExclude end={endStatus}>
-            <ProcessUploadCard addFiles={addFiles} />
+            <PermissionGate element="ProcessFileUpload">
+              <ProcessUploadCard addFiles={addFiles} />
+            </PermissionGate>
           </ProcessStatusGate>
         </>
       ) : null}

@@ -20,6 +20,7 @@ import ProcessStatusGate from "@/components/Process/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
 import Hint from "@/components/Hint/Hint";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -119,30 +120,34 @@ const ServiceManufacturingDetails: React.FC<
           ))
         )}
         <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                models.length === 0 ? "addModel" : "addMore"
-              }`
-            )}
-            size={models.length === 0 ? "sm" : "xs"}
-            variant={models.length === 0 ? "primary" : "secondary"}
-            onClick={handleOnButtonClickModel}
-            startIcon={<AddIcon />}
-            children={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                models.length === 0 ? "addModel" : "addMore"
-              }`
-            )}
-          />
-          <Button
-            size="xs"
-            variant="text"
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.noModel"
-            )}
-            to={`service/manufacturing/${activeGroup}/model/descriptive`}
-          />
+          <PermissionGate element="ProcessManufacturingServiceAddModel">
+            <Button
+              title={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
+                  models.length === 0 ? "addModel" : "addMore"
+                }`
+              )}
+              size={models.length === 0 ? "sm" : "xs"}
+              variant={models.length === 0 ? "primary" : "secondary"}
+              onClick={handleOnButtonClickModel}
+              startIcon={<AddIcon />}
+              children={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
+                  models.length === 0 ? "addModel" : "addMore"
+                }`
+              )}
+            />
+          </PermissionGate>
+          <PermissionGate element="ProcessManufacturingServiceAddNoModel">
+            <Button
+              size="xs"
+              variant="text"
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.noModel"
+              )}
+              to={`service/manufacturing/${activeGroup}/model/descriptive`}
+            />
+          </PermissionGate>
         </ProcessStatusGate>
       </Container>
       <Divider />
@@ -176,18 +181,20 @@ const ServiceManufacturingDetails: React.FC<
         )}
         {material === undefined ? (
           <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-            <Button
-              title={t(
-                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickMaterial}
-              startIcon={<AddIcon />}
-              children={t(
-                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
-              )}
-            />
+            <PermissionGate element="ProcessManufacturingServiceAddMaterial">
+              <Button
+                title={t(
+                  `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+                )}
+                size="sm"
+                variant="primary"
+                onClick={handleOnButtonClickMaterial}
+                startIcon={<AddIcon />}
+                children={t(
+                  `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+                )}
+              />
+            </PermissionGate>
           </ProcessStatusGate>
         ) : null}
       </Container>
@@ -223,22 +230,24 @@ const ServiceManufacturingDetails: React.FC<
           ))
         )}
         <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                postProcessings.length === 0 ? "addPostProcessing" : "addMore"
-              }`
-            )}
-            size={postProcessings.length === 0 ? "sm" : "xs"}
-            variant={postProcessings.length === 0 ? "primary" : "secondary"}
-            onClick={handleOnButtonClickPostProcessing}
-            startIcon={<AddIcon />}
-            children={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                postProcessings.length === 0 ? "addPostProcessing" : "addMore"
-              }`
-            )}
-          />
+          <PermissionGate element="ProcessManufacturingServiceAddPostProcessing">
+            <Button
+              title={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
+                  postProcessings.length === 0 ? "addPostProcessing" : "addMore"
+                }`
+              )}
+              size={postProcessings.length === 0 ? "sm" : "xs"}
+              variant={postProcessings.length === 0 ? "primary" : "secondary"}
+              onClick={handleOnButtonClickPostProcessing}
+              startIcon={<AddIcon />}
+              children={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
+                  postProcessings.length === 0 ? "addPostProcessing" : "addMore"
+                }`
+              )}
+            />
+          </PermissionGate>
         </ProcessStatusGate>
       </Container>
     </Container>

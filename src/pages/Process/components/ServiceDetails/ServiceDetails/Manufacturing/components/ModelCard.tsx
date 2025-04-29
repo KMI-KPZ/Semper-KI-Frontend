@@ -17,6 +17,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
 import { getFileSizeAsString } from "@/services/utils";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ProcessServiceModelCardProps {
   model: ProcessModel;
@@ -202,24 +203,28 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
         className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.editModel"
-            )}
-            size="sm"
-            variant="secondary"
-            onClick={handleOnButtonClickModel}
-            children={t("general.button.edit")}
-          />
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteModel"
-            )}
-            size="sm"
-            variant="text"
-            onClick={() => handleOnButtonClickDeleteModel(model.id)}
-            children={t("general.button.delete")}
-          />
+          <PermissionGate element="ProcessManufacturingServiceEditModel">
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.editModel"
+              )}
+              size="sm"
+              variant="secondary"
+              onClick={handleOnButtonClickModel}
+              children={t("general.button.edit")}
+            />
+          </PermissionGate>
+          <PermissionGate element="ProcessManufacturingServiceDeleteModel">
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteModel"
+              )}
+              size="sm"
+              variant="text"
+              onClick={() => handleOnButtonClickDeleteModel(model.id)}
+              children={t("general.button.delete")}
+            />
+          </PermissionGate>
         </ProcessStatusGate>
       </Container>
     </ServiceDetailsCard>

@@ -8,6 +8,7 @@ import useDownloadZIP from "@/api/Process/Files/Mutations/useDownloadZIP";
 import useUploadFiles from "@/api/Process/Files/Mutations/useUploadFiles";
 import { ProcessFile, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 import RawProcessFileRow from "./RawFileRow";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 export type ProcessFileTableProps =
   | UploadFileTableProps
@@ -136,27 +137,31 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
         </tbody>
       </table>
       {type === "upload" ? (
-        <Button
-          size="sm"
-          variant="primary"
-          title={t(
-            "components.Process.File.components.FileTable.button.upload"
-          )}
-          startIcon={<FileUploadIcon />}
-          loading={uploadFiles.isLoading}
-          onClick={handleOnButtonClickUpload}
-        />
+        <PermissionGate element="ProcessFileUpload">
+          <Button
+            size="sm"
+            variant="primary"
+            title={t(
+              "components.Process.File.components.FileTable.button.upload"
+            )}
+            startIcon={<FileUploadIcon />}
+            loading={uploadFiles.isLoading}
+            onClick={handleOnButtonClickUpload}
+          />
+        </PermissionGate>
       ) : (
-        <Button
-          size="sm"
-          variant="primary"
-          title={t(
-            "components.Process.File.components.FileTable.button.downloadAll"
-          )}
-          loading={downloadZIP.isLoading}
-          startIcon={<DownloadIcon />}
-          onClick={handleOnButtonClickDownload}
-        />
+        <PermissionGate element="ProcessFileDownloadAll">
+          <Button
+            size="sm"
+            variant="primary"
+            title={t(
+              "components.Process.File.components.FileTable.button.downloadAll"
+            )}
+            loading={downloadZIP.isLoading}
+            startIcon={<DownloadIcon />}
+            onClick={handleOnButtonClickDownload}
+          />
+        </PermissionGate>
       )}
     </Container>
   );

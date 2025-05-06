@@ -41,7 +41,8 @@ const ProcessImagePreview: React.FC<ProcessImagePreviewProps> = (props) => {
         className
       )}
     >
-      {process.processDetails.imagePath.length > 1 ? (
+      {process.processDetails.imagePath !== undefined &&
+      process.processDetails.imagePath.length > 1 ? (
         <Button
           title={t("general.previous")}
           variant="secondary"
@@ -52,13 +53,18 @@ const ProcessImagePreview: React.FC<ProcessImagePreviewProps> = (props) => {
         />
       ) : null}
       <img
-        src={process.processDetails.imagePath[currentImage]}
+        src={
+          process.processDetails.imagePath !== undefined
+            ? process.processDetails.imagePath[currentImage]
+            : ""
+        }
         alt=""
         className={`aspect-square ${
           size === "sm" ? "w-40" : "w-60"
         } rounded-md border-2 object-cover`}
       />
-      {process.processDetails.imagePath.length > 1 ? (
+      {process.processDetails.imagePath &&
+      process.processDetails.imagePath.length > 1 ? (
         <Button
           title={t("general.next")}
           variant="secondary"

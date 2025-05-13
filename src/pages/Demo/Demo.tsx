@@ -28,7 +28,7 @@ const Demo: React.FC<DemoProps> = (props) => {
     if (!createProject.isLoading && !hasCalled.current) {
       createProject.mutate({
         title: "Demo Project",
-        servieType: getServiceType(),
+        serviceType: getServiceType(),
       });
       hasCalled.current = true;
     }

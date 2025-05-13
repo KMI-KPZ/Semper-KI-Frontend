@@ -5,6 +5,10 @@ import { useTranslation } from "react-i18next";
 import ThreePIcon from "@mui/icons-material/ThreeP";
 import {useNavigate} from "react-router-dom";
 import useUser, {UserType} from "@/hooks/useUser";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import { useCallback } from "react";
+
 
 
 declare global {
@@ -74,6 +78,7 @@ function formatDynamicPrompt(
 const Chatbot: React.FC<ChatbotProps> = (props) => {
   const {} = props;
   const logger: boolean = false;
+  const createProjectFunction = useCreateProject();
   const {
     topics,
     maintopic,
@@ -93,6 +98,72 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   const detailedHelpRef = useRef(detailedHelp);
   const navigate = useNavigate();
   const { user } = useUser();
+
+  const handleWindowMessage = useCallback((e: MessageEvent) => {
+      // if(logger)console.log("Message received: "); if(logger)console.log(e.data);
+      try {
+        const chatbotResponse = JSON.parse(e.data);
+        if (logger) console.log("Chatbotresponse: ", chatbotResponse);
+
+        if (chatbotResponse.eventType === "responseFromChatbot") {
+          if (
+              chatbotResponse.action === "runCommand" &&
+              chatbotResponse.response?.response?.shouldEndSession === true
+          ) {
+            botAlreadyOpenend.current = false;
+            if (logger) console.log("Chatbot session ended");
+          }
+
+          const botResponse = chatbotResponse.response;
+          if (logger)
+            console.log(
+                "Chatbot things: ",
+                botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
+                    ?.content
+            );
+          try {
+            const parsedObject = extractAndParseJSON(
+                botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
+                    ?.content
+            );
+            if (logger) console.log("Chatbot JSON", parsedObject);
+
+            if (parsedObject.empty) {
+              lastAnswer.current = "";
+            }
+            if (parsedObject.decision) {
+              setUserChoice(parsedObject.decision);
+            }
+            if (
+                parsedObject.more_help &&
+                parsedObject.more_help !== lastAnswer.current
+            ) {
+              lastAnswer.current = parsedObject.more_help;
+              sendDetailedHelp(parsedObject.more_help);
+            }
+
+            if (parsedObject.goto_url) {
+              navigate(parsedObject.goto_url);
+            }
+
+            if (parsedObject.action && parsedObject.action === "create_project") {
+              // create hash of object parsedObject and put it in lastAnswe
+              if(lastAnswer.current != JSON.stringify(parsedObject)){
+                createProject(parsedObject);
+                lastAnswer.current = JSON.stringify(parsedObject);
+              }
+            }
+          } catch (error) {
+            console.log("Chatbot JSON parsing error: ", error);
+          }
+        }
+
+        if (chatbotResponse.eventType === "startSession") {
+          if (logger) console.log("Chatbot session started");
+          // bot.eventsBus.emit('openChatbot', {query: '__[++ {topics: "' + topics.join(",") + '", maintopic: {"' + maintopic+ '"}}, currentChoices: '+ JSON.stringify(choices)+ ']__'});
+        }
+      } catch {}
+    },[createProjectFunction]);
 
   const sendDetailedHelp = (helpKey: string) => {
     debugger;
@@ -122,6 +193,14 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   const isChatbotEnabled = true;
   // process.env.NODE_ENV === "production";
   useEffect(() => {
+    window.addEventListener("message", handleWindowMessage);
+    return () => {
+      // beim Unmount wieder sauber entfernen
+      window.removeEventListener("message", handleWindowMessage);
+    };
+  }, [handleWindowMessage]);
+
+  useEffect(() => {
     detailedHelpRef.current = detailedHelp;
 
     if (isChatbotEnabled && !botAlreadyLoaded.current) {
@@ -129,132 +208,57 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       botAlreadyLoaded.current = true;
       if (logger) console.log("Chatbot will be loaded");
 
-      // script.src = (window.location.hostname.includes("localhost") || window.location.hostname.includes("127.0.0.1"))
-      //     ? "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js"
-      //     : "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
-
-      script.src = "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
-
-      // script.src =
-      //   "http://localhost:38080/kbot-widget/bots/preview/ecjI0kKpfTQaWkNx5CAgFj3ixoD0ZAUNuTjTwrjxHUY=/widget.js";
+      // script.src = "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
+      script.src = "https://chat.semper-ki.org/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
 
       script.async = true;
 
       document.body.appendChild(script);
 
-      // const test_script = document.createElement("script");
-      // test_script.type ="module";
-      // test_script.text = "import Chatbot from \"https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js\"\n" +
-      //     "          Chatbot.init({\n" +
-      //     "          \"chatflowid\": \"dc0de093-b290-4c68-9d0e-e9bb08b44655\",\n" +
-      //     "          \"apiHost\": \"http://localhost:3005\",\n" +
-      //     "        })\n";
-      //   document.body.appendChild(test_script);
-
-
-      // const iframe = document.getElementById(
-      //   "USUChatbotIframe"
-      // ) as HTMLIFrameElement;
-      // if (iframe) {
-      //   const iframeDocument = iframe.contentWindow?.document;
-      //   if (iframeDocument) {
-      //     const tooltipElement =
-      //       iframeDocument.getElementById("usuChatbotTooltip");
-      //     if (tooltipElement) {
-      //       tooltipElement.style.height = "fit-content";
-      //     }
-      //   }
-      // }
-    }
-
-    if (topics) {
-      if (logger)
-        console.log("topics for chatbot: " + formatTopicsToJSON(topics));
-      const bot = window.ChatbotIframe;
-      if (bot !== undefined && botAlreadyOpenend.current) {
-        alert("Chatbot is already open");
-        // bot.eventsBus.emit('openChatbot', {query: '__[++ {topics: "' + topics.join(",") + '", maintopic: {"' + maintopic+ '"}}, currentChoices: '+ JSON.stringify(choices)+ ']__'});
-
-        bot.eventsBus.emit(
-          "askChatbot",
-          formatDynamicPrompt(topics, maintopic, choices)
-        );
+      if (topics) {
         if (logger)
-          console.log(
-            "query: ",
-            '__[++ {topics: "' +
-              formatTopicsToJSON(topics) +
-              '", maintopic: {"' +
-              maintopic +
-              '"}}, currentChoices: ' +
-              JSON.stringify(choices) +
-              "__"
-          );
-      }
+          console.log("topics for chatbot: " + formatTopicsToJSON(topics));
+        const bot = window.ChatbotIframe;
+        if (bot !== undefined && botAlreadyOpenend.current) {
+          alert("Chatbot is already open");
+          // bot.eventsBus.emit('openChatbot', {query: '__[++ {topics: "' + topics.join(",") + '", maintopic: {"' + maintopic+ '"}}, currentChoices: '+ JSON.stringify(choices)+ ']__'});
 
-      if (closeChatbot === true) {
-        bot.eventsBus.emit("closeChatbot");
+          bot.eventsBus.emit(
+              "askChatbot",
+              formatDynamicPrompt(topics, maintopic, choices)
+          );
+          if (logger)
+            console.log(
+                "query: ",
+                '__[++ {topics: "' +
+                formatTopicsToJSON(topics) +
+                '", maintopic: {"' +
+                maintopic +
+                '"}}, currentChoices: ' +
+                JSON.stringify(choices) +
+                "__"
+            );
+        }
+
+        if (closeChatbot === true) {
+          bot.eventsBus.emit("closeChatbot");
+        }
       }
     }
   }, [topics, closeChatbot, setTopics, maintopic, choices, detailedHelp]);
 
-  window.addEventListener("message", (e) => {
-    // if(logger)console.log("Message received: "); if(logger)console.log(e.data);
-    try {
-      const chatbotResponse = JSON.parse(e.data);
-      if (logger) console.log("Chatbotresponse: ", chatbotResponse);
+  function createProject(params: any) {
+    debugger
+    if(createProjectFunction.isSuccess || createProjectFunction.isLoading) {
+      return;
+    }
+    createProjectFunction.mutate({
+      title: params.title,
+      serviceType:  Number(params.serviceType) as ServiceType,
+    });
 
-      if (chatbotResponse.eventType === "responseFromChatbot") {
-        if (
-          chatbotResponse.action === "runCommand" &&
-          chatbotResponse.response?.response?.shouldEndSession === true
-        ) {
-          botAlreadyOpenend.current = false;
-          if (logger) console.log("Chatbot session ended");
-        }
+  }
 
-        const botResponse = chatbotResponse.response;
-        if (logger)
-          console.log(
-            "Chatbot things: ",
-            botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
-              ?.content
-          );
-        try {
-          const parsedObject = extractAndParseJSON(
-            botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
-              ?.content
-          );
-          if (logger) console.log("Chatbot JSON", parsedObject);
-
-          if (parsedObject.empty) {
-            lastAnswer.current = "";
-          }
-          if (parsedObject.decision) {
-            setUserChoice(parsedObject.decision);
-          }
-          if (
-            parsedObject.more_help &&
-            parsedObject.more_help !== lastAnswer.current
-          ) {
-            lastAnswer.current = parsedObject.more_help;
-            sendDetailedHelp(parsedObject.more_help);
-          }
-
-          if (parsedObject.goto_url) {
-            navigate(parsedObject.goto_url);
-          }
-        } catch (error) {
-          // if(logger)console.log("Chatbot JSON parsing error: ", error);
-        }
-      }
-
-      if (chatbotResponse.eventType === "startSession") {
-        if (logger) console.log("Chatbot session started");
-        // bot.eventsBus.emit('openChatbot', {query: '__[++ {topics: "' + topics.join(",") + '", maintopic: {"' + maintopic+ '"}}, currentChoices: '+ JSON.stringify(choices)+ ']__'});
-      }
-    } catch {}
-  });
 
   // const getHeadersText = () => {
   //   const headers = [];
@@ -282,7 +286,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     const bot = window.ChatbotIframe;
 
     console.log(user);
-    if (bot !== undefined && !botAlreadyOpenend.current) {
+    if (bot !== undefined ) { //&& !botAlreadyOpenend.current) {
       bot.eventsBus.emit("openChatbot", {
         query:
           '__[++ {topics: "' +
@@ -301,20 +305,20 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           "query: '__[++ (Seitenthemen: " + formatTopicsToJSON(topics) + ")]__'"
         );
     }
-    if (bot !== undefined && botAlreadyOpenend.current) {
-      bot.eventsBus.emit("askChatbot", {
-        query:
-          '__[++ {topics: "' +
-          formatTopicsToJSON(topics) +
-          '", maintopic: {"' +
-          maintopic +
-          '"}}, currentChoices: ' +
-          JSON.stringify(choices) +
-            "," +
-            '"user_logged_in" : ' + (user.usertype !== UserType.ANONYM ? '"true"' : '"false"') +
-          "]__",
-      });
-    }
+    // if (bot !== undefined && botAlreadyOpenend.current) {
+    //   bot.eventsBus.emit("askChatbot", {
+    //     query:
+    //       '__[++ {topics: "' +
+    //       formatTopicsToJSON(topics) +
+    //       '", maintopic: {"' +
+    //       maintopic +
+    //       '"}}, currentChoices: ' +
+    //       JSON.stringify(choices) +
+    //         "," +
+    //         '"user_logged_in" : ' + (user.usertype !== UserType.ANONYM ? '"true"' : '"false"') +
+    //       "]__",
+    //   });
+    // }
   };
 
   const { t } = useTranslation();
@@ -350,10 +354,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
             size="sm"
             onClick={handleOnClickButton}
             children={<ThreePIcon/>}
-            active={isChatbotEnabled && !botAlreadyOpenend.current}
+            active={isChatbotEnabled }
         />
         <Button
-            active={isChatbotEnabled && !botAlreadyOpenend.current}
+            active={isChatbotEnabled }
             className={`hidden rounded-full  duration-300 md:flex ${
                 bounce ? "animate-bounce " : "animate-none"
             }`}

@@ -62,26 +62,29 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
     });
   };
 
-  setTopics(
-    new Map([
-      [
+  useEffect(() => {
+    setTopics(
+        new Map([
+          [
+            "ServiceSelection",
+            "Der Nutzer kann hier entscheiden ob er ein vorhandenes digitales 3D Modell drucken lassen will, oder erst einmal eins entwerfen lassen will z.B. aus einem pyhsischen Gegenstand. Sag ihm einfach die beiden Möglichkeiten und falls er fragt, gib mehr Details hinzu.",
+          ],
+          [
+            "3d-print",
+            "Ruft einige Parameter für die Rahmenbedingungen des Bauteils ab um dann diese mit den vorhandenen Herstellern und ihren Drucktechniken abzugleichen, so dass ein passender Hersteller gefunden wird. Der Nutzer kann dann den Druckauftrag erteilen.",
+          ],
+          [
+            "3d-dev",
+            "Der Nutzer kann hier ein 3D Modell entwerfen lassen. Dazu wird ein Designer beauftragt, der das Modell erstellt. Der Nutzer kann dann das Modell begutachten und ggf. Änderungen anfordern.",
+          ],
+        ]),
         "ServiceSelection",
-        "Der Nutzer kann hier entscheiden ob er ein vorhandenes digitales 3D Modell drucken lassen will, oder erst einmal eins entwerfen lassen will z.B. aus einem pyhsischen Gegenstand. Sag ihm einfach die beiden Möglichkeiten und falls er fragt, gib mehr Details hinzu.",
-      ],
-      [
-        "3d-print",
-        "Ruft einige Parameter für die Rahmenbedingungen des Bauteils ab um dann diese mit den vorhandenen Herstellern und ihren Drucktechniken abzugleichen, so dass ein passender Hersteller gefunden wird. Der Nutzer kann dann den Druckauftrag erteilen.",
-      ],
-      [
-        "3d-dev",
-        "Der Nutzer kann hier ein 3D Modell entwerfen lassen. Dazu wird ein Designer beauftragt, der das Modell erstellt. Der Nutzer kann dann das Modell begutachten und ggf. Änderungen anfordern.",
-      ],
-    ]),
-    "ServiceSelection",
-    "",
-    { "1": "3d-dev", "2": "3d-print" },
-    null
-  );
+        "",
+        { "1": "3d-dev", "2": "3d-print" },
+        null
+    );
+
+  }, []);
 
   if (services.isLoading || services.data === undefined)
     return <LoadingAnimation />;

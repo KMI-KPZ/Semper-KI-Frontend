@@ -4,15 +4,19 @@ import { useMutation } from "@tanstack/react-query";
 import useCreateProjectProcess from "./useCreateProjectProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
-interface CreateProjectProps {
+interface CreateProjectPropsChatbot {
   title: string;
   serviceType?: ServiceType;
+  processName?: string;
+  materialCategory?: string;
+  amount?: number;
+  description?: string;
 }
 
 const useCreateProject = () => {
   const createProjectProcess = useCreateProjectProcess();
 
-  const createProject = async ({ title }: CreateProjectProps) =>
+  const createProject = async ({ title }: CreateProjectPropsChatbot) =>
     authorizedCustomAxios
       .post(`${process.env.VITE_HTTP_API_URL}/public/project/create/`, {
         title,
@@ -25,7 +29,7 @@ const useCreateProject = () => {
         logger("useCreateProject | createProject ❌ |", error);
       });
 
-  return useMutation<string, Error, CreateProjectProps>({
+  return useMutation<string, Error, CreateProjectPropsChatbot>({
     mutationFn: createProject,
     onSuccess: (projectID, props) => {
       createProjectProcess.mutate({ projectID, serviceType: props.serviceType });

@@ -8,6 +8,7 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 interface CreateProcessProps {
   projectID: string;
   serviceType?: ServiceType;
+  onProjectSuccess?: (projectID: string, processID: string) => void;
 }
 
 const useCreateProjectProcess = () => {
@@ -31,7 +32,12 @@ const useCreateProjectProcess = () => {
   return useMutation<string, Error, CreateProcessProps>({
     mutationFn: createProjectProcess,
     onSuccess: (newProcessID, props) => {
-      debugger
+      if(props.onProjectSuccess) {
+        debugger
+        props.onProjectSuccess(props.projectID, newProcessID);
+        return;
+      }
+
       if (props.serviceType !== undefined) {
         updateProcess.mutate(
           {

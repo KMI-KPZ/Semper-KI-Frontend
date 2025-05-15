@@ -7,6 +7,7 @@ import { ServiceType } from "@/api/Service/Querys/useGetServices";
 interface CreateProjectProps {
   title: string;
   serviceType?: ServiceType;
+  onProjectSuccess?: (projectID: string, processID: string) => void;
 }
 
 const useCreateProject = () => {
@@ -28,7 +29,7 @@ const useCreateProject = () => {
   return useMutation<string, Error, CreateProjectProps>({
     mutationFn: createProject,
     onSuccess: (projectID, props) => {
-      createProjectProcess.mutate({ projectID, serviceType: props.serviceType });
+      createProjectProcess.mutate({ projectID, serviceType: props.serviceType , onProjectSuccess: props.onProjectSuccess}, );
     },
   });
 };

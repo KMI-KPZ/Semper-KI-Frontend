@@ -8,6 +8,7 @@ import useUser, {UserType} from "@/hooks/useUser";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { useCallback } from "react";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 
 
@@ -79,6 +80,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   const {} = props;
   const logger: boolean = false;
   const createProjectFunction = useCreateProject();
+  const updateProcess = useUpdateProcess();
   const {
     topics,
     maintopic,
@@ -148,8 +150,8 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
 
             if (parsedObject.action && parsedObject.action === "create_project") {
               // create hash of object parsedObject and put it in lastAnswe
-              if(lastAnswer.current != JSON.stringify(parsedObject)){
-                createProject(parsedObject);
+              if(lastAnswer.current != JSON.stringify(parsedObject) && parsedObject.params){
+                createProject(parsedObject.params);
                 lastAnswer.current = JSON.stringify(parsedObject);
               }
             }
@@ -249,15 +251,48 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
 
   function createProject(params: any) {
     debugger
-    if(createProjectFunction.isSuccess || createProjectFunction.isLoading) {
+
+    if (createProjectFunction.isSuccess || createProjectFunction.isLoading) {
       return;
     }
-    createProjectFunction.mutate({
-      title: params.title,
-      serviceType:  Number(params.serviceType) as ServiceType,
-    });
 
+    if (params.title) {
+      createProjectFunction.mutate({
+            title: params.title,
+            serviceType: Number(params.serviceType) as ServiceType,
+            onProjectSuccess: (projectID: string, processID: string) => {
+              debugger
+              updateProcess.mutate(
+                  {
+                    processIDs: [processID],
+                    projectID: projectID,
+                    updates: { changes: { serviceType: Number(params.serviceType) as ServiceType,
+                                          serviceDetails: {
+                                                            groups: [{context: params.description}]
+                                          },
+                                          processDetails: {
+                                            title: params.title,
+                                          }
+                                        }
+                    },
+                  },
+                  {
+                    onSuccess: () => {
+                      navigate(`/projects/${projectID}/${processID}`);
+                    },
+                  }
+              );
+            }},
+          {
+            onSuccess: (projectID, more: any) => {
+              console.log("Project created: ", projectID);
+              console.log("more info: ", more);
+            }
+          });
+    }
   }
+  // const getHeaders = () => {
+
 
 
   // const getHeadersText = () => {

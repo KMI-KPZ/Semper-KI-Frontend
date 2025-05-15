@@ -44,7 +44,7 @@ const ProcessDelivery: React.FC<ProcessDeliveryProps> = (props) => {
       start={ProcessStatus.PRODUCTION_COMPLETED}
       end={ProcessStatus.DELIVERY_IN_PROGRESS}
     >
-      <ProcessMessages messages={process.messages.Contract} origin="Delivery" />
+      <ProcessMessages messages={process.messages.Delivery} origin="Delivery" />
       <DeliveryUpload />
     </ProcessContainer>
   );

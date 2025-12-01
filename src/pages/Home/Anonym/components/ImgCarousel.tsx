@@ -8,7 +8,7 @@ import Smart3 from "@images/partner/Smart3.svg";
 import trilogIQa from "@images/partner/trilogIQa.svg";
 import TUC from "@images/partner/TUC.png";
 import USU from "@images/partner/USU.svg";
-import WHZ from "@images/partner/WHZ.svg";
+import WHZ from "@images/partner/WHZ.png";
 import BMWKdeURL from "@images/BMWK_de.png";
 import BMWKenURL from "@images/BMWE_en.png";
 import KMILogo from "@images/partner/KMI_Logo.svg";
@@ -84,7 +84,7 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
     },
     {
       img: WHZ,
-      href: "https://www.fh-zwickau.de/",
+      href: "https://www.whz.de/",
       title: "WHZ",
     },
   ];
